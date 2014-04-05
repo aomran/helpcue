@@ -15,25 +15,3 @@ The development environment requires the Ruby 2.1.1 and Postgresql. To get this 
 
 ### Run tests
 - `$ rake test` to run all Ruby tests.
-
-
-
-# Devise controller helpers
-
-* `before_action :authenticate_user!` in controllers to say that user should be logged in.
-* `user_signed_in?` to check if user is signed in
-* `current_user` to get get logged in user
-
-# Devise path helpers
-
-* `new_user_registration_path` -> sign up
-* `edit_user_registration_path` -> edit user profile
-* `new_user_session_path` -> sign in
-* `destroy_user_session_path` -> sign out
-* `new_user_password_path` -> reset password page
-* `edit_user_password_path` -> change password page (after reset email)
-
-# Devise controller test helpers
-
-* `sign_in(@user)`
-* `sign_out(@user)`
