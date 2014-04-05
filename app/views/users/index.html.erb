@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= "#{user.first_name} #{user.last_name}" %></td>
+    <td><%= user.email %></td>
+  </tr>
+<% end %>
+</table>
+
+<% if user_signed_in? %>
+  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<% end %>
