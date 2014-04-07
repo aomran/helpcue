@@ -1,0 +1,22 @@
+  <div class="grid-unit wide">
+    <h2>Your Classrooms</h2>
+  </div>
+  <div class="grid-unit narrow">
+    <a href="#new-classroom" rel="modal:open" class="open-modal">Create Classroom</a>
+    <a href="#join-classroom" rel="modal:open" class="open-modal">Join Classroom</a>
+  </div>
+
+  <div id="new-classroom" class="modal">
+    <h6 class="subtitle classroom-option">Create New Classroom</h6>
+    <%= render partial: 'form', locals: {classroom: Classroom.new, remote: true, leave_link: false} %>
+  </div>
+
+  <div id="join-classroom" class="modal">
+    <%= render 'join_classroom' %>
+  </div>
+</div>
+<div class="wrapper" id="classrooms">
+  <!-- Classrooms List -->
+  <%= render @classrooms %>
+</div>
+<% provide(:title, 'Classrooms') %>

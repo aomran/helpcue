@@ -1,0 +1,10 @@
+<h6 class="subtitle classroom-option">Join Existing Classroom</h6>
+<%= form_tag join_classrooms_path, method: :post, remote: true, id: 'join_classroom' do %>
+  <div class="form-group form-input-required">
+    <%= label_tag :teacher_token, 'Classroom Token' %>
+    <%= text_field_tag :teacher_token, nil,placeholder: "Enter classroom token", class: "form-input" %>
+  </div>
+  <div>
+    <%= submit_tag 'Join Classroom', class: "btn btn-primary" %>
+  </div>
+<% end %>

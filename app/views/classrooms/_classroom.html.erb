@@ -1,0 +1,13 @@
+<div class="grid-unit narrow">
+  <div class="padding-border">
+    <%= link_to classrooms_path, class: 'content classroom-unit' do %>
+      <h4 class="unit-header truncate"><%= classroom.name %></h4>
+      <p class="classroom-desc"><%= classroom.description %></p>
+
+      <div class="student-count">
+        <span class="class-icons student-icon"></span>
+        <span class="number"><%= classroom.users.count %></span><span><%= " #{'Student'.pluralize(classroom.users.count)} Joined" %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

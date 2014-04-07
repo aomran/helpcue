@@ -1,11 +1,36 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+teacher1:
+  email: aomra@gmail.com
+  first_name: Ahmed
+  last_name: Omran
+  password_digest: <%= BCrypt::Password.create("password123")%>
+
+teacher2:
+  email: franzini@paula.com
+  first_name: Paula
+  last_name: Franzini
+  password_digest: <%= BCrypt::Password.create("password123")%>
+  auth_token: <%= SecureRandom.urlsafe_base64 %>
+
+student1:
+  email: student@school.com
+  first_name: jane
+  last_name: doe
+  password_digest: <%= BCrypt::Password.create("password123")%>
+  auth_token: <%= SecureRandom.urlsafe_base64 %>
+
+student2:
+  email: student2@school.com
+  first_name: john
+  last_name: smith
+  password_digest: <%= BCrypt::Password.create("password123")%>
+  auth_token: <%= SecureRandom.urlsafe_base64 %>
+
+nameless_student:
+  email: student00@school.com
+  password_digest: <%= BCrypt::Password.create("password123")%>
+
+new_student:
+  email: student3@school.com
+  password_digest: <%= BCrypt::Password.create("password123")%>

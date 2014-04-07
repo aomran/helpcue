@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
 
   before_save :set_avatar
 
+  has_many :classroom_users
+  has_many :classrooms, through: :classroom_users
+  has_many :owned_classrooms, :class_name => "Classroom", :foreign_key => "owner_id"
 
   private
   def set_avatar

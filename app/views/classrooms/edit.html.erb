@@ -1,0 +1,15 @@
+  <div class="grid-unit whole">
+    <h2>Edit Classroom</h2>
+    <h6 class="subtitle"><%= @classroom.name %></h6>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="grid-unit narrow sidebar pull-right">
+    <h5>Additional Teachers</h5>
+    <p>To invite additional teachers to this classroom, please share this token:</p>
+    <p><span class='token'><%= @classroom.teacher_token %></span></p>
+  </div>
+  <div class="grid-unit wide">
+    <%= render partial: 'form', locals: {classroom: @classroom, remote: false, leave_link: true} %>
+  </div>
+</div>
