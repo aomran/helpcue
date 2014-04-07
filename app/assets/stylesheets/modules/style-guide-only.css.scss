@@ -1,0 +1,47 @@
+// This stylesheet is ONLY for classes that are used exclusively in the app to demonstrate certain styles. These styles should not be used in the app. 
+
+@import 'globals/all';
+
+.show-grid {
+  color: white;
+  background-color: lighten($color-main, 30%);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.branding-colors > div {
+  height: 35px;
+  padding:5px 10px;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: $global-radius;
+}
+
+.sg-main {
+  background-color: $color-main;
+}
+
+.sg-primary {
+  background-color: $color-primary;
+}
+
+.sg-success {
+  background-color: $color-success;
+}
+.sg-warning {
+  background-color: $color-warning;
+}
+
+.sg-danger {
+  background-color: $color-danger;
+}
+
+div.sg-lt-grey {
+  background-color: $grey-lt;
+  color: $grey-md;
+}
+
+.sg-md-grey {
+  background-color: $grey-md;
+}

@@ -1,0 +1,29 @@
+// styles used in @extends
+
+%row-content {
+  padding: 15px 25px;
+  margin: 0 -25px;
+  &:hover {
+    background: lighten($grey-lt, 12%);
+  }
+}
+
+%display-bl {
+  display: block;
+}
+
+%clearfix {
+  &%clearfix:before,
+  &%clearfix:after {
+    content: " ";
+    display: table;
+  }
+   
+  &%clearfix:after {
+    clear: both;
+  }
+   
+  &%clearfix {
+    *zoom: 1;
+  }
+}

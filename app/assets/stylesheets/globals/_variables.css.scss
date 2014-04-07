@@ -1,0 +1,32 @@
+// colors
+$grey-lt: #ddd;
+$grey-md: #888;
+$bluegrey-lt: #F0F2F5;
+$bluegrey-v-lt: #F8FAFC;
+$color-main: #415463;
+$color-primary: #5DA3FD;
+$color-success: #88DB81;
+$color-warning: #FDB343;
+$color-danger: #FF5454;
+$color-accent: #C45906;
+$color-text: lighten($grey-md, 5%);
+$color-link: $color-primary;
+
+// Paula's suggestions: More saturated colors
+// $color-primary: #3D88FF;
+// $color-success: #00CB51;
+// $color-warning: #EDC028;
+// $color-danger: #F02810;
+
+// breakpoint sizes
+
+$small-end: 480px;
+$med-end: 768px;
+$large-start: 1024px;
+
+// arrange these
+$sans-serif: "source sans pro", "helvetica neue", helvetica, lucida sans, sans-serif;
+$source-code: Monaco, Menlo, Consolas, "Courier New", monospace;
+$global-radius: 5px;
+$button-highlight: inset 0 -4px 0 0 rgba(255,255,255,0.4);
+$focus-outline: 0 0 5px 1px rgb(0, 82, 255);

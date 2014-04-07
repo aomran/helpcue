@@ -1,0 +1,478 @@
+@import 'globals/all';
+
+// Navigation
+.fixed-nav {
+  display: none;
+  position: fixed;
+  width: 70px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: $color-main;
+  background-image: linear-gradient(to right, $color-main, darken($color-main, 3%));
+  box-shadow: inset -3px 0 10px 0 rgba(0,0,0,0.2);
+  height: inherit;
+  min-height: 320px;
+  z-index: 100;
+}
+
+body.nav-open .fixed-nav {
+  display: block;
+  width: 170px;
+}
+
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.fixed-nav li {
+  list-style-type: none;
+}
+
+.logo {
+  background: lighten($color-main, 60%);
+  box-shadow: inset -3px 0 15px 0 rgba(0,0,0,0.08);
+  @include all-transition(0.2s);
+  &:hover {
+    background: darken($color-main, 10%);
+    background: $color-success;
+  }
+  .nav-links {
+    padding-bottom: 18px;
+  }
+}
+
+.nav-logo {
+  display: inline-block;
+  padding: 18px;
+  position: relative;
+  top: 5px;
+  background-position: -90px -27px;
+  .logo:hover & {
+    background-position: -90px -62px;
+  }
+}
+
+.nav-wordmark {
+  display: none;
+  padding: 18px 45px;
+  background-position: -120px -22px;
+  .logo:hover & {
+    background-position: -120px -57px;
+  }
+  body.nav-open & {
+    display: inline-block;
+  }
+}
+
+.expand-collapse {
+  display: none;
+}
+
+.nav-links, .subnav-links {
+  display: block;
+  padding: 15px 20px;
+  line-height: 1;
+}
+
+.nav-links {
+  color: lighten($color-main, 40%);
+  overflow: hidden; // tooltips
+  position: relative; // tooltips
+  &:hover,
+  &:focus {
+    color: #fff;
+    overflow: visible;
+  }
+}
+
+// selected class for nav links
+a.selected, a.selected:hover {
+  background-color: #fff;
+  color: $color-main;
+}
+
+// svg icons
+.nav-icon,
+.nav-wordmark {
+  background-image: image-url('curri-icons.svg');
+}
+
+.nav-gravatar {
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  top: 13px;
+  left: 18px;
+  @include border-radius(30px);
+}
+
+.nav-classrooms,
+.nav-tracks,
+.nav-analytics,
+.nav-account,
+.nav-size {
+  padding: 15px;
+  display: inline-block;
+}
+
+.nav-classrooms {
+  background-position: 0 0;
+}
+
+.nav-tracks {
+  background-position: 0 -30px;
+}
+
+.nav-analytics {
+  background-position: 0 -60px;
+}
+
+.nav-account {
+  background-position: 0 -90px;
+}
+
+.nav-size {
+  background-position: 0 -150px;
+}
+
+body.nav-open .nav-size {
+  background-position: 0 -120px;
+}
+
+body.nav-open a:hover .nav-size {
+    background-position: -30px -120px;
+  }
+
+a:hover {
+  & .nav-classrooms {
+  background-position: -30px 0;
+  }
+
+  & .nav-tracks {
+    background-position: -30px -30px;
+  }
+
+  & .nav-analytics {
+    background-position: -30px -60px;
+  }
+
+  & .nav-account {
+    background-position: -30px -90px;
+  }
+
+  & .nav-size {
+    background-position: -30px -150px;
+  }
+}
+
+a.selected {
+  & .nav-classrooms, .nav-classrooms:hover {
+  background-position: -60px 0;
+  }
+
+  & .nav-tracks, .nav-tracks:hover {
+    background-position: -60px -30px;
+  }
+
+  & .nav-analytics, .nav-analytics:hover {
+    background-position: -60px -60px;
+  }
+
+  & .nav-account, .nav-account:hover {
+    background-position: -60px -90px;
+  }
+}
+
+// Tooltips
+.nav-label {
+  font-weight: 700;
+  position: absolute;
+  background: darken($color-main, 10%);
+  padding: 10px 14px 12px;
+  top: 12px;
+  left: 85px;
+  @include border-radius(5px);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  line-height: 1;
+  &:before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 33%;
+    width: 10px;
+    height: 10px;
+    background: darken($color-main, 10%);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    @include border-radius(2px);
+  }
+}
+
+.nav-links:hover .nav-label ,
+.nav-links:focus .nav-label {
+  color: #fff;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  body.nav-open & {
+    left: 0;
+  }
+}
+
+body.nav-open .nav-links.selected:hover .nav-label {
+  color: darken($color-main, 10%);
+}
+
+body.nav-open .nav-label {
+  display: inline;
+  background: none;
+  margin-left: 10px;
+  padding: 0;
+  position: relative;
+  top: -9px;
+  left: 0;
+  opacity: 1;
+  &:before {
+    display: none;
+  }
+}
+
+// hide the tooltip for the expand arrow
+.nav-label-hide {
+  display: none;
+}
+
+//subnav
+.subnav {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: 130px;
+  left: 70px;
+  background: lighten($color-main, 65%);
+  border-right: 1px solid lighten($color-main, 60%);
+  .bottom-nav {
+    margin-bottom: 10px;
+  }
+  &.subnav-show {
+  display: block;
+    &:before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      bottom: 25px;
+      width: 13px;
+      height: 13px;
+      background: lighten($color-main, 65%);
+      @include rotate(45deg);
+      @include border-radius(2px);
+      @include media-query(medium) {
+        bottom: 88px;
+      }
+    }
+  }
+}
+
+body.nav-open .subnav {
+  left: 170px;
+}
+
+.account-id {
+  color: lighten($color-main, 65%);
+  color: $color-main;
+  background: lighten($color-main, 50%);
+  margin-bottom: 15px;
+}
+
+.user-type {
+  display: block;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  margin-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 13px;
+}
+
+a.subnav-links {
+  color: lighten($color-main, 25%);
+  font-size: 15px;
+  font-weight: 600;
+  &:hover,
+  &:focus {
+    color: $color-main;
+  }
+}
+
+// page header navigation
+.page-header .nav-icon {
+  display: inline-block;
+}
+
+.mobile-menu {
+  margin: 0 10px 0 -10px;
+  line-height: 0;
+  position: relative;
+  top: 6px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.nav-burger {
+  width: 22px;
+  height: 22px;
+  background-position: -90px 0;
+}
+
+a:hover .nav-burger {
+  background-position: -112px 0;
+}
+
+// secondary nav
+.help-toggle {
+  position: relative;
+  top: 3px;
+}
+
+.help-toggle div {
+  text-align: center;
+}
+
+// teacher
+.nav-help {
+  width: 30px;
+  height: 30px;
+  background-position: -60px -120px;
+  &:hover {
+    background-position: -60px -150px;
+  }
+  &.active {
+    margin-right: 14px;
+    background-position: -60px -180px;
+    &:hover {
+      background-position: -60px -210px;
+    }
+  }
+}
+
+.req-num {
+  position: absolute;
+  left: 22px;
+  top: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1px 6px 3px;
+  border-radius: 100px;
+  background-color: $color-primary;
+  display: inline-block;
+}
+
+// students
+.view-q {
+  display: inline-block;
+  margin-right: 10px;
+}
+.help-btn {
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.1);
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.7;
+  width: 130px;
+  height: 30px;
+  margin-top: 1px;
+  @include border-radius(100px);
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 3px 1px $color-success;
+  }
+}
+
+.in-queue {
+  color: #fff;
+  background: $color-success;
+  box-shadow: 0 0 8px 2px $color-success;
+  &:hover,
+  &:focus {
+    background: darken($color-success, 10%);
+  }
+}
+
+.ask-help {
+  color: $grey-md;
+  background: $grey-lt;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background: darken($grey-lt, 15%);
+  }
+}
+
+@include media-query(medium) {
+  .show-desktop {
+    display: block;
+  }
+
+  .hide-desktop {
+    display: none;
+  }
+}
+
+//student tooltips
+.student-help-tooltip {
+  display: none;
+  position: absolute;
+  top:5px;
+  right: 180px;
+  width: 120px;
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+  padding: 3px 7px 4px;
+  background: $color-main;
+  color: #fff;
+  @include border-radius(5px);
+  &:before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    right: -6px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid $color-main;
+  }
+}
+
+@include media-query(small) {
+  .student-help-tooltip {
+    width: auto;
+    top: 23px;
+    &:before {
+      top: 5px;
+    }
+  }
+}

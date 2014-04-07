@@ -1,0 +1,68 @@
+
+@mixin all-transition($duration) {
+  -webkit-transition: all $duration ease;
+  -moz-transition: all $duration ease;
+  -o-transition: all $duration ease;
+  transition: all $duration ease;
+}
+
+@mixin border-radius($value) {
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  -o-border-radius: $value;
+  border-radius: $value;
+}
+
+@mixin transform-translate($x-val, $y-val) {
+  -webkit-transform: translate($x-val, $y-val);
+  -moz-transform: translate($x-val, $y-val);
+  -ms-transform: translate($x-val, $y-val);
+  -o-transform: translate($x-val, $y-val);
+  transform: translate($x-val, $y-val);
+}
+
+@mixin translateZ($z-val) {
+  -webkit-transform: translateZ($z-val);
+  -moz-transform: translateZ($z-val);
+  -ms-transform: translateZ($z-val);
+  -o-transform: translateZ($z-val);
+  transform: translateZ($z-val);
+}
+
+@mixin transition($property, $duration, $timing-function, $delay) {
+  -webkit-transition: $property $duration $timing-function $delay;
+  -moz-transition: $property $duration $timing-function $delay;
+  -o-transition: $property $duration $timing-function $delay;
+  -ms-transition: $property $duration $timing-function $delay;
+  transition: $property $duration $timing-function $delay;
+}
+
+@mixin transition-transform($property, $duration, $timing-function, $delay) {
+  -webkit-transition: -webkit-transform $duration $timing-function $delay;
+  -moz-transition: -moz-transform $duration $timing-function $delay;
+  -o-transition: -o-transform $duration $timing-function $delay;
+  -ms-transition: -ms-transform $duration $timing-function $delay;
+  transition: transform $duration $timing-function $delay;
+}
+
+@mixin rotate($value) {
+  -webkit-transform: rotate($value);
+  -moz-transform: rotate($value);
+  -o-transform: rotate($value);
+  transform: rotate($value);
+}
+
+@mixin media-query($media-query) {
+
+  @if $media-query ==  small {
+    @media only screen and (min-width:$small-end) { @content; }
+  }
+
+  @if $media-query ==  medium {
+      @media only screen and (min-width:$med-end) { @content; }
+  }
+  
+  @if $media-query ==  large {
+      @media only screen and (min-width:$large-start) { @content; }
+  }
+}

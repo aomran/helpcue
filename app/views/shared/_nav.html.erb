@@ -1,0 +1,14 @@
+<div class="fixed-nav show-desktop">
+  <ul class="subnav">
+    <% if current_user %>
+      <%= render 'shared/subnav' %>
+    <% end %>
+  </ul>
+  <ul class="nav">
+    <% if current_user %>
+      <%= render 'shared/logged_in_nav' %>
+    <% else %>
+      <%= render 'shared/logged_out_nav' %>
+    <% end %>
+  </ul>
+</div>

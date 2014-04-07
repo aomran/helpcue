@@ -1,0 +1,12 @@
+<div class="bottom-nav">
+  <li class="subnav-links account-id">
+    <span class="user-type user-name"><%= current_user.first_name %></span>
+    <span class="user-type user-role"><%= current_user.classrole_type %></span>
+  </li>
+  <li>
+    <%= link_to 'Edit Profile', edit_profile_path, class: "subnav-links", id: 'account' %>
+  </li>
+  <li>
+    <%= link_to 'Log Out', logout_path, class: "subnav-links", id: 'logout-link' %>
+  </li>
+</div>

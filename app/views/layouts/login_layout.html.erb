@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Curri | The Syllabus Reinvented</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag %>
+    <%= favicon_link_tag 'curri512.png', rel: 'apple-touch-icon', type: 'image/png', size: '512x512' %>
+    <%= favicon_link_tag 'curri152.png', rel: 'apple-touch-icon', type: 'image/png', size: '152x152' %>
+    <%= favicon_link_tag 'curri120.png', rel: 'apple-touch-icon', type: 'image/png', size: '120x120' %>
+    <%= favicon_link_tag 'curri76.png', rel: 'apple-touch-icon', type: 'image/png', size: '76x76' %>
+  </head>
+  <body class="login">
+    <div class="brandbar"></div>
+    <div class="main">
+      <div class="wrapper">
+        <div class="grid-unit narrow flash">
+          <% if notice %>
+              <div class="alert alert-success alert-dismissable">
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+                <a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+                <%= notice %>
+              </div>
+          <% end %>
+
+          <% if alert %>
+              <div class="alert alert-warning alert-dismissable">
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+                <a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+                <%= alert %>
+              </div>
+          <% end %>
+        </div>
+        <div class="grid-unit narrow login-logo">
+          <%= render 'shared/logo' %>
+        </div>
+        <div class="grid-unit narrow login-box">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

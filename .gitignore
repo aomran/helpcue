@@ -14,3 +14,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/coverage
+rails_best_practices_output.html
+.env
+.DS_Store
+
+# Ignore Illustrator files
+/app/assets/images/*.ai

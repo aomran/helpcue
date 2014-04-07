@@ -1,0 +1,17 @@
+@import 'globals/all';
+
+.requester {
+  img {
+    @include border-radius(30px);
+    display: inline-block;
+  }
+}
+
+.gravatar-image {
+  height: 28px;
+  width: 28px;
+}
+
+td .btn-small {
+  margin-right: 0;
+}

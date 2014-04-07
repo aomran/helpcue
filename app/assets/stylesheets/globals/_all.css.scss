@@ -1,0 +1,6 @@
+// This file simply @imports the global partial files for easier @import into other stylesheets
+
+@import "./variables";
+@import "./functions";
+@import "./mixins";
+@import "./extend";

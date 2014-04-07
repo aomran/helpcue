@@ -1,0 +1,19 @@
+// Styles for helper classes that are sitewide
+@import 'globals/all';
+
+.strong {
+  font-weight: 700;
+}
+
+.pull-right {
+  float: right;
+}
+
+.hide-mobile {
+  display: none;
+}
+
+// Used by teacher request header
+.dont-show {
+  display: none;
+}

@@ -1,0 +1,177 @@
+@import 'globals/all';
+
+.btn {
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus,
+  &[disabled]:active,
+  &.disabled,
+  &.disabled:hover,
+  &.disabled:focus,
+  &.disabled:active {
+    opacity: 0.7;
+    top: 0;
+    padding-bottom: 5px;
+    cursor: default;
+  }
+}
+
+button, input[type="button"], input[type="submit"] {
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+button,
+.btn {
+  font: inherit;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  margin: 0 25px 0 0;
+  padding: 2px 15px 5px;
+  border-radius: $global-radius;
+  border: 1px solid $grey-lt;
+  background: lighten($grey-lt, 10%);
+  min-width: 125px;
+  color: $grey-md;
+  -webkit-appearance: none;
+  -webkit-box-shadow: inset 0px -3px 0px 0px $grey-lt, $button-highlight;
+  box-shadow: inset 0px -3px 0px 0px $grey-lt, $button-highlight;
+
+  &:hover,
+  &:focus {
+    background: lighten($grey-lt, 8%);
+    border-color: darken($grey-lt, 8%);
+    // outline: 1px solid rgb(0, 82, 255);
+  }
+
+  &:active {
+    top: 3px;
+    // padding-bottom: 3px; // This is needed for correct padding on :active but with this rule, if the button is the only element in the line, it causes elements after it to move up 3px on click- why?
+    -webkit-box-shadow: inset 0 -1px 0 0 rgba(255,255,255, 0.4);
+    box-shadow: inset 0 -1px 0 0 rgba(255,255,255, 0.4);
+  }
+
+  &[disabled],
+  &.disabled,
+  &.disabled:hover,
+  &.disabled:focus,
+  &.disabled:active {
+    border-color: lighten($grey-lt, 2%);
+    background: lighten( $grey-lt, 10%);
+    -webkit-box-shadow: inset 0 -3px 0 0 lighten($grey-lt, 2%);
+    box-shadow: inset 0 -3px 0 0 lighten($grey-lt, 2%);
+  }
+}
+
+.btn-small {
+  font-size: 0.8rem;
+  margin-right: 15px;
+  padding: 0 15px 3px;
+  min-width: 60px;
+  -webkit-box-shadow: inset 0px -3px 0px 0px $grey-lt, $button-highlight;
+  box-shadow: inset 0px -3px 0px 0px $grey-lt, $button-highlight;
+
+  &:active {
+    top: 2px;
+    // padding-bottom: 1px;
+    -webkit-box-shadow: inset 0 -1px 0 0 rgba(255,255,255, 0.4);
+    box-shadow: inset 0 -1px 0 0 rgba(255,255,255, 0.4);
+  }
+
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus,
+  &[disabled]:active,
+  &.disabled,
+  &.disabled:hover,
+  &.disabled:focus,
+  &.disabled:active {
+    padding-bottom: 3px;
+  }
+}
+
+.btn-primary {
+  border-color: darken($color-primary, 15%);
+  background: $color-primary;
+  color: white;
+  -webkit-box-shadow: inset 0 -3px 0 0 darken($color-primary, 15%), $button-highlight;
+  box-shadow: inset 0 -3px 0 0 darken($color-primary, 15%), $button-highlight;
+
+  &:hover,
+  &:focus {
+    border-color: darken($color-primary, 25%);
+    background: darken($color-primary, 10%);
+  }
+
+  &[disabled],
+  &.disabled,
+  &.disabled:hover,
+  &.disabled:focus,
+  &.disabled:active {
+    border-color: $color-primary;
+    background: lighten($color-primary, 10%);
+    -webkit-box-shadow: inset 0 -3px 0 0 $color-primary;
+    box-shadow: inset 0 -3px 0 0 $color-primary;
+  }
+}
+
+.btn-success {
+  border-color: darken($color-success, 15%);
+  background: $color-success;
+  color: white;
+  -webkit-box-shadow: inset 0 -3px 0 0 darken($color-success, 15%), $button-highlight;
+  box-shadow: inset 0 -3px 0 0 darken($color-success, 15%), $button-highlight;
+
+  &:hover, &:focus {
+    border-color: darken($color-success, 25%);
+    background: darken($color-success, 10%);
+  }
+
+  &[disabled], &.disabled, &.disabled:hover, &.disabled:focus, &.disabled:active {
+    border-color: $color-success;
+    background: lighten($color-success, 10%);
+    -webkit-box-shadow: inset 0 -3px 0 0 $color-success;
+    box-shadow: inset 0 -3px 0 0 $color-success;
+  }
+}
+
+.btn-warning {
+  border-color: darken($color-warning, 15%);
+  background: $color-warning;
+  color: white;
+  -webkit-box-shadow: inset 0 -3px 0 0 darken($color-warning, 15%), $button-highlight;
+  box-shadow: inset 0 -3px 0 0 darken($color-warning, 15%), $button-highlight;
+
+  &:hover, &:focus {
+    border-color: darken($color-warning, 20%);
+    background: darken($color-warning, 10%);
+  }
+
+  &[disabled], &.disabled, &.disabled:hover, &.disabled:focus, &.disabled:active {
+    border-color: $color-warning;
+    background: lighten($color-warning, 10%);
+    -webkit-box-shadow: inset 0 -3px 0 0 $color-warning;
+    box-shadow: inset 0 -3px 0 0 $color-warning;
+  }
+}
+
+.btn-danger {
+  border-color: darken($color-danger, 20%);
+  background: $color-danger;
+  color: white;
+  -webkit-box-shadow: inset 0 -3px 0 0 darken($color-danger, 20%), $button-highlight;
+  box-shadow: inset 0 -3px 0 0 darken($color-danger, 20%), $button-highlight;
+
+  &:hover, &:focus {
+    border-color: darken($color-danger, 25%);
+    background: darken($color-danger, 10%);
+  }
+
+  &[disabled], &.disabled, &.disabled:hover, &.disabled:focus, &.disabled:active {
+    border-color: $color-danger;
+    background: lighten($color-danger, 10%);
+    -webkit-box-shadow: inset 0 -3px 0 0 $color-danger;
+    box-shadow: inset 0 -3px 0 0 $color-danger;
+  }
+}

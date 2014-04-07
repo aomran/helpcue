@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Helpcue</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= render 'shared/event_tracking' %>
+    <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+    <script type="text/javascript">
+      window.Curri.pusher = new Pusher('<%= Pusher.key %>');
+    </script>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag %>
+  </head>
+  <body ontouchstart="">
+    <%= render "shared/nav" %>
+    <div class="main">
+      <%= render 'shared/page_header' %>
+      <%= render 'shared/alerts' %>
+      <div class="wrapper page-title">
+        <%= yield %>
+    </div>
 
-<%= yield %>
+    <%= javascript_include_tag "application" %>
 
-</body>
+    <% if flash[:track] %>
+      <%= track_event(flash[:track][:event_name], flash[:track][:properties]) %>
+    <% end %>
+  </body>
 </html>

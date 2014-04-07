@@ -1,0 +1,162 @@
+@import 'globals/all';
+
+// Styles for login page
+.login {
+  background: lighten($color-main, 65%);
+  .main {
+    padding: 0;
+    margin-left: 0;
+    background: none;
+  }
+  .wrapper {
+    margin: 0;
+  }
+  .flash {
+    float: none;
+  }
+}
+
+
+.brandbar {
+  height: 6px;
+  background: $color-main;
+  background-image: repeating-linear-gradient(to right, $color-success 0px, $color-success 80px, $color-warning 80px, $color-warning 160px, $color-danger 160px, $color-danger 240px, $color-main 240px, $color-main 320px);
+}
+
+@include media-query(medium) {
+  .brandbar {
+    background-image: repeating-linear-gradient(to right, $color-success 0px, $color-success 160px, $color-warning 160px, $color-warning 320px, $color-danger 320px, $color-danger 480px, $color-main 480px, $color-main 640px);
+  }
+}
+
+.login-box,
+.login-logo {
+  float: none;
+  width: 280px;
+}
+
+.login-logo {
+  width: 171px;
+  height: 51px;
+  margin-top: 30px;
+  &:hover {
+    .green {
+      fill: $color-success;
+      @include transition(fill, 0.3s, ease, 0.6s);
+    }
+    .orange {
+      fill: $color-warning;
+      @include transition(fill, 0.3s, ease, 0.3s);
+    }
+    .red {
+      fill: $color-danger;
+      @include transition(fill, 0.3s, ease, 0);
+    }
+  }
+}
+
+.login-box {
+  font-size: 17px;
+  padding: 20px;
+  border: 1px solid $grey-lt;
+  @include border-radius(5px);
+  margin-top: 40px;  
+  margin-bottom: 50px;
+  h3 {
+    margin: 15px 0 10px;
+  }
+}
+
+@include media-query(small) {
+  .login-logo {
+    margin-top: 45px;
+  }
+  .login-box {
+    min-width: 350px;
+    margin-top: 55px;
+  }
+}
+
+.grid-unit-header, .grid-unit-footer {
+  padding: 10px 20px;
+}
+
+.grid-unit-header {
+  margin: -30px -20px 20px;
+  border-bottom: 1px solid $grey-lt;
+}
+
+.grid-unit-footer {
+  margin: 20px -20px -30px;
+  border-top: 1px solid $grey-lt;
+}
+
+.forgot {
+  font-size: 14px;
+  vertical-align: baseline;
+  position: absolute;
+  top: -4px;
+  right: 0
+}
+
+.login .btn {
+  width: 100%;
+}
+
+.login .grid-unit-footer {
+  text-align: center;
+  position: relative;
+}
+.register {
+  font-size: 14px;
+  padding: 7px 0 8px;
+}
+
+.register-show {
+  font-size: 14px;
+  color: darken($color-main, 10%);
+  font-weight: 700;
+  padding: 0 10px 5px;
+  @include border-radius(5px);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.register-hidden {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  display: none;
+  width: 258px;
+  margin: 0 auto;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  right: 10px;
+  text-align: left;
+  color: #fff;
+  padding: 10px 20px;
+  background: darken($color-main, 10%);
+  &:before {
+    content: "";
+    position: absolute;
+    left: 47%;
+    bottom: -4px;
+    width: 15px;
+    height: 15px;
+    background: darken($color-main, 10%);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    @include border-radius(2px);
+  }
+  @include border-radius(5px);
+  .register-show:hover & {
+    display: inline;
+  }
+}
+
+.login-top {
+  margin-bottom: 20px;
+}
