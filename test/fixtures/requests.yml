@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: MyString
+  status: MyString
+  owner: student1
+  users: student1
+  classroom: one
+
+two:
+  question: MyString
+  status: MyString
+  owner: student2
+  users: student2
+  classroom: one

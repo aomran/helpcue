@@ -12,6 +12,17 @@ class User < ActiveRecord::Base
   has_many :classroom_users
   has_many :classrooms, through: :classroom_users
   has_many :owned_classrooms, :class_name => "Classroom", :foreign_key => "owner_id"
+  has_and_belongs_to_many :requests
+  has_many :owned_requests, :class_name => "Request", :foreign_key => "owner_id"
+
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def admin?(classroom)
+    self.classroom_users.where(classroom: classroom, role: 'Admin').any?
+  end
 
   private
   def set_avatar

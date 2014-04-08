@@ -1,0 +1,30 @@
+<% unless current_user.admin?(@classroom) %>
+  <%= render 'form' %>
+<% end %>
+
+  <div class="grid-unit whole">
+    <h2>Students in Help Queue</h2>
+    <h6 class="subtitle"><%= @classroom.name %></h6>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="grid-unit wide">
+    <table id="requesters-table">
+      <thead>
+        <tr>
+          <th colspan="2">Name</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <% if @requests.empty? %>
+        <tr id="placeholder"><td colspan="4">No students need help right now.</td></tr>
+      <% else %>
+        <% @requests.each do |request| %>
+          <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

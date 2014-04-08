@@ -1,6 +1,6 @@
 <div class="grid-unit narrow">
   <div class="padding-border">
-    <%= link_to classrooms_path, class: 'content classroom-unit' do %>
+    <%= link_to classroom_requests_path(classroom), class: 'content classroom-unit' do %>
       <h4 class="unit-header truncate"><%= classroom.name %></h4>
       <p class="classroom-desc"><%= classroom.description %></p>
 

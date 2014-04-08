@@ -1,4 +1,5 @@
 class Classroom < ActiveRecord::Base
+  has_many :requests
   has_many :classroom_users
   has_many :users, through: :classroom_users
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"

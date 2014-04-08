@@ -83,14 +83,14 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "should add user with user role to classroom with user-token" do
-    assert_equal 0, users(:student1).classrooms.size
+    assert_equal 1, users(:student1).classrooms.size
 
     sign_out users(:teacher1)
     sign_in users(:student1)
 
     xhr :post, :join, format: :json, join_token: classrooms(:one).user_token
 
-    assert_equal 1, users(:student1).classrooms.size
+    assert_equal 2, users(:student1).classrooms.size
     assert_equal 'User', users(:student1).classroom_users.last.role
   end
 
