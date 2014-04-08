@@ -12,21 +12,7 @@
 </li>
 
 <% if @classroom.try(:id) %>
-  <li id="track_link" data-classroomid="<%= @classroom.id %>" >
-    <%= link_to_selected classroom_tracks_path(@classroom), class: "nav-links" do %>
-      <span class="nav-icon nav-tracks"></span>
-      <span class="nav-label">Tracks</span>
-    <% end %>
-  </li>
-
-  <% if @track.try(:id)%>
-    <li>
-      <%= link_to_selected classroom_track_analytics_path(@classroom, @track), class: "nav-links" do %>
-        <span class="nav-icon nav-analytics"></span>
-        <span class="nav-label">Analytics</span>
-      <% end %>
-    </li>
-  <% end %>
+ <!-- Requests link here -->
 <% end %>
 
 <div class="bottom-nav">

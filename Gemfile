@@ -24,3 +24,7 @@ group :development do
   gem 'rack-livereload'
   gem 'guard-livereload'
 end
+
+group :development, :test do
+  gem 'pry-rails'
+end

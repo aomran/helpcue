@@ -1,4 +1,7 @@
 class ClassroomsController < ApplicationController
+
+  before_action :get_classroom, only: [:edit, :update, :destroy]
+
   def index
     @classrooms = current_user.classrooms
   end
@@ -16,14 +19,38 @@ class ClassroomsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @classroom.update(classroom_params)
+      redirect_to classroom_path(@classroom), notice: "Classroom has been updated."
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    current_user.classrooms.delete(@classroom)
+    if @classroom.users.empty?
+      @classroom.destroy
+    end
+    redirect_to classrooms_path, notice: "You have left the classroom."
+  end
+
   def join
-    classroom = Classroom.find_by(teacher_token: params[:teacher_token])
+    if classroom = Classroom.find_by(user_token: params[:join_token])
+      role = 'User'
+    elsif classroom = Classroom.find_by(admin_token: params[:join_token])
+      role = 'Admin'
+    end
+
     respond_to do |format|
-      if classroom && @current_user.classrooms.exclude?(classroom)
-        @current_user.classrooms << classroom
+      if classroom && current_user.classrooms.exclude?(classroom)
+        classroom.classroom_users.create(user: current_user, role: role)
         format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom }
       else
-        if @current_user.classrooms.include?(classroom)
+        if current_user.classrooms.include?(classroom)
           message = 'You are already in this classroom'
         else
           message = 'Invalid Token'
@@ -31,25 +58,6 @@ class ClassroomsController < ApplicationController
         format.json { render json: message, status: :unprocessable_entity }
       end
     end
-  end
-
-  def edit
-  end
-
-  def update
-    if @classroom.update(classroom_params)
-      redirect_to classroom_tracks_path(@classroom), notice: "Classroom has been updated."
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @current_user.classrooms.delete(@classroom)
-    if @classroom.teachers.empty? && @classroom.students.empty?
-      @classroom.destroy
-    end
-    redirect_to classrooms_path, notice: "You have left the classroom."
   end
 
   private

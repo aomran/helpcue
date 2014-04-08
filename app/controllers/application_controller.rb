@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
+
+  private
+  def get_classroom
+    @classroom = current_user.classrooms.find(params[:classroom_id] || params[:id])
+  end
 end

@@ -4,10 +4,5 @@
       <span class="nav-icon nav-burger"></span>
     </a>
     <h4><%= current_page_header %></h4>
-    <div class="secondary-nav pull-right">
-      <% if @classroom.try(:id) %>
-        <%= render 'shared/help_toggle' %>
-      <% end %>
-    </div>
   </div>
 </div>

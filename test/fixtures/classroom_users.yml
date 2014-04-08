@@ -2,10 +2,10 @@
 
 one:
   role: MyString
-  user_id: 1
-  classroom_id: 1
+  user: teacher1
+  classroom: one
 
 two:
   role: MyString
-  user_id: 1
-  classroom_id: 1
+  user: teacher2
+  classroom: one

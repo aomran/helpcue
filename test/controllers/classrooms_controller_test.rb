@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ClassroomsControllerTest < ActionController::TestCase
 
-  before do
+  def setup
     sign_in users(:teacher1)
   end
 
@@ -39,7 +39,7 @@ class ClassroomsControllerTest < ActionController::TestCase
 
     classroom = Classroom.find(classrooms(:one).id)
     assert_equal "Changed name", classroom.name
-    assert_redirected_to classroom_tracks_path(assigns(:classroom))
+    assert_redirected_to classroom_path(assigns(:classroom))
   end
 
   test "should not update classroom with invalid data" do
@@ -48,7 +48,7 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert_template :edit
   end
 
-  test "should remove teacher from classroom without deleting classroom" do
+  test "should remove user from classroom without deleting classroom" do
     assert_difference 'users(:teacher1).classrooms.count', -1 do
       delete :destroy, id: classrooms(:one)
     end
@@ -57,51 +57,47 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert_redirected_to classrooms_path
   end
 
-  test "should remove student from classroom without deleting classroom" do
-    cookies[:auth_token] = users(:student1).auth_token
+  test "should remove classroom with no users" do
+    delete :destroy, id: classrooms(:one)
 
-    assert_difference 'users(:student1).classrooms.count', -1 do
+    sign_out users(:teacher1)
+    sign_in users(:teacher2)
+
+    assert_difference 'Classroom.count', -1 do
       delete :destroy, id: classrooms(:one)
     end
-
-    assert classrooms(:one).reload
-    assert_redirected_to classrooms_path
   end
 
-  test "should remove classroom with no teachers or students" do
-    cookies[:auth_token] = users(:teacher2).auth_token
-    assert_difference 'Classroom.count', -1 do
-      delete :destroy, id: classrooms(:three)
-    end
-  end
-
-  test "should add teacher to classroom" do
+  test "should add user with admin role to classroom with admin-token" do
     assert_equal 1, users(:teacher1).classrooms.size
-    xhr :post, :join, format: :json, teacher_token: classrooms(:three).teacher_token
+    xhr :post, :join, format: :json, join_token: classrooms(:three).admin_token
 
     assert_equal 2, users(:teacher1).classrooms.size
+    assert_equal 'Admin', users(:teacher1).classroom_users.last.role
   end
 
   test "should give error with wrong token" do
-    xhr :post, :join, format: :json, teacher_token: 'bad-token'
+    xhr :post, :join, format: :json, admin_token: 'bad-token'
 
     assert_equal 'Invalid Token', @response.body
   end
 
-  test "should not add student to classroom using token" do
-    assert_equal 1, users(:student1).classrooms.size
+  test "should add user with user role to classroom with user-token" do
+    assert_equal 0, users(:student1).classrooms.size
 
-    cookies[:auth_token] = users(:student1).auth_token
-    xhr :post, :join, format: :json, teacher_token: classrooms(:three).teacher_token
+    sign_out users(:teacher1)
+    sign_in users(:student1)
+
+    xhr :post, :join, format: :json, join_token: classrooms(:one).user_token
 
     assert_equal 1, users(:student1).classrooms.size
-    assert 'Only a teacher can do that.', flash[:alert]
+    assert_equal 'User', users(:student1).classroom_users.last.role
   end
 
-  test "should not add teacher to a classroom they are already in" do
+  test "should not add user to a classroom they are already in" do
 
     assert_no_difference 'users(:teacher1).classrooms.count' do
-      xhr :post, :join, format: :json, teacher_token: classrooms(:one).teacher_token
+      xhr :post, :join, format: :json, join_token: classrooms(:one).admin_token
     end
 
     assert_equal 'You are already in this classroom', @response.body

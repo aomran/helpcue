@@ -3,13 +3,20 @@
 one:
   name: MyString
   description: MyString
-  admin_token: MyString
-  user_token: MyString
+  admin_token: ADMINTOKEN
+  user_token: USERTOKEN
   owner_id: 1
 
 two:
   name: MyString
   description: MyString
-  admin_token: MyString
-  user_token: MyString
+  admin_token: ADMINTOKEN2
+  user_token: USERTOKEN2
+  owner_id: 1
+
+three:
+  name: MyString
+  description: MyString
+  admin_token: ADMINTOKEN3
+  user_token: USERTOKEN3
   owner_id: 1
