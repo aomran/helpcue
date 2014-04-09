@@ -16,3 +16,5 @@ $ ->
 
     $('#requesters-table').on 'ajax:success', '.request-delete', (e, data) ->
       HelpCue.RequestsList.removeRequest(data.id)
+
+    $("abbr.timeago").timeago()

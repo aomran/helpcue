@@ -18,6 +18,7 @@
 #= require matchMedia
 #= require bootstrap-dismiss
 #= require jquery.modal
+#= require jquery.timeago
 #= require utilities
 #= require_tree ./objects
 #= require_tree .

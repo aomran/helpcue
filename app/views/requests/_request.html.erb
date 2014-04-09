@@ -1,7 +1,11 @@
 <tr class="request" id="request<%= request.id %>">
   <td colspan="2"><%= image_tag "#{request.owner.avatar}?s=56", class: 'gravatar-image' %><%= request.owner.full_name %></td>
   <td><%= request.question %></td>
-  <td><%= request.created_at.strftime("%l:%M%P, %e %b %y") %></td>
+  <td>
+    <abbr class="timeago" title="<%= request.created_at.getutc.iso8601 %>">
+      <%= request.created_at.to_s %>
+    </abbr>
+  </td>
   <td>
   <% if request.status == Request::STATUS_OPTIONS[0] %>
     <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-primary btn-small request-button'%>
