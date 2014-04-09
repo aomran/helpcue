@@ -18,6 +18,13 @@ class RequestsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "should get list of completed requests" do
+    get :completed, classroom_id: classrooms(:two).id
+
+    assert assigns(:requests)
+    assert :success
+  end
+
   test "should create request with valid data" do
     assert_difference 'Request.count' do
       @params[:format] = :json
@@ -25,6 +32,19 @@ class RequestsControllerTest < ActionController::TestCase
     end
 
     assert_equal Request::STATUS_OPTIONS[0], Request.last.status
+    assert_equal @params[:request][:question], Request.last.question
     assert_equal users(:student1).id, Request.last.owner_id
+  end
+
+  test "should update request status" do
+    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {status: Request::STATUS_OPTIONS[1]}
+
+    assert_equal Request::STATUS_OPTIONS[1], requests(:one).reload.status
+  end
+
+  test "should update request question" do
+    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {question: 'new question'}
+
+    assert_equal 'new question', requests(:one).reload.question
   end
 end

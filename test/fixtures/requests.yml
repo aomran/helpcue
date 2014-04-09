@@ -5,11 +5,11 @@ one:
   status: MyString
   owner: student1
   users: student1
-  classroom: one
+  classroom: two
 
 two:
   question: MyString
   status: MyString
   owner: student2
   users: student2
-  classroom: one
+  classroom: two

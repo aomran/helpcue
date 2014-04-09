@@ -1,9 +1,6 @@
-<% unless current_user.admin?(@classroom) %>
-  <%= render 'form' %>
-<% end %>
 
   <div class="grid-unit whole">
-    <h2>Current Requests</h2>
+    <h2>Completed Requests</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
 </div>
@@ -15,12 +12,12 @@
           <th colspan="2">Name</th>
           <th>Question</th>
           <th>Time</th>
-          <th>Status</th>
+          <th>Options</th>
         </tr>
       </thead>
 
       <% if @requests.empty? %>
-        <tr id="placeholder"><td colspan="4">No students need help right now.</td></tr>
+        <tr id="placeholder"><td colspan="4">No questions have the "done" status yet.</td></tr>
       <% else %>
         <% @requests.each do |request| %>
           <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>

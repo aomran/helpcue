@@ -12,7 +12,19 @@
 </li>
 
 <% if @classroom.try(:id) %>
- <!-- Requests link here -->
+ <li id="track_link" data-classroomid="<%= @classroom.id %>" >
+   <%= link_to_selected classroom_requests_path(@classroom), class: "nav-links" do %>
+     <span class="nav-icon nav-tracks"></span>
+     <span class="nav-label">Queue</span>
+   <% end %>
+ </li>
+
+ <li id="track_link" data-classroomid="<%= @classroom.id %>" >
+   <%= link_to_selected completed_classroom_requests_path(@classroom), class: "nav-links" do %>
+     <span class="nav-icon nav-tracks"></span>
+     <span class="nav-label">Completed</span>
+   <% end %>
+ </li>
 <% end %>
 
 <div class="bottom-nav">
