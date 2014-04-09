@@ -9,8 +9,11 @@
   addRequest: (partial) ->
     $placeholder = $('#placeholder')
     $placeholder.hide() if $placeholder.length
-    $('#requesters-table').append(partial)
-    $("abbr.timeago").timeago()
+    $('#requests-table').append(partial)
+    $('.timeago').each ->
+      $this = $(this)
+      if $this.data('active') != 'yes'
+        $this.timeago().data('active','yes')
 
   removeRequest: (requestId) ->
     $("#request#{requestId}").fadeOut 'slow', ->
