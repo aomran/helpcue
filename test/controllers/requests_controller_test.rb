@@ -47,4 +47,22 @@ class RequestsControllerTest < ActionController::TestCase
 
     assert_equal 'new question', requests(:one).reload.question
   end
+
+  test "should toggle request status from waiting to being helped" do
+    xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:one).id
+
+    assert_equal Request::STATUS_OPTIONS[1], requests(:one).reload.status
+  end
+
+  test "should toggle request status from being helped to waiting" do
+    xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:two).id
+
+    assert_equal Request::STATUS_OPTIONS[0], requests(:two).reload.status
+  end
+
+  test "should remove request when it's done" do
+    xhr :patch, :remove, classroom_id: classrooms(:two), id: requests(:one).id
+
+    assert_equal Request::STATUS_OPTIONS[2], requests(:one).reload.status
+  end
 end

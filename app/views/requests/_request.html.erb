@@ -3,8 +3,11 @@
   <td><%= request.question %></td>
   <td><%= request.created_at.strftime("%l:%M%P, %e %b %y") %></td>
   <td>
-  <%= form_for [@classroom, request], method: :patch, remote: true do |f| %>
-    <%= f.select :status, options_for_select(Request::STATUS_OPTIONS, request.status) %>
+  <% if request.status == Request::STATUS_OPTIONS[0] %>
+    <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-primary btn-small request-button'%>
+    <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove dont-show'%>
+  <% elsif request.status == Request::STATUS_OPTIONS[1] %>
+    <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-success btn-small request-button'%>
+    <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove'%>
   <% end %>
-<!--   <%= link_to 'Yes', remove_classroom_request_path(id: request.id, classroom_id: classroom.id), method: :patch, remote: true, class: 'btn btn-primary btn-small request-button'%></td> -->
 </tr>

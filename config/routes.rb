@@ -9,6 +9,7 @@ Helpcue::Application.routes.draw do
     post 'join', on: :collection
     resources :requests, only: [:index, :create, :update] do
       patch 'remove', on: :member
+      patch 'toggle_help', on: :member
       get 'completed', on: :collection
     end
   end

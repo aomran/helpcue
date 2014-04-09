@@ -6,10 +6,9 @@ $ ->
     $('#new_request').on "ajax:success", (e, data) ->
       HelpCue.RequestsList.addRequest(data.partial)
 
+    $('#requesters-table').on 'ajax:success', '.request-button', (e, data) ->
+      $(this).toggleClass('btn-primary btn-success')
+      $(this).closest('td').find('.request-remove').toggle()
 
-    $('.edit_request select').on 'change', ->
-      $(this).closest('form').submit()
-    # Remove student from help queue
-    # $('#requesters-table').on "ajax:success", '.btn-small', (e, data) ->
-    #   HelpCue.RequestsList.removeRequest(data.id)
-    #   analytics.track "Teacher Answered Student", classroom_id: data.classroom_id
+    $('#requesters-table').on 'ajax:success', '.request-remove', (e, data) ->
+      HelpCue.RequestsList.removeRequest(data.request_id)

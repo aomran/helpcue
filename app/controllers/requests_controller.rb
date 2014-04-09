@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :get_classroom
-  before_action :get_request, only: [:update]
+  before_action :get_request, only: [:update, :toggle_help, :remove]
 
   def index
     @requests = @classroom.requests.need_help
@@ -29,6 +29,33 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.update(request_params)
         format.json { render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }), classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+      else
+        format.json { render json: @request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def toggle_help
+    if @request.status == Request::STATUS_OPTIONS[0]
+      @request.status = Request::STATUS_OPTIONS[1]
+    elsif @request.status == Request::STATUS_OPTIONS[1]
+      @request.status = Request::STATUS_OPTIONS[0]
+    end
+
+    respond_to do |format|
+      if @request.save
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
+      else
+        format.json { render json: @request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove
+    @request.status = Request::STATUS_OPTIONS[2]
+    respond_to do |format|
+      if @request.save
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end

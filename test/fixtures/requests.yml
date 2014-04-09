@@ -2,14 +2,14 @@
 
 one:
   question: MyString
-  status: MyString
+  status: Waiting
   owner: student1
   users: student1
   classroom: two
 
 two:
   question: MyString
-  status: MyString
+  status: Being Helped
   owner: student2
   users: student2
   classroom: two

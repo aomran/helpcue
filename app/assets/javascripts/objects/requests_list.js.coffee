@@ -11,8 +11,8 @@
     $placeholder.hide() if $placeholder.length
     $('#requesters-table').append(partial)
 
-  removeRequest: (requesterId) ->
-    $("#requester#{requesterId}").fadeOut 'slow', ->
+  removeRequest: (requestId) ->
+    $("#request#{requestId}").fadeOut 'slow', ->
       $(this).remove()
-      unless $('.requester').length
-        $$('#placeholder').show()
+      unless $('.request').length
+        $('#placeholder').show()
