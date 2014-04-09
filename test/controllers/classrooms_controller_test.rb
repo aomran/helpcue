@@ -69,10 +69,10 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "should add user with admin role to classroom with admin-token" do
-    assert_equal 1, users(:teacher1).classrooms.size
+    assert_equal 2, users(:teacher1).classrooms.size
     xhr :post, :join, format: :json, join_token: classrooms(:three).admin_token
 
-    assert_equal 2, users(:teacher1).classrooms.size
+    assert_equal 3, users(:teacher1).classrooms.size
     assert_equal 'Admin', users(:teacher1).classroom_users.last.role
   end
 

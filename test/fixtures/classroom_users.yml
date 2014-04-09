@@ -19,3 +19,8 @@ four:
   role: User
   user: student2
   classroom: two
+
+five:
+  role: Admin
+  user: teacher1
+  classroom: two

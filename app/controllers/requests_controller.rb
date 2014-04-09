@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
   before_action :get_classroom
   before_action :get_request, only: [:update, :toggle_help, :remove, :destroy]
+  after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy]
 
   def index
     @requests = @classroom.requests.need_help
@@ -26,6 +27,7 @@ class RequestsController < ApplicationController
   end
 
   def update
+    authorize @request
     respond_to do |format|
       if @request.update(request_params)
         format.json { render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }), classroom_id: @classroom.id, request_id: @request.id }, status: :created }
@@ -36,6 +38,7 @@ class RequestsController < ApplicationController
   end
 
   def toggle_help
+    authorize @request
     if @request.status == Request::STATUS_OPTIONS[0]
       @request.status = Request::STATUS_OPTIONS[1]
     elsif @request.status == Request::STATUS_OPTIONS[1]
@@ -52,6 +55,7 @@ class RequestsController < ApplicationController
   end
 
   def remove
+    authorize @request
     @request.status = Request::STATUS_OPTIONS[2]
     respond_to do |format|
       if @request.save
@@ -63,6 +67,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
+    authorize @request
     @request.destroy
 
     respond_to do |format|

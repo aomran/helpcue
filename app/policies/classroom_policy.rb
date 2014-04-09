@@ -14,4 +14,3 @@ class ClassroomPolicy
     classroom.owner == user
   end
 end
-

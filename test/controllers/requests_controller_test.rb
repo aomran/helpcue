@@ -55,6 +55,8 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should toggle request status from being helped to waiting" do
+    sign_out users(:student1)
+    sign_in users(:student2)
     xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:two).id
 
     assert_equal Request::STATUS_OPTIONS[0], requests(:two).reload.status
@@ -67,6 +69,16 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should delete request" do
+    sign_out users(:student1)
+    sign_in users(:student2)
+    assert_difference 'classrooms(:two).requests.count', -1 do
+      xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:two).id
+    end
+  end
+
+  test "teacher should be able to delete request" do
+    sign_out users(:student1)
+    sign_in users(:teacher1)
     assert_difference 'classrooms(:two).requests.count', -1 do
       xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:two).id
     end
