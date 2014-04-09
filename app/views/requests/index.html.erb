@@ -18,13 +18,9 @@
           <th>Status</th>
         </tr>
       </thead>
-
-      <% if @requests.empty? %>
-        <tr id="placeholder"><td colspan="4">No students need help right now.</td></tr>
-      <% else %>
+        <tr id="placeholder" class="<%= 'dont-show' if !@requests.empty? %>"><td colspan="4">No students need help right now.</td></tr>
         <% @requests.each do |request| %>
           <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
-        <% end %>
       <% end %>
     </table>
   </div>
