@@ -10,6 +10,7 @@
     $placeholder = $('#placeholder')
     $placeholder.hide() if $placeholder.length
     $('#requesters-table').append(partial)
+    $("abbr.timeago").timeago()
 
   removeRequest: (requestId) ->
     $("#request#{requestId}").fadeOut 'slow', ->
