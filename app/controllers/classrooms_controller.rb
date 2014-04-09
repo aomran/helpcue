@@ -1,5 +1,6 @@
 class ClassroomsController < ApplicationController
 
+  after_action :verify_authorized, only: [:edit, :update]
   before_action :get_classroom, only: [:edit, :update, :destroy]
 
   def index
@@ -20,9 +21,12 @@ class ClassroomsController < ApplicationController
   end
 
   def edit
+    authorize @classroom
   end
 
   def update
+    authorize @classroom
+
     if @classroom.update(classroom_params)
       redirect_to classroom_path(@classroom), notice: "Classroom has been updated."
     else

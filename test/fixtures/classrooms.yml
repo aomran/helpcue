@@ -5,7 +5,7 @@ one:
   description: MyString
   admin_token: ADMINTOKEN
   user_token: USERTOKEN
-  owner_id: 1
+  owner: teacher1
 
 two:
   name: MyString

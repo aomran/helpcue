@@ -108,6 +108,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    pundit (0.2.3)
+      activesupport (>= 3.0.0)
     pusher (0.12.0)
       httpclient (~> 2.3.0)
       multi_json (~> 1.0)
@@ -183,6 +185,7 @@ DEPENDENCIES
   pg
   pickadate-rails
   pry-rails
+  pundit
   pusher
   rack-livereload
   rails (= 4.0.4)

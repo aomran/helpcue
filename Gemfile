@@ -17,6 +17,7 @@ gem 'pickadate-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
+gem "pundit"
 gem 'pusher'
 
 group :development do
