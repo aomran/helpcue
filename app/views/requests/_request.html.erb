@@ -7,13 +7,17 @@
     </abbr>
   </td>
   <td>
-  <% if request.status == Request::STATUS_OPTIONS[0] %>
-    <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-primary btn-small request-button'%>
-    <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove dont-show'%>
-  <% elsif request.status == Request::STATUS_OPTIONS[1] %>
-    <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-success btn-small request-button'%>
-    <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove'%>
+  <% if policy(request).update? %>
+    <% if request.status == Request::STATUS_OPTIONS[0] %>
+      <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-primary btn-small request-button'%>
+      <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove dont-show'%>
+    <% elsif request.status == Request::STATUS_OPTIONS[1] %>
+      <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-success btn-small request-button'%>
+      <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove'%>
+    <% end %>
   <% end %>
 
-  <%= link_to 'X', [@classroom, request], method: :delete, remote: true, class: 'btn btn-small request-delete'%>
+  <% if policy(request).destroy? %>
+    <%= link_to 'X', [@classroom, request], method: :delete, remote: true, class: 'btn btn-small request-delete'%>
+  <% end %>
 </tr>
