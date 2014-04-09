@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :get_classroom
-  before_action :get_request, only: [:update, :toggle_help, :remove]
+  before_action :get_request, only: [:update, :toggle_help, :remove, :destroy]
 
   def index
     @requests = @classroom.requests.need_help
@@ -59,6 +59,16 @@ class RequestsController < ApplicationController
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @request.destroy
+
+    respond_to do |format|
+      format.json {
+        render json: { id: params[:id] }
+      }
     end
   end
 

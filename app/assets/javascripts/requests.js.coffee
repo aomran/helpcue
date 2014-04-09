@@ -13,3 +13,6 @@ $ ->
 
     $('#requesters-table').on 'ajax:success', '.request-remove', (e, data) ->
       HelpCue.RequestsList.removeRequest(data.request_id)
+
+    $('#requesters-table').on 'ajax:success', '.request-delete', (e, data) ->
+      HelpCue.RequestsList.removeRequest(data.id)

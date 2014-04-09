@@ -65,4 +65,10 @@ class RequestsControllerTest < ActionController::TestCase
 
     assert_equal Request::STATUS_OPTIONS[2], requests(:one).reload.status
   end
+
+  test "should delete request" do
+    assert_difference 'classrooms(:two).requests.count', -1 do
+      xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:two).id
+    end
+  end
 end
