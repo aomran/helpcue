@@ -1,8 +1,13 @@
 <% unless current_user.admin?(@classroom) %>
   <%= render 'form' %>
 <% end %>
+  <% if policy(@classroom).edit? %>
+    <div class="grid-unit narrow pull-right">
+      <%= link_to 'Manage Classroom', edit_classroom_path(@classroom), id: 'manage-classroom' %>
+    </div>
+  <% end %>
 
-  <div class="grid-unit whole">
+  <div class="grid-unit wide">
     <h2>Current Requests</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
