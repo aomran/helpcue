@@ -1,7 +1,7 @@
 require 'pusher'
 
 unless Rails.env.production?
-  Pusher.app_id = '63065'
-  Pusher.key = 'a04c76daaec237bb1d36'
-  Pusher.secret = '46e5b89679bead70002e'
+  Pusher.app_id = '71476'
+  Pusher.key = '25d54724919c414f290a'
+  Pusher.secret = '8eb4b18291b92b3c0a6a'
 end
