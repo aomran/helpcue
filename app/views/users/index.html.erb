@@ -10,19 +10,19 @@
   <h2>Students</h2>
 </div>
 
-<table>
+<table class="users-table">
   <tr>
     <th>Name</th>
     <th>Email</th>
     <th>Options</th>
   </tr>
 <% @students.each do |user| %>
-  <tr>
+  <tr id="user_<%= user.id %>">
     <td><%= user.full_name %></td>
     <td><%= user.email %></td>
     <td>
       <% if policy(@classroom).remove_student? %>
-        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small student-remove'%>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
       <% end %>
     </td>
   </tr>
@@ -33,19 +33,19 @@
   <h2>Teachers</h2>
 </div>
 
-<table>
+<table class="users-table">
   <tr>
     <th>Name</th>
     <th>Email</th>
     <th>Options</th>
   </tr>
 <% @teachers.each do |user| %>
-  <tr>
+  <tr id="user_<%= user.id %>">
     <td><%= user.full_name %></td>
     <td><%= user.email %></td>
     <td>
-      <% if policy(@classroom).remove_admin? %>
-        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small teacher-remove'%>
+      <% if policy(@classroom).remove_admin? && (user != current_user ) %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
       <% end %>
     </td>
   </tr>
