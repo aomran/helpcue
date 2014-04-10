@@ -24,3 +24,8 @@ five:
   role: Admin
   user: teacher1
   classroom: two
+
+six:
+  role: Admin
+  user: teacher2
+  classroom: two

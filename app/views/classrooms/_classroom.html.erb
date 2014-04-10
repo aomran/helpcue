@@ -5,8 +5,8 @@
       <p class="classroom-desc"><%= classroom.description %></p>
 
       <div class="student-count">
-        <% students = classroom.users.merge(ClassroomUser.students).count %>
-        <% teachers = classroom.users.merge(ClassroomUser.teachers).count %>
+        <% students = classroom.users.merge(classroom.classroom_users.students).count %>
+        <% teachers = classroom.users.merge(classroom.classroom_users.teachers).count %>
         <div>
         <span class="class-icons student-icon"></span>
         <span class="number"><%= students %></span><span><%= " #{'Student'.pluralize(students)} Joined" %></span>

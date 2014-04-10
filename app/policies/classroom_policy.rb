@@ -13,4 +13,12 @@ class ClassroomPolicy
   def update?
     classroom.owner == user
   end
+
+  def remove_admin?
+    classroom.owner == user
+  end
+
+  def remove_student?
+    user.admin?(classroom)
+  end
 end

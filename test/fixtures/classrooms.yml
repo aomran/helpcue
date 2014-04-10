@@ -12,7 +12,7 @@ two:
   description: MyString
   admin_token: ADMINTOKEN2
   user_token: USERTOKEN2
-  owner_id: 1
+  owner: teacher2
 
 three:
   name: MyString

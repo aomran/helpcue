@@ -1,16 +1,53 @@
+<% if policy(@classroom).remove_student? %>
+  <div class="grid-unit narrow sidebar pull-right">
+    <h5>Invite Students</h5>
+    <p>To invite additional students to this classroom, please share this token:</p>
+    <p><span class='token'><%= @classroom.user_token %></span></p>
+  </div>
+<% end %>
+
+<div class="grid-unit wide">
+  <h2>Students</h2>
+</div>
+
 <table>
   <tr>
     <th>Name</th>
     <th>Email</th>
+    <th>Options</th>
   </tr>
-<% @users.each do |user| %>
+<% @students.each do |user| %>
   <tr>
-    <td><%= "#{user.first_name} #{user.last_name}" %></td>
+    <td><%= user.full_name %></td>
     <td><%= user.email %></td>
+    <td>
+      <% if policy(@classroom).remove_student? %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small student-remove'%>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
 
-<% if user_signed_in? %>
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<div class="grid-unit wide">
+  <h2>Teachers</h2>
+</div>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Options</th>
+  </tr>
+<% @teachers.each do |user| %>
+  <tr>
+    <td><%= user.full_name %></td>
+    <td><%= user.email %></td>
+    <td>
+      <% if policy(@classroom).remove_admin? %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small teacher-remove'%>
+      <% end %>
+    </td>
+  </tr>
 <% end %>
+</table>

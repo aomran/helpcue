@@ -13,6 +13,8 @@ Helpcue::Application.routes.draw do
       patch 'me_too', on: :member
       get 'completed', on: :collection
     end
+
+    resources :users, only: [:index, :destroy]
   end
 
   # Development Environment
