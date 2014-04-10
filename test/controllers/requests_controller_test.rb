@@ -83,4 +83,33 @@ class RequestsControllerTest < ActionController::TestCase
       xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:two).id
     end
   end
+
+  test "should add additional student to request" do
+    sign_out users(:student1)
+    sign_in users(:student2)
+    assert_difference 'requests(:one).users.count' do
+      xhr :patch, :me_too, classroom_id: classrooms(:two), id: requests(:one).id
+    end
+  end
+
+  test "should add additional student to request only once, instead removing them" do
+    sign_out users(:student1)
+    sign_in users(:student2)
+    xhr :patch, :me_too, classroom_id: classrooms(:two), id: requests(:one).id
+
+    assert_difference 'requests(:one).users.count', -1 do
+      xhr :patch, :me_too, classroom_id: classrooms(:two), id: requests(:one).id
+    end
+  end
+
+  test "should not allow teacher to me-too a request" do
+    sign_out users(:student1)
+    sign_in users(:teacher1)
+
+    assert_no_difference 'requests(:one).users.count' do
+      xhr :patch, :me_too, classroom_id: classrooms(:two), id: requests(:one).id
+    end
+
+    assert "You are not authorized to perform this action.", flash[:error]
+  end
 end

@@ -4,12 +4,12 @@ one:
   question: MyString
   status: Waiting
   owner: student1
-  users: student1
+  users:
   classroom: two
 
 two:
   question: MyString
   status: Being Helped
   owner: student2
-  users: student2
+  users:
   classroom: two

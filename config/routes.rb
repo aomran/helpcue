@@ -10,6 +10,7 @@ Helpcue::Application.routes.draw do
     resources :requests, only: [:index, :create, :update, :destroy] do
       patch 'remove', on: :member
       patch 'toggle_help', on: :member
+      patch 'me_too', on: :member
       get 'completed', on: :collection
     end
   end

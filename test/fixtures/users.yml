@@ -17,14 +17,12 @@ student1:
   first_name: jane
   last_name: doe
   encrypted_password: <%= BCrypt::Password.create("password123")%>
-  requests: one
 
 student2:
   email: student2@school.com
   first_name: john
   last_name: smith
   encrypted_password: <%= BCrypt::Password.create("password123")%>
-  requests: two
 
 nameless_student:
   email: student00@school.com

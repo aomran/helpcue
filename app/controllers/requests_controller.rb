@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
   before_action :get_classroom
-  before_action :get_request, only: [:update, :toggle_help, :remove, :destroy]
-  after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy]
+  before_action :get_request, only: [:update, :toggle_help, :remove, :destroy, :me_too]
+  after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy, :me_too]
 
   def index
     @requests = @classroom.requests.need_help
@@ -75,6 +75,23 @@ class RequestsController < ApplicationController
         render json: { id: params[:id] }
       }
     end
+  end
+
+  def me_too
+    authorize @request
+
+    if current_user.requests.exclude?(@request)
+      current_user.requests << @request
+    else
+      current_user.requests.delete(@request)
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }), classroom_id: @classroom.id, request_id: @request.id }
+      }
+    end
+
   end
 
   private

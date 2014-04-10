@@ -21,4 +21,8 @@ class RequestPolicy
   def destroy?
     (request.owner == user) || user.admin?(request.classroom)
   end
+
+  def me_too?
+    (request.owner != user) && !user.admin?(request.classroom)
+  end
 end

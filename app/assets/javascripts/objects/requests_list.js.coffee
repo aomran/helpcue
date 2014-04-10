@@ -1,19 +1,14 @@
 @HelpCue.RequestsList =
 
-  updateList: (data) ->
-    if data.helpStatus == true
-      @addRequest(data.requesterPartial)
-    else
-      @removeRequest(data.requesterId)
+  updateRequest: (data) ->
+    $("#request#{data.request_id}").replaceWith(data.partial)
+    HelpCue.timeago()
 
   addRequest: (partial) ->
     $placeholder = $('#placeholder')
     $placeholder.hide() if $placeholder.length
     $('#requests-table').append(partial)
-    $('.timeago').each ->
-      $this = $(this)
-      if $this.data('active') != 'yes'
-        $this.timeago().data('active','yes')
+    HelpCue.timeago()
 
   removeRequest: (requestId) ->
     $("#request#{requestId}").fadeOut 'slow', ->

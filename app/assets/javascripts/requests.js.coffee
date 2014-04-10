@@ -18,3 +18,9 @@ $ ->
       HelpCue.RequestsList.removeRequest(data.id)
 
     $("abbr.timeago").timeago()
+
+    $('#requests-table').on 'click', '.me-too-count', ->
+      $(this).closest('td').find('.me-too-people').toggle()
+
+    $('#requests-table').on 'ajax:success', '.request-metoo', (e, data) ->
+      HelpCue.RequestsList.updateRequest(data)

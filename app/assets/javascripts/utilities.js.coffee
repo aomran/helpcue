@@ -26,3 +26,9 @@
   $modal.find('textarea').each ->
     $(this).val('')
   $.modal.close()
+
+@HelpCue.timeago = ->
+  $('.timeago').each ->
+    $this = $(this)
+    if $this.data('active') != 'yes'
+      $this.timeago().data('active','yes')
