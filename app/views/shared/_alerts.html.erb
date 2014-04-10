@@ -1,4 +1,4 @@
-<% if notice %>
+<% if notice && !notice.empty? %>
   <div class="wrapper flash">
     <div class="grid-unit wide">
       <div class="alert alert-success alert-dismissable">
@@ -9,8 +9,8 @@
     </div>
   </div>
 <% end %>
-  
-<% if alert %>
+
+<% if alert && !alert.empty? %>
   <div class="wrapper flash">
     <div class="grid-unit wide">
       <div class="alert alert-warning alert-dismissable">
