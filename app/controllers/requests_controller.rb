@@ -51,15 +51,17 @@ class RequestsController < ApplicationController
     authorize @request
 
     if current_user.requests.exclude?(@request)
+      me_too_status = 'joined'
       current_user.requests << @request
     else
       current_user.requests.delete(@request)
+      me_too_status = 'left'
     end
 
     respond_to do |format|
       push_to_channel('updateRequest')
       format.json {
-        render json: { classroom_id: @classroom.id, request_id: @request.id }
+        render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count }
       }
     end
   end

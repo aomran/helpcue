@@ -52,7 +52,7 @@ class ClassroomsController < ApplicationController
     respond_to do |format|
       if classroom && current_user.classrooms.exclude?(classroom)
         classroom.classroom_users.create(user: current_user, role: role)
-        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom }
+        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id, role: role }, status: :created, location: classroom }
       else
         if current_user.classrooms.include?(classroom)
           message = 'You are already in this classroom'
