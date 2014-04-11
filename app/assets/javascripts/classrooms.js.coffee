@@ -13,7 +13,7 @@ $ ->
     $('#join_classroom').on "ajax:success", (e, data, status, xhr) ->
       HelpCue.clear_modal()
       $('.grid-unit').last().after($(data.partial).fadeIn('slow'))
-      analytics.track "User joined classroom", classroom_id: data.id
+      analytics.track "User joined classroom", classroom_id: data.id, role: data.role
 
     $('#join_classroom').on "ajax:error", (e, xhr, status, error) ->
       HelpCue.form_validations('join', {token: xhr.responseText})
