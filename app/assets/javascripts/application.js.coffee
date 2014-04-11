@@ -51,7 +51,6 @@ $ ->
       lastName: HelpCue.user.last_name || 'Name'
 
     analytics.identify(HelpCue.user.id, userData)
-    analytics.trackLink($('#logout-link'), "Sign out")
 
   $('a.open-modal').click ->
     HelpCue.SubNav.close()

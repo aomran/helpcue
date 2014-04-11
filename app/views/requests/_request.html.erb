@@ -16,6 +16,9 @@
     </abbr>
   </td>
   <td>
+  <% if !policy(request).toggle_help? %>
+    <%= request.status %>
+  <% end %>
   <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
     <% if request.users.include?(current_user) %>
       <%= link_to '+', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-success btn-small request-metoo'%>

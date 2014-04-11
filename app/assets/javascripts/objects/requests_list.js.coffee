@@ -1,17 +1,23 @@
 @HelpCue.RequestsList =
 
   updateRequest: (data) ->
-    $("#request#{data.request_id}").replaceWith(data.partial)
-    HelpCue.timeago()
+    $request = $("#request#{data.request_id}")
+    $.getJSON data.path, (data) ->
+      $request.replaceWith(data.partial)
+      HelpCue.timeago()
 
-  addRequest: (partial) ->
+  addRequest: (data) ->
     $placeholder = $('#placeholder')
     $placeholder.hide() if $placeholder.length
-    $('#requests-table').append(partial)
-    HelpCue.timeago()
+    $.getJSON data.path, (data) ->
+      $('#requests-table').append(data.partial)
+      HelpCue.timeago()
 
-  removeRequest: (requestId) ->
-    $("#request#{requestId}").fadeOut 'slow', ->
+  removeRequest: (data) ->
+    $("#request#{data.request_id}").fadeOut 'slow', ->
       $(this).remove()
       unless $('.request').length
         $('#placeholder').show()
+
+  realtimeRequests: (data) ->
+    HelpCue.RequestsList[data.requestAction](data)

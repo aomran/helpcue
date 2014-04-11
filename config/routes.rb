@@ -7,7 +7,7 @@ Helpcue::Application.routes.draw do
   # Resources
   resources :classrooms, except: [:show, :new] do
     post 'join', on: :collection
-    resources :requests, only: [:index, :create, :update, :destroy] do
+    resources :requests, only: [:index, :create, :update, :destroy, :show] do
       patch 'remove', on: :member
       patch 'toggle_help', on: :member
       patch 'me_too', on: :member
