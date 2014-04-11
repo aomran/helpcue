@@ -10,9 +10,16 @@
 .gravatar-image {
   display: block;
   margin: auto;
-  height: 50px;
-  width: 50px;
-  @include border-radius(30px);
+  height: 35px;
+  width: 35px;
+  @include border-radius(5px);
+}
+
+@include media-query(medium) {
+  .gravatar-image {
+    height: 60px;
+    width: 60px;
+  }
 }
 
 td .btn-small {
@@ -41,12 +48,18 @@ td .btn-small {
 .gravatar-meta,
 .question-meta {
   float: left;
-  padding: 10px;
 }
+
 
 .gravatar-meta {
   width: 25%;
   padding: 10px 5px 10px 10px;
+  margin-top: 7px;
+  span {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+  }
 }
 
 .question-meta {
@@ -54,8 +67,20 @@ td .btn-small {
   padding: 10px 10px 10px 5px;
 }
 
-.me-too-count {
-  display: block;
+@include media-query(medium) {
+  .gravatar-meta,
+  .question-meta {
+    padding: 20px;
+  }
+  .gravatar-meta {
+    margin-top: 10px;
+  }
+}
+
+.timeago {
+  color: $grey-md;
+}
+
+.question-actions {
   margin-top: 10px;
-  text-align: center;
 }

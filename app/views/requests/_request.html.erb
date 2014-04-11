@@ -2,11 +2,10 @@
   <div class="question-content">
     <div class="gravatar-meta">
       <%= image_tag "#{request.owner.avatar}?s=120", class: 'gravatar-image' %>
-      <span class="timeago" title="<%= request.created_at.getutc.iso8601 %>">
-          <%= request.created_at.strftime("%l:%M%P, %e %b %y") %>
-        </span>
+      <span class="timeago small" title="<%= request.created_at.getutc.iso8601 %>">
+        <%= request.created_at.strftime("%l:%M%P, %e %b %y") %>
+      </span>
       <% if request.users.any? %>
-
         <span class="me-too-count">+ <%= request.users.count %></span>
         <p class="me-too-people dont-show">
           Also asked by: <%= request.users.collect {|u| u.full_name }.join(', ') %>
@@ -34,7 +33,7 @@
           <% end %>
         <% end %>
         <% if request.status == Request::STATUS_OPTIONS[0] && policy(request).toggle_help? %>
-          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'small request-button'%>
           <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove dont-show'%>
         <% elsif request.status == Request::STATUS_OPTIONS[1] && policy(request).remove? %>
           <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
