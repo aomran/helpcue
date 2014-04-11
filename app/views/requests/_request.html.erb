@@ -1,4 +1,47 @@
-<tr class="request" id="request<%= request.id %>">
+<div class="padding-border">
+  <div class="question-content">
+    <div class="gravatar-meta">
+      <%= image_tag "#{request.owner.avatar}?s=120", class: 'gravatar-image' %>
+      <% if request.users.any? %>
+        <span class="timeago" title="<%= request.created_at.getutc.iso8601 %>">
+          <%= request.created_at.to_s %>
+        </span>
+        <span class="me-too-count">+ <%= request.users.count %></span>
+      <% end %>
+    </div>
+    <div class="question-meta">
+      <div class="question-header">
+        <span class="h5"><%= request.owner.full_name %></span>
+        <span class="pr">  
+          <% if policy(request).destroy? %>
+            <%= link_to 'X', [@classroom, request], method: :delete, remote: true, class: 'request-delete'%>
+          <% end %>
+        </span>
+      </div>
+      <div class="question">
+        <%= request.question %>
+      </div>
+      <div class="question-actions">
+        <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
+          <% if request.users.include?(current_user) %>
+            <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: ''%>
+          <% else %>
+            <%= link_to '+', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: ''%>
+          <% end %>
+        <% end %>
+        <% if request.status == Request::STATUS_OPTIONS[0] && policy(request).toggle_help? %>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
+          <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove dont-show'%>
+        <% elsif request.status == Request::STATUS_OPTIONS[1] && policy(request).remove? %>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
+          <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove'%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <tr class="request" id="request<%= request.id %>">
   <td colspan="2"><%= image_tag "#{request.owner.avatar}?s=56", class: 'gravatar-image' %><%= request.owner.full_name %>
 
   <% if request.users.any? %>
@@ -35,9 +78,5 @@
     <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'btn btn-small request-remove'%>
   <% end %>
 
-  <% if policy(request).destroy? %>
-    <%= link_to 'X', [@classroom, request], method: :delete, remote: true, class: 'btn btn-small request-delete'%>
-  <% end %>
-
   </td>
-</tr>
+</tr> -->

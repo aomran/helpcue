@@ -17,8 +17,11 @@
       <%= render 'form' %>
     <% end %>
   </div>
-  <div class="grid-unit wide">
-    <table id="requests-table">
+  <div class="grid-unit wide helpcue">
+    <% @requests.each do |request| %>
+      <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
+    <% end %>
+    <!-- <table id="requests-table">
       <thead>
         <tr>
           <th colspan="2">Name</th>
@@ -28,10 +31,7 @@
         </tr>
       </thead>
         <tr id="placeholder" class="<%= 'dont-show' if !@requests.empty? %>"><td colspan="4">No students need help right now.</td></tr>
-        <% @requests.each do |request| %>
-          <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
-        <% end %>
-    </table>
+    </table> -->
   </div>
 </div>
 

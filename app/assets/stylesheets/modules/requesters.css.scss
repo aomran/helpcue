@@ -1,17 +1,54 @@
 @import 'globals/all';
 
-.requester {
-  img {
-    @include border-radius(30px);
-    display: inline-block;
-  }
-}
+// .requester {
+//   img {
+//     @include border-radius(30px);
+//     display: inline-block;
+//   }
+// }
 
 .gravatar-image {
-  height: 28px;
-  width: 28px;
+  display: block;
+  margin: auto;
+  height: 50px;
+  width: 50px;
+  @include border-radius(30px);
 }
 
 td .btn-small {
   margin-right: 0;
+}
+
+.helpcue .padding-border {
+  margin-bottom: 20px;
+}
+.question-content {
+  background: #fff;
+  border: 1px solid $grey-lt;
+  @extend %clearfix;
+  .padding-border:hover & {
+    border-color: lighten($grey-md, 20%);
+  }
+}
+
+.gravatar-meta,
+.question-meta {
+  float: left;
+  padding: 10px;
+}
+
+.gravatar-meta {
+  width: 25%;
+  padding: 10px 5px 10px 10px;
+}
+
+.question-meta {
+  width: 75%;
+  padding: 10px 10px 10px 5px;
+}
+
+.me-too-count {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
 }
