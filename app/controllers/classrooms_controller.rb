@@ -33,6 +33,8 @@ class ClassroomsController < ApplicationController
     if @classroom.update(classroom_params)
       redirect_to classroom_path(@classroom), notice: "Classroom has been updated."
     else
+      @students = @classroom.users.merge(@classroom.classroom_users.students)
+      @teachers = @classroom.users.merge(@classroom.classroom_users.teachers)
       render :edit
     end
   end
