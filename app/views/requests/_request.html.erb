@@ -1,18 +1,22 @@
-<div class="padding-border">
+<div class="padding-border request" id="request<%= request.id %>">
   <div class="question-content">
     <div class="gravatar-meta">
       <%= image_tag "#{request.owner.avatar}?s=120", class: 'gravatar-image' %>
-      <% if request.users.any? %>
-        <span class="timeago" title="<%= request.created_at.getutc.iso8601 %>">
+      <span class="timeago" title="<%= request.created_at.getutc.iso8601 %>">
           <%= request.created_at.to_s %>
         </span>
+      <% if request.users.any? %>
+
         <span class="me-too-count">+ <%= request.users.count %></span>
+        <p class="me-too-people dont-show">
+          Also asked by: <%= request.users.collect {|u| u.full_name }.join(', ') %>
+        </p>
       <% end %>
     </div>
     <div class="question-meta">
       <div class="question-header">
         <span class="h5"><%= request.owner.full_name %></span>
-        <span class="pr">  
+        <span class="pr">
           <% if policy(request).destroy? %>
             <%= link_to 'X', [@classroom, request], method: :delete, remote: true, class: 'request-delete'%>
           <% end %>
@@ -24,9 +28,9 @@
       <div class="question-actions">
         <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
           <% if request.users.include?(current_user) %>
-            <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: ''%>
+            <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-metoo'%>
           <% else %>
-            <%= link_to '+', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: ''%>
+            <%= link_to '+', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-metoo'%>
           <% end %>
         <% end %>
         <% if request.status == Request::STATUS_OPTIONS[0] && policy(request).toggle_help? %>

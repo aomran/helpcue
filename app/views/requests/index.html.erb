@@ -17,7 +17,7 @@
       <%= render 'form' %>
     <% end %>
   </div>
-  <div class="grid-unit wide helpcue">
+  <div class="grid-unit wide helpcue" id="requests-list">
     <% @requests.each do |request| %>
       <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
     <% end %>

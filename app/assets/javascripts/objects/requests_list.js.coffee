@@ -10,7 +10,7 @@
     $placeholder = $('#placeholder')
     $placeholder.hide() if $placeholder.length
     $.getJSON data.path, (data) ->
-      $('#requests-table').append(data.partial)
+      $('#requests-list').append(data.partial)
       HelpCue.timeago()
 
   removeRequest: (data) ->
