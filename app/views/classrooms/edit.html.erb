@@ -13,3 +13,57 @@
     <%= render partial: 'form', locals: {classroom: @classroom, remote: false, leave_link: true} %>
   </div>
 </div>
+
+<% if policy(@classroom).remove_student? %>
+  <div class="grid-unit narrow sidebar pull-right">
+    <h5>Invite Students</h5>
+    <p>To invite additional students to this classroom, please share this token:</p>
+    <p><span class='token'><%= @classroom.user_token %></span></p>
+  </div>
+<% end %>
+
+<div class="grid-unit wide">
+  <h2>Students</h2>
+</div>
+
+<table class="users-table">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Options</th>
+  </tr>
+<% @students.each do |user| %>
+  <tr id="user_<%= user.id %>">
+    <td><%= user.full_name %></td>
+    <td><%= user.email %></td>
+    <td>
+      <% if policy(@classroom).remove_student? %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<div class="grid-unit wide">
+  <h2>Teachers</h2>
+</div>
+
+<table class="users-table">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Options</th>
+  </tr>
+<% @teachers.each do |user| %>
+  <tr id="user_<%= user.id %>">
+    <td><%= user.full_name %></td>
+    <td><%= user.email %></td>
+    <td>
+      <% if policy(@classroom).remove_admin? && (user != current_user ) %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>

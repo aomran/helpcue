@@ -22,6 +22,9 @@ class ClassroomsController < ApplicationController
 
   def edit
     authorize @classroom
+
+    @students = @classroom.users.merge(@classroom.classroom_users.students)
+    @teachers = @classroom.users.merge(@classroom.classroom_users.teachers)
   end
 
   def update

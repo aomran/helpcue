@@ -14,7 +14,7 @@ Helpcue::Application.routes.draw do
       get 'completed', on: :collection
     end
 
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:destroy]
   end
 
   # Development Environment

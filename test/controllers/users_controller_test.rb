@@ -6,15 +6,6 @@ class UsersControllerTest < ActionController::TestCase
     sign_in users(:teacher1)
   end
 
-  test "get list of classroom users" do
-    get :index, classroom_id: classrooms(:one).id
-    assert assigns(:classroom)
-
-    assert assigns(:students)
-    assert assigns(:teachers)
-    assert :success
-  end
-
   test "owner can remove students" do
     sign_out users(:teacher1)
     sign_in users(:teacher2)
