@@ -38,6 +38,7 @@ td .btn-small {
 }
 .question-content {
   background: #fff;
+  @include border-radius(3px);
   border: 1px solid $grey-lt;
   @extend %clearfix;
   .padding-border:hover & {
@@ -52,14 +53,19 @@ td .btn-small {
 
 
 .gravatar-meta {
+  position: relative;
   width: 25%;
   padding: 10px 5px 10px 10px;
   margin-top: 7px;
   span {
-    display: block;
-    margin-top: 10px;
     text-align: center;
+    display: block;
   }
+}
+
+.me-too-count {
+  max-width: 40px;
+  margin: 5px auto;
 }
 
 .question-meta {

@@ -6,10 +6,7 @@
         <%= request.created_at.strftime("%l:%M%P, %e %b %y") %>
       </span>
       <% if request.users.any? %>
-        <span class="me-too-count">+ <%= request.users.count %></span>
-        <p class="me-too-people dont-show">
-          Also asked by: <%= request.users.collect {|u| u.full_name }.join(', ') %>
-        </p>
+        <span class="me-too-count req-num">+<%= request.users.count %></span>
       <% end %>
     </div>
     <div class="question-meta">
@@ -40,6 +37,9 @@
           <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove'%>
         <% end %>
       </div>
+      <p class="me-too-people dont-show">
+          Also asked by: <%= request.users.collect {|u| u.full_name }.join(', ') %>
+        </p>
     </div>
   </div>
 </div>
