@@ -18,6 +18,11 @@
     <% end %>
   </div>
   <div class="grid-unit wide helpcue" id="requests-list">
+    <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
+      <div class="question-content">
+        <p class="placeholder">There's no one in the Help Cue right now!</p>
+      </div>
+    </div>
     <% @requests.each do |request| %>
       <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
     <% end %>
