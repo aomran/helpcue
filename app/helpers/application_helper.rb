@@ -36,8 +36,8 @@ module ApplicationHelper
 
   def js_render_user(user)
     javascript_tag %Q{
-      window.Curri = {};
-      window.Curri.user = #{user.to_json};
+      window.HelpCue = {};
+      window.HelpCue.user = #{user.to_json};
     }
   end
 
@@ -51,7 +51,7 @@ module ApplicationHelper
   end
 
   def full_title(page_title)
-    base_title = "Curri"
+    base_title = "HelpCue"
     if page_title.empty?
       base_title
     else
