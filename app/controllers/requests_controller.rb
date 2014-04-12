@@ -40,7 +40,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.update(request_params)
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, path: classroom_request_path(@classroom, @request) }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -61,7 +61,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       push_to_channel('updateRequest')
       format.json {
-        render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count, path: classroom_request_path(@classroom, @request) }
+        render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count }
       }
     end
   end
@@ -77,7 +77,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status, path: classroom_request_path(@classroom, @request) }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -118,7 +118,7 @@ class RequestsController < ApplicationController
   end
 
   def push_to_channel(requestAction)
-    data = { requestAction: requestAction, path: classroom_request_path(@classroom, @request), request_id: params[:id], user_id: current_user.id }
+    data = { requestAction: requestAction, request_id: params[:id] || @request.id, user_id: current_user.id, classroom_id: @classroom.id }
     Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
   end
 end
