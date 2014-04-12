@@ -11,7 +11,7 @@
       <%= render 'form' %>
     <% end %>
   </div>
-  <div class="grid-unit wide helpcue" id="requests-list">
+  <div class="grid-unit wide helpcue requests" id="requests-list">
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
       <div class="question-content">
         <p class="placeholder">There's no one in the Help Cue right now!</p>
@@ -39,6 +39,8 @@
   window.HelpCue.pusher = new Pusher('<%= Pusher.key %>');
   window.HelpCue.channel = window.HelpCue.pusher.subscribe('classroom<%= @classroom.id %>-requests');
   window.HelpCue.channel.bind('request', function(data) {
-    HelpCue.RequestsList.realtimeRequests(data)
+    if (data.user_id !== window.HelpCue.user.id) {
+      HelpCue.RequestsList.realtimeRequests(data)
+    };
   });
 </script>

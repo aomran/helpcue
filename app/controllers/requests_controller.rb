@@ -118,7 +118,7 @@ class RequestsController < ApplicationController
   end
 
   def push_to_channel(requestAction)
-    data = { requestAction: requestAction, path: classroom_request_path(@classroom, @request), request_id: params[:id] }
+    data = { requestAction: requestAction, path: classroom_request_path(@classroom, @request), request_id: params[:id], user_id: current_user.id }
     Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
   end
 end
