@@ -40,7 +40,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.update(request_params)
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, path: classroom_request_path(@classroom, @request) }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -61,7 +61,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       push_to_channel('updateRequest')
       format.json {
-        render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count }
+        render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count, path: classroom_request_path(@classroom, @request) }
       }
     end
   end
@@ -77,7 +77,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status, path: classroom_request_path(@classroom, @request) }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
