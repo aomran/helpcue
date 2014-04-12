@@ -12,9 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
-#= require pickadate/picker
-#= require pickadate/picker.date
-#= require pickadate/picker.time
+#= require jquery.ui.effect-highlight
 #= require matchMedia
 #= require bootstrap-dismiss
 #= require jquery.modal

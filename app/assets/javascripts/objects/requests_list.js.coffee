@@ -1,9 +1,11 @@
 @HelpCue.RequestsList =
 
   updateRequest: (data) ->
-    $request = $("#request#{data.request_id}")
+    request_id = data.request_id
+    $request = $("#request#{request_id}")
     $.getJSON data.path, (data) ->
       $request.replaceWith(data.partial)
+      $("#request#{request_id} .question-content").effect('highlight')
       HelpCue.timeago()
 
   addRequest: (data) ->
