@@ -19,7 +19,7 @@
         </span>
       </div>
       <div class="question">
-        <%= request.question %>
+        <%= linkify_hashtags request.question %>
       </div>
       <div class="question-actions">
         <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>

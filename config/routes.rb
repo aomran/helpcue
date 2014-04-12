@@ -15,6 +15,7 @@ Helpcue::Application.routes.draw do
     end
 
     resources :users, only: [:destroy]
+    get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
   end
 
   # Development Environment

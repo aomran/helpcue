@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem "pundit"
 gem 'pusher'
+gem 'simple_hashtag'
 
 group :development do
   gem 'style-guide'
