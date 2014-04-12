@@ -7,6 +7,6 @@ class Request < ActiveRecord::Base
   belongs_to :classroom
 
   scope :need_help, -> { where.not(status: STATUS_OPTIONS[2]).order("created_at ASC") }
-  scope :completed, -> { where(status: STATUS_OPTIONS[2]).order("created_at ASC") }
+  scope :completed, -> { where(status: STATUS_OPTIONS[2]).order("updated_at DESC") }
   STATUS_OPTIONS = ['Waiting', 'Being Helped', 'Done']
 end
