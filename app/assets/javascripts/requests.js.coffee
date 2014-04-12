@@ -31,3 +31,10 @@ $ ->
 
   if $('#completed-requests').length
     analytics.track "Viewed completed requests page", classroom_id: $('#track_link').data('classroomid')
+
+    $('#completed-requests').on 'ajax:success', '.request-delete', (e, data) ->
+      HelpCue.RequestsList.removeRequest(data)
+      analytics.track "Request deleted", classroom_id: data.classroom_id, request_id: data.request_id
+
+    $('#completed-requests').on 'click', '.me-too-count', ->
+      $(this).closest('.request').find('.me-too-people').toggle()

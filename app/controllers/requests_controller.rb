@@ -104,7 +104,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       push_to_channel('removeRequest')
       format.json {
-        render json: { id: params[:id] }
+        render json: { request_id: params[:id] }
       }
     end
   end
