@@ -18,7 +18,7 @@ module ApplicationHelper
     if params[:controller] == 'devise/registrations'
       'Account'
     elsif params[:controller] == 'requests'
-      'Questions'
+      'Queue'
     else
       params[:controller].capitalize
     end
