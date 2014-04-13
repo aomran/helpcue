@@ -17,6 +17,8 @@ module ApplicationHelper
   def current_page_header
     if params[:controller] == 'devise/registrations'
       'Account'
+    elsif params[:controller] == 'requests'
+      'Questions'
     else
       params[:controller].capitalize
     end
