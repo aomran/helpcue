@@ -92,6 +92,10 @@ td .btn-small {
   margin-top: 10px;
 }
 
+.request-action {
+  margin-right: 10px;
+}
+
 .action-label {
   color: $grey-lt;
   .request-action:hover & {
@@ -138,4 +142,17 @@ td .btn-small {
 .metoo-current,
 .request-action:hover .metoo {
   background-position: -90px -126px;
+}
+
+.helped {
+  background-position: -114px -102px;
+}
+
+.helped-current,
+.request-action:hover .helped {
+  background-position: -114px -126px;
+}
+
+.done {
+  background-position: -138px -102px;
 }

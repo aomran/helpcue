@@ -34,10 +34,19 @@
           <% end %>
         <% end %>
         <% if request.status == Request::STATUS_OPTIONS[0] %>
-          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'small request-button', data: { canClick: policy(request).toggle_help? } %>
+          <%= link_to_selected toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small', data: { canClick: policy(request).toggle_help? } do %>
+            <span class="request-icon helped"></span>
+            <span class="action-label">Being Helped?</span>
+          <% end %>
         <% elsif request.status == Request::STATUS_OPTIONS[1] %>
-          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button', data: { canClick: policy(request).toggle_help? } %>
-            <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove' if policy(request).remove? %>
+          <%= link_to_selected toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small', data: { canClick: policy(request).toggle_help? } do %>
+            <span class="request-icon helped-current"></span>
+            <span class="action-label-current">Being Helped?</span>
+          <% end %>
+          <%= link_to_selected remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small' if policy(request).remove? do %>
+            <span class="request-icon done"></span>
+            <span class="action-label">Done?</span>
+          <% end %>
         <% end %>
       </div>
       <!-- <div class="question-actions">
