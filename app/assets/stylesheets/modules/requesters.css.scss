@@ -92,7 +92,22 @@ td .btn-small {
   margin-top: 10px;
 }
 
-.request-action,
+.action-label {
+  color: $grey-lt;
+  .request-action:hover & {
+    text-decoration: underline;
+    color: $grey-md;
+  }
+}
+
+.action-label-current {
+  color: $color-success;
+  .request-action:hover & {
+    text-decoration: underline;
+  }
+}
+
+.request-icon,
 .request-delete {
   background-image: image-url('helpcue-icons.svg');
   // padding-left: 30px;
@@ -109,6 +124,18 @@ td .btn-small {
   }
 }
 
+.request-icon {
+  padding: 12px;
+  display: inline-block;
+  position: relative;
+  top: 7px;
+}
+
 .metoo {
-  background-position: -60px -112px;
+  background-position: -90px -102px;
+}
+
+.metoo-current,
+.request-action:hover .metoo {
+  background-position: -90px -126px;
 }

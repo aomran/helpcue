@@ -24,6 +24,28 @@
       <div class="question-actions">
         <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
           <% if request.users.include?(current_user) %>
+            <%= link_to_selected me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small' do %>
+              <span class="request-icon metoo-current"></span>
+              <span class="action-label-current">Me too</span>
+            <% end %>
+          <% else %>
+            <%= link_to_selected me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small' do %>
+              <span class="request-icon metoo"></span>
+              <span class="action-label">Me too</span>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if request.status == Request::STATUS_OPTIONS[0] && policy(request).toggle_help? %>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'small request-button'%>
+          <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove dont-show'%>
+        <% elsif request.status == Request::STATUS_OPTIONS[1] && policy(request).remove? %>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
+          <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove'%>
+        <% end %>
+      </div>
+      <!-- <div class="question-actions">
+        <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
+          <% if request.users.include?(current_user) %>
             <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action metoo-current'%>
           <% else %>
             <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action metoo'%>
@@ -36,7 +58,7 @@
           <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
           <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove'%>
         <% end %>
-      </div>
+      </div> -->
       <p class="me-too-people dont-show">
           Also asked by: <%= request.users.collect {|u| u.full_name }.join(', ') %>
         </p>
