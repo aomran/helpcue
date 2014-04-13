@@ -23,16 +23,10 @@
       </div>
       <div class="question-actions">
         <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
-          <% if request.users.include?(current_user) %>
-            <%= link_to_selected me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small' do %>
-              <span class="request-icon metoo-current"></span>
-              <span class="action-label-current">Me too</span>
-            <% end %>
-          <% else %>
-            <%= link_to_selected me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small' do %>
-              <span class="request-icon metoo"></span>
-              <span class="action-label">Me too</span>
-            <% end %>
+          <% metoo_class = request.users.include?(current_user) ? '-current' : '' %>
+          <%= link_to me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action small' do %>
+            <span class="request-icon metoo<%= metoo_class %>"></span>
+            <span class="action-label<%= metoo_class %>">Me too</span>
           <% end %>
         <% end %>
         <% if request.status == Request::STATUS_OPTIONS[0] %>
