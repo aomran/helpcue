@@ -8,7 +8,7 @@
     $request = $("#request#{request_id}")
     $.getJSON @requestPath(data.classroom_id, data.request_id), (data) ->
       $request.replaceWith(data.partial)
-      $("#request#{request_id} .question-content").effect('highlight')
+      $("#request#{request_id} .question-content").effect('highlight', {color: '#E8FFE7'}, 500)
       HelpCue.timeago()
 
   addRequest: (data) ->
