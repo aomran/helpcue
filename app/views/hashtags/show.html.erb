@@ -4,7 +4,7 @@
     <% @hashtagged.each do |hashtagged| %>
       <%= render_hashtaggable hashtagged %>
     <% end -%>
-  <% else -%>
-    <p id="placeholder">There is no match for the <em><%= params[:hashtag] %></em> hashtag.</p>
   <% end -%>
+
+  <p id="placeholder" class="<%= 'dont-show' if (@hashtagged && @hashtagged.any?) %>">There is no match for the <em><%= params[:hashtag] %></em> hashtag.</p>
 </div>

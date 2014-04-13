@@ -21,7 +21,7 @@
   removeRequest: (data) ->
     $("#request#{data.request_id}").fadeOut 'slow', ->
       $(this).remove()
-      unless $('.request').length
+      unless $('.request-item').length
         $('#placeholder').show()
 
   realtimeRequests: (data) ->
