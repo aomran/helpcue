@@ -35,12 +35,11 @@
             <% end %>
           <% end %>
         <% end %>
-        <% if request.status == Request::STATUS_OPTIONS[0] && policy(request).toggle_help? %>
-          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'small request-button'%>
-          <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove dont-show'%>
-        <% elsif request.status == Request::STATUS_OPTIONS[1] && policy(request).remove? %>
-          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button'%>
-          <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove'%>
+        <% if request.status == Request::STATUS_OPTIONS[0] %>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'small request-button', data: { canClick: policy(request).toggle_help? } %>
+        <% elsif request.status == Request::STATUS_OPTIONS[1] %>
+          <%= link_to 'Being helped?', toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-button', data: { canClick: policy(request).toggle_help? } %>
+            <%= link_to 'Done?', remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-remove' if policy(request).remove? %>
         <% end %>
       </div>
       <!-- <div class="question-actions">
