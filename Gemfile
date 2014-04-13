@@ -19,6 +19,7 @@ gem 'devise'
 gem "pundit"
 gem 'pusher'
 gem 'simple_hashtag'
+gem 'intercom-rails', '~> 0.2.24'
 
 group :development do
   gem 'style-guide'
