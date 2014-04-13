@@ -1,4 +1,6 @@
-<div class="padding-border request" id="request<%= request.id %>">
+<% being_helped = request.status == Request::STATUS_OPTIONS[1] %>
+
+<div class="padding-border request <%= 'being_helped' if being_helped %>" id="request<%= request.id %>">
   <div class="question-content">
     <div class="gravatar-meta">
       <%= image_tag "#{request.owner.avatar}?s=120", class: 'gravatar-image' %>
@@ -36,7 +38,7 @@
             <% end %>
           <% end %>
 
-          <% status_class = request.status == Request::STATUS_OPTIONS[1] ?  '-current' : '' %>
+          <% status_class = being_helped ?  '-current' : '' %>
           <% if policy(request).toggle_help? %>
             <%= link_to toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do %>
               <span class="request-icon helped<%= status_class %>"></span>
@@ -51,7 +53,7 @@
 
         <% end %>
 
-        <% if request.status == Request::STATUS_OPTIONS[1] %>
+        <% if being_helped %>
           <% if policy(request).remove? %>
             <%= link_to remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-remove small' do %>
               <span class="request-icon done"></span>
