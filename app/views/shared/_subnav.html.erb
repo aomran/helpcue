@@ -4,7 +4,7 @@
     <!-- <span class="user-type user-role">Role</span> -->
   </li>
   <li>
-    <%= link_to 'Edit Profile', edit_user_registration_path(current_user), class: "subnav-links", id: 'account' %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, class: "subnav-links", id: 'account' %>
   </li>
   <li>
     <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "subnav-links", id: 'logout-link' %>
