@@ -31,6 +31,9 @@ class ClassroomsControllerTest < ActionController::TestCase
   test "get edit classroom form" do
     get :edit, id: classrooms(:one)
     assert_equal classrooms(:one), assigns(:classroom)
+
+    assert assigns(:students)
+    assert assigns(:teachers)
     assert :success
   end
 

@@ -1,17 +1,178 @@
 @import 'globals/all';
 
-.requester {
-  img {
-    @include border-radius(30px);
-    display: inline-block;
-  }
-}
+// .requester {
+//   img {
+//     @include border-radius(30px);
+//     display: inline-block;
+//   }
+// }
 
 .gravatar-image {
-  height: 28px;
-  width: 28px;
+  display: block;
+  margin: auto;
+  height: 35px;
+  width: 35px;
+  @include border-radius(5px);
+}
+
+@include media-query(medium) {
+  .gravatar-image {
+    height: 60px;
+    width: 60px;
+  }
 }
 
 td .btn-small {
   margin-right: 0;
+}
+
+.request .placeholder {
+  // display: inline-block;
+  text-align: center;
+  margin: auto;
+  padding: 30px;
+}
+
+.helpcue .padding-border {
+  margin-bottom: 20px;
+  &.being-helped {
+    background: lighten($color-success, 20%);
+    &:hover {
+      background: lighten($color-success, 15%);
+    }
+  }
+}
+
+.question-content {
+  background: #fff;
+  @include border-radius(3px);
+  border: 1px solid $grey-lt;
+  @extend %clearfix;
+  .padding-border:hover & {
+    border-color: lighten($grey-md, 20%);
+  }
+  .being-helped & {
+    border-color: $color-success;
+  }
+  .being-helped:hover & {
+    border-color: darken($color-success, 5%);
+  }
+}
+
+.highlight {
+  background: red;
+}
+
+.gravatar-meta,
+.question-meta {
+  float: left;
+}
+
+
+.gravatar-meta {
+  position: relative;
+  width: 25%;
+  padding: 10px 5px 10px 10px;
+  margin-top: 7px;
+  span {
+    text-align: center;
+    display: block;
+  }
+}
+
+.me-too-count {
+  max-width: 40px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.question-meta {
+  width: 75%;
+  padding: 10px 10px 10px 5px;
+}
+
+@include media-query(medium) {
+  .gravatar-meta,
+  .question-meta {
+    padding: 20px;
+  }
+  .gravatar-meta {
+    margin-top: 10px;
+  }
+}
+
+.timeago {
+  color: $grey-md;
+}
+
+.question-actions {
+  margin-top: 10px;
+}
+
+.request-action {
+  margin-right: 10px;
+}
+
+.action-label {
+  color: $grey-lt;
+  .request-action:hover & {
+    text-decoration: underline;
+    color: $grey-md;
+  }
+}
+
+.action-label-current {
+  color: $color-success;
+  .request-action:hover & {
+    text-decoration: underline;
+  }
+}
+
+.request-icon,
+.request-delete {
+  background-image: image-url('helpcue-icons.svg');
+  // padding-left: 30px;
+}
+
+.request-delete {
+  padding: 15px;
+  display: inline-block;
+  background-position: -60px -150px;
+  position: relative;
+  top: -3px;
+  &:hover {
+    background-position: -90px -150px;
+  }
+}
+
+.request-icon {
+  padding: 12px;
+  display: inline-block;
+  position: relative;
+  top: 7px;
+}
+
+.metoo {
+  background-position: -90px -102px;
+}
+
+.metoo-current,
+.request-action:hover .metoo {
+  background-position: -90px -126px;
+}
+
+.helped {
+  background-position: -114px -102px;
+}
+
+.helped-current,
+.request-action:hover .helped {
+  background-position: -114px -126px;
+}
+
+.done {
+  background-position: -138px -102px;
+  .request-action:hover & {
+    background-position: -138px -126px;
+  }
 }

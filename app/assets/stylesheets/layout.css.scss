@@ -11,12 +11,18 @@
   max-width: 1300px;
   min-width: 320px;
   height: inherit;
-  padding: 20px 30px;
+  padding: 15px;
   background: #FFF;
   @include transition-transform(all, 0.25s, ease, 0s);
   &.subnav-open {
     @include transform-translate(130px, 0);
     overflow: hidden;
+  }
+}
+
+@include media-query(medium) {
+  .main {
+    padding: 20px 30px;
   }
 }
 
@@ -99,6 +105,9 @@ body.nav-open .main {
   margin: 0 auto 25px;
 }
 
+.pr {
+  float: right;
+}
 .unit-header {
   color: $color-main;
   border-bottom: 1px solid $grey-lt;

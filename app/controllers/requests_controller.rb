@@ -104,7 +104,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       push_to_channel('removeRequest')
       format.json {
-        render json: { id: params[:id] }
+        render json: { request_id: params[:id] }
       }
     end
   end
@@ -118,7 +118,7 @@ class RequestsController < ApplicationController
   end
 
   def push_to_channel(requestAction)
-    data = { requestAction: requestAction, path: classroom_request_path(@classroom, @request), request_id: params[:id] }
+    data = { requestAction: requestAction, request_id: params[:id] || @request.id, user_id: current_user.id, classroom_id: @classroom.id }
     Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
   end
 end

@@ -1,9 +1,7 @@
 <%= form_for [@classroom, @request], remote: true do |f| %>
   <div class="form-group">
-    <%= f.label :question, 'Question' %>
-    <%= f.text_field :question, placeholder: "Briefly describe your question - use #hashtags! (optional)", class: "form-input" %>
-  </div>
-  <div>
-    <%= f.submit 'Ask for help', class: "btn btn-primary" %>
+  <!--<%= f.label :question, 'Question' %> -->
+  <%= f.text_area :question, placeholder: "Briefly describe your question - use #hashtags! (optional)", rows:4, class: "form-input" %>
+  <%= f.submit 'Ask Question', class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -7,11 +7,11 @@ class ClassroomPolicy
   end
 
   def edit?
-    classroom.owner == user
+    user.admin?(classroom)
   end
 
   def update?
-    classroom.owner == user
+    user.admin?(classroom)
   end
 
   def remove_admin?

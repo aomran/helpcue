@@ -12,9 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
-#= require pickadate/picker
-#= require pickadate/picker.date
-#= require pickadate/picker.time
+#= require jquery.ui.effect-highlight
 #= require matchMedia
 #= require bootstrap-dismiss
 #= require jquery.modal
@@ -57,3 +55,22 @@ $ ->
     $('.error-message').remove()
     $(this).modal(fadeDuration: 250)
     return false
+
+jQuery.timeago.settings.strings =
+    prefixAgo: null
+    prefixFromNow: null
+    suffixAgo: ""
+    suffixFromNow: ""
+    seconds: "now"
+    minute: "1 m"
+    minutes: "%d m"
+    hour: "1 h"
+    hours: "%d h"
+    day: "1 d"
+    days: "%d d"
+    month: "1 mo"
+    months: "%d mo"
+    year: "1 yr"
+    years: "%d yr"
+    wordSeparator: " "
+    numbers: []

@@ -11,7 +11,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'pickadate-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -19,6 +18,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem "pundit"
 gem 'pusher'
+gem 'simple_hashtag'
 
 group :development do
   gem 'style-guide'

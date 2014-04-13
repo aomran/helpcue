@@ -1,33 +1,23 @@
-<% unless current_user.admin?(@classroom) %>
-  <%= render 'form' %>
-<% end %>
-  <% if policy(@classroom).edit? %>
-    <div class="grid-unit narrow pull-right">
-      <%= link_to 'Manage Classroom', edit_classroom_path(@classroom), id: 'manage-classroom' %>
-    </div>
-  <% end %>
-
-  <div class="grid-unit wide">
-    <h2>Current Requests</h2>
+  <div class="grid-unit whole">
+    <h2>Active Questions</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
 </div>
 <div class="wrapper">
-  <div class="grid-unit wide">
-    <table id="requests-table">
-      <thead>
-        <tr>
-          <th colspan="2">Name</th>
-          <th>Question</th>
-          <th>Time</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-        <tr id="placeholder" class="<%= 'dont-show' if !@requests.empty? %>"><td colspan="4">No students need help right now.</td></tr>
-        <% @requests.each do |request| %>
-          <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
-        <% end %>
-    </table>
+  <div class="grid-unit narrow pr">
+    <% unless current_user.admin?(@classroom) %>
+      <%= render 'form' %>
+    <% end %>
+  </div>
+  <div class="grid-unit wide helpcue requests" id="requests-list">
+    <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
+      <div class="question-content">
+        <p class="placeholder">There's no one in the help queue right now.</p>
+      </div>
+    </div>
+    <% @requests.each do |request| %>
+      <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
+    <% end %>
   </div>
 </div>
 
@@ -36,6 +26,8 @@
   window.HelpCue.pusher = new Pusher('<%= Pusher.key %>');
   window.HelpCue.channel = window.HelpCue.pusher.subscribe('classroom<%= @classroom.id %>-requests');
   window.HelpCue.channel.bind('request', function(data) {
-    HelpCue.RequestsList.realtimeRequests(data)
+    if (data.user_id !== window.HelpCue.user.id) {
+      HelpCue.RequestsList.realtimeRequests(data)
+    };
   });
 </script>

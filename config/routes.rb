@@ -14,7 +14,8 @@ Helpcue::Application.routes.draw do
       get 'completed', on: :collection
     end
 
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:destroy]
+    get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
   end
 
   # Development Environment

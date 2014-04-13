@@ -1,24 +1,18 @@
-
   <div class="grid-unit whole">
-    <h2>Completed Requests</h2>
+    <h2>Completed Questions</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
 </div>
-<div class="wrapper" id="completed-requests">
+<div class="wrapper requests" id="completed-requests">
   <div class="grid-unit wide">
-    <table id="requests-table">
-      <thead>
-        <tr>
-          <th colspan="2">Name</th>
-          <th>Question</th>
-          <th>Time</th>
-          <th>Options</th>
-        </tr>
-      </thead>
-      <tr id="placeholder" class="<%= 'dont-show' if !@requests.empty? %>"><td colspan="4">No student requests have been completed.</td></tr>
-      <% @requests.each do |request| %>
-        <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
-      <% end %>
-    </table>
+    <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
+      <div class="question-content">
+        <p class="placeholder">Questions that are marked as 'done' will appear here.</p>
+      </div>
+    </div>
+
+    <% @requests.each do |request| %>
+      <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
+    <% end %>
   </div>
 </div>

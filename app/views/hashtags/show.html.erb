@@ -1,0 +1,10 @@
+<div id="hashtags-list" class="requests">
+  <h1><%= params[:hashtag] %></h1>
+  <% if @hashtagged && @hashtagged.any? %>
+    <% @hashtagged.each do |hashtagged| %>
+      <%= render_hashtaggable hashtagged %>
+    <% end -%>
+  <% end -%>
+
+  <p id="placeholder" class="<%= 'dont-show' if (@hashtagged && @hashtagged.any?) %>">There is no match for the <em><%= params[:hashtag] %></em> hashtag.</p>
+</div>

@@ -98,7 +98,7 @@ a.selected, a.selected:hover {
 // svg icons
 .nav-icon,
 .nav-wordmark {
-  background-image: image-url('curri-icons.svg');
+  background-image: image-url('helpcue-icons.svg');
 }
 
 .nav-gravatar {
@@ -111,8 +111,9 @@ a.selected, a.selected:hover {
 }
 
 .nav-classrooms,
-.nav-tracks,
-.nav-analytics,
+.nav-queue,
+.nav-queue-completed,
+.nav-settings,
 .nav-account,
 .nav-size {
   padding: 15px;
@@ -123,28 +124,32 @@ a.selected, a.selected:hover {
   background-position: 0 0;
 }
 
-.nav-tracks {
+.nav-queue {
   background-position: 0 -30px;
 }
 
-.nav-analytics {
+.nav-queue-completed {
   background-position: 0 -60px;
 }
 
-.nav-account {
+.nav-settings {
   background-position: 0 -90px;
 }
 
-.nav-size {
-  background-position: 0 -150px;
-}
-
-body.nav-open .nav-size {
+.nav-account {
   background-position: 0 -120px;
 }
 
+.nav-size {
+  background-position: 0 -180px;
+}
+
+body.nav-open .nav-size {
+  background-position: 0 -150px;
+}
+
 body.nav-open a:hover .nav-size {
-    background-position: -30px -120px;
+    background-position: -30px -150px;
   }
 
 a:hover {
@@ -152,20 +157,24 @@ a:hover {
   background-position: -30px 0;
   }
 
-  & .nav-tracks {
+  & .nav-queue {
     background-position: -30px -30px;
   }
 
-  & .nav-analytics {
+  & .nav-queue-completed {
     background-position: -30px -60px;
   }
 
-  & .nav-account {
+  & .nav-settings {
     background-position: -30px -90px;
   }
 
+  & .nav-account {
+    background-position: -30px -120px;
+  }
+
   & .nav-size {
-    background-position: -30px -150px;
+    background-position: -30px -180px;
   }
 }
 
@@ -174,16 +183,20 @@ a.selected {
   background-position: -60px 0;
   }
 
-  & .nav-tracks, .nav-tracks:hover {
+  & .nav-queue, .nav-queue:hover {
     background-position: -60px -30px;
   }
 
-  & .nav-analytics, .nav-analytics:hover {
+  & .nav-queue-completed, .nav-queue-completed:hover {
     background-position: -60px -60px;
   }
 
-  & .nav-account, .nav-account:hover {
+  & .nav-settings, .nav-settings:hover {
     background-position: -60px -90px;
+  }
+
+  & .nav-account, .nav-account:hover {
+    background-position: -60px -120px;
   }
 }
 
@@ -375,17 +388,17 @@ a:hover .nav-burger {
 }
 
 .req-num {
-  position: absolute;
-  left: 22px;
-  top: 6px;
+  // position: absolute;
+  // left: 22px;
+  // top: 6px;
   color: #fff;
   font-size: 13px;
   font-weight: 700;
   line-height: 1;
   padding: 1px 6px 3px;
   border-radius: 100px;
-  background-color: $color-primary;
-  display: inline-block;
+  background-color: $color-warning;
+  // display: inline-block;
 }
 
 // students
