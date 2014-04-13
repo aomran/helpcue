@@ -1,6 +1,6 @@
 <% being_helped = request.status == Request::STATUS_OPTIONS[1] %>
 
-<div class="padding-border request <%= 'being_helped' if being_helped %>" id="request<%= request.id %>">
+<div class="padding-border request <%= 'being-helped' if being_helped %>" id="request<%= request.id %>">
   <div class="question-content">
     <div class="gravatar-meta">
       <%= image_tag "#{request.owner.avatar}?s=120", class: 'gravatar-image' %>

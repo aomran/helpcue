@@ -35,7 +35,11 @@ td .btn-small {
 
 .helpcue .padding-border {
   margin-bottom: 20px;
+  &.being-helped {
+    background: $color-success;
+  }
 }
+
 .question-content {
   background: #fff;
   @include border-radius(3px);
@@ -43,6 +47,12 @@ td .btn-small {
   @extend %clearfix;
   .padding-border:hover & {
     border-color: lighten($grey-md, 20%);
+  }
+  .being-helped & {
+    border-color: darken($color-success, 10%);
+  }
+  .being-helped:hover & {
+    border-color: darken($color-success, 20%);
   }
 }
 
