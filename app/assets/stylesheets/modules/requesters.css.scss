@@ -36,7 +36,10 @@ td .btn-small {
 .helpcue .padding-border {
   margin-bottom: 20px;
   &.being-helped {
-    background: $color-success;
+    background: lighten($color-success, 20%);
+    &:hover {
+      background: lighten($color-success, 15%);
+    }
   }
 }
 
@@ -49,10 +52,10 @@ td .btn-small {
     border-color: lighten($grey-md, 20%);
   }
   .being-helped & {
-    border-color: darken($color-success, 10%);
+    border-color: $color-success;
   }
   .being-helped:hover & {
-    border-color: darken($color-success, 20%);
+    border-color: darken($color-success, 5%);
   }
 }
 
