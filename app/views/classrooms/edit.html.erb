@@ -4,66 +4,79 @@
   </div>
 </div>
 <div class="wrapper">
-  <div class="grid-unit narrow sidebar pull-right">
-    <h5>Additional Teachers</h5>
-    <p>To invite additional teachers to this classroom, please share this token:</p>
-    <p><span class='token'><%= @classroom.admin_token %></span></p>
-  </div>
   <div class="grid-unit wide">
     <%= render partial: 'form', locals: {classroom: @classroom, remote: false, leave_link: true} %>
   </div>
 </div>
 
-<% if policy(@classroom).remove_student? %>
-  <div class="grid-unit narrow sidebar pull-right">
-    <h5>Invite Students</h5>
-    <p>To invite additional students to this classroom, please share this token:</p>
-    <p><span class='token'><%= @classroom.user_token %></span></p>
+<div class="wrapper">
+  <div class="grid-unit whole">
+    <h3 class="settings-table">Students</h3>
   </div>
-<% end %>
-
-<div class="grid-unit wide">
-  <h2>Students</h2>
+  <% if policy(@classroom).remove_student? %>
+    <div class="grid-unit narrow sidebar pull-right">
+      <h4>Invite Students</h4>
+      <p>To invite students to this classroom, please share this access code: <span class='token'><%= @classroom.user_token %></span></p>
+    </div>
+  <% end %>
+  <div class="grid-unit wide">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+    <% @students.each do |user| %>
+      <tr id="user_<%= user.id %>">
+        <td><%= user.full_name %></td>
+        <td><%= user.email %></td>
+        <td>
+          <% if policy(@classroom).remove_student? %>
+            <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
 </div>
 
-<table class="users-table">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Options</th>
-  </tr>
-<% @students.each do |user| %>
-  <tr id="user_<%= user.id %>">
-    <td><%= user.full_name %></td>
-    <td><%= user.email %></td>
-    <td>
-      <% if policy(@classroom).remove_student? %>
-        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
-</table>
-
-<div class="grid-unit wide">
-  <h2>Teachers</h2>
+<div class="wrapper">
+  <div class="grid-unit whole">
+    <h3 class="settings-table">Teachers</h3>
+  </div>
+   <div class="grid-unit narrow sidebar pull-right">
+    <h4>Additional Teachers</h4>
+    <p>To invite additional teachers to this classroom, please share this access code: <span class='token'><%= @classroom.admin_token %></span></p>
+  </div>
+  <div class="grid-unit wide">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <% if policy(@classroom).remove_admin? %>
+            <th>Remove</th>
+          <% end %>
+        </tr>
+      </thead>
+    <% @teachers.each do |user| %>
+      <tr id="user_<%= user.id %>">
+        <td><%= user.full_name %></td>
+        <td><%= user.email %></td>
+        <% if policy(@classroom).remove_admin? %>
+          <td>
+            <% if policy(@classroom).remove_admin? && (user != current_user ) %>
+              <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+            <% elsif policy(@classroom).remove_admin? && (user == current_user) %>
+              Owner
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </table>
+  </div>
 </div>
-
-<table class="users-table">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Options</th>
-  </tr>
-<% @teachers.each do |user| %>
-  <tr id="user_<%= user.id %>">
-    <td><%= user.full_name %></td>
-    <td><%= user.email %></td>
-    <td>
-      <% if policy(@classroom).remove_admin? && (user != current_user ) %>
-        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
-</table>

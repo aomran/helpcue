@@ -97,9 +97,8 @@ h6,
 }
 
 .small {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.4;
-  // margin: 5px 0 15px 0;
 }
 
 @include media-query(medium) {
@@ -118,12 +117,8 @@ h6,
     font-size: 1.5rem;
     line-height: 1.25;
   }
-  p {
-    font-size: 1.1rem;
-  }
   .small {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
   }
 }
 
@@ -140,10 +135,6 @@ h6,
   h3,
   .h3 {
     font-size: 1.75rem;
-  }
-  p {
-    font-size: 1.2rem;
-    line-height: 1.55;
   }
 }
 
