@@ -11,7 +11,11 @@
     </div>
     <div class="question-meta">
       <div class="question-header">
-        <span class="h5"><%= request.owner.full_name %></span>
+        <% if request.owner == current_user %>
+          <span class="h5">Me</span>
+        <% else %>
+          <span class="h5"><%= request.owner.full_name %></span>
+        <% end %>
         <span class="pr">
           <% if policy(request).destroy? %>
             <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-delete', title: 'Delete my question'%>
