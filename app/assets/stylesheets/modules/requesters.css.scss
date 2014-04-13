@@ -66,6 +66,7 @@ td .btn-small {
 .me-too-count {
   max-width: 40px;
   margin: 5px auto;
+  cursor: pointer;
 }
 
 .question-meta {
@@ -89,4 +90,25 @@ td .btn-small {
 
 .question-actions {
   margin-top: 10px;
+}
+
+.request-action,
+.request-delete {
+  background-image: image-url('helpcue-icons.svg');
+  // padding-left: 30px;
+}
+
+.request-delete {
+  padding: 15px;
+  display: inline-block;
+  background-position: -60px -150px;
+  position: relative;
+  top: -3px;
+  &:hover {
+    background-position: -90px -150px;
+  }
+}
+
+.metoo {
+  background-position: -60px -112px;
 }

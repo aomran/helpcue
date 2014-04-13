@@ -6,7 +6,7 @@
         <%= request.created_at.strftime("%l:%M%P, %e %b %y") %>
       </span>
       <% if request.users.any? %>
-        <span class="me-too-count req-num">+<%= request.users.count %></span>
+        <span class="me-too-count req-num" title="More students have this question">+<%= request.users.count %></span>
       <% end %>
     </div>
     <div class="question-meta">
@@ -14,7 +14,7 @@
         <span class="h5"><%= request.owner.full_name %></span>
         <span class="pr">
           <% if policy(request).destroy? %>
-            <%= link_to 'X', [@classroom, request], method: :delete, remote: true, class: 'request-delete'%>
+            <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-delete', title: 'Delete my question'%>
           <% end %>
         </span>
       </div>
@@ -24,9 +24,9 @@
       <div class="question-actions">
         <% if request.status != Request::STATUS_OPTIONS[2] && policy(request).me_too? %>
           <% if request.users.include?(current_user) %>
-            <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-metoo'%>
+            <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action metoo-current'%>
           <% else %>
-            <%= link_to '+', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-metoo'%>
+            <%= link_to 'Me too', me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action metoo'%>
           <% end %>
         <% end %>
         <% if request.status == Request::STATUS_OPTIONS[0] && policy(request).toggle_help? %>
