@@ -20,7 +20,6 @@
 #= require utilities
 #= require_tree ./objects
 #= require_tree .
-#= require uservoice
 
 $ = jQuery
 
