@@ -15,7 +15,7 @@
   </div>
   <div class="grid-unit narrow pr">
     <%= form_tag classroom_hashtag_search_path(classroom_id: @classroom.id), method: :get, class: 'form-group' do %>
-      <%= text_field_tag :hashtag, nil, placeholder: 'Search for another tag- no need to type #',  class: "form-input" %>
+      <%= text_field_tag :hashtag, nil, placeholder: 'Search for another tag',  class: "form-input" %>
     <% end %>
       <%= submit_tag  'Search', name: nil, class: 'btn btn-primary' %>
   </div>
