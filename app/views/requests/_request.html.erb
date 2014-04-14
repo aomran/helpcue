@@ -51,6 +51,11 @@
             <% end %>
           <% end %>
 
+        <% else %>
+          <%= content_tag :span, class: 'request-action-disabled small' do %>
+            <span class="request-icon done-current"></span>
+            <span class="action-label-current">Done?</span>
+          <% end %>
         <% end %>
 
         <% if being_helped %>
