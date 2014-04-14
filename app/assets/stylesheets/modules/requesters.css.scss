@@ -7,9 +7,9 @@
 @include media-query(large) {
   .fg-fixed {
     position: fixed;
-    top: 90px;
-    width: inherit;
-    // .form
+    // top: 90px;
+    width: 29%; // hacky...is this the best way?
+    max-width: 380px;
   }
 }
 
