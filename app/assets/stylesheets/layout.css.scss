@@ -132,7 +132,6 @@ body.nav-open .main {
 @include media-query(small) {
   .narrow {
     width: 50%;
-    max-width: 420px;
   }
 
   .wide {
