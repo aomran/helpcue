@@ -1,4 +1,11 @@
-  <div class="grid-unit whole">
+<div class="grid-unit narrow pr">
+  <%= form_tag classroom_hashtag_search_path(classroom_id: @classroom.id), method: :get do %>
+    <%= text_field_tag :hashtag, nil, placeholder: 'tag',  class: "form-input" %>
+    <%= submit_tag  'Search', name: nil, class: 'btn btn-small btn-primary' %>
+  <% end %>
+</div>
+
+  <div class="grid-unit wide">
     <h2>#<%= params[:hashtag] %></h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
