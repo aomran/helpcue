@@ -5,7 +5,7 @@ $ ->
     $('#new_request').on "ajax:success", (e, data) ->
       HelpCue.RequestsList.addRequest(data)
       $(this).find('#request_question').val('')
-      analytics.track "Request created", classroom_id: data.classroom_id, request_id: data.request_id
+      analytics.track "Request created", classroom_id: data.classroom_id, request_id: data.request_id, question_length: data.question_length
 
     HelpCue.timeago()
 
