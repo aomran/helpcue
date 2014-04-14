@@ -1,11 +1,17 @@
 @import 'globals/all';
 
-// .requester {
-//   img {
-//     @include border-radius(30px);
-//     display: inline-block;
-//   }
-// }
+.new_request {
+  @extend %clearfix;
+}
+
+@include media-query(large) {
+  .fg-fixed {
+    position: fixed;
+    top: 90px;
+    width: inherit;
+    // .form
+  }
+}
 
 .gravatar-image {
   display: block;
@@ -57,10 +63,6 @@ td .btn-small {
   .being-helped:hover & {
     border-color: darken($color-success, 5%);
   }
-}
-
-.highlight {
-  background: red;
 }
 
 .gravatar-meta,

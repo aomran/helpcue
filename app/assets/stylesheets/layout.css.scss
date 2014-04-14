@@ -103,6 +103,7 @@ body.nav-open .main {
   float: left;
   padding-left: 20px;
   margin: 0 auto 25px;
+  @extend %clearfix;
 }
 
 .pr {
