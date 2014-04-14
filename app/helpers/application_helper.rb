@@ -19,6 +19,8 @@ module ApplicationHelper
       'Account'
     elsif params[:controller] == 'requests'
       'Queue'
+    elsif params[:controller] == 'hashtags'
+      'Tags'
     else
       params[:controller].capitalize
     end
