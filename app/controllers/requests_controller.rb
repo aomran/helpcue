@@ -28,7 +28,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('addRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, question_length: @request.question.length }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end

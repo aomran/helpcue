@@ -1,10 +1,22 @@
-<div id="hashtags-list" class="requests">
-  <h1><%= params[:hashtag] %></h1>
-  <% if @hashtagged && @hashtagged.any? %>
-    <% @hashtagged.each do |hashtagged| %>
-      <%= render_hashtaggable hashtagged %>
-    <% end -%>
-  <% end -%>
 
-  <p id="placeholder" class="<%= 'dont-show' if (@hashtagged && @hashtagged.any?) %>">There is no match for the <em><%= params[:hashtag] %></em> hashtag.</p>
+  <div class="grid-unit wide">
+    <h2>#<%= params[:hashtag] %></h2>
+    <h6 class="subtitle"><%= @classroom.name %></h6>
+  </div>
+</div>
+<div class="wrapper">
+  <div id="hashtags-list" class="grid-unit wide requests">
+    <% if @hashtagged && @hashtagged.any? %>
+      <% @hashtagged.each do |hashtagged| %>
+        <%= render_hashtaggable hashtagged %>
+      <% end -%>
+    <% end -%>
+    <p id="placeholder" class="<%= 'dont-show' if (@hashtagged && @hashtagged.any?) %>">There is no match for the <em>'<%= params[:hashtag] %>'</em> tag.</p>
+  </div>
+  <div class="grid-unit narrow pr">
+    <%= form_tag classroom_hashtag_search_path(classroom_id: @classroom.id), method: :get, class: 'form-group' do %>
+      <%= text_field_tag :hashtag, nil, placeholder: 'Search for another tag',  class: "form-input" %>
+    <% end %>
+      <%= submit_tag  'Search', name: nil, class: 'btn btn-primary' %>
+  </div>
 </div>
