@@ -17,6 +17,7 @@ Helpcue::Application.routes.draw do
     resources :users, only: [:destroy]
     get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
     get "hashtags",   to: "hashtags#show",      as: :hashtag_search
+    resources :invitations, only: [:create]
   end
 
   # Development Environment

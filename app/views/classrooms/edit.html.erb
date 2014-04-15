@@ -16,7 +16,16 @@
   <% if policy(@classroom).remove_student? %>
     <div class="grid-unit narrow sidebar pull-right">
       <h4>Invite Students</h4>
-      <p>To invite students to this classroom, please share this access code: <span class='token'><%= @classroom.user_token %></span></p>
+      <p>To invite students to this classroom, please share this access code: <span class='token'><%= @classroom.user_token %></span> or use the form below.</p>
+
+      <%= form_tag classroom_invitations_path(@classroom) do %>
+        <div class="form-group">
+          <%= text_area_tag :invitation_emails, '', placeholder: "Separate multiple email addresses with commas or line breaks.", class: "form-input", rows: 4 %>
+        </div>
+        <div>
+          <%= submit_tag 'Send Invitation', class: 'btn btn-primary', id: 'invite-button' %>
+        </div>
+      <% end %>
     </div>
   <% end %>
   <div class="grid-unit wide">
