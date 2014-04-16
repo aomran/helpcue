@@ -98,6 +98,7 @@ a.selected, a.selected:hover {
 // svg icons
 .nav-icon,
 .nav-wordmark {
+  position: relative;
   background-image: image-url('helpcue-icons.svg');
 }
 
@@ -198,6 +199,12 @@ a.selected {
   & .nav-account, .nav-account:hover {
     background-position: -60px -120px;
   }
+}
+
+.requests-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
 }
 
 // Tooltips
