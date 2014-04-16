@@ -7,8 +7,8 @@
 
     # Reset title & text
     document.title = document.title.replace(/\(\d+\)\s/, '')
-    $queueLabel = $queueLink.find('.nav-label')
-    $queueLabel.text($queueLabel.text().replace(/\s\(\d+\)/, ''))
+    $queueLabel = $queueLink.find('.requests-badge')
+    $queueLabel.text($queueLabel.text().replace(/\d+/, '')).hide()
 
     # Update the DOM data
     $queueLink.data("requests", newReqNum)
@@ -17,7 +17,7 @@
     if newReqNum > 0
       newReqNum = '30+' if newReqNum > reqLimit
       document.title = "(#{newReqNum}) #{document.title}"
-      $queueLabel.text("#{$queueLabel.text()} (#{newReqNum})")
+      $queueLabel.text(newReqNum).show()
 
   updateNumber: (oldReqNum, add) ->
     if add

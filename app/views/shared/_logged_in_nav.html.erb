@@ -20,8 +20,10 @@
            <span class="req-num requests-badge">
              <%= requests > 30 ? '30+' : requests %>
            </span>
+          <% else %>
+            <span class="req-num requests-badge dont-show"></span>
          <% end %>
-         
+
        </span>
        <span class="nav-label">Queue</span>
      <% end %>
