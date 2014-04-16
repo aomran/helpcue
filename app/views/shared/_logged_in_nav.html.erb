@@ -13,11 +13,10 @@
 
 <% if @classroom.try(:id) %>
   <% requests = @classroom.requests.need_help.count %>
-  <% requests = '30+' if requests > 30 %>
-  <li id="queue_link" data-classroomid="<%= @classroom.id %>" data-reqlimit="30">
+  <li id="queue_link" data-classroomid="<%= @classroom.id %>" data-reqlimit="30" data-requests="<%= requests %>">
      <%= link_to_selected classroom_requests_path(@classroom), class: "nav-links" do %>
        <span class="nav-icon nav-queue"></span>
-       <span class="nav-label">Queue (<%= requests %>)</span>
+       <span class="nav-label">Queue (<%= requests > 30 ? '30+' : requests %>)</span>
      <% end %>
   </li>
 

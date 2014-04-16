@@ -28,7 +28,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('addRequest')
-        update_requesters_number
+        update_requesters_number(true)
         format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, question_length: @request.question.length }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -91,7 +91,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('removeRequest')
-        update_requesters_number
+        update_requesters_number(false)
         format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -105,7 +105,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       push_to_channel('removeRequest')
-      update_requesters_number
+      update_requesters_number(false)
       format.json {
         render json: { request_id: params[:id] }
       }
@@ -125,7 +125,7 @@ class RequestsController < ApplicationController
     Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
   end
 
-  def update_requesters_number
-    Pusher.trigger("classroom#{@classroom.id}-requests", 'requestUpdate', {requests_count: @classroom.requests.need_help.count })
+  def update_requesters_number(add)
+    Pusher.trigger("classroom#{@classroom.id}-requests", 'requestUpdate', {add: add })
   end
 end
