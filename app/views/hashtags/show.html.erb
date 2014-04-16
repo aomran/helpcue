@@ -14,9 +14,10 @@
     <p id="placeholder" class="<%= 'dont-show' if (@hashtagged && @hashtagged.any?) %>">There is no match for the <em>'<%= params[:hashtag] %>'</em> tag.</p>
   </div>
   <div class="grid-unit narrow pr">
-    <%= form_tag classroom_hashtag_search_path(classroom_id: @classroom.id), method: :get, class: 'form-group' do %>
-      <%= text_field_tag :hashtag, nil, placeholder: 'Search for another tag',  class: "form-input" %>
-    <% end %>
+    <%= form_tag classroom_hashtag_search_path(classroom_id: @classroom.id), method: :get  do %>
+      <div class="form-group">
+        <%= text_field_tag :hashtag, nil, placeholder: 'Search for another tag',  class: "form-input" %>
+      </div>
       <%= submit_tag  'Search', name: nil, class: 'btn btn-primary' %>
-  </div>
+    <% end %>
 </div>
