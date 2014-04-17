@@ -4,6 +4,11 @@
   </div>
 </div>
 <div class="wrapper" id="completed-requests">
+
+  <div class="grid-unit narrow pr" id="pagination">
+    <%= render 'requests_pagination' %>
+  </div>
+
   <div class="grid-unit wide helpcue requests">
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
       <div class="question-content">

@@ -14,6 +14,7 @@ $ ->
 
     $('#completed-requests').on 'ajax:success', '.pagination a', (e, data) ->
       $('#requests').html(data.partial)
+      $('#pagination').html(data.pagination_partial)
 
   if $('.requests').length
     $requests = $('.requests')

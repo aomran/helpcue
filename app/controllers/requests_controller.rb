@@ -13,7 +13,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: { partial: render_to_string(partial: 'requests.html') }
+        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
       }
       format.html {}
     end
