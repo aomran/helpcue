@@ -11,8 +11,7 @@
       </div>
     </div>
 
-    <% @requests.each do |request| %>
-      <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
-    <% end %>
+    <div id="requests"><%= render 'requests' %></div>
+
   </div>
 </div>

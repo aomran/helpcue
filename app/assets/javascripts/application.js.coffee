@@ -56,20 +56,20 @@ $ ->
     return false
 
 jQuery.timeago.settings.strings =
-    prefixAgo: null
-    prefixFromNow: null
-    suffixAgo: ""
-    suffixFromNow: ""
-    seconds: "now"
-    minute: "1 m"
-    minutes: "%d m"
-    hour: "1 h"
-    hours: "%d h"
-    day: "1 d"
-    days: "%d d"
-    month: "1 mo"
-    months: "%d mo"
-    year: "1 yr"
-    years: "%d yr"
-    wordSeparator: " "
-    numbers: []
+  prefixAgo: null
+  prefixFromNow: null
+  suffixAgo: ""
+  suffixFromNow: ""
+  seconds: "now"
+  minute: "1 m"
+  minutes: "%d m"
+  hour: "1 h"
+  hours: "%d h"
+  day: "1 d"
+  days: "%d d"
+  month: "1 mo"
+  months: "%d mo"
+  year: "1 yr"
+  years: "%d yr"
+  wordSeparator: " "
+  numbers: []

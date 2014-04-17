@@ -12,6 +12,9 @@ $ ->
   if $('#completed-requests').length
     analytics.track "Viewed completed requests page", classroom_id: $('#track_link').data('classroomid')
 
+    $('#completed-requests').on 'ajax:success', '.pagination a', (e, data) ->
+      $('#requests').html(data.partial)
+
   if $('.requests').length
     $requests = $('.requests')
 

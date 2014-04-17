@@ -1,0 +1,5 @@
+<% @requests.each do |request| %>
+  <%= render partial: 'request.html', locals: { classroom: @classroom, request: request } %>
+<% end %>
+
+<%= paginate @requests, :remote => true %>
