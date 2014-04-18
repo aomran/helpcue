@@ -14,11 +14,12 @@ $ ->
     analytics.track "Viewed completed requests page", classroom_id: $('#track_link').data('classroomid')
     Intercom('trackEvent', 'viewed-completed-request', {classroom_id: $('#track_link').data('classroomid')})
 
-    $('#completed-requests').on 'ajax:success', '.pagination a', (e, data) ->
+  if $('.requests').length
+
+    $('.requests-container').on 'ajax:success', '.pagination a', (e, data) ->
       $('#requests').html(data.partial)
       $('#pagination').html(data.pagination_partial)
 
-  if $('.requests').length
     $requests = $('.requests')
 
     $requests.on 'click', '.me-too-count', ->

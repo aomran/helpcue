@@ -1,8 +1,19 @@
 <div class="wrapper page-header">
-  <div class="grid-unit whole">
+  <div class="grid-unit wide">
     <a class="hide-desktop collapse-toggle mobile-menu" title="Toggle Mobile Menu">
       <span class="nav-icon nav-burger"></span>
     </a>
     <h4><%= current_page_header %></h4>
   </div>
+
+  <% if @classroom.try(:id) %>
+    <div class="grid-unit">
+      <%= form_tag search_classroom_requests_path(@classroom), method: :get do %>
+        <div class="form-group">
+          <%= text_field_tag :query, params[:query], placeholder: 'Search by keyword, name, tag...',  class: "form-input" %>
+        </div>
+        <%= submit_tag  'Search', name: nil, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
