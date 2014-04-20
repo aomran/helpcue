@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def current_page_header
-    if params[:controller] == 'devise/registrations'
+    if params[:controller] == 'registrations'
       'Account'
     elsif params[:controller] == 'requests'
       'Queue'
