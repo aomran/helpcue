@@ -50,6 +50,15 @@
   }
 }
 
+form.search-form input {
+  display: inline;
+  width: 130px;
+  transition: .7s;
+  &:focus {
+    width: 160px;
+  }
+}
+
 .form-input-half {
   width: 100%;
 }
