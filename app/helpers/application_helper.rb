@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def at_account?(path)
-    path == '' && params[:controller] == 'devise/registrations'
+    path == '' && params[:controller] == 'registrations'
   end
 
   def current_page_header
