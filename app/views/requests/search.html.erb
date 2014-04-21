@@ -15,7 +15,7 @@
         <p class="placeholder">There is no match for <em>'<%= params[:query] %>'</em>.</p>
       </div>
     </div>
-
+    <%= search_count @requests.total_count %>
     <div id="requests"><%= render 'requests' %></div>
 
   </div>

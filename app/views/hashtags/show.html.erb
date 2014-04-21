@@ -7,6 +7,7 @@
 <div class="wrapper">
   <div id="hashtags-list" class="grid-unit wide requests">
     <% if @hashtagged && @hashtagged.any? %>
+      <%= search_count @hashtagged.count %>
       <% @hashtagged.each do |hashtagged| %>
         <%= render_hashtaggable hashtagged %>
       <% end -%>
