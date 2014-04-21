@@ -6,7 +6,7 @@
     newReqNum = @updateNumber(oldReqNum, data.add)
 
     # Reset title & text
-    document.title = document.title.replace(/\(\d+\)\s/, '')
+    document.title = document.title.replace(/\(\d+\+*\)\s/, '')
     $queueLabel = $queueLink.find('.requests-badge')
     $queueLabel.text($queueLabel.text().replace(/\d+/, '')).hide()
 
