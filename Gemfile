@@ -20,6 +20,8 @@ gem "pundit"
 gem 'pusher'
 gem 'simple_hashtag'
 gem 'intercom-rails', '~> 0.2.24'
+gem 'kaminari'
+gem 'pg_search'
 
 group :development do
   gem 'style-guide'

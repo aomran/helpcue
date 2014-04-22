@@ -12,6 +12,7 @@ Helpcue::Application.routes.draw do
       patch 'toggle_help', on: :member
       patch 'me_too', on: :member
       get 'completed', on: :collection
+      get 'search', on: :collection
     end
 
     resources :users, only: [:destroy]

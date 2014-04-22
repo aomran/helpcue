@@ -9,7 +9,25 @@ class RequestsController < ApplicationController
   end
 
   def completed
-    @requests = @classroom.requests.completed
+    @requests = @classroom.requests.completed.page(params[:page])
+
+    respond_to do |format|
+      format.json {
+        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
+      }
+      format.html {}
+    end
+  end
+
+  def search
+    @requests = @classroom.requests.search(params[:query]).page(params[:page])
+
+    respond_to do |format|
+      format.json {
+        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
+      }
+      format.html {}
+    end
   end
 
   def show

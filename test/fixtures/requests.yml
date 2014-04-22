@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  question: MyString
+  question: css question
   status: Waiting
   owner: student1
   users:
   classroom: two
 
 two:
-  question: MyString
+  question: ruby question
   status: Being Helped
   owner: student2
   users:
