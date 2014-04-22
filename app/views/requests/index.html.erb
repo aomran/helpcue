@@ -15,7 +15,6 @@
         <p class="placeholder">There's no one in the help queue right now.</p>
       </div>
     </div>
-    <%= question_count @requests.count %>
     <% @requests.each do |request| %>
       <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
     <% end %>
