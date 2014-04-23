@@ -17,4 +17,17 @@ class Request < ActiveRecord::Base
       users: [:first_name, :last_name],
       owner: [:first_name, :last_name]
     }
+
+  def toggle_status
+    if status == STATUS_OPTIONS[0]
+      self.status = STATUS_OPTIONS[1]
+    elsif status == STATUS_OPTIONS[1]
+      self.status = STATUS_OPTIONS[0]
+    end
+    self
+  end
+
+  def remove_from_queue
+    self.status = STATUS_OPTIONS[2]
+  end
 end

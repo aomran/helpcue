@@ -44,7 +44,6 @@ class RequestsController < ApplicationController
 
   def create
     @request = @classroom.requests.build(question: params[:request][:question])
-    @request.status = Request::STATUS_OPTIONS[0]
     @request.owner = current_user
 
     respond_to do |format|
@@ -91,11 +90,7 @@ class RequestsController < ApplicationController
 
   def toggle_help
     authorize @request
-    if @request.status == Request::STATUS_OPTIONS[0]
-      @request.status = Request::STATUS_OPTIONS[1]
-    elsif @request.status == Request::STATUS_OPTIONS[1]
-      @request.status = Request::STATUS_OPTIONS[0]
-    end
+    @request.toggle_status
 
     respond_to do |format|
       if @request.save
@@ -109,7 +104,7 @@ class RequestsController < ApplicationController
 
   def remove
     authorize @request
-    @request.status = Request::STATUS_OPTIONS[2]
+    @request.remove_from_queue
     respond_to do |format|
       if @request.save
         push_to_channel('removeRequest')
