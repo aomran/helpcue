@@ -22,11 +22,15 @@ class RequestsController < ApplicationController
   def search
     @requests = @classroom.requests.search(params[:query]).page(params[:page])
 
+
     respond_to do |format|
       format.json {
         render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
       }
-      format.html {}
+      format.html {
+        @total_results_count = @requests.total_count
+        flash.now[:track] = { event_name: "Search", properties: { classroom_id: @classroom.id, query: params[:query], results_count: @total_results_count } }
+      }
     end
   end
 
