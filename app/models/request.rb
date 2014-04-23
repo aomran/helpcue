@@ -29,5 +29,6 @@ class Request < ActiveRecord::Base
 
   def remove_from_queue
     self.status = STATUS_OPTIONS[2]
+    self
   end
 end
