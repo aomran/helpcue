@@ -33,4 +33,8 @@ class Request < ActiveRecord::Base
     self.done_at = Time.zone.now
     self
   end
+
+  def time_waiting
+    (helped_at - created_at).floor
+  end
 end

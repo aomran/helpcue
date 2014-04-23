@@ -16,7 +16,6 @@ class RequestTest < ActiveSupport::TestCase
   test "adds current time when changing status to being-helped" do
     Timecop.freeze
     requests(:one).toggle_status.save
-
     assert_equal Time.zone.now, requests(:one).reload.helped_at
   end
 
@@ -25,5 +24,13 @@ class RequestTest < ActiveSupport::TestCase
     requests(:one).remove_from_queue.save
 
     assert_equal Time.zone.now, requests(:one).reload.done_at
+  end
+
+  test "time waiting" do
+    request = Request.create
+    Timecop.freeze(Time.zone.now + 30.minutes) do
+      request.toggle_status.save
+      assert_equal 30.minutes, request.time_waiting
+    end
   end
 end
