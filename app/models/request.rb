@@ -37,4 +37,8 @@ class Request < ActiveRecord::Base
   def time_waiting
     (helped_at - created_at).floor
   end
+
+  def help_duration
+    (done_at - helped_at).floor
+  end
 end
