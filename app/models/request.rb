@@ -21,6 +21,7 @@ class Request < ActiveRecord::Base
   def toggle_status
     if status == STATUS_OPTIONS[0]
       self.status = STATUS_OPTIONS[1]
+      self.helped_at = Time.zone.now
     elsif status == STATUS_OPTIONS[1]
       self.status = STATUS_OPTIONS[0]
     end
@@ -29,6 +30,7 @@ class Request < ActiveRecord::Base
 
   def remove_from_queue
     self.status = STATUS_OPTIONS[2]
+    self.done_at = Time.zone.now
     self
   end
 end

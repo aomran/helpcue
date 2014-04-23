@@ -33,6 +33,10 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+group :test do
+  gem 'timecop'
+end
+
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
