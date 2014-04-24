@@ -49,4 +49,11 @@ class Request < ActiveRecord::Base
       0
     end
   end
+
+  def self.average_waiting_time
+    waiting_times = all.map {|r| r.time_waiting }
+    waiting_times.reject! { |t| t <= 2.seconds }
+
+    waiting_times.reduce(:+) / waiting_times.length
+  end
 end

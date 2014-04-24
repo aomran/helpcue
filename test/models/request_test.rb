@@ -43,4 +43,10 @@ class RequestTest < ActiveSupport::TestCase
       assert_equal 40.minutes, request.help_duration
     end
   end
+
+  test "average waiting time in past 24 hours" do
+    # classrooms(:three) has 3 requests with 20/30/30 minutes waiting. One very old request and one request with no helped_at time.
+
+    assert_in_delta (30.minutes+20.minutes+30.minutes)/3, classrooms(:three).requests.where("helped_at > ?", 24.hours.ago).average_waiting_time, 10
+  end
 end
