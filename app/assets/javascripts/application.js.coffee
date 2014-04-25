@@ -14,7 +14,6 @@
 #= require jquery_ujs
 #= require jquery.ui.effect-highlight
 #= require matchMedia
-#= require bootstrap-dismiss
 #= require jquery.modal
 #= require jquery.timeago
 #= require utilities
@@ -54,6 +53,10 @@ $ ->
     $('.error-message').remove()
     $(this).modal(fadeDuration: 250)
     return false
+
+  $('[data-dismiss="alert"]').on 'click', ->
+    $(this).closest('.flash').fadeOut ->
+      $(this).remove()
 
 jQuery.timeago.settings.strings =
   prefixAgo: null
