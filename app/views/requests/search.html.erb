@@ -1,5 +1,5 @@
   <div class="grid-unit whole">
-    <h2>Questions</h2>
+    <h2>Results for "<%= params[:query] %>"</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
 </div>
@@ -10,12 +10,12 @@
   </div>
 
   <div class="grid-unit wide helpcue requests">
+    <%= search_count @total_results_count %>
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
       <div class="question-content">
         <p class="placeholder">There is no match for <em>'<%= params[:query] %>'</em>.</p>
       </div>
     </div>
-    <%= search_count @requests.total_count %>
     <div id="requests"><%= render 'requests' %></div>
 
   </div>

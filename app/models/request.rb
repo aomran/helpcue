@@ -8,6 +8,8 @@ class Request < ActiveRecord::Base
 
   scope :need_help, -> { where.not(status: STATUS_OPTIONS[2]).order("created_at ASC") }
   scope :completed, -> { where(status: STATUS_OPTIONS[2]).order("updated_at DESC") }
+  scope :past_24_hours, -> { where("helped_at > ?", 24.hours.ago) }
+
   STATUS_OPTIONS = ['Waiting', 'Being Helped', 'Done']
 
   include PgSearch
@@ -17,4 +19,46 @@ class Request < ActiveRecord::Base
       users: [:first_name, :last_name],
       owner: [:first_name, :last_name]
     }
+
+  def toggle_status
+    if status == STATUS_OPTIONS[0]
+      self.status = STATUS_OPTIONS[1]
+      self.helped_at = Time.zone.now
+    elsif status == STATUS_OPTIONS[1]
+      self.status = STATUS_OPTIONS[0]
+    end
+    self
+  end
+
+  def remove_from_queue
+    self.status = STATUS_OPTIONS[2]
+    self.done_at = Time.zone.now
+    self
+  end
+
+  def time_waiting
+    if helped_at
+      (helped_at - created_at).floor
+    else
+      0
+    end
+  end
+
+  def help_duration
+    if helped_at && done_at
+      (done_at - helped_at).floor
+    else
+      0
+    end
+  end
+
+  def self.average_waiting_time
+    waiting_times = all.map {|r| r.time_waiting }
+    waiting_times.reject! { |t| t <= 2.seconds }
+    if waiting_times.any?
+      waiting_times.reduce(:+) / waiting_times.length
+    else
+      0
+    end
+  end
 end

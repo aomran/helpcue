@@ -22,11 +22,15 @@ class RequestsController < ApplicationController
   def search
     @requests = @classroom.requests.search(params[:query]).page(params[:page])
 
+
     respond_to do |format|
       format.json {
         render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
       }
-      format.html {}
+      format.html {
+        @total_results_count = @requests.total_count
+        flash.now[:track] = { event_name: "Search", properties: { classroom_id: @classroom.id, query: params[:query], results_count: @total_results_count } }
+      }
     end
   end
 
@@ -40,7 +44,6 @@ class RequestsController < ApplicationController
 
   def create
     @request = @classroom.requests.build(question: params[:request][:question])
-    @request.status = Request::STATUS_OPTIONS[0]
     @request.owner = current_user
 
     respond_to do |format|
@@ -87,16 +90,12 @@ class RequestsController < ApplicationController
 
   def toggle_help
     authorize @request
-    if @request.status == Request::STATUS_OPTIONS[0]
-      @request.status = Request::STATUS_OPTIONS[1]
-    elsif @request.status == Request::STATUS_OPTIONS[1]
-      @request.status = Request::STATUS_OPTIONS[0]
-    end
+    @request.toggle_status
 
     respond_to do |format|
       if @request.save
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status, waiting_time: @request.time_waiting }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -105,7 +104,7 @@ class RequestsController < ApplicationController
 
   def remove
     authorize @request
-    @request.status = Request::STATUS_OPTIONS[2]
+    @request.remove_from_queue
     respond_to do |format|
       if @request.save
         push_to_channel('removeRequest')

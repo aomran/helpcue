@@ -38,6 +38,7 @@ module ApplicationHelper
     javascript_tag %Q{
       $(document).ready(function(){
         analytics.track("#{event_name}"#{p});
+        Intercom("trackEvent", "#{event_name}"#{p});
       });
     }
   end
