@@ -6,6 +6,8 @@ class RequestsController < ApplicationController
   def index
     @requests = @classroom.requests.need_help
     @request = Request.new
+
+    @average_wait_time = @classroom.requests.past_24_hours.average_waiting_time
   end
 
   def completed

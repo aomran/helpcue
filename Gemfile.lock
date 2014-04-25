@@ -34,6 +34,8 @@ GEM
     celluloid-io (0.15.0)
       celluloid (>= 0.15.0)
       nio4r (>= 0.5.0)
+    chronic_duration (0.10.4)
+      numerizer (~> 0.1.1)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -104,6 +106,7 @@ GEM
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    numerizer (0.1.1)
     orm_adapter (0.5.0)
     pg (0.17.1)
     pg_search (0.7.3)
@@ -126,6 +129,8 @@ GEM
     rack (1.5.2)
     rack-livereload (0.3.15)
       rack
+    rack-mini-profiler (0.9.1)
+      rack (>= 1.1.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.4)
@@ -198,6 +203,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chronic_duration
   coffee-rails (~> 4.0.0)
   devise
   guard-livereload
@@ -213,6 +219,7 @@ DEPENDENCIES
   pundit
   pusher
   rack-livereload
+  rack-mini-profiler
   rails (= 4.0.4)
   rails_12factor
   sass-rails (~> 4.0.2)

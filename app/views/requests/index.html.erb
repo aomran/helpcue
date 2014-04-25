@@ -6,6 +6,8 @@
 <div class="wrapper">
   <div class="grid-unit narrow pr">
     <%= render 'form' %>
+
+    <p>Average recent waiting time: <span class="token"><%= display_duration @average_wait_time %></span></p>
   </div>
   <div class="grid-unit wide helpcue requests" id="requests-list">
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
