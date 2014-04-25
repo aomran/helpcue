@@ -6,6 +6,10 @@ class RequestsController < ApplicationController
   def index
     @requests = @classroom.requests.need_help
     @request = Request.new
+
+    if @classroom.users.merge(@classroom.classroom_users.students).empty?
+      flash.now[:notice] = "The next step is to invite your students. Click 'Settings' to get started."
+    end
   end
 
   def completed
