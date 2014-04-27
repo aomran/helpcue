@@ -19,7 +19,7 @@
           <span class="h5"><%= request.owner.full_name %></span>
         <% end %>
         <span class="pr">
-          <% if policy(request).destroy? && request.status != Request::STATUS_OPTIONS[2] %>
+          <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
             <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-delete', title: 'Delete my question'%>
           <% end %>
         </span>
