@@ -50,11 +50,9 @@ $ ->
         analytics.track "User leaves a request", classroom_id: data.classroom_id, request_id: data.request_id, count: data.count
         Intercom('trackEvent', 'left-request', {classroom_id: data.classroom_id, request_id: data.request_id, count: data.count})
 
+    # In-place editing
     $requests.on 'focusin', '[contenteditable="true"]', ->
       localStorage.setItem('originalText', $(this).html())
-
-    # $requests.on 'focusout', '[contenteditable="true"]', ->
-    #   localStorage.clear()
 
     $requests.on 'keydown', '[contenteditable="true"]', (e) ->
       if e.which == 27
@@ -63,5 +61,13 @@ $ ->
         $(this).trigger('blur')
       else if e.which == 13
         e.preventDefault()
-        linkHashtags($(this))
-        $(this).trigger('blur')
+        # update the question
+        classroom_id = $('#queue_link').data('classroomid')
+        request_id = $(this).data('requestid')
+        $.ajax
+          url: "/classrooms/#{classroom_id}/requests/#{request_id}"
+          type: 'POST'
+          data: { request: { question: $(this).text() }, "_method": "patch" }
+          success: (data) ->
+            HelpCue.RequestsList.updateRequest(data)
+            $(this).trigger('blur')

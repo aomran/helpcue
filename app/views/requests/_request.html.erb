@@ -24,7 +24,7 @@
           <% end %>
         </span>
       </div>
-      <div class="question" <%= "contenteditable=true" if policy(request).update? %> >
+      <div class="question" <%= "contenteditable=true" if policy(request).update? %> data-requestid="<%= request.id %>">
         <%= linkify_hashtags request.question %>
       </div>
       <div class="question-actions">
