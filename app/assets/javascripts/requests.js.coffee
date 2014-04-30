@@ -51,6 +51,12 @@ $ ->
         Intercom('trackEvent', 'left-request', {classroom_id: data.classroom_id, request_id: data.request_id, count: data.count})
 
     # In-place editing
+    $requests.on 'click', '.request-edit', (e) ->
+      e.preventDefault()
+      $question = $(this).closest('.question-meta').find('.question')
+      $question.attr('contenteditable', true)
+      $question.trigger('focus')
+
     $requests.on 'focusin', '[contenteditable="true"]', ->
       localStorage.setItem('originalText', $(this).html())
 
@@ -59,6 +65,7 @@ $ ->
         e.preventDefault()
         $(this).html(localStorage.getItem('originalText'))
         $(this).trigger('blur')
+        $(this).attr('contenteditable', false)
       else if e.which == 13
         e.preventDefault()
         # update the question
@@ -71,3 +78,4 @@ $ ->
           success: (data) ->
             HelpCue.RequestsList.updateRequest(data)
             $(this).trigger('blur')
+            $(this).attr('contenteditable', false)
