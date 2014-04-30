@@ -62,7 +62,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.update(question: params[:request][:question].strip)
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+        format.json { render json: { question: view_context.linkify_hashtags(@request.question) }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end

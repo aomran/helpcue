@@ -54,28 +54,24 @@ $ ->
     $requests.on 'click', '.request-edit', (e) ->
       e.preventDefault()
       $question = $(this).closest('.question-meta').find('.question')
-      $question.attr('contenteditable', true)
-      $question.trigger('focus')
+      HelpCue.ContentEditable.enable($question)
 
     $requests.on 'focusin', '[contenteditable="true"]', ->
-      localStorage.setItem('originalText', $(this).html())
+      HelpCue.ContentEditable.store_original($(this))
 
     $requests.on 'keydown', '[contenteditable="true"]', (e) ->
+      $this = $(this)
       if e.which == 27
         e.preventDefault()
-        $(this).html(localStorage.getItem('originalText'))
-        $(this).trigger('blur')
-        $(this).attr('contenteditable', false)
+        HelpCue.ContentEditable.restore_original($this)
       else if e.which == 13
         e.preventDefault()
         # update the question
         classroom_id = $('#queue_link').data('classroomid')
-        request_id = $(this).data('requestid')
+        request_id = $this.data('requestid')
         $.ajax
           url: "/classrooms/#{classroom_id}/requests/#{request_id}"
           type: 'POST'
-          data: { request: { question: $(this).text() }, "_method": "patch" }
+          data: { request: { question: $this.text() }, "_method": "patch" }
           success: (data) ->
-            HelpCue.RequestsList.updateRequest(data)
-            $(this).trigger('blur')
-            $(this).attr('contenteditable', false)
+            HelpCue.ContentEditable.update_content($this, data.question)
