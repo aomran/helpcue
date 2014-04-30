@@ -60,9 +60,9 @@ class RequestsController < ApplicationController
   def update
     authorize @request
     respond_to do |format|
-      if @request.update(request_params)
+      if @request.update(question: params[:request][:question].strip)
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+        format.json { render json: { question: view_context.linkify_hashtags(@request.question) }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -130,9 +130,6 @@ class RequestsController < ApplicationController
   end
 
   private
-  def request_params
-    params.require(:request).permit(:question, :status)
-  end
   def get_request
     @request = @classroom.requests.find(params[:id])
   end
