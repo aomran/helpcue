@@ -44,12 +44,6 @@ class RequestsControllerTest < ActionController::TestCase
     assert_equal users(:student1).id, Request.last.owner_id
   end
 
-  test "should update request status" do
-    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {status: Request::STATUS_OPTIONS[1]}
-
-    assert_equal Request::STATUS_OPTIONS[1], requests(:one).reload.status
-  end
-
   test "should update request question" do
     xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {question: 'new question'}
 
