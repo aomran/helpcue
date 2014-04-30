@@ -172,7 +172,9 @@ td .btn-small {
 
 .done {
   background-position: -138px -102px;
-  .request-action:hover & {
-    background-position: -138px -126px;
-  }
+}
+
+.done-current,
+.request-action:hover .done {
+  background-position: -138px -126px;
 }

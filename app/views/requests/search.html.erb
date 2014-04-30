@@ -1,21 +1,21 @@
   <div class="grid-unit whole">
-    <h2>Completed Questions</h2>
+    <h2>Results for "<%= params[:query] %>"</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
   </div>
 </div>
-<div class="wrapper requests-container" id="completed-requests">
+<div class="wrapper requests-container">
 
   <div class="grid-unit narrow pr" id="pagination">
     <%= render 'requests_pagination' %>
   </div>
 
   <div class="grid-unit wide helpcue requests">
+    <%= search_count @total_results_count %>
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
       <div class="question-content">
-        <p class="placeholder">Questions that are marked as 'done' will appear here.</p>
+        <p class="placeholder">There is no match for <em>'<%= params[:query] %>'</em>.</p>
       </div>
     </div>
-    <%= question_count @requests.total_count %>
     <div id="requests"><%= render 'requests' %></div>
 
   </div>

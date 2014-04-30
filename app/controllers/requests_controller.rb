@@ -9,7 +9,29 @@ class RequestsController < ApplicationController
   end
 
   def completed
-    @requests = @classroom.requests.completed
+    @requests = @classroom.requests.completed.page(params[:page])
+
+    respond_to do |format|
+      format.json {
+        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
+      }
+      format.html {}
+    end
+  end
+
+  def search
+    @requests = @classroom.requests.search(params[:query]).page(params[:page])
+
+
+    respond_to do |format|
+      format.json {
+        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
+      }
+      format.html {
+        @total_results_count = @requests.total_count
+        flash.now[:track] = { event_name: "Search", properties: { classroom_id: @classroom.id, query: params[:query], results_count: @total_results_count } }
+      }
+    end
   end
 
   def show
@@ -22,13 +44,13 @@ class RequestsController < ApplicationController
 
   def create
     @request = @classroom.requests.build(question: params[:request][:question])
-    @request.status = Request::STATUS_OPTIONS[0]
     @request.owner = current_user
 
     respond_to do |format|
       if @request.save
         push_to_channel('addRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+        update_requesters_number(true)
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, question_length: @request.question.length }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -68,16 +90,12 @@ class RequestsController < ApplicationController
 
   def toggle_help
     authorize @request
-    if @request.status == Request::STATUS_OPTIONS[0]
-      @request.status = Request::STATUS_OPTIONS[1]
-    elsif @request.status == Request::STATUS_OPTIONS[1]
-      @request.status = Request::STATUS_OPTIONS[0]
-    end
+    @request.toggle_status
 
     respond_to do |format|
       if @request.save
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status, waiting_time: @request.time_waiting }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -86,10 +104,11 @@ class RequestsController < ApplicationController
 
   def remove
     authorize @request
-    @request.status = Request::STATUS_OPTIONS[2]
+    @request.remove_from_queue
     respond_to do |format|
       if @request.save
         push_to_channel('removeRequest')
+        update_requesters_number(false)
         format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -103,6 +122,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       push_to_channel('removeRequest')
+      update_requesters_number(false)
       format.json {
         render json: { request_id: params[:id] }
       }
@@ -120,5 +140,9 @@ class RequestsController < ApplicationController
   def push_to_channel(requestAction)
     data = { requestAction: requestAction, request_id: params[:id] || @request.id, user_id: current_user.id, classroom_id: @classroom.id }
     Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
+  end
+
+  def update_requesters_number(add)
+    Pusher.trigger("classroom#{@classroom.id}-requests", 'requestUpdate', {add: add })
   end
 end

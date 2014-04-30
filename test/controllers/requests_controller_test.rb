@@ -25,6 +25,14 @@ class RequestsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "should get requests containing query" do
+    classrooms(:two).requests.create(question: 'question about jerky', owner_id: users(:student1).id)
+    get :search, classroom_id: classrooms(:two).id, query: 'jerky'
+
+    assert_equal 1, assigns(:requests).count
+    assert :success
+  end
+
   test "should create request with valid data" do
     assert_difference 'Request.count' do
       @params[:format] = :json

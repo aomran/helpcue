@@ -11,14 +11,16 @@ module ApplicationHelper
   end
 
   def at_account?(path)
-    path == '' && params[:controller] == 'devise/registrations'
+    path == '' && params[:controller] == 'registrations'
   end
 
   def current_page_header
-    if params[:controller] == 'devise/registrations'
+    if params[:controller] == 'registrations'
       'Account'
     elsif params[:controller] == 'requests'
       'Queue'
+    elsif params[:controller] == 'hashtags'
+      'Tags'
     else
       params[:controller].capitalize
     end
@@ -36,6 +38,7 @@ module ApplicationHelper
     javascript_tag %Q{
       $(document).ready(function(){
         analytics.track("#{event_name}"#{p});
+        Intercom("trackEvent", "#{event_name}"#{p});
       });
     }
   end

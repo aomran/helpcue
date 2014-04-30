@@ -12,10 +12,13 @@ Helpcue::Application.routes.draw do
       patch 'toggle_help', on: :member
       patch 'me_too', on: :member
       get 'completed', on: :collection
+      get 'search', on: :collection
     end
 
     resources :users, only: [:destroy]
     get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
+    get "hashtags",   to: "hashtags#show",      as: :hashtag_search
+    resources :invitations, only: [:create]
   end
 
   # Development Environment

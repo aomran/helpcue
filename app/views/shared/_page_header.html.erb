@@ -4,5 +4,13 @@
       <span class="nav-icon nav-burger"></span>
     </a>
     <h4><%= current_page_header %></h4>
+
+    <% if @classroom.try(:id) %>
+      <div class="secondary-nav pull-right">
+        <%= form_tag search_classroom_requests_path(@classroom), method: :get, class: 'search-form' do %>
+          <%= text_field_tag :query, params[:query], placeholder: 'Search...', class: "form-input" %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

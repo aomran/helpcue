@@ -20,15 +20,23 @@ gem "pundit"
 gem 'pusher'
 gem 'simple_hashtag'
 gem 'intercom-rails', '~> 0.2.24'
+gem 'kaminari'
+gem 'pg_search'
+gem 'chronic_duration'
 
 group :development do
   gem 'style-guide'
   gem 'rack-livereload'
   gem 'guard-livereload'
+  gem 'rack-mini-profiler'
 end
 
 group :development, :test do
   gem 'pry-rails'
+end
+
+group :test do
+  gem 'timecop'
 end
 
 group :production do

@@ -1,15 +1,54 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  question: MyString
+  question: css question
   status: Waiting
   owner: student1
   users:
   classroom: two
 
 two:
-  question: MyString
+  question: ruby question
   status: Being Helped
   owner: student2
   users:
   classroom: two
+
+three:
+  question: ruby question
+  status: Being Helped
+  owner: student2
+  users:
+  classroom: three
+  helped_at: <%= Time.zone.now + 20.minutes %>
+
+four:
+  question: ruby question
+  status: Being Helped
+  owner: student2
+  users:
+  classroom: three
+  helped_at: <%= Time.zone.now + 30.minutes %>
+
+five:
+  question: ruby question
+  status: Being Helped
+  owner: student2
+  users:
+  classroom: three
+  helped_at: <%= Time.zone.now + 30.minutes %>
+
+six:
+  question: ruby question
+  status: Being Helped
+  owner: student2
+  users:
+  classroom: three
+  helped_at: <%= Time.zone.parse("April 12 2008") %>
+
+seven:
+  question: ruby question
+  status: Waiting
+  owner: student2
+  users:
+  classroom: three

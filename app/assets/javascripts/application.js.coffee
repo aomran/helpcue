@@ -14,7 +14,6 @@
 #= require jquery_ujs
 #= require jquery.ui.effect-highlight
 #= require matchMedia
-#= require bootstrap-dismiss
 #= require jquery.modal
 #= require jquery.timeago
 #= require utilities
@@ -55,21 +54,25 @@ $ ->
     $(this).modal(fadeDuration: 250)
     return false
 
+  $('[data-dismiss="alert"]').on 'click', ->
+    $(this).closest('.flash').fadeOut ->
+      $(this).remove()
+
 jQuery.timeago.settings.strings =
-    prefixAgo: null
-    prefixFromNow: null
-    suffixAgo: ""
-    suffixFromNow: ""
-    seconds: "now"
-    minute: "1 m"
-    minutes: "%d m"
-    hour: "1 h"
-    hours: "%d h"
-    day: "1 d"
-    days: "%d d"
-    month: "1 mo"
-    months: "%d mo"
-    year: "1 yr"
-    years: "%d yr"
-    wordSeparator: " "
-    numbers: []
+  prefixAgo: null
+  prefixFromNow: null
+  suffixAgo: ""
+  suffixFromNow: ""
+  seconds: "now"
+  minute: "1 m"
+  minutes: "%d m"
+  hour: "1 h"
+  hours: "%d h"
+  day: "1 d"
+  days: "%d d"
+  month: "1 mo"
+  months: "%d mo"
+  year: "1 yr"
+  years: "%d yr"
+  wordSeparator: " "
+  numbers: []

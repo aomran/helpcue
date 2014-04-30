@@ -5,9 +5,7 @@
 </div>
 <div class="wrapper">
   <div class="grid-unit narrow pr">
-    <% unless current_user.admin?(@classroom) %>
-      <%= render 'form' %>
-    <% end %>
+    <%= render 'form' %>
   </div>
   <div class="grid-unit wide helpcue requests" id="requests-list">
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
@@ -21,9 +19,7 @@
   </div>
 </div>
 
-<script src="http://js.pusher.com/2.1/pusher.min.js"></script>
 <script type="text/javascript">
-  window.HelpCue.pusher = new Pusher('<%= Pusher.key %>');
   window.HelpCue.channel = window.HelpCue.pusher.subscribe('classroom<%= @classroom.id %>-requests');
   window.HelpCue.channel.bind('request', function(data) {
     if (data.user_id !== window.HelpCue.user.id) {
