@@ -47,7 +47,7 @@
 
   <div class="grid-unit whole">
     <h5>Cancel my account</h5>
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-warning' %></p>
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure? This action cannot be undone." }, method: :delete, class: 'btn btn-warning' %></p>
   </div>
 </div>
 <% provide(:title, 'Edit Profile') %>
