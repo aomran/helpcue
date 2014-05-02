@@ -37,12 +37,12 @@
           <th>Remove</th>
         </tr>
       </thead>
-    <% if @classroom.classroom_users.students.empty? %>
+    <% if @classroom.students.empty? %>
       <tr>
         <td colspan='3'>No students have joined this classroom yet.</td>
       </tr>
     <% end %>
-    <% @students.each do |user| %>
+    <% @classroom.students.each do |user| %>
       <tr id="user_<%= user.id %>">
         <td><%= user.full_name %></td>
         <td><%= user.email %></td>
@@ -76,7 +76,7 @@
           <% end %>
         </tr>
       </thead>
-    <% @teachers.each do |user| %>
+    <% @classroom.teachers.each do |user| %>
       <tr id="user_<%= user.id %>">
         <td><%= user.full_name %></td>
         <td><%= user.email %></td>

@@ -10,12 +10,12 @@
   </div>
 
   <div class="grid-unit wide helpcue requests">
+    <%= question_count @requests.total_count %>
     <div class="padding-border request <%= 'dont-show' if !@requests.empty? %>" id="placeholder">
       <div class="question-content">
         <p class="placeholder">Questions that are marked as 'done' will appear here.</p>
       </div>
     </div>
-    <%= question_count @requests.total_count %>
     <div id="requests"><%= render 'requests' %></div>
 
   </div>
