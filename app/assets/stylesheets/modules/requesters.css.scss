@@ -1,11 +1,17 @@
 @import 'globals/all';
 
-// .requester {
-//   img {
-//     @include border-radius(30px);
-//     display: inline-block;
-//   }
-// }
+.new_request {
+  @extend %clearfix;
+}
+
+@include media-query(large) {
+  .fg-fixed {
+    position: fixed;
+    // top: 90px;
+    width: 29%; // hacky...is this the best way?
+    max-width: 380px;
+  }
+}
 
 .gravatar-image {
   display: block;

@@ -1,4 +1,4 @@
-<%= form_for [@classroom, @request], remote: true do |f| %>
+<%= form_for [@classroom, @request], remote: true, html: { class: 'fg-fixed'} do |f| %>
   <div class="form-group">
   <!--<%= f.label :question, 'Question' %> -->
   <%= f.text_area :question, placeholder: "Briefly describe your question - use #tags! (optional)", rows:4, class: "form-input" %>
