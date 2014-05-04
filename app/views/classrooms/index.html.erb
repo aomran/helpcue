@@ -19,7 +19,9 @@
   <% if @classrooms.any? %>
     <%= render @classrooms %>
   <% else %>
-    <p class="lead">Get started by creating or joining a classroom.</p>
+    <div class="grid-unit whole">
+      <p>Get started by creating or joining a classroom.</p>
+    </div>
   <% end %>
 </div>
 <% provide(:title, 'Classrooms') %>
