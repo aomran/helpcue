@@ -1,4 +1,5 @@
 Helpcue::Application.configure do
+  config.style_guide.paths = Rails.root.join("app/views/style-guide/**/*")
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

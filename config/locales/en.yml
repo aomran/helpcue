@@ -21,3 +21,142 @@
 
 en:
   hello: "Hello world"
+  style_guide:
+    1_overview:
+      01_introduction: "This is the living styleguide for Curri. It may be modified after discussion with other team members. [Twitter's Bootstrap](http://getbootstrap.com/) and [Github's CSS styleguide](https://github.com/styleguide/css) have provided a lot of the inspiration for the code."
+      02_coding_style: |
+        &#8226;&nbsp; Use soft-tabs with a two space indent.
+        &#8226;&nbsp; Put spaces before `{` in rule declarations.
+        &#8226;&nbsp; Put spaces after `:` in property declarations.
+        &#8226;&nbsp; Use hex color codes `#000` unless using `rgba`.
+        &#8226;&nbsp; Use `//` for comment blocks (instead of `/* */`)."
+        &#8226;&nbsp; Write comma-delimited selectors on separate lines, with no space after commas.
+        &#8226;&nbsp; Leave a blank line between selectors.
+
+        This is an example of good syntax:
+
+        ```
+        // This is very nice formatting!!
+        .styleguide-format,
+        .another-class {
+          border: 1px solid #0f0;
+          color: #000;
+          background: rgba(0,0,0,0.5);
+        }
+        ```
+
+      03_sass_style: |
+        Much of this section and the next (04. File Organization) is borrowed verbatim from [A Styleguide for the Asset Pipeline](http://blog.55minutes.com/2013/01/smacss-and-rails/#styleguide) by 55 Minutes and [Github's CSS Styles](https://github.com/styleguide/css). Credit to [Matt Brictson](http://twitter.com/mbrictson) and Github.
+
+        Our Sass stylesheets should follow the [SMACSS guidelines](http://smacss.com) for CSS development; a lot of the book is available for free.
+
+        **Categorization**
+
+        &#8226;&nbsp; Base styles are the default styles for HTML elements (`<h1>`, `<p>`, `<pre>`, etc.).
+        &#8226;&nbsp; Layout styles are grid and other reusable layout classes.
+        &#8226;&nbsp; All remaining CSS is classified into modules, with classes namespaced by module. For example, an alert module might have the following rules: `.alert`, `.alert-message`, `.alert-icon`.
+
+        **Guidelines**
+
+        &#8226;&nbsp; Use hyphenated class names (no camelCase or snake_case).
+        &#8226;&nbsp; For naming, use the general-to-specific approach. See [this article](http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-name-your-sass-variables-modularly/) for more details.
+        &#8226;&nbsp; Any `$variable` or `@mixin` that is used in more than one file should be put in `globals/`. Others should be put at the top of the file where they're used.
+        &#8226;&nbsp; As a rule of thumb, don't nest further than 3 levels deep.
+
+      04_file_organization: |
+        The asset pipeline directories are structured as follows.
+
+        ```
+        app/assets/stylesheets/
+        ├── application.css.scss
+        ├── base.css.scss
+        ├── layout.css.scss
+        ├── globals
+            ├── _all.css.scss
+            ├── _functions.css.scss
+            ├── _mixins.css.scss
+            └── _variables.css.scss
+        └── modules
+            ├── alert.css.scss
+            └── …
+        vendor/assets/stylesheets/
+        ├── reset.css
+        └── …
+        ```
+        **Filenames**
+
+        In Sass, a leading underscore indicates a partial, meaning the file should not be compiled into a standalone CSS file. SMACSS advocates designing modules that can be used independently, so use partials only for pure Sass constructs, like variable, function, and mixin definitions.
+
+        Sprockets and *guard-livereload* conventions dictate that we use the double extension of `.css.scss`. If you use just `.scss`, the stylesheets will still compile, but *guard-livereload* won’t work out of the box. We already have *guard-livereload* and *rack-livereload* installed in our development environment thanks to installing the Pivotal Labs' [style-guide gem](https://github.com/pivotalexperimental/style-guide), but if you need to install them, follow [these instructions](http://blog.55minutes.com/2013/01/lightning-fast-sass-reloading-in-rails-32/).
+
+        **Application manifest**
+
+        The Sprockets `//=require` syntax is used to specify how styles should be merged into a single stylesheet in production. Our `application.css.scss` contains:
+
+        ```
+        //= require reset
+        //= require ./base
+        //= require ./layout
+        //= require_tree ./modules
+        ```
+
+        **Globals**
+
+        The `globals` directory is for Sass functions, variables, and mixins that are truly global: they should be used in 2 or more files. Variables or mixins that are only used by a single module, should be defined in the module file itself.
+
+        Combine all global imports with a `globals/_all.css.scss` partial that looks like:
+
+        ```
+        @import "./variables";
+        @import "./functions";
+        @import "./mixins";
+        ```
+
+        Then in each stylesheet: base, layout and modules, start with a single `@import "globals/all";`.
+
+    2_branding:
+      01_typography: "The app is built using only [Source Sans Pro](http://www.google.com/fonts/specimen/Source+Sans+Pro) from Google Fonts. There are 4 defined header elements, `<h1>` through `<h4>`, as well as the basic paragraph `<p>`."
+      02_colors: "This is the color palette used throughout the app. For ease of use and consistency, all colors are defined as variables in `app/assets/stylesheets/_variables.scss` and should be used as such."
+    3_buttons:
+      01_styles: "Regular buttons should be used for forms and primary actions. Use the `.btn` class to style buttons, and add any of the additional `.btn-primary`,`,btn-success`,`.btn-warning` or `.btn-danger` classes as needed."
+      02_sizes: We only use two button sizes- the default larger size and a smaller size. The small buttons should be used for secondary actions- to open new pages and modals. Use the `.btn-small` class to change the appearance.
+      03_button_tags: |
+        The different button classes can be used on `<a>`, `<button>`, or `<input>` elements.
+
+        **Note:** As a best practice, it is recommended to use the `<button>` element whenever possible to ensure matching cross-browser rendering. Among other things, there's a Firefox bug that prevents us from setting the line-height of `<input>`-based buttons, causing them to not exactly match the height of other buttons on Firefox."
+
+      04_disabled: |
+        On button and input elements, use the `disabled` attribute to disable the button action. On `<a>` elements use the `.disabled` class to achieve the same effect.
+
+        **Note:** Link functionality will not be disabled when using the `.disabled` class on `<a>` elements, and will need to be done through javascript. If you add the disabled attribute to a `<button>`, IE 9 and below will render text gray with a nasty text-shadow."
+    4_forms:
+      01_basic_form: |
+        Individual form controls automatically receive some global styling. All textual `<input>`, `<textarea>`, and `<select>` elements with `.form-input` are set to `width: 100%;` by default. Wrap labels and controls in `.form-group` for optimum spacing.
+
+        We only use the stacked style with the label and input on their own lines, left aligned. There is no need for inline forms in our app right now, but if the need arises, those styles will be defined here as optional.
+
+      02_disabled: Add the `disabled` attribute on an input to prevent user input and trigger a slightly different look.
+
+      03_required: |
+        Add `.form-input-required` to the containing `<div>` to ensure that the labels get the asterisk. Also add the `required="true"` attribute to the inputs to make sure that they are filled before the form can be submitted.
+
+        If every field in the form is required, then you can instead add `.form-required` to the `<form>` itself, as in the example below.
+
+      04_form_width: Forms can easily by wrapped by a parent element or a grid unit, and the 100% width will conform to the container. See the [Layout](http://localhost:3000/style-guide/5_layout#01_grid) section for more about grids.
+
+    5_layout:
+      01_grid: |
+        We use a 4-up fluid grid in combination with `@media-query`'s to organize the layout of our app. Content is designed in a mobile-first format. All app content is contained in a `.main`, and this:
+
+        &#8226;&nbsp; Sets the `max-width`
+        &#8226;&nbsp; Accommodates the fixed nav on the left.
+        &#8226;&nbsp; At smaller sizes, it provides an equal left and right padding, as the mobile nav (icon) becomes visible.
+
+        Any modules that are within the `.main` div, should be contained in a `.wrapper`. All grid units are 100% at mobile sizes and change according to screen width (see next section), and are assigned a `.grid-unit`. Along with this, a size class needs to be assigned, either `.narrow`, `.wide` or `.whole`, which will ensure correct display at all screen sizes.
+
+        At larger screen sizes, `.narrow` takes up 25% of the available width, and `.wide` takes up 75%. At medium sizes, these become 33.33% and 66.67% respectively, whereas at small sizes they are all full-width; `.whole` is always 100% of available width. Resize this window to see how the grid responds.
+
+      02_responsive: |
+        Breakpoint sizes are defined in the `_variables.css.scss` file. These are then called in the `_mixins.css.scss` file when defining the `@mixin media-query`. For ease of use, these are named `$small-end`, `$med-end` and `$large-start`, corresponding to the 3 different breakpoints.
+
+        In a mobile-first design strategy, default styles are created for the smallest viewports (generally 320px wide), and `@media-query`'s are used to apply responsive styles to adapt the design to larger viewports.

@@ -16,7 +16,10 @@
   </div>
 </div>
 <div class="wrapper" id="classrooms">
-  <!-- Classrooms List -->
-  <%= render @classrooms %>
+  <% if @classrooms.any? %>
+    <%= render @classrooms %>
+  <% else %>
+    <p class="lead">Get started by creating or joining a classroom.</p>
+  <% end %>
 </div>
 <% provide(:title, 'Classrooms') %>
