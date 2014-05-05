@@ -41,10 +41,9 @@ $ ->
   if HelpCue.user
     userData =
       email: HelpCue.user.email
-      classRole: HelpCue.user.classrole_type
       created: HelpCue.user.created_at
-      firstName: HelpCue.user.first_name || 'No'
-      lastName: HelpCue.user.last_name || 'Name'
+      firstName: HelpCue.user.first_name
+      lastName: HelpCue.user.last_name
 
     analytics.identify(HelpCue.user.id, userData)
 

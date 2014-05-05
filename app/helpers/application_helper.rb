@@ -1,17 +1,13 @@
 module ApplicationHelper
 
   def link_to_selected(*arg, &block)
-    if current_page?(arg[0]) || at_account?(arg[0])
+    if current_page?(arg[0]) || (arg[0] == '' && params[:controller] == 'registrations')
       options = arg.extract_options!
       options[:class] += ' selected'
       arg << options
     end
 
     link_to(*arg, &block)
-  end
-
-  def at_account?(path)
-    path == '' && params[:controller] == 'registrations'
   end
 
   def current_page_header

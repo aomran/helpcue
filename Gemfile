@@ -28,7 +28,6 @@ group :development do
   gem 'style-guide'
   gem 'rack-livereload'
   gem 'guard-livereload'
-  gem 'rack-mini-profiler'
 end
 
 group :development, :test do

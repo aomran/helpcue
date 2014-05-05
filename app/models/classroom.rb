@@ -10,6 +10,14 @@ class Classroom < ActiveRecord::Base
 
   before_create :generate_tokens
 
+  def students
+    users.merge(classroom_users.students)
+  end
+
+  def teachers
+    users.merge(classroom_users.teachers)
+  end
+
   private
   def generate_tokens
     begin

@@ -1,14 +1,52 @@
 # Creater Users
-teacher1 = User.create(first_name: 'Teacher', last_name: 'One', email: 'teacher1@fakemail.com', password: '1234', password_confirmation: '1234')
+teacher1 = User.find_or_create_by(email: 'teacher1@fakemail.com') do |user|
+  user.first_name = 'Teacher'
+  user.last_name = 'One'
+  user.password = '1234'
+  user.password_confirmation = '1234'
+end
 
-teacher2 = User.create(first_name: 'Teacher', last_name: 'Two', email: 'teacher2@fakemail.com', password: '1234', password_confirmation: '1234')
+teacher2 = User.find_or_create_by(email: 'teacher2@fakemail.com') do |user|
+  user.first_name = 'Teacher'
+  user.last_name = 'Two'
+  user.password = '1234'
+  user.password_confirmation = '1234'
+end
 
-student1 = User.create(first_name: 'Student', last_name: 'One', email: 'student1@fakemail.com', password: '1234', password_confirmation: '1234')
+student1 = User.find_or_create_by(email: 'ahmed@helpcue.com') do |user|
+  user.first_name = 'Student'
+  user.last_name = 'One'
+  user.password = '1234'
+  user.password_confirmation = '1234'
+end
 
-student2 = User.create(first_name: 'Student', last_name: 'Two', email: 'student2@fakemail.com', password: '1234', password_confirmation: '1234')
+student2 = User.find_or_create_by(email: 'paula@helpcue.com') do |user|
+  user.first_name = 'Student'
+  user.last_name = 'Two'
+  user.password = '1234'
+  user.password_confirmation = '1234'
+end
+
+student3 = User.find_or_create_by(email: 'nachiket@helpcue.com') do |user|
+  user.first_name = 'Student'
+  user.last_name = 'Three'
+  user.password = '1234'
+  user.password_confirmation = '1234'
+end
+
+student4 = User.find_or_create_by(email: 'alexander@helpcue.com') do |user|
+  user.first_name = 'Student'
+  user.last_name = 'Four'
+  user.password = '1234'
+  user.password_confirmation = '1234'
+end
 
 # Create Classroom
-sample_classroom = Classroom.new(name: 'Sample Classroom', description: 'This classroom is used for testing and demonstration purposes only.')
+sample_classroom = Classroom.find_or_initialize_by(user_token: 'rDFioTXR') do |classroom|
+  classroom.name = 'Sample Classroom'
+  classroom.description = 'This classroom is used for testing and demonstration purposes only.'
+end
+
 sample_classroom.owner = teacher1
 sample_classroom.save
 sample_classroom.classroom_users.create(user: teacher1, role: 'Admin')
@@ -16,7 +54,8 @@ sample_classroom.classroom_users.create(user: teacher1, role: 'Admin')
 # Teacher Two joins
 sample_classroom.classroom_users.create(user: teacher2, role: 'Admin')
 
-# Students One & Two join
+# Students join
 sample_classroom.classroom_users.create(user: student1, role: 'User')
 sample_classroom.classroom_users.create(user: student2, role: 'User')
-
+sample_classroom.classroom_users.create(user: student3, role: 'User')
+sample_classroom.classroom_users.create(user: student4, role: 'User')
