@@ -14,9 +14,10 @@ $ ->
       if(e.keyCode == 13 && (e.metaKey || e.ctrlKey))
         $(this).parents('form').submit()
 
-    $(window).on 'scroll', ->
-      if (document.body.scrollTop == 0)
-        $('#new_request').css('top', '')
-      else
-        $('#new_request').css('top', '90px')
+    if HelpCue.largeScreen()
+      $(window).on 'scroll', ->
+        if (document.body.scrollTop == 0)
+          $('#new_request').css('top', '')
+        else
+          $('#new_request').css('top', '90px')
     HelpCue.timeago()
