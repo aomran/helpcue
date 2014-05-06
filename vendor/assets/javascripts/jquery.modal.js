@@ -185,7 +185,7 @@
     overlay: "#000",
     opacity: 0.75,
     zIndex: 500,
-    escapeClose: true,
+    escapeClose: false,
     clickClose: true,
     closeText: 'Close',
     closeClass: '',

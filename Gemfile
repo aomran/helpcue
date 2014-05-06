@@ -23,6 +23,7 @@ gem 'intercom-rails', '~> 0.2.24'
 gem 'kaminari'
 gem 'pg_search'
 gem 'chronic_duration'
+gem 'rest_in_place'
 
 group :development do
   gem 'style-guide'

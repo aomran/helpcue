@@ -22,6 +22,7 @@
           <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
             <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-delete', title: 'Delete my question', data: {confirm: 'Are you sure?'} %>
           <% end %>
+          <a href="#request-expand-<%= request.id %>" rel="modal:open" class="open-modal">Expand</a>
         </span>
       </div>
       <div class="question">
@@ -73,4 +74,15 @@
       </p>
     </div>
   </div>
+</div>
+
+<div id="request-expand-<%= request.id %>" class="modal" data-url="<%= classroom_request_path(@classroom, request) %>" data-object="request">
+  <div>
+    Question: <%= in_place_edit(policy(request).update?, request, :question, {attribute: 'question', placeholder: "Enter a question", formtype: "textarea"}) %>
+  </div>
+
+  <div>
+    Answer: <%= in_place_edit(policy(request).update?, request, :answer, {attribute: 'answer', placeholder: "Enter an answer", formtype: "textarea"}) %>
+  </div>
+
 </div>

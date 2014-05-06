@@ -14,6 +14,7 @@
 #= require jquery_ujs
 #= require jquery.ui.effect-highlight
 #= require matchMedia
+#= require rest_in_place
 #= require jquery.modal
 #= require jquery.timeago
 #= require utilities

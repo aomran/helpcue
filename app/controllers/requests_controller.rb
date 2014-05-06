@@ -62,7 +62,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.update(request_params)
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+        format.json { render json: { question: @request.question, answer: @request.answer, classroom_id: @classroom.id, request_id: @request.id }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -131,7 +131,7 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:question, :status)
+    params.require(:request).permit(:question, :answer)
   end
   def get_request
     @request = @classroom.requests.find(params[:id])
