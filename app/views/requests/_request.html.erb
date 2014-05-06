@@ -74,15 +74,12 @@
       </p>
     </div>
   </div>
-</div>
-
-<div id="request-expand-<%= request.id %>" class="modal" data-url="<%= classroom_request_path(@classroom, request) %>" data-object="request">
-  <div>
-    Question: <%= in_place_edit(policy(request).update?, request, :question, {attribute: 'question', placeholder: "Enter a question", formtype: "textarea"}) %>
+  <div id="request-expand-<%= request.id %>" class="modal" data-url="<%= classroom_request_path(@classroom, request) %>" data-object="request">
+    <div>
+      Question: <%= in_place_edit(policy(request).update?, request, :question, {attribute: 'question', placeholder: "Enter a question", formtype: "textarea"}) %>
+    </div>
+    <div>
+      Answer: <%= in_place_edit(policy(request).update?, request, :answer, {attribute: 'answer', placeholder: "Enter an answer", formtype: "textarea"}) %>
+    </div>
   </div>
-
-  <div>
-    Answer: <%= in_place_edit(policy(request).update?, request, :answer, {attribute: 'answer', placeholder: "Enter an answer", formtype: "textarea"}) %>
-  </div>
-
 </div>

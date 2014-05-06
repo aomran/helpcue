@@ -20,4 +20,10 @@ $ ->
           $('#new_request').css('top', '')
         else
           $('#new_request').css('top', '90px')
+
     HelpCue.timeago()
+
+    HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
+    HelpCue.channel.bind 'request', (data) ->
+      if (data.user_id != HelpCue.user.id)
+        HelpCue.RequestsList.realtimeRequests(data)

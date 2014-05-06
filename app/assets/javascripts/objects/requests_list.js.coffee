@@ -10,6 +10,7 @@
       $request.replaceWith(data.partial)
       $("#request#{request_id} .question-content").effect('highlight', {color: '#E8FFE7'}, 500)
       HelpCue.timeago()
+      $(".rest-in-place").restInPlace()
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')
@@ -17,6 +18,7 @@
     $.getJSON @requestPath(data.classroom_id, data.request_id), (data) ->
       $('#requests-list').append(data.partial)
       HelpCue.timeago()
+      $(".rest-in-place").restInPlace()
 
   removeRequest: (data) ->
     $("#request#{data.request_id}").fadeOut 'slow', ->
