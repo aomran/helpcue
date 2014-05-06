@@ -45,9 +45,10 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should update request status" do
-    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {status: Request::STATUS_OPTIONS[1]}
+    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {question: 'new question', answer: 'with an answer'}
 
-    assert_equal Request::STATUS_OPTIONS[1], requests(:one).reload.status
+    assert_equal 'new question', requests(:one).reload.question
+    assert_equal 'with an answer', requests(:one).reload.answer
   end
 
   test "should update request question" do
