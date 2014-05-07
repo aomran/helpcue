@@ -23,13 +23,6 @@ $ ->
 
     HelpCue.timeago()
 
-    # x-editable
-    $.fn.editable.defaults.mode = 'inline'
-    $.fn.editable.defaults.showbuttons = 'bottom'
-    $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
-    '<a href="#" class="editable-cancel">X</a>'
-    $('.editable').editable(success: (response, newValue) -> HelpCue.RequestsList.updateQuestion(response))
-
     HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
     HelpCue.channel.bind 'request', (data) ->
       if (data.user_id != HelpCue.user.id)
