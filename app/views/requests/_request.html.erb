@@ -74,7 +74,7 @@
       </p>
     </div>
   </div>
-  <div id="request-expand-<%= request.id %>" class="modal" data-url="<%= classroom_request_path(@classroom, request) %>" data-object="request">
+  <div id="request-expand-<%= request.id %>" class="modal" data-url="<%= classroom_request_path(@classroom, request) %>" data-object="request" data-id="<%= request.id %>">
     <div>
       <h2>Question</h2>
       <%= editable request, :question, {type: 'textarea', title: 'Enter a question', url: classroom_request_path(@classroom, request)} %>
