@@ -32,3 +32,9 @@
     $this = $(this)
     if $this.data('active') != 'yes'
       $this.timeago().data('active','yes')
+
+@HelpCue.linkHashtags = (data) ->
+  hashpattern = /(#[A-Za-z0-9-_]+)/g;
+  data.question.replace hashpattern, ($0) ->
+    with_hash = $0
+    "<a href='/classrooms/#{data.classroom_id}/hashtags/#{$0.replace(/#/, '')}'>" + with_hash + "</a>"

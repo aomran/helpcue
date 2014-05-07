@@ -12,11 +12,11 @@ module RequestsHelper
     ChronicDuration.output(seconds, :keep_zero => true)
   end
 
-  def in_place_edit(permission, modal_object, attribute, data)
-    if permission
-      content_tag :span, modal_object.send(attribute), class: 'rest-in-place', data: data
+  def editable(object, attribute, data)
+    if policy(object).update?
+      content_tag :span, object.send(attribute), class: 'editable', data: data.merge(name: attribute, resource: object.class.name.downcase, inputclass: 'form-input')
     else
-      content_tag :span, modal_object.send(attribute)
+      content_tag :span, object.send(attribute)
     end
   end
 end
