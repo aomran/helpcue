@@ -3044,7 +3044,7 @@ $(function(){
 
             //ctrl + enter
             this.$input.keydown(function (e) {
-                if (e.ctrlKey && e.which === 13) {
+                if ((e.metaKey || e.ctrlKey) && e.which === 13) {
                     $(this).closest('form').submit();
                 }
             });
