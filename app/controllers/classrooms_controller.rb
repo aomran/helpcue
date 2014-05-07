@@ -28,7 +28,7 @@ class ClassroomsController < ApplicationController
     authorize @classroom
 
     if @classroom.update(classroom_params)
-      redirect_to classroom_path(@classroom), notice: "Classroom has been updated."
+      redirect_to edit_classroom_path(@classroom), notice: "Classroom has been updated."
     else
       render :edit
     end
