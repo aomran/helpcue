@@ -40,7 +40,7 @@ class ClassroomsControllerTest < ActionController::TestCase
 
     classroom = Classroom.find(classrooms(:one).id)
     assert_equal "Changed name", classroom.name
-    assert_redirected_to classroom_path(assigns(:classroom))
+    assert_redirected_to edit_classroom_path(assigns(:classroom))
   end
 
   test "should not update classroom with invalid data" do
