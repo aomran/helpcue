@@ -36,19 +36,19 @@
         $('#placeholder').show()
 
   updateQuestion: (data) ->
-    $request = $("#request#{data.request_id}")
-    $request.find("div.question").html(HelpCue.linkHashtags(data))
-    if $request.find(".modal .editable.question").length
-      $request.find(".modal .editable.question").editable('setValue', data.question)
+    $("#request#{data.request_id}").find("div.question").html(HelpCue.linkHashtags(data))
+    $request_modal = $("#request-expand-#{data.request_id}")
+    if $request_modal.find(".editable.question").length
+      $request_modal.find(".editable.question").editable('setValue', data.question)
     else
-      $request.find(".modal .question").html(data.question)
+      $request_modal.find(".question").html(data.question)
 
   updateAnswer: (data) ->
-    $request = $("#request#{data.request_id}")
-    if $request.find(".modal .editable.answer").length
-      $request.find(".modal .editable.answer").editable('setValue', data.answer)
+    $request_modal = $("#request-expand-#{data.request_id}")
+    if $request_modal.find(".editable.answer").length
+      $request_modal.find(".editable.answer").editable('setValue', data.answer)
     else
-      $request.find(".modal .answer").html(data.answer)
+      $request_modal.find(".answer").html(data.answer)
 
 
   realtimeRequests: (data) ->
