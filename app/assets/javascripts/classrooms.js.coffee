@@ -5,6 +5,7 @@ $ ->
     $('#new_classroom').on "ajax:success", (e, data, status, xhr) ->
       HelpCue.clear_modal()
       $('#classrooms').append($(data.partial).fadeIn('slow'))
+      $('.placeholder').hide()
       analytics.track "User created classroom", classroom_id: data.id
       Intercom('trackEvent', 'created-classroom', {classroom_id: data.id})
 
@@ -14,6 +15,7 @@ $ ->
     $('#join_classroom').on "ajax:success", (e, data, status, xhr) ->
       HelpCue.clear_modal()
       $('#classrooms').append($(data.partial).fadeIn('slow'))
+      $('.placeholder').hide()
       analytics.track "User joined classroom", classroom_id: data.id, role: data.role
       Intercom('trackEvent', 'joined-classroom', {classroom_id: data.id, role: data.role})
 
