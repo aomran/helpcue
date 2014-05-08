@@ -78,7 +78,7 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "should give error with wrong token" do
-    xhr :post, :join, format: :json, admin_token: 'bad-token'
+    xhr :post, :join, format: :json, join_token: 'bad-token'
 
     assert_equal 'Invalid Token', @response.body
   end
