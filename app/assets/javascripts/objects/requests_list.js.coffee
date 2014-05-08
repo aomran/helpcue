@@ -18,7 +18,7 @@
         $("#request#{request_id} .question-content").effect('highlight', {color: '#E8FFE7'}, 500)
       complete: ->
         HelpCue.timeago()
-        $('.editable').editable(success: (response, newValue) -> HelpCue.RequestsList.updateRequest(response))
+        HelpCue.editable()
         $("#request#{request_id} .modal").modal() if keep_modal
 
   addRequest: (data) ->
@@ -27,13 +27,29 @@
     $.getJSON @requestPath(data.classroom_id, data.request_id), (data) ->
       $('#requests-list').append(data.partial)
       HelpCue.timeago()
-      $('.editable').editable(success: (response, newValue) -> HelpCue.RequestsList.updateRequest(response))
+      HelpCue.editable()
 
   removeRequest: (data) ->
     $("#request#{data.request_id}").fadeOut 'slow', ->
       $(this).remove()
       unless $('.request-item').length
         $('#placeholder').show()
+
+  updateQuestion: (data) ->
+    $request = $("#request#{data.request_id}")
+    $request.find("div.question").html(HelpCue.linkHashtags(data))
+    if $request.find(".modal .editable.question").length
+      $request.find(".modal .editable.question").editable('setValue', data.question)
+    else
+      $request.find(".modal .question").html(data.question)
+
+  updateAnswer: (data) ->
+    $request = $("#request#{data.request_id}")
+    if $request.find(".modal .editable.answer").length
+      $request.find(".modal .editable.answer").editable('setValue', data.answer)
+    else
+      $request.find(".modal .answer").html(data.answer)
+
 
   realtimeRequests: (data) ->
     HelpCue.RequestsList[data.requestAction](data)

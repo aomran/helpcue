@@ -38,4 +38,4 @@ $ ->
     $.fn.editable.defaults.showbuttons = 'bottom'
     $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
     'or <a href="#" class="editable-cancel">cancel</a>'
-    $('.editable').editable(success: (response, newValue) -> HelpCue.RequestsList.updateRequest(response))
+    HelpCue.editable()

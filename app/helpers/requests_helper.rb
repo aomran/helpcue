@@ -14,9 +14,9 @@ module RequestsHelper
 
   def editable(object, attribute, data)
     if policy(object).update?
-      content_tag :span, object.send(attribute), class: 'editable', data: data.merge(name: attribute, resource: object.class.name.downcase, inputclass: 'form-input')
+      content_tag :span, object.send(attribute), class: "editable #{attribute}", data: data.merge(name: attribute, resource: object.class.name.downcase, inputclass: 'form-input')
     else
-      content_tag :span, object.send(attribute)
+      content_tag :span, object.send(attribute), class: "#{attribute}"
     end
   end
 end
