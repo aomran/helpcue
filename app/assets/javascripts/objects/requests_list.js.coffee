@@ -20,7 +20,7 @@
     $placeholder = $('#placeholder')
     $placeholder.hide() if $placeholder.length
     $.getJSON @requestPath(data.classroom_id, data.request_id), (data) ->
-      $('#requests-list').append(data.partial)
+      $('#requests-list').append(data.partial).append(data.expand_partial)
       HelpCue.timeago()
       HelpCue.editable()
 
@@ -44,6 +44,11 @@
       $request_modal.find(".editable.answer").editable('setValue', data.answer)
     else
       $request_modal.find(".answer").html(data.answer)
+
+    if data.answer
+      $("#request#{data.request_id} .no-answer").attr('title', 'Click more icon to see answer').removeClass('no-answer').addClass('has-answer')
+    else
+      $("#request#{data.request_id} .has-answer").attr('title', 'No answer entered').removeClass('has-answer').addClass('no-answer')
 
 
   realtimeRequests: (data) ->
