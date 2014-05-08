@@ -39,3 +39,9 @@ $ ->
     $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
     'or <a href="#" class="editable-cancel">cancel</a>'
     HelpCue.editable()
+
+    # Realtime
+    HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
+    HelpCue.channel.bind 'request', (data) ->
+      if (data.user_id != HelpCue.user.id)
+        HelpCue.RequestsList.realtimeRequests(data)
