@@ -134,24 +134,39 @@ td .btn-small {
   }
 }
 
-.request-icon,
-.request-delete {
+.question-status,
+.request-icon {
   background-image: image-url('helpcue-icons.svg');
-  // padding-left: 30px;
+}
+
+.request-icon {
+  padding: 15px;
+  display: inline-block;
+  position: relative;
+  top: -3px;
 }
 
 .request-delete {
-  padding: 15px;
-  display: inline-block;
   background-position: -60px -150px;
-  position: relative;
-  top: -3px;
   &:hover {
     background-position: -90px -150px;
   }
 }
 
-.request-icon {
+.request-more {
+  background-position: -60px -180px;
+  &:hover {
+    background-position: -90px -180px;
+  }
+}
+.no-answer {
+  background-position: -60px -210px;
+}
+
+.has-answer {
+  background-position: -90px -210px;
+}
+.question-status {
   padding: 12px;
   display: inline-block;
   position: relative;
