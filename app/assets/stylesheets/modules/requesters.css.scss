@@ -199,3 +199,24 @@ td .btn-small {
 .request-action:hover .done {
   background-position: -138px -126px;
 }
+
+//modal
+
+.modal-question {
+  margin-bottom: 40px;
+}
+
+.modal-question,
+.modal-answer {
+  h5 {
+    margin-bottom: 5px;
+  }
+}
+
+.editable-container.editable-inline {
+  width: 100%;
+}
+
+.editable-input {
+  width: 100%;
+}

@@ -37,5 +37,5 @@ $ ->
     $.fn.editable.defaults.mode = 'inline'
     $.fn.editable.defaults.showbuttons = 'bottom'
     $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
-    '<a href="#" class="editable-cancel">X</a>'
+    'or <a href="#" class="editable-cancel">cancel</a>'
     $('.editable').editable(success: (response, newValue) -> HelpCue.RequestsList.updateRequest(response))
