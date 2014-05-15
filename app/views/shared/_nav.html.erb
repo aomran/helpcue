@@ -1,14 +1,37 @@
 <div class="fixed-nav show-desktop">
   <ul class="subnav">
-    <% if current_user %>
-      <%= render 'shared/subnav' %>
-    <% end %>
+    <%= render 'shared/subnav' %>
   </ul>
   <ul class="nav">
-    <% if current_user %>
-      <%= render 'shared/logged_in_nav' %>
-    <% else %>
-      <%= render 'shared/logged_out_nav' %>
-    <% end %>
+    <li class="logo">
+      <%= link_to root_path, class: "nav-links", title: 'Home' do %>
+        <span class="nav-icon nav-logo"></span>
+        <span class="nav-wordmark"></span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to_selected root_path, class: "nav-links" do %>
+        <span class="nav-icon nav-classrooms"></span>
+        <span class="nav-label">Classrooms</span>
+      <% end %>
+    </li>
+
+    <%= render 'shared/classroom_nav' %>
+
+    <div class="bottom-nav">
+      <li>
+        <%= link_to_selected '', class: 'nav-links subnav-toggle' do %>
+          <span class="nav-icon nav-account"><span class="nav-gravatar" style="background: url('<%= current_user.avatar%>?s=68&d=blank'); background-size: contain;" title="<%= current_user.first_name %> <%= current_user.last_name %>"></span></span>
+          <span class="nav-label subnav-slide">Account</span>
+        <% end %>
+      </li>
+      </li>
+      <li class="expand-collapse show-desktop">
+        <a href='' class="nav-links collapse-toggle" title="Toggle Menu Size">
+          <span class="nav-icon nav-size"></span>
+          <span class="nav-label nav-label-hide">Collapse</span>
+        </a>
+      </li>
+    </div>
   </ul>
 </div>

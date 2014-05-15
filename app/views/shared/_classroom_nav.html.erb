@@ -1,0 +1,35 @@
+<% if @classroom.try(:id) %>
+  <% requests = @classroom.requests.need_help.count %>
+
+  <li id="queue_link" data-classroomid="<%= @classroom.id %>" data-reqlimit="30" data-requests="<%= requests %>">
+     <%= link_to_selected classroom_requests_path(@classroom), class: "nav-links" do %>
+       <span class="nav-icon nav-queue">
+          <span class="req-num requests-badge <%= 'dont-show' if requests.zero? %>">
+            <%= requests > 30 ? '30+' : requests %>
+          </span>
+       </span>
+       <span class="nav-label">Queue</span>
+     <% end %>
+  </li>
+
+  <li>
+   <%= link_to_selected completed_classroom_requests_path(@classroom), class: "nav-links" do %>
+     <span class="nav-icon nav-queue-completed"></span>
+     <span class="nav-label">Completed</span>
+   <% end %>
+  </li>
+
+  <% if policy(@classroom).edit? %>
+    <li>
+     <%= link_to_selected edit_classroom_path(@classroom), class: "nav-links" do %>
+       <span class="nav-icon nav-settings">
+         <% if @classroom.classroom_users.students.empty? %>
+           <span class="req-num requests-badge">!</span>
+         <% end %>
+       </span>
+       <span class="nav-label">Settings</span>
+     <% end %>
+    </li>
+  <% end %>
+
+<% end %>
