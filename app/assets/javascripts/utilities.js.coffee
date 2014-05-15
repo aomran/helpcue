@@ -43,4 +43,5 @@
   $('.editable').editable(
     success: (response, newValue) -> HelpCue.RequestsList.realtimeRequests(response)
     onblur: 'ignore'
+    emptytext: 'Click to enter text'
   )

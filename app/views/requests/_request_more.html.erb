@@ -1,10 +1,10 @@
 <div id="request-expand-<%= request.id %>" class="modal" data-url="<%= classroom_request_path(@classroom, request) %>" data-object="request" data-id="<%= request.id %>">
   <div class="modal-question">
     <h5>Question</h5>
-    <%= editable request, :question, {type: 'textarea', title: 'Enter a question', url: classroom_request_path(@classroom, request)} %>
+    <%= editable request, :question, {type: 'textarea', title: 'Enter a question', url: classroom_request_path(@classroom, request), placeholder: "Briefly describe your question - use #tags! (optional)" } %>
   </div>
   <div class="modal-answer">
     <h5>Answer</h5>
-    <%= editable request, :answer, {type: 'textarea', title: 'Enter an answer', url: classroom_request_path(@classroom, request)} %>
+    <%= editable request, :answer, {type: 'textarea', title: 'Enter an answer', url: classroom_request_path(@classroom, request), placeholder: 'Add an answer to consolidate learning and for the benefit of others.'} %>
   </div>
 </div>

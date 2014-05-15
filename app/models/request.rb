@@ -21,11 +21,11 @@ class Request < ActiveRecord::Base
     }
 
   def question_or_placeholder
-    question.blank? ? 'I have a question' : question
+    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : question
   end
 
   def answer_or_placeholder
-    answer.blank? ? 'No answer yet' : answer
+    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : answer
   end
 
   def toggle_status
