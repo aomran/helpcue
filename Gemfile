@@ -36,6 +36,8 @@ end
 
 group :test do
   gem 'timecop'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :production do

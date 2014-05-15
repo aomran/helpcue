@@ -13,6 +13,26 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
+  def login_as(user)
+    visit new_session_path(:user)
+    fill_in :email, with: user.email
+    fill_in :password, with: 'password123'
+    click_button 'Login'
+  end
+
+  def log_out
+    click_link 'logout-link'
+  end
+
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_wait_time) do
+      loop do
+        active = page.evaluate_script('jQuery.active')
+        break if active == 0
+      end
+    end
+  end
+
   def teardown
     Timecop.return
   end
@@ -20,4 +40,10 @@ end
 
 class ActionController::TestCase
   include Devise::TestHelpers
+end
+
+class ActionDispatch::IntegrationTest
+  # Make the Capybara DSL available in all integration tests
+  include Capybara::DSL
+  Capybara.current_driver = Capybara.javascript_driver
 end
