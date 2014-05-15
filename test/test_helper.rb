@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'capybara/rails'
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
@@ -14,23 +15,14 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def login_as(user)
-    visit new_session_path(:user)
-    fill_in :email, with: user.email
-    fill_in :password, with: 'password123'
+    visit new_user_session_path
+    fill_in :user_email, with: user.email
+    fill_in :user_password, with: 'password123'
     click_button 'Login'
   end
 
   def log_out
-    click_link 'logout-link'
-  end
-
-  def wait_for_ajax
-    Timeout.timeout(Capybara.default_wait_time) do
-      loop do
-        active = page.evaluate_script('jQuery.active')
-        break if active == 0
-      end
-    end
+    click_link 'Log Out'
   end
 
   def teardown
