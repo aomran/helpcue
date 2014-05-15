@@ -70,9 +70,15 @@
         <% end %>
 
         <span class="pr">
-          <a href="#request-expand-<%= request.id %>" rel="modal:open" class="open-modal request-icon request-more" title="More"></a>
+          <%= link_to "#request-expand-#{request.id}", class: "open-modal", title: "More", rel: "modal:open" do %>
+            <span class="request-icon request-more"></span>
+            <span class="action-label">more</span>
+          <% end %>
           <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
-            <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-icon request-delete', title: 'Delete my question', data: {confirm: 'Are you sure?'} %>
+            <%= link_to [@classroom, request], method: :delete, remote: true, title: 'Delete my question', data: {confirm: 'Are you sure?'}  do %>
+              <span class="request-icon request-delete"></span>
+              <span class="action-label">delete</span>
+            <% end %>
           <% end %>
         </span>
 
