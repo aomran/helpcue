@@ -31,6 +31,7 @@
         $('#placeholder').show()
 
   updateQuestion: (data) ->
+    data.question = 'I have a question' unless data.question
     $("#request#{data.request_id}").find("div.question").html(HelpCue.linkHashtags(data))
     $request_modal = $("#request-expand-#{data.request_id}")
     if $request_modal.find(".editable.question").length
@@ -39,6 +40,7 @@
       $request_modal.find(".question").html(data.question)
 
   updateAnswer: (data) ->
+    data.answer = 'No answer yet' unless data.answer
     $request_modal = $("#request-expand-#{data.request_id}")
     if $request_modal.find(".editable.answer").length
       $request_modal.find(".editable.answer").editable('setValue', data.answer)

@@ -26,7 +26,7 @@
         </span>
       </div>
       <div class="question">
-        <%= linkify_hashtags request.question %>
+        <%= linkify_hashtags(request.question_or_placeholder) %>
       </div>
       <div class="question-actions">
         <% if request.status != Request::STATUS_OPTIONS[2] %>

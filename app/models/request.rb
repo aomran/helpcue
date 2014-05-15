@@ -20,6 +20,14 @@ class Request < ActiveRecord::Base
       owner: [:first_name, :last_name]
     }
 
+  def question_or_placeholder
+    question.blank? ? 'I have a question' : question
+  end
+
+  def answer_or_placeholder
+    answer.blank? ? 'No answer yet' : answer
+  end
+
   def toggle_status
     if status == STATUS_OPTIONS[0]
       self.status = STATUS_OPTIONS[1]
