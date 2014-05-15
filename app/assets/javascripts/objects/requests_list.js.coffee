@@ -40,17 +40,17 @@
       $request_modal.find(".question").html(data.question)
 
   updateAnswer: (data) ->
-    data.answer = "<p class='lightgrey-text'> No answer yet </p>" unless data.answer
+    if data.answer
+      $("#request#{data.request_id} .no-answer").attr('title', 'Click more icon to see answer').removeClass('no-answer').addClass('has-answer')
+    else
+      $("#request#{data.request_id} .has-answer").attr('title', 'No answer entered').removeClass('has-answer').addClass('no-answer')
+      data.answer = "<p class='lightgrey-text'> No answer yet </p>"
+
     $request_modal = $("#request-expand-#{data.request_id}")
     if $request_modal.find(".editable.answer").length
       $request_modal.find(".editable.answer").editable('setValue', data.answer)
     else
       $request_modal.find(".answer").html(data.answer)
-
-    if data.answer
-      $("#request#{data.request_id} .no-answer").attr('title', 'Click more icon to see answer').removeClass('no-answer').addClass('has-answer')
-    else
-      $("#request#{data.request_id} .has-answer").attr('title', 'No answer entered').removeClass('has-answer').addClass('no-answer')
 
 
   realtimeRequests: (data) ->
