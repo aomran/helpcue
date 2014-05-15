@@ -44,12 +44,12 @@
           <% if policy(request).toggle_help? %>
             <%= link_to toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do %>
               <span class="question-status helped<%= status_class %>"></span>
-              <span class="action-label<%= status_class %>">Being Helped?</span>
+              <span class="action-label<%= status_class %>">Being Helped<%= '?' unless being_helped %></span>
             <% end %>
           <% else %>
             <%= content_tag :span, class: 'request-action-disabled small' do %>
               <span class="question-status helped<%= status_class %>"></span>
-              <span class="action-label<%= status_class %>">Being Helped?</span>
+              <span class="action-label<%= status_class %>">Being Helped<%= '?' unless being_helped %></span>
             <% end %>
           <% end %>
 
@@ -75,8 +75,8 @@
             <span class="action-label">More</span>
           <% end %>
           <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
-            <%= link_to [@classroom, request], method: :delete, remote: true, class: "request-action small", title: 'Delete my question', data: {confirm: 'Are you sure?'}  do %>
-              <span class="request-icon request-delete"></span>
+            <%= link_to [@classroom, request], method: :delete, remote: true, class: "request-action small request-delete", title: 'Delete my question', data: {confirm: 'Are you sure?'}  do %>
+              <span class="request-icon request-trash"></span>
               <span class="action-label">Delete</span>
             <% end %>
           <% end %>

@@ -40,6 +40,7 @@ $ ->
     'or <a href="#" class="editable-cancel">cancel</a>'
     HelpCue.editable()
 
+
     # Realtime
     HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
     HelpCue.channel.bind 'request', (data) ->

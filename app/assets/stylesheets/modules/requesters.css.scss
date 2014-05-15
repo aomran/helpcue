@@ -181,11 +181,11 @@ td .btn-small {
   @extend .question-status;
 }
 
-.request-delete {
+.request-trash {
   background-position: -162px -102px;
 }
 
-.request-action:hover .request-delete {
+.request-action:hover .request-trash {
   background-position: -162px -126px;
 }
 
