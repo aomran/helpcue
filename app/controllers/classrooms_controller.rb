@@ -28,7 +28,7 @@ class ClassroomsController < ApplicationController
     authorize @classroom
 
     if @classroom.update(classroom_params)
-      redirect_to classroom_path(@classroom), notice: "Classroom has been updated."
+      redirect_to edit_classroom_path(@classroom), notice: "Classroom has been updated."
     else
       render :edit
     end
@@ -43,9 +43,9 @@ class ClassroomsController < ApplicationController
   end
 
   def join
-    if classroom = Classroom.find_by(user_token: params[:join_token])
+    if classroom = Classroom.find_by(user_token: params[:join_token].strip)
       role = 'User'
-    elsif classroom = Classroom.find_by(admin_token: params[:join_token])
+    elsif classroom = Classroom.find_by(admin_token: params[:join_token].strip)
       role = 'Admin'
     end
 

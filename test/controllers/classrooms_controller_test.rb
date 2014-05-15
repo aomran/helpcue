@@ -40,7 +40,7 @@ class ClassroomsControllerTest < ActionController::TestCase
 
     classroom = Classroom.find(classrooms(:one).id)
     assert_equal "Changed name", classroom.name
-    assert_redirected_to classroom_path(assigns(:classroom))
+    assert_redirected_to edit_classroom_path(assigns(:classroom))
   end
 
   test "should not update classroom with invalid data" do
@@ -78,7 +78,7 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "should give error with wrong token" do
-    xhr :post, :join, format: :json, admin_token: 'bad-token'
+    xhr :post, :join, format: :json, join_token: 'bad-token'
 
     assert_equal 'Invalid Token', @response.body
   end
