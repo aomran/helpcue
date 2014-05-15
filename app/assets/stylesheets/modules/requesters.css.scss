@@ -154,10 +154,13 @@ td .btn-small {
 }
 
 .request-more {
-  background-position: -60px -210px;
+  background-position: -60px -180px;
   &:hover {
-    background-position: -90px -210px;
+    background-position: -90px -180px;
   }
+}
+.no-answer {
+  background-position: -60px -210px;
 }
 
 .has-answer {

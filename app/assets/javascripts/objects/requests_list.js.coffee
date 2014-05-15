@@ -48,9 +48,9 @@
       $request_modal.find(".answer").html(data.answer)
 
     if data.answer
-      $("#request#{data.request_id} .request-more").addClass('has-answer')
+      $("#request#{data.request_id} .no-answer").attr('title', 'Click more icon to see answer').removeClass('no-answer').addClass('has-answer')
     else
-      $("#request#{data.request_id} .request-more").removeClass('has-answer')
+      $("#request#{data.request_id} .has-answer").attr('title', 'No answer entered').removeClass('has-answer').addClass('no-answer')
 
 
   realtimeRequests: (data) ->
