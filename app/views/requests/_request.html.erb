@@ -19,12 +19,8 @@
           <span class="h5"><%= request.owner.full_name %></span>
         <% end %>
         <span class="pr">
-          <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
-            <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-icon request-delete', title: 'Delete my question', data: {confirm: 'Are you sure?'} %>
-          <% end %>
-          <a href="#request-expand-<%= request.id %>" rel="modal:open" class="open-modal request-icon request-more" title="More"></a>
           <% if request.answer? %>
-            <span class="request-icon has-answer" title="Click more icon to see answer"></span>
+            <span class="request-icon has-answer" title="Click 'More' to see answer"></span>
           <% else %>
             <span class="request-icon no-answer" title="No answer entered"></span>
           <% end %>
@@ -72,6 +68,13 @@
             <% end %>
           <% end %>
         <% end %>
+
+        <span class="pr">
+          <a href="#request-expand-<%= request.id %>" rel="modal:open" class="open-modal request-icon request-more" title="More"></a>
+          <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
+            <%= link_to '', [@classroom, request], method: :delete, remote: true, class: 'request-icon request-delete', title: 'Delete my question', data: {confirm: 'Are you sure?'} %>
+          <% end %>
+        </span>
 
       </div>
       <p class="me-too-people dont-show">

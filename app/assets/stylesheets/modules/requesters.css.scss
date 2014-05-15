@@ -139,33 +139,6 @@ td .btn-small {
   background-image: image-url('helpcue-icons.svg');
 }
 
-.request-icon {
-  padding: 15px;
-  display: inline-block;
-  position: relative;
-  top: -3px;
-}
-
-.request-delete {
-  background-position: -60px -150px;
-  &:hover {
-    background-position: -90px -150px;
-  }
-}
-
-.request-more {
-  background-position: -60px -180px;
-  &:hover {
-    background-position: -90px -180px;
-  }
-}
-.no-answer {
-  background-position: -60px -210px;
-}
-
-.has-answer {
-  background-position: -90px -210px;
-}
 .question-status {
   padding: 12px;
   display: inline-block;
@@ -202,6 +175,36 @@ td .btn-small {
 .done-current,
 .request-action:hover .done {
   background-position: -138px -126px;
+}
+
+.request-icon {
+  // padding: 12px;
+  // display: inline-block;
+  // position: relative;
+  // top: -3px;
+  @extend .question-status;
+}
+
+.request-delete {
+  background-position: -162px -102px;
+  &:hover {
+    background-position: -162px -126px;
+  }
+}
+
+.request-more {
+  background-position: -186px -102px;
+  &:hover {
+    background-position: -186px -126px;
+  }
+}
+
+.no-answer {
+  background-position: -60px -210px;
+}
+
+.has-answer {
+  background-position: -90px -210px;
 }
 
 //modal
