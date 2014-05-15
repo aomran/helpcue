@@ -15,7 +15,7 @@ two:
   owner: teacher2
 
 three:
-  name: MyString
+  name: New Classroom with token
   description: MyString
   admin_token: ADMINTOKEN3
   user_token: USERTOKEN3

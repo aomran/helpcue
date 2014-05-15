@@ -22,6 +22,7 @@ class ActiveSupport::TestCase
   end
 
   def log_out
+    click_link 'Account'
     click_link 'Log Out'
   end
 
