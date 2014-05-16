@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     self.classroom_users.where(classroom: classroom, role: 'Admin').any?
   end
 
+  def self.full_names
+    all.collect {|u| u.full_name }.join(', ')
+  end
+
   private
   def set_avatar
     email_address = self.email.downcase

@@ -14,53 +14,17 @@
         <%= linkify_hashtags(request.question_or_placeholder) %>
       </div>
       <div class="question-actions">
-        <%= metoo_button(request) if policy(request).me_too? %>
-
-        <% status_class = request.being_helped? ?  '-current' : '' %>
-        <% if policy(request).toggle_help? & !request.done? %>
-          <%= link_to toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do %>
-            <span class="action-icon helped<%= status_class %>"></span>
-            <span class="action-label<%= status_class %>">Being Helped<%= '?' unless request.being_helped? %></span>
-          <% end %>
-
-        <% elsif !policy(request).toggle_help? & !request.done? %>
-          <%= content_tag :span, class: 'request-action-disabled small' do %>
-            <span class="action-icon helped<%= status_class %>"></span>
-            <span class="action-label<%= status_class %>">Being Helped<%= '?' unless request.being_helped? %></span>
-          <% end %>
-        <% end %>
-
-        <% if request.done? %>
-          <%= content_tag :span, class: 'request-action-disabled small' do %>
-            <span class="action-icon done-current"></span>
-            <span class="action-label-current">Done</span>
-          <% end %>
-        <% end %>
-
-        <% if policy(request).remove? %>
-          <%= link_to remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-remove small' do %>
-            <span class="action-icon done"></span>
-            <span class="action-label">Done?</span>
-          <% end %>
-        <% end %>
+        <%= metoo_button(request) %>
+        <%= toggle_help_button(request) %>
+        <%= done_button(request) %>
 
         <span class="pr">
-          <%= link_to "#request-expand-#{request.id}", class: "open-modal request-action small", title: "More", rel: "modal:open" do %>
-            <span class="action-icon more"></span>
-            <span class="action-label">More</span>
-          <% end %>
-          <% if policy(request).destroy? %>
-            <%= link_to [@classroom, request], method: :delete, remote: true, class: "request-action small request-delete", title: 'Delete my question', data: {confirm: 'Are you sure?'}  do %>
-              <span class="action-icon trash"></span>
-              <span class="action-label">Delete</span>
-            <% end %>
-          <% end %>
+          <%= more_button(request) %>
+          <%= delete_button(request) %>
         </span>
 
       </div>
-      <p class="me-too-people dont-show">
-        Also asked by: <%= request.users.collect {|u| u.full_name }.join(', ') %>
-      </p>
+      <%= metoo_people(request) %>
     </div>
   </div>
 </div>

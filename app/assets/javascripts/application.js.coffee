@@ -51,7 +51,7 @@ $ ->
   $('a.open-modal').click ->
     HelpCue.SubNav.close()
     $('.error-message').remove()
-    $(this).modal(fadeDuration: 250)
+    $(this).modal()
     return false
 
   $('[data-dismiss="alert"]').on 'click', ->
