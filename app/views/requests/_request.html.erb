@@ -35,7 +35,7 @@
           <% if policy(request).me_too? %>
             <% metoo_class = request.users.include?(current_user) ? '-current' : '' %>
             <%= link_to me_too_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-metoo small' do %>
-              <span class="question-status metoo<%= metoo_class %>"></span>
+              <span class="action-icon metoo<%= metoo_class %>"></span>
               <span class="action-label<%= metoo_class %>">Me too</span>
             <% end %>
           <% end %>
@@ -43,19 +43,19 @@
           <% status_class = being_helped ?  '-current' : '' %>
           <% if policy(request).toggle_help? %>
             <%= link_to toggle_help_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do %>
-              <span class="question-status helped<%= status_class %>"></span>
+              <span class="action-icon helped<%= status_class %>"></span>
               <span class="action-label<%= status_class %>">Being Helped<%= '?' unless being_helped %></span>
             <% end %>
           <% else %>
             <%= content_tag :span, class: 'request-action-disabled small' do %>
-              <span class="question-status helped<%= status_class %>"></span>
+              <span class="action-icon helped<%= status_class %>"></span>
               <span class="action-label<%= status_class %>">Being Helped<%= '?' unless being_helped %></span>
             <% end %>
           <% end %>
 
         <% else %>
           <%= content_tag :span, class: 'request-action-disabled small' do %>
-            <span class="question-status done-current"></span>
+            <span class="action-icon done-current"></span>
             <span class="action-label-current">Done</span>
           <% end %>
         <% end %>
@@ -63,7 +63,7 @@
         <% if being_helped %>
           <% if policy(request).remove? %>
             <%= link_to remove_classroom_request_path(id: request.id, classroom_id: @classroom.id), method: :patch, remote: true, class: 'request-action request-remove small' do %>
-              <span class="question-status done"></span>
+              <span class="action-icon done"></span>
               <span class="action-label">Done?</span>
             <% end %>
           <% end %>
@@ -71,12 +71,12 @@
 
         <span class="pr">
           <%= link_to "#request-expand-#{request.id}", class: "open-modal request-action small", title: "More", rel: "modal:open" do %>
-            <span class="request-icon request-more"></span>
+            <span class="action-icon more"></span>
             <span class="action-label">More</span>
           <% end %>
           <% if policy(request).destroy? && request.status == Request::STATUS_OPTIONS[0] %>
             <%= link_to [@classroom, request], method: :delete, remote: true, class: "request-action small request-delete", title: 'Delete my question', data: {confirm: 'Are you sure?'}  do %>
-              <span class="request-icon request-trash"></span>
+              <span class="action-icon trash"></span>
               <span class="action-label">Delete</span>
             <% end %>
           <% end %>

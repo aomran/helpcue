@@ -134,12 +134,12 @@ td .btn-small {
   }
 }
 
-.question-status,
+.action-icon,
 .request-icon {
   background-image: image-url('helpcue-icons.svg');
 }
 
-.question-status {
+.action-icon {
   padding: 12px;
   display: inline-block;
   position: relative;
@@ -178,22 +178,23 @@ td .btn-small {
 }
 
 .request-icon {
-  @extend .question-status;
+  @extend .action-icon;
+  top: 0;
 }
 
-.request-trash {
+.trash {
   background-position: -162px -102px;
 }
 
-.request-action:hover .request-trash {
+.request-action:hover .trash {
   background-position: -162px -126px;
 }
 
-.request-more {
+.more {
   background-position: -186px -102px;
 }
 
-.request-action:hover .request-more {
+.request-action:hover .more {
   background-position: -186px -126px;
 }
 
