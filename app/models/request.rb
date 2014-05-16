@@ -33,10 +33,10 @@ class Request < ActiveRecord::Base
   end
 
   def toggle_status
-    if status == STATUS_OPTIONS[0]
+    if waiting?
       self.status = STATUS_OPTIONS[1]
       self.helped_at = Time.zone.now
-    elsif status == STATUS_OPTIONS[1]
+    elsif being_helped?
       self.status = STATUS_OPTIONS[0]
     end
     self
