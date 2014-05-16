@@ -13,7 +13,7 @@ class Request < ActiveRecord::Base
   STATUS_OPTIONS = ['Waiting', 'Being Helped', 'Done']
 
   include PgSearch
-  pg_search_scope :search, against: [:question],
+  pg_search_scope :search, against: [:question, :answer],
     using: {tsearch: {dictionary: "english"}},
     associated_against: {
       users: [:first_name, :last_name],
