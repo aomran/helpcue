@@ -41,7 +41,7 @@
 
   updateAnswer: (data) ->
     if data.answer
-      $("#request#{data.request_id} .no-answer").attr('title', 'Click more icon to see answer').removeClass('no-answer').addClass('has-answer')
+      $("#request#{data.request_id} .no-answer").attr('title', "Click 'More' to see answer").removeClass('no-answer').addClass('has-answer')
     else
       $("#request#{data.request_id} .has-answer").attr('title', 'No answer entered').removeClass('has-answer').addClass('no-answer')
       data.answer = "<p class='lightgrey-text'> No answer yet </p>"

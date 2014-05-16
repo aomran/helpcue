@@ -20,6 +20,18 @@ class Request < ActiveRecord::Base
       owner: [:first_name, :last_name]
     }
 
+  def waiting?
+    status == STATUS_OPTIONS[0]
+  end
+
+  def being_helped?
+    status == STATUS_OPTIONS[1]
+  end
+
+  def done?
+    status == STATUS_OPTIONS[2]
+  end
+
   def question_or_placeholder
     question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : question
   end
