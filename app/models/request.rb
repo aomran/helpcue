@@ -32,14 +32,6 @@ class Request < ActiveRecord::Base
     status == STATUS_OPTIONS[2]
   end
 
-  def question_or_placeholder
-    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : question
-  end
-
-  def answer_or_placeholder
-    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : answer
-  end
-
   def toggle_status
     if status == STATUS_OPTIONS[0]
       self.status = STATUS_OPTIONS[1]

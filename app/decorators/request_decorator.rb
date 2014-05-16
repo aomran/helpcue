@@ -29,6 +29,18 @@ class RequestDecorator < Draper::Decorator
     end
   end
 
+  def question_or_placeholder
+    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : question
+  end
+
+  def answer_or_placeholder
+    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : answer
+  end
+
+  def question_with_hashtags
+    h.linkify_hashtags(question_or_placeholder)
+  end
+
   def metoo_button
     if h.policy(object).me_too?
       metoo_class = users.include?(h.current_user) ? '-current' : ''
