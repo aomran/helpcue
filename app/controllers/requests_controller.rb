@@ -37,7 +37,7 @@ class RequestsController < ApplicationController
   def show
     respond_to do |format|
       format.json {
-        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
+        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request.decorate }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
       }
     end
   end

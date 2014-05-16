@@ -1,30 +1,30 @@
 <div class="padding-border request request-item <%= 'being-helped' if request.being_helped? %>" id="request<%= request.id %>">
   <div class="question-content">
     <div class="gravatar-meta">
-      <%= image_tag "#{request.owner.avatar}?s=120", class: 'gravatar-image' %>
-      <%= request_time(request) %>
-      <%= request_metoo_count(request) %>
+      <%= request.gravatar_image %>
+      <%= request.time %>
+      <%= request.metoo_count %>
     </div>
     <div class="question-meta">
       <div class="question-header">
-        <span class="h5"><%= request_owner_name(request) %></span>
-        <span class="pr"><%= request_star_icon(request) %></span>
+        <span class="h5"><%= request.owner_name %></span>
+        <span class="pr"><%= request.star_icon %></span>
       </div>
       <div class="question">
         <%= linkify_hashtags(request.question_or_placeholder) %>
       </div>
       <div class="question-actions">
-        <%= metoo_button(request) %>
-        <%= toggle_help_button(request) %>
-        <%= done_button(request) %>
+        <%= request.metoo_button %>
+        <%= request.toggle_help_button %>
+        <%= request.done_button %>
 
         <span class="pr">
-          <%= more_button(request) %>
-          <%= delete_button(request) %>
+          <%= request.more_button %>
+          <%= request.delete_button %>
         </span>
 
       </div>
-      <%= metoo_people(request) %>
+      <%= request.metoo_people %>
     </div>
   </div>
 </div>

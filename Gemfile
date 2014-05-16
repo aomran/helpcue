@@ -23,6 +23,7 @@ gem 'intercom-rails', '~> 0.2.24'
 gem 'kaminari'
 gem 'pg_search'
 gem 'chronic_duration'
+gem 'draper', '~> 1.3'
 
 group :development do
   gem 'style-guide'
