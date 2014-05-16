@@ -72,16 +72,16 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should remove request when it's done" do
-    xhr :patch, :remove, classroom_id: classrooms(:two), id: requests(:one).id
+    sign_out users(:student1)
+    sign_in users(:teacher1)
+    xhr :patch, :remove, classroom_id: classrooms(:two), id: requests(:two).id
 
-    assert_equal Request::STATUS_OPTIONS[2], requests(:one).reload.status
+    assert_equal Request::STATUS_OPTIONS[2], requests(:two).reload.status
   end
 
   test "should delete request" do
-    sign_out users(:student1)
-    sign_in users(:student2)
     assert_difference 'classrooms(:two).requests.count', -1 do
-      xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:two).id
+      xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:one).id
     end
   end
 
@@ -89,7 +89,7 @@ class RequestsControllerTest < ActionController::TestCase
     sign_out users(:student1)
     sign_in users(:teacher1)
     assert_difference 'classrooms(:two).requests.count', -1 do
-      xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:two).id
+      xhr :delete, :destroy, classroom_id: classrooms(:two), id: requests(:one).id
     end
   end
 
