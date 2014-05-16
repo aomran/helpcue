@@ -14,9 +14,7 @@
         <%= linkify_hashtags(request.question_or_placeholder) %>
       </div>
       <div class="question-actions">
-        <% if policy(request).me_too? %>
-          <%= metoo_button(request) %>
-        <% end %>
+        <%= metoo_button(request) if policy(request).me_too? %>
 
         <% status_class = request.being_helped? ?  '-current' : '' %>
         <% if policy(request).toggle_help? & !request.done? %>

@@ -5,7 +5,7 @@ $ ->
     $requests = $('.requests')
 
     $requests.on 'click', '.me-too-count', ->
-      $(this).closest('.request').find('.me-too-people').toggle()
+      $(this).closest('.request').find('.me-too-people').toggleClass('dont-show')
 
     $requests.on 'ajax:success', '.request-toggle', (e, data) ->
       HelpCue.RequestsList.updateRequest(data)
