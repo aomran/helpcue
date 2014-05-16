@@ -49,7 +49,7 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
     click_button 'Ask Question'
 
     request_id = Request.all.last.id
-    find("#request#{request_id}").find(".delete").click
+    find("#request#{request_id}").find(".request-delete").click
     page.driver.browser.switch_to.alert.accept
 
     page.assert_selector("#request#{request_id}", :count => 0)
