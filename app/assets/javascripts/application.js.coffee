@@ -25,18 +25,7 @@ $ = jQuery
 
 $ ->
   # Navigation
-  if $('.fixed-nav').length
-    HelpCue.MainNav.init()
-
-    $('.collapse-toggle').on 'click', (e) ->
-      e.preventDefault()
-      $('body').toggleClass('nav-open')
-      HelpCue.MainNav.update()
-      HelpCue.SubNav.close()
-
-    $('.subnav-toggle').on 'click', (e) ->
-      e.preventDefault()
-      HelpCue.SubNav.toggle()
+  HelpCue.Navigation.init()
 
   # SegmentIO
   if HelpCue.user
@@ -58,7 +47,7 @@ $ ->
     $(this).closest('.flash').fadeOut ->
       $(this).remove()
 
-jQuery.timeago.settings.strings =
+$.timeago.settings.strings =
   prefixAgo: null
   prefixFromNow: null
   suffixAgo: ""
