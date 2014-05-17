@@ -38,6 +38,10 @@ p {
   line-height: 1.5;
 }
 
+p.lightgrey-text {
+  color: lighten($grey-md, 25%);
+}
+
 a {
   color: $color-link;
   text-decoration: none;
@@ -58,13 +62,13 @@ h6,
   font-weight: 700;
 }
 
-h1, 
+h1,
 .h1 {
   font-size: 2rem;
   line-height: 1;
 }
 
-h2, 
+h2,
 .h2 {
   font-size: 1.6rem;
   line-height: 1.1;

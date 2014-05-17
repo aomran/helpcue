@@ -134,28 +134,20 @@ td .btn-small {
   }
 }
 
-.request-icon,
-.request-delete {
-  background-image: image-url('helpcue-icons.svg');
-  // padding-left: 30px;
-}
-
-.request-delete {
-  padding: 15px;
-  display: inline-block;
-  background-position: -60px -150px;
-  position: relative;
-  top: -3px;
-  &:hover {
-    background-position: -90px -150px;
-  }
-}
-
+.action-icon,
 .request-icon {
+  background-image: image-url('helpcue-icons.svg');
+}
+
+.action-icon {
   padding: 12px;
   display: inline-block;
   position: relative;
   top: 7px;
+}
+
+.editable {
+  cursor: pointer;
 }
 
 .metoo {
@@ -183,4 +175,54 @@ td .btn-small {
 .done-current,
 .request-action:hover .done {
   background-position: -138px -126px;
+}
+
+.request-icon {
+  @extend .action-icon;
+  top: 0;
+}
+
+.trash {
+  background-position: -162px -102px;
+}
+
+.request-action:hover .trash {
+  background-position: -162px -126px;
+}
+
+.more {
+  background-position: -186px -102px;
+}
+
+.request-action:hover .more {
+  background-position: -186px -126px;
+}
+
+.no-answer {
+  background-position: -60px -210px;
+}
+
+.has-answer {
+  background-position: -90px -210px;
+}
+
+//modal
+
+.modal-question {
+  margin-bottom: 40px;
+}
+
+.modal-question,
+.modal-answer {
+  h5 {
+    margin-bottom: 5px;
+  }
+}
+
+.editable-container.editable-inline {
+  width: 100%;
+}
+
+.editable-input {
+  width: 100%;
 }

@@ -20,4 +20,5 @@ $ ->
           $('#new_request').css('top', '')
         else
           $('#new_request').css('top', '90px')
+
     HelpCue.timeago()

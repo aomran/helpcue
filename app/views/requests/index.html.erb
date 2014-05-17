@@ -15,15 +15,7 @@
     </div>
     <% @requests.each do |request| %>
       <%= render partial: 'request', locals: { classroom: @classroom, request: request } %>
+      <%= render partial: 'request_more', locals: { classroom: @classroom, request: request } %>
     <% end %>
   </div>
 </div>
-
-<script type="text/javascript">
-  window.HelpCue.channel = window.HelpCue.pusher.subscribe('classroom<%= @classroom.id %>-requests');
-  window.HelpCue.channel.bind('request', function(data) {
-    if (data.user_id !== window.HelpCue.user.id) {
-      HelpCue.RequestsList.realtimeRequests(data)
-    };
-  });
-</script>

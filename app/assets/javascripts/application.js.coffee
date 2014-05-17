@@ -14,6 +14,7 @@
 #= require jquery_ujs
 #= require jquery.ui.effect-highlight
 #= require matchMedia
+#= require jquery-editable-poshytip
 #= require jquery.modal
 #= require jquery.timeago
 #= require utilities
@@ -50,7 +51,7 @@ $ ->
   $('a.open-modal').click ->
     HelpCue.SubNav.close()
     $('.error-message').remove()
-    $(this).modal(fadeDuration: 250)
+    $(this).modal(fadeDuration: 250, fadeDelay: 0.5)
     return false
 
   $('[data-dismiss="alert"]').on 'click', ->

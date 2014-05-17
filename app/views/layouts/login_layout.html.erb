@@ -16,21 +16,7 @@
     <div class="main">
       <div class="wrapper">
         <div class="grid-unit narrow flash">
-          <% if notice && !notice.empty? %>
-              <div class="alert alert-success alert-dismissable">
-                <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-                <a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
-                <%= notice %>
-              </div>
-          <% end %>
-
-          <% if alert && !alert.empty? %>
-              <div class="alert alert-warning alert-dismissable">
-                <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-                <a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
-                <%= alert %>
-              </div>
-          <% end %>
+          <%= render 'shared/alerts' %>
         </div>
         <div class="grid-unit narrow login-logo">
           <%= render 'shared/logo' %>

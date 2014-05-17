@@ -37,7 +37,7 @@ class RequestsController < ApplicationController
   def show
     respond_to do |format|
       format.json {
-        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }) }
+        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
       }
     end
   end
@@ -61,8 +61,15 @@ class RequestsController < ApplicationController
     authorize @request
     respond_to do |format|
       if @request.update(request_params)
-        push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id }, status: :created }
+
+        if params[:request][:question]
+          request_action = 'updateQuestion'
+        elsif params[:request][:answer]
+          request_action = 'updateAnswer'
+        end
+
+        push_to_channel(request_action, question: @request.question, answer: @request.answer)
+        format.json { render json: { question: @request.question, answer: @request.answer, classroom_id: @classroom.id, request_id: @request.id, requestAction: request_action }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -131,14 +138,14 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:question, :status)
+    params.require(:request).permit(:question, :answer)
   end
   def get_request
     @request = @classroom.requests.find(params[:id])
   end
 
-  def push_to_channel(requestAction)
-    data = { requestAction: requestAction, request_id: params[:id] || @request.id, user_id: current_user.id, classroom_id: @classroom.id }
+  def push_to_channel(requestAction, extra_data={})
+    data = { requestAction: requestAction, request_id: params[:id] || @request.id, user_id: current_user.id, classroom_id: @classroom.id }.merge(extra_data)
     Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
   end
 

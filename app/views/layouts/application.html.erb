@@ -4,11 +4,7 @@
     <title><%= full_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <%= stylesheet_link_tag "application", media: "all" %>
-    <%= render 'shared/event_tracking' %>
-    <script src="http://js.pusher.com/2.2/pusher.min.js"></script>
-    <script type="text/javascript">
-      window.HelpCue.pusher = new Pusher('<%= Pusher.key %>');
-    </script>
+    <%= render 'shared/js_header' %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag %>
   </head>

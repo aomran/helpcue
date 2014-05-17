@@ -1,4 +1,3 @@
-
   <div class="grid-unit wide">
     <h2>#<%= params[:hashtag] %></h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
@@ -10,6 +9,7 @@
       <%= search_count @hashtagged.count %>
       <% @hashtagged.each do |hashtagged| %>
         <%= render_hashtaggable hashtagged %>
+        <%= render partial: 'requests/request_more', locals: { classroom: @classroom, request: hashtagged } %>
       <% end -%>
     <% end -%>
     <p id="placeholder" class="<%= 'dont-show' if (@hashtagged && @hashtagged.any?) %>">There is no match for the <em>'<%= params[:hashtag] %>'</em> tag.</p>

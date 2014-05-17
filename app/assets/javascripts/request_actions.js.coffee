@@ -31,3 +31,18 @@ $ ->
       else if data.me_too_status == 'left'
         analytics.track "User leaves a request", classroom_id: data.classroom_id, request_id: data.request_id, count: data.count
         Intercom('trackEvent', 'left-request', {classroom_id: data.classroom_id, request_id: data.request_id, count: data.count})
+
+
+    # x-editable
+    $.fn.editable.defaults.mode = 'inline'
+    $.fn.editable.defaults.showbuttons = 'bottom'
+    $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
+    'or <a href="#" class="editable-cancel">cancel</a>'
+    HelpCue.editable()
+
+
+    # Realtime
+    HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
+    HelpCue.channel.bind 'request', (data) ->
+      if (data.user_id != HelpCue.user.id)
+        HelpCue.RequestsList.realtimeRequests(data)
