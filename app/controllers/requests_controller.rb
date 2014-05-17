@@ -4,12 +4,12 @@ class RequestsController < ApplicationController
   after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy, :me_too]
 
   def index
-    @requests = @classroom.requests.need_help
+    @requests = @classroom.requests.need_help.includes(:owner, :classroom)
     @request = Request.new
   end
 
   def completed
-    @requests = @classroom.requests.completed.page(params[:page])
+    @requests = @classroom.requests.completed.page(params[:page]).includes(:owner, :classroom)
 
     respond_to do |format|
       format.json {
@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
   end
 
   def search
-    @requests = @classroom.requests.search(params[:query]).page(params[:page])
+    @requests = @classroom.requests.search(params[:query]).page(params[:page]).includes(:owner, :classroom)
 
 
     respond_to do |format|
