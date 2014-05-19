@@ -5,7 +5,6 @@ class RequestsController < ApplicationController
 
   def index
     @requests = @classroom.requests.need_help.includes(:owner, :classroom)
-    @request = Request.new
   end
 
   def completed

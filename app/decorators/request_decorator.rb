@@ -10,11 +10,7 @@ class RequestDecorator < Draper::Decorator
   end
 
   def owner_name
-    if owner == h.current_user
-      "Me"
-    else
-      owner.full_name
-    end
+    owner.id == h.current_user.id ? 'Me' : owner.full_name
   end
 
   def metoo_count
@@ -22,11 +18,8 @@ class RequestDecorator < Draper::Decorator
   end
 
   def star_icon
-    if answer?
-      h.content_tag :span, '', class: "request-icon has-answer", title: "Click 'More' to see answer"
-    else
-      h.content_tag :span, '', class: "request-icon no-answer", title: "No answer entered"
-    end
+    title = answer? ? "Click 'More' to see answer" : "No answer entered"
+    h.content_tag :span, '', class: "request-icon answer-#{answer?}", title: title
   end
 
   def question_or_placeholder
