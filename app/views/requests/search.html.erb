@@ -16,11 +16,7 @@
         <p class="placeholder">There is no match for <em>'<%= params[:query] %>'</em>.</p>
       </div>
     </div>
-    <div id="requests">
-      <% @requests.each do |request| %>
-        <%= render partial: 'request', locals: { classroom: @classroom, request: request.decorate } %>
-        <%= render partial: 'request_more', locals: { classroom: @classroom, request: request } %>
-      <% end %>
+    <%= render partial: 'requests' %>
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')
-    $placeholder.hide() if $placeholder.length
+    $placeholder.addClass('dont-show') if $placeholder.length
     $.getJSON @requestPath(data.classroom_id, data.request_id), (data) ->
       $('#requests-list').append(data.partial).append(data.expand_partial)
       HelpCue.timeago()
@@ -28,7 +28,7 @@
     $("#request#{data.request_id}").fadeOut 'slow', ->
       $(this).remove()
       unless $('.request-item').length
-        $('#placeholder').show()
+        $('#placeholder').removeClass('dont-show')
 
   updateQuestion: (data) ->
     data.question = "<p class='lightgrey-text'> Blank question </p>" unless data.question

@@ -38,7 +38,7 @@ $ ->
     analytics.identify(HelpCue.user.id, userData)
 
   $('a.open-modal').click ->
-    HelpCue.SubNav.close()
+    HelpCue.Navigation.subClose()
     $('.error-message').remove()
     $(this).modal(fadeDuration: 250, fadeDelay: 0.5)
     return false

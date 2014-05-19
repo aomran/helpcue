@@ -9,3 +9,4 @@ $ ->
     $('.requests-container').on 'ajax:success', '.pagination a', (e, data) ->
       $('#requests').html(data.partial)
       $('#pagination').html(data.pagination_partial)
+      HelpCue.editable()

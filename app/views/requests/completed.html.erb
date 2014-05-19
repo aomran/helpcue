@@ -16,12 +16,6 @@
         <p class="placeholder">Questions that are marked as 'done' will appear here.</p>
       </div>
     </div>
-    <div id="requests">
-      <% @requests.each do |request| %>
-        <%= render partial: 'request', locals: { classroom: @classroom, request: request.decorate } %>
-        <%= render partial: 'request_more', locals: { classroom: @classroom, request: request } %>
-      <% end %>
-    </div>
-
+    <%= render partial: 'requests' %>
   </div>
 </div>
