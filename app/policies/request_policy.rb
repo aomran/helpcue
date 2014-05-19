@@ -11,7 +11,7 @@ class RequestPolicy
   end
 
   def toggle_help?
-    (request.owner == user) || user.admin?(request.classroom)
+    !request.done? && ((request.owner == user) || user.admin?(request.classroom))
   end
 
   def remove?

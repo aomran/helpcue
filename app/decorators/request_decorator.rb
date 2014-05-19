@@ -48,21 +48,20 @@ class RequestDecorator < Draper::Decorator
   end
 
   def toggle_help_button
-    unless done?
-      status_class = being_helped? ?  '-current' : ''
-      label_and_text = h.content_tag(:span, '', class: "action-icon helped#{ status_class}") + h.content_tag(:span, "Being Helped#{'?' unless being_helped?}", class: "action-label#{status_class}")
-
-      if h.policy(object).toggle_help?
-        h.link_to h.toggle_help_classroom_request_path(id: id, classroom_id: classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do
-          label_and_text
-        end
-
-      else
-        h.content_tag :span, class: 'request-action-disabled small' do
-          label_and_text
-        end
+    if h.policy(object).toggle_help?
+      h.link_to h.toggle_help_classroom_request_path(id: id, classroom_id: classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do
+        toggle_button_label
+      end
+    elsif !done?
+      h.content_tag :span, class: 'request-action-disabled small' do
+        toggle_button_label
       end
     end
+  end
+
+  def toggle_button_label
+    status_class = being_helped? ?  '-current' : ''
+    h.content_tag(:span, '', class: "action-icon helped#{status_class}") + h.content_tag(:span, "Being Helped#{'?' unless being_helped?}", class: "action-label#{status_class}")
   end
 
   def done_button
