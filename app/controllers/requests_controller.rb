@@ -4,12 +4,11 @@ class RequestsController < ApplicationController
   after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy, :me_too]
 
   def index
-    @requests = @classroom.requests.need_help
-    @request = Request.new
+    @requests = @classroom.requests.need_help.includes(:owner, :classroom)
   end
 
   def completed
-    @requests = @classroom.requests.completed.page(params[:page])
+    @requests = @classroom.requests.completed.page(params[:page]).includes(:owner, :classroom)
 
     respond_to do |format|
       format.json {
@@ -20,7 +19,7 @@ class RequestsController < ApplicationController
   end
 
   def search
-    @requests = @classroom.requests.search(params[:query]).page(params[:page])
+    @requests = @classroom.requests.search(params[:query]).page(params[:page]).includes(:owner, :classroom)
 
 
     respond_to do |format|
@@ -37,7 +36,7 @@ class RequestsController < ApplicationController
   def show
     respond_to do |format|
       format.json {
-        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
+        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request.decorate }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
       }
     end
   end

@@ -5,7 +5,7 @@ $ ->
     $requests = $('.requests')
 
     $requests.on 'click', '.me-too-count', ->
-      $(this).closest('.request').find('.me-too-people').toggle()
+      $(this).closest('.request').find('.me-too-people').toggleClass('dont-show')
 
     $requests.on 'ajax:success', '.request-toggle', (e, data) ->
       HelpCue.RequestsList.updateRequest(data)
@@ -39,10 +39,3 @@ $ ->
     $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
     'or <a href="#" class="editable-cancel">cancel</a>'
     HelpCue.editable()
-
-
-    # Realtime
-    HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
-    HelpCue.channel.bind 'request', (data) ->
-      if (data.user_id != HelpCue.user.id)
-        HelpCue.RequestsList.realtimeRequests(data)

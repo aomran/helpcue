@@ -18,7 +18,7 @@
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')
-    $placeholder.hide() if $placeholder.length
+    $placeholder.addClass('dont-show') if $placeholder.length
     $.getJSON @requestPath(data.classroom_id, data.request_id), (data) ->
       $('#requests-list').append(data.partial).append(data.expand_partial)
       HelpCue.timeago()
@@ -28,7 +28,7 @@
     $("#request#{data.request_id}").fadeOut 'slow', ->
       $(this).remove()
       unless $('.request-item').length
-        $('#placeholder').show()
+        $('#placeholder').removeClass('dont-show')
 
   updateQuestion: (data) ->
     data.question = "<p class='lightgrey-text'> Blank question </p>" unless data.question
@@ -41,9 +41,9 @@
 
   updateAnswer: (data) ->
     if data.answer
-      $("#request#{data.request_id} .no-answer").attr('title', 'Click more icon to see answer').removeClass('no-answer').addClass('has-answer')
+      $("#request#{data.request_id} .answer-false").attr('title', "Click 'More' to see answer").removeClass('answer-false').addClass('answer-true')
     else
-      $("#request#{data.request_id} .has-answer").attr('title', 'No answer entered').removeClass('has-answer').addClass('no-answer')
+      $("#request#{data.request_id} .answer-true").attr('title', 'No answer entered').removeClass('answer-true').addClass('answer-false')
       data.answer = "<p class='lightgrey-text'> No answer yet </p>"
 
     $request_modal = $("#request-expand-#{data.request_id}")

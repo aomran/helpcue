@@ -1,3 +1,6 @@
-<% @requests.each do |request| %>
-  <%= render partial: 'request.html', locals: { classroom: @classroom, request: request } %>
-<% end %>
+<div id="requests">
+  <% @requests.each do |request| %>
+    <%= render partial: 'request.html', locals: { classroom: @classroom, request: request } %>
+    <%= render partial: 'request_more.html', locals: { classroom: @classroom, request: request } %>
+  <% end %>
+</div>

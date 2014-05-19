@@ -25,18 +25,7 @@ $ = jQuery
 
 $ ->
   # Navigation
-  if $('.fixed-nav').length
-    HelpCue.MainNav.init()
-
-    $('.collapse-toggle').on 'click', (e) ->
-      e.preventDefault()
-      $('body').toggleClass('nav-open')
-      HelpCue.MainNav.update()
-      HelpCue.SubNav.close()
-
-    $('.subnav-toggle').on 'click', (e) ->
-      e.preventDefault()
-      HelpCue.SubNav.toggle()
+  HelpCue.Navigation.init()
 
   # SegmentIO
   if HelpCue.user
@@ -49,7 +38,7 @@ $ ->
     analytics.identify(HelpCue.user.id, userData)
 
   $('a.open-modal').click ->
-    HelpCue.SubNav.close()
+    HelpCue.Navigation.subClose()
     $('.error-message').remove()
     $(this).modal(fadeDuration: 250, fadeDelay: 0.5)
     return false
@@ -58,7 +47,7 @@ $ ->
     $(this).closest('.flash').fadeOut ->
       $(this).remove()
 
-jQuery.timeago.settings.strings =
+$.timeago.settings.strings =
   prefixAgo: null
   prefixFromNow: null
   suffixAgo: ""

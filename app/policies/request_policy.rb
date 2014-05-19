@@ -11,18 +11,18 @@ class RequestPolicy
   end
 
   def toggle_help?
-    (request.owner == user) || user.admin?(request.classroom)
+    !request.done? && ((request.owner == user) || user.admin?(request.classroom))
   end
 
   def remove?
-    (request.owner == user) || user.admin?(request.classroom)
+    request.being_helped? && ((request.owner == user) || user.admin?(request.classroom))
   end
 
   def destroy?
-    (request.owner == user) || user.admin?(request.classroom)
+    request.waiting? && ((request.owner == user) || user.admin?(request.classroom))
   end
 
   def me_too?
-    (request.owner != user) && !user.admin?(request.classroom)
+    !request.done? && ((request.owner != user) && !user.admin?(request.classroom))
   end
 end

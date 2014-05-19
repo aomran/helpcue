@@ -22,7 +22,13 @@ $ ->
     $('#join_classroom').on "ajax:error", (e, xhr, status, error) ->
       HelpCue.form_validations('join', {token: xhr.responseText})
 
+  # Realtime
   if $('#queue_link').length
     HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
+
     HelpCue.channel.bind 'requestUpdate', (data) ->
       HelpCue.RequestsNumber.update(data)
+
+    HelpCue.channel.bind 'request', (data) ->
+      if (data.user_id != HelpCue.user.id)
+        HelpCue.RequestsList.realtimeRequests(data)

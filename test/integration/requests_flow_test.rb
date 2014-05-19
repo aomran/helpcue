@@ -55,21 +55,6 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
     page.assert_selector("#request#{request_id}", :count => 0)
   end
 
-  # test "student can edit their own question" do
-  #   fill_in :request_question, with: "Question to edit!"
-  #   click_button 'Ask Question'
-
-  #   request_id = Request.all.last.id
-  #   find("#request#{request_id}").find(".request-more").click
-  #   page.assert_selector(".modal.current", :count => 1)
-
-  #   find(".modal.current").find(".editable.question").click
-  #   fill_in '#modal_question', with: 'Edited question'
-  #   click_button 'Save'
-
-  #   assert find("#request#{request_id}").find(".question").has_content?("Edited question")
-  # end
-
   teardown do
     log_out
   end

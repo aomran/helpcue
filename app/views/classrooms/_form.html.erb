@@ -9,6 +9,6 @@
   </div>
   <div>
     <%= f.submit class: "btn btn-primary" %>
-    <%= link_to 'Leave Classroom', @classroom, method: :delete, data: {confirm: "Are you sure you want to leave this classroom?"}, class: "danger-link", id: 'delete-classroom' if leave_link %>
+    <%= link_to 'Leave Classroom', classroom_path(@classroom), method: :delete, data: {confirm: "Are you sure you want to leave this classroom?"}, class: "danger-link", id: 'delete-classroom' if leave_link %>
   </div>
 <% end %>

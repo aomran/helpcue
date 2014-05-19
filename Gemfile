@@ -23,11 +23,13 @@ gem 'intercom-rails', '~> 0.2.24'
 gem 'kaminari'
 gem 'pg_search'
 gem 'chronic_duration'
+gem 'draper', '~> 1.3'
 
 group :development do
   gem 'style-guide'
   gem 'rack-livereload'
   gem 'guard-livereload'
+  gem 'brakeman', :require => false
 end
 
 group :development, :test do
@@ -38,6 +40,7 @@ group :test do
   gem 'timecop'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'bullet'
 end
 
 group :production do

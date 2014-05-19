@@ -26,7 +26,13 @@ class ActiveSupport::TestCase
     click_link 'Log Out'
   end
 
+  def setup
+    Bullet.start_request if Bullet.enable?
+  end
+
   def teardown
+    Bullet.perform_out_of_channel_notifications if Bullet.enable? && Bullet.notification?
+    Bullet.end_request if Bullet.enable?
     Timecop.return
   end
 end

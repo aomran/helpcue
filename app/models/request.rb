@@ -8,31 +8,34 @@ class Request < ActiveRecord::Base
 
   scope :need_help, -> { where.not(status: STATUS_OPTIONS[2]).order("created_at ASC") }
   scope :completed, -> { where(status: STATUS_OPTIONS[2]).order("updated_at DESC") }
-  scope :past_24_hours, -> { where("helped_at > ?", 24.hours.ago) }
 
   STATUS_OPTIONS = ['Waiting', 'Being Helped', 'Done']
 
   include PgSearch
-  pg_search_scope :search, against: [:question],
+  pg_search_scope :search, against: [:question, :answer],
     using: {tsearch: {dictionary: "english"}},
     associated_against: {
       users: [:first_name, :last_name],
       owner: [:first_name, :last_name]
     }
 
-  def question_or_placeholder
-    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : question
+  def waiting?
+    status == STATUS_OPTIONS[0]
   end
 
-  def answer_or_placeholder
-    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : answer
+  def being_helped?
+    status == STATUS_OPTIONS[1]
+  end
+
+  def done?
+    status == STATUS_OPTIONS[2]
   end
 
   def toggle_status
-    if status == STATUS_OPTIONS[0]
+    if waiting?
       self.status = STATUS_OPTIONS[1]
       self.helped_at = Time.zone.now
-    elsif status == STATUS_OPTIONS[1]
+    elsif being_helped?
       self.status = STATUS_OPTIONS[0]
     end
     self
@@ -55,16 +58,6 @@ class Request < ActiveRecord::Base
   def help_duration
     if helped_at && done_at
       (done_at - helped_at).floor
-    else
-      0
-    end
-  end
-
-  def self.average_waiting_time
-    waiting_times = all.map {|r| r.time_waiting }
-    waiting_times.reject! { |t| t <= 2.seconds }
-    if waiting_times.any?
-      waiting_times.reduce(:+) / waiting_times.length
     else
       0
     end
