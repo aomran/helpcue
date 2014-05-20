@@ -1,10 +1,15 @@
 class ClassroomsController < ApplicationController
 
   after_action :verify_authorized, only: [:edit, :update]
-  before_action :get_classroom, only: [:edit, :update, :destroy]
+  before_action :get_classroom, only: [:edit, :update, :destroy, :people]
 
   def index
     @classrooms = current_user.classrooms
+  end
+
+  def people
+    @teachers = @classroom.teachers
+    @students = @classroom.students
   end
 
   def create

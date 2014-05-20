@@ -21,4 +21,8 @@ class ClassroomPolicy
   def remove_student?
     user.admin?(classroom)
   end
+
+  def promote?
+    classroom.owner == user
+  end
 end

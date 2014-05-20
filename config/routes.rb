@@ -7,6 +7,7 @@ Helpcue::Application.routes.draw do
   # Resources
   resources :classrooms, except: [:show, :new] do
     post 'join', on: :collection
+    get 'people', on: :member
     resources :requests, only: [:index, :create, :update, :destroy, :show] do
       patch 'remove', on: :member
       patch 'toggle_help', on: :member
@@ -15,7 +16,7 @@ Helpcue::Application.routes.draw do
       get 'search', on: :collection
     end
 
-    resources :users, only: [:destroy]
+    resources :users, only: [:destroy, :update]
     get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
     get "hashtags",   to: "hashtags#show",      as: :hashtag_search
     resources :invitations, only: [:create]

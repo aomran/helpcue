@@ -21,6 +21,12 @@
   @include border-radius(5px);
 }
 
+.gravatar-table-image {
+  margin-right: 5px;
+  vertical-align: middle;
+  @include border-radius(5px);
+}
+
 @include media-query(medium) {
   .gravatar-image {
     height: 60px;

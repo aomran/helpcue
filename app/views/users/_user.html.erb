@@ -1,0 +1,39 @@
+<tr id="user_<%= user.id %>">
+
+  <td colspan="2"><%= image_tag "#{user.avatar}?s=56", class: 'gravatar-table-image' %><%= content_tag :span, user.full_name, title: user.email %>
+  </td>
+
+  <td class="role">
+    <% if user == @classroom.owner %>
+      Owner
+    <% elsif user.admin?(@classroom) %>
+      Admin
+    <% else %>
+      User
+    <% end %>
+  </td>
+
+  <% if policy(@classroom).promote? %>
+    <td>
+    <% unless user == @classroom.owner %>
+      <%= form_tag classroom_user_path(@classroom, user), id: "form#{user.id}", class: 'user-promote-form', remote: true, method: :patch do %>
+        <%= check_box_tag :promote, user.admin?(@classroom), user.admin?(@classroom), onchange: "$('#form#{user.id}').submit();" %>
+      <% end %>
+    <% end %>
+    </td>
+  <% end %>
+
+  <% if policy(@classroom).remove_student? %>
+    <td>
+    <% if user.admin?(@classroom) %>
+      <% if policy(@classroom).remove_admin? && (user != current_user ) %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+      <% end %>
+    <% else %>
+      <% if policy(@classroom).remove_student? %>
+        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+      <% end %>
+    <% end %>
+    </td>
+  <% end %>
+</tr>

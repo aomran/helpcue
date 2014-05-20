@@ -24,6 +24,17 @@ class User < ActiveRecord::Base
     self.classroom_users.where(classroom: classroom, role: 'Admin').any?
   end
 
+  def promote_or_demote(classroom, promote)
+    classroom_user = self.classroom_users.where(classroom: classroom).first
+    if promote
+      classroom_user.role = 'Admin'
+    elsif !promote
+      classroom_user.role = 'User'
+    end
+    classroom_user.save
+    classroom_user
+  end
+
   def self.full_names
     all.collect {|u| u.full_name }.join(', ')
   end
