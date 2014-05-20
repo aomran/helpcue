@@ -5,7 +5,7 @@ module RequestsHelper
   end
 
   def question_count(numb)
-    "<p>#{numb} #{'question'.pluralize(numb)}</p>".html_safe
+    "#{numb} #{'question'.pluralize(numb)}"
   end
 
   def display_duration(seconds)

@@ -15,6 +15,7 @@ class RequestsController < ApplicationController
         render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
       }
       format.html {}
+      format.csv { send_data @classroom.requests.completed.to_csv }
     end
   end
 
