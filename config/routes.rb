@@ -2,7 +2,7 @@ Helpcue::Application.routes.draw do
   resources :requests
 
   root 'classrooms#index'
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Resources
   resources :classrooms, except: [:show, :new] do
