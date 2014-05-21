@@ -65,7 +65,7 @@ class Request < ActiveRecord::Base
 
   def self.to_csv(admin)
     if admin
-      csv_header = ["user", "question", "answer", "created_at", "helped_at", "done_at", ]
+      csv_header = ["user", "question", "answer", "created_at", "helped_at", "done_at"]
     elsif !admin
       csv_header = ["user", "question", "answer", "created_at"]
     end
