@@ -27,7 +27,6 @@
       <thead>
         <tr>
           <th colspan="2">User</th>
-          <th>Role</th>
           <% if policy(@classroom).promote? %><th>Admin?</th><% end %>
           <% if policy(@classroom).remove_student? %><th>Options</th><% end %>
         </tr>

@@ -24,7 +24,12 @@
 .gravatar-table-image {
   margin-right: 5px;
   vertical-align: middle;
+  float: left;
   @include border-radius(5px);
+}
+
+.name-email {
+  float: left;
 }
 
 td.name-gravatar {
