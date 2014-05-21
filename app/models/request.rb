@@ -63,9 +63,14 @@ class Request < ActiveRecord::Base
     end
   end
 
-  def self.to_csv(options = {})
-    CSV.generate(options) do |csv|
+  def self.to_csv(admin)
+    if admin
       csv_header = ["user", "question", "answer", "created_at", "helped_at", "done_at", ]
+    elsif !admin
+      csv_header = ["user", "question", "answer", "created_at"]
+    end
+
+    CSV.generate do |csv|
       csv << csv_header
       all.each do |request|
         csv << request.attributes.values_at(*csv_header[1..-1]).unshift(request.owner.full_name)

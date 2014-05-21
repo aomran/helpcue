@@ -43,11 +43,4 @@ class RequestTest < ActiveSupport::TestCase
       assert_equal 40.minutes, request.help_duration
     end
   end
-
-  test "export csv" do
-    csv_export = Request.includes(:owner).to_csv
-    csv_array = CSV.parse csv_export
-
-    assert_equal ["user", "question", "answer", "created_at", "helped_at", "done_at", ], csv_array[0]
-  end
 end

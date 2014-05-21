@@ -25,6 +25,25 @@ class RequestsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "user export csv" do
+    get :completed, classroom_id: classrooms(:two).id, format: :csv
+    csv_array = CSV.parse @response.body
+
+    assert_equal ["user", "question", "answer", "created_at"], csv_array[0]
+    assert :success
+  end
+
+  test "admin export csv" do
+    sign_out users(:student1)
+    sign_in users(:teacher1)
+
+    get :completed, classroom_id: classrooms(:two).id, format: :csv
+    csv_array = CSV.parse @response.body
+
+    assert_equal ["user", "question", "answer", "created_at", "helped_at", "done_at", ], csv_array[0]
+    assert :success
+  end
+
   test "should get requests containing query" do
     classrooms(:two).requests.create(question: 'question about jerky', owner_id: users(:student1).id)
     get :search, classroom_id: classrooms(:two).id, query: 'jerky'
