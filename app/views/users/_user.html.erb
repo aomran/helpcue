@@ -9,7 +9,7 @@
   </td>
 
   <% if policy(@classroom).promote? %>
-    <td>
+    <td class="admin">
     <% if user == @classroom.owner %>
       Owner
     <% else %>

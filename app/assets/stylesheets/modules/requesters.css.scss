@@ -36,6 +36,10 @@ td.name-gravatar {
   text-align: left;
 }
 
+td.admin input {
+  margin: 0 auto;
+}
+
 @include media-query(medium) {
   .gravatar-image {
     height: 60px;
