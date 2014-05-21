@@ -1,6 +1,6 @@
 class ClassroomsController < ApplicationController
 
-  after_action :verify_authorized, only: [:edit, :update]
+  after_action :verify_authorized, only: [:edit, :update, :people]
   before_action :get_classroom, only: [:edit, :update, :destroy, :people]
 
   def index
@@ -8,6 +8,7 @@ class ClassroomsController < ApplicationController
   end
 
   def people
+    authorize @classroom
     @teachers = @classroom.teachers
     @students = @classroom.students
   end

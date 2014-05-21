@@ -14,6 +14,10 @@ class ClassroomPolicy
     user.admin?(classroom)
   end
 
+  def people?
+    user.admin?(classroom)
+  end
+
   def remove_admin?
     classroom.owner == user
   end
