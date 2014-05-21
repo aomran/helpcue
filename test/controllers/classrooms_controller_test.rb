@@ -28,44 +28,42 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert response["name"]
   end
 
-  test "get edit classroom form" do
-    get :edit, id: classrooms(:one)
-    assert_equal classrooms(:one), assigns(:classroom)
-
-    assert :success
-  end
 
   test "should update classroom with valid data" do
-    patch :update, id: classrooms(:one), classroom: {name: "Changed name" }
+    xhr :patch, :update, id: classrooms(:one), classroom: {name: "Changed name" }
 
     classroom = Classroom.find(classrooms(:one).id)
-    assert_equal "Changed name", classroom.name
-    assert_redirected_to edit_classroom_path(assigns(:classroom))
+    assert_equal "Changed name", classroom.name, 'Name did not change'
+
+    response = JSON.parse(@response.body)
+    assert response["partial"], 'Partial was not sent in response body'
   end
 
   test "should not update classroom with invalid data" do
-    patch :update, id: classrooms(:one), classroom: {name: nil }
+    xhr :patch, :update, id: classrooms(:one), classroom: {name: nil }
 
-    assert_template :edit
+    response = JSON.parse(@response.body)
+    assert response["name"]
   end
 
   test "should remove user from classroom without deleting classroom" do
     assert_difference 'users(:teacher1).classrooms.count', -1 do
-      delete :destroy, id: classrooms(:one)
+      xhr :delete, :destroy, id: classrooms(:one)
     end
 
     assert classrooms(:one).reload
-    assert_redirected_to classrooms_path
+    response = JSON.parse(@response.body)
+    assert response["id"]
   end
 
   test "should remove classroom with no users" do
-    delete :destroy, id: classrooms(:one)
+    xhr :delete, :destroy, id: classrooms(:one)
 
     sign_out users(:teacher1)
     sign_in users(:teacher2)
 
     assert_difference 'Classroom.count', -1 do
-      delete :destroy, id: classrooms(:one)
+      xhr :delete, :destroy, id: classrooms(:one)
     end
   end
 

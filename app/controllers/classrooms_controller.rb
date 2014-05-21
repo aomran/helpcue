@@ -26,10 +26,6 @@ class ClassroomsController < ApplicationController
     end
   end
 
-  def edit
-    authorize @classroom
-  end
-
   def update
     authorize @classroom
 

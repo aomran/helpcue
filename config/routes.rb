@@ -5,7 +5,7 @@ Helpcue::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Resources
-  resources :classrooms, except: [:show, :new] do
+  resources :classrooms, except: [:show, :new, :edit] do
     post 'join', on: :collection
     get 'people', on: :member
     resources :requests, only: [:index, :create, :update, :destroy, :show] do
