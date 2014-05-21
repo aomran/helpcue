@@ -8,7 +8,7 @@ class Classroom < ActiveRecord::Base
   validates_length_of :name, :maximum => 90
   validates_length_of :description, :maximum => 90, :allow_blank => true
 
-  before_create :generate_tokens
+  before_create :generate_token
 
   def students
     users.merge(classroom_users.students)
@@ -19,11 +19,7 @@ class Classroom < ActiveRecord::Base
   end
 
   private
-  def generate_tokens
-    begin
-      self.admin_token = SecureRandom.urlsafe_base64(6)
-    end while Classroom.exists?(admin_token: self.admin_token)
-
+  def generate_token
     begin
       self.user_token = SecureRandom.urlsafe_base64(6)
     end while Classroom.exists?(user_token: self.user_token)

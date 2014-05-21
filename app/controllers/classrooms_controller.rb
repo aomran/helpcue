@@ -49,16 +49,12 @@ class ClassroomsController < ApplicationController
   end
 
   def join
-    if classroom = Classroom.find_by(user_token: params[:join_token].strip)
-      role = 'User'
-    elsif classroom = Classroom.find_by(admin_token: params[:join_token].strip)
-      role = 'Admin'
-    end
+    classroom = Classroom.find_by(user_token: params[:join_token].strip)
 
     respond_to do |format|
       if classroom && current_user.classrooms.exclude?(classroom)
-        classroom.classroom_users.create(user: current_user, role: role)
-        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id, role: role }, status: :created, location: classroom }
+        classroom.classroom_users.create(user: current_user, role: 'User')
+        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom }
       else
         if current_user.classrooms.include?(classroom)
           message = 'You are already in this classroom'

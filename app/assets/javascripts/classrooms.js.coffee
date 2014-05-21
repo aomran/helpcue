@@ -16,8 +16,8 @@ $ ->
       HelpCue.clear_modal()
       $('#classrooms').append($(data.partial).fadeIn('slow'))
       $('.placeholder').hide()
-      analytics.track "User joined classroom", classroom_id: data.id, role: data.role
-      Intercom('trackEvent', 'joined-classroom', {classroom_id: data.id, role: data.role})
+      analytics.track "User joined classroom", classroom_id: data.id
+      Intercom('trackEvent', 'joined-classroom', { classroom_id: data.id })
 
     $('#join_classroom').on "ajax:error", (e, xhr, status, error) ->
       HelpCue.form_validations('join', {token: xhr.responseText})

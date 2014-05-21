@@ -69,13 +69,6 @@ class ClassroomsControllerTest < ActionController::TestCase
     end
   end
 
-  test "should add user with admin role to classroom with admin-token" do
-    classroom = Classroom.create(name: 'new class')
-    xhr :post, :join, format: :json, join_token: classroom.admin_token
-
-    assert_equal 'Admin', users(:teacher1).classroom_users.last.role
-  end
-
   test "should give error with wrong token" do
     xhr :post, :join, format: :json, join_token: 'bad-token'
 
@@ -97,7 +90,7 @@ class ClassroomsControllerTest < ActionController::TestCase
   test "should not add user to a classroom they are already in" do
 
     assert_no_difference 'users(:teacher1).classrooms.count' do
-      xhr :post, :join, format: :json, join_token: classrooms(:one).admin_token
+      xhr :post, :join, format: :json, join_token: classrooms(:one).user_token
     end
 
     assert_equal 'You are already in this classroom', @response.body
