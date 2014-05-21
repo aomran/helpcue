@@ -33,10 +33,16 @@ class ClassroomsController < ApplicationController
   def update
     authorize @classroom
 
-    if @classroom.update(classroom_params)
-      redirect_to edit_classroom_path(@classroom), notice: "Classroom has been updated."
-    else
-      render :edit
+    respond_to do |format|
+      if @classroom.update(classroom_params)
+        format.json {
+          render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: @classroom }), id: @classroom.id }, status: :created, location: @classroom
+        }
+      else
+        format.json {
+          render json: @classroom.errors, status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -45,7 +51,11 @@ class ClassroomsController < ApplicationController
     if @classroom.users.empty?
       @classroom.destroy
     end
-    redirect_to classrooms_path, notice: "You have left the classroom."
+    respond_to do |format|
+      format.json {
+        render json: { id: params[:id] }
+      }
+    end
   end
 
   def join

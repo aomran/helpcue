@@ -21,14 +21,6 @@
 
   <% if policy(@classroom).edit? %>
     <li>
-     <%= link_to_selected edit_classroom_path(@classroom), class: "nav-links" do %>
-       <span class="nav-icon nav-settings">
-       </span>
-       <span class="nav-label">Settings</span>
-     <% end %>
-    </li>
-
-    <li>
      <%= link_to_selected people_classroom_path(@classroom), class: "nav-links" do %>
        <span class="nav-icon nav-settings">
          <% if @classroom.classroom_users.students.empty? %>

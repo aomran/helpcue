@@ -1,4 +1,4 @@
-<%= form_for classroom, remote: remote do |f| %>
+<%= form_for classroom, remote: true do |f| %>
   <div class="form-group form-input-required">
     <%= f.label :name, 'Classroom Name' %>
     <%= f.text_field :name, maxlength: "90", placeholder: "Enter classroom name", class: "form-input" %>
@@ -9,6 +9,6 @@
   </div>
   <div>
     <%= f.submit class: "btn btn-primary" %>
-    <%= link_to 'Leave Classroom', classroom_path(@classroom), method: :delete, data: {confirm: "Are you sure you want to leave this classroom?"}, class: "danger-link", id: 'delete-classroom' if leave_link %>
+    <%= link_to 'Leave Classroom', classroom_path(classroom), method: :delete, remote: true, data: {confirm: "Are you sure you want to leave this classroom?"}, class: "danger-link leave_classroom", id: 'delete-classroom' if leave_link %>
   </div>
 <% end %>

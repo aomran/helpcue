@@ -15,7 +15,8 @@
 @HelpCue.form_validations = (resource, errors) ->
   $('.error-message').remove()
   for field, error of errors
-    $input = $("##{resource}_#{field}")
+    $modal = $('.modal.current')
+    $input = $modal.find("##{resource}_#{field}")
     $error = $('<span>').addClass('error-message h6').text(error)
     $input.addClass('error').before($error)
 

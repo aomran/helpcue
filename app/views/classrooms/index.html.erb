@@ -8,7 +8,7 @@
 
   <div id="new-classroom" class="modal">
     <h6 class="subtitle classroom-option">Create New Classroom</h6>
-    <%= render partial: 'form', locals: {classroom: Classroom.new, remote: true, leave_link: false} %>
+    <%= render partial: 'form', locals: {classroom: Classroom.new, leave_link: false} %>
   </div>
 
   <div id="join-classroom" class="modal">
@@ -16,12 +16,9 @@
   </div>
 </div>
 <div class="wrapper" id="classrooms">
-  <% if @classrooms.any? %>
-    <%= render @classrooms %>
-  <% else %>
-    <div class="grid-unit whole placeholder">
-      <p>Get started by creating or joining a classroom.</p>
-    </div>
-  <% end %>
+  <div class="grid-unit whole placeholder <%= 'dont-show' if @classrooms.any? %>" id="placeholder">
+    <p>Get started by creating or joining a classroom.</p>
+  </div>
+  <%= render @classrooms %>
 </div>
 <% provide(:title, 'Classrooms') %>
