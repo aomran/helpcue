@@ -5,9 +5,6 @@
 </div>
 
 <div class="wrapper">
-<!--   <div class="grid-unit whole">
-    <h3 class="settings-table">Students</h3>
-  </div> -->
 
   <% if policy(@classroom).remove_student? %>
     <div class="grid-unit narrow sidebar pull-right">
@@ -32,7 +29,7 @@
           <th colspan="2">User</th>
           <th>Role</th>
           <% if policy(@classroom).promote? %><th>Admin?</th><% end %>
-          <% if policy(@classroom).remove_student? %><th>Remove</th><% end %>
+          <% if policy(@classroom).remove_student? %><th>Options</th><% end %>
         </tr>
       </thead>
 

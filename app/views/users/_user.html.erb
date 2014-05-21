@@ -1,6 +1,6 @@
 <tr id="user_<%= user.id %>">
 
-  <td colspan="2"><%= image_tag "#{user.avatar}?s=56", class: 'gravatar-table-image' %><%= content_tag :span, user.full_name, title: user.email %>
+  <td colspan="2" class="name-gravatar"><%= image_tag "#{user.avatar}?s=56", class: 'gravatar-table-image' %><%= content_tag :span, user.full_name, title: user.email %>
   </td>
 
   <td class="role">
@@ -27,11 +27,17 @@
     <td>
     <% if user.admin?(@classroom) %>
       <% if policy(@classroom).remove_admin? && (user != current_user ) %>
-        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+        <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
+          <%= content_tag(:span, '', class: "action-icon trash") %>
+          <%= content_tag(:span, 'Remove', class: "action-label") %>
+        <% end %>
       <% end %>
     <% else %>
       <% if policy(@classroom).remove_student? %>
-        <%= link_to 'X', [@classroom, user], method: :delete, remote: true, class: 'btn btn-small user-remove'%>
+        <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
+          <%= content_tag(:span, '', class: "action-icon trash") %>
+          <%= content_tag(:span, 'Remove', class: "action-label") %>
+        <% end %>
       <% end %>
     <% end %>
     </td>

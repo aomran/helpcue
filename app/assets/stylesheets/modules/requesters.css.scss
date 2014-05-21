@@ -27,6 +27,10 @@
   @include border-radius(5px);
 }
 
+td.name-gravatar {
+  text-align: left;
+}
+
 @include media-query(medium) {
   .gravatar-image {
     height: 60px;
