@@ -1,7 +1,7 @@
 class ClassroomsController < ApplicationController
 
   after_action :verify_authorized, only: [:edit, :update, :people]
-  before_action :get_classroom, only: [:edit, :update, :destroy, :people]
+  before_action :get_classroom, only: [:edit, :update, :destroy, :people, :set_sort]
 
   def index
     @classrooms = current_user.classrooms
@@ -69,6 +69,16 @@ class ClassroomsController < ApplicationController
         end
         format.json { render json: message, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def set_sort
+    current_user.set_sort(params[:sort_type], @classroom)
+
+    respond_to do |format|
+      format.json {
+        render json: { sort_type: params[:sort_type] }
+      }
     end
   end
 

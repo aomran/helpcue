@@ -22,3 +22,14 @@ $ ->
           $('#new_request').css('top', '90px')
 
     HelpCue.timeago()
+    HelpCue.tinysort()
+
+    $('.sort-by-popularity').on "ajax:success", (e, data) ->
+      $('.request').tsort('.me-too-count',{order:'desc', data:'count'})
+      $(this).addClass('active')
+      $('.sort-by-time').removeClass('active')
+
+    $('.sort-by-time').on "ajax:success", (e, data) ->
+      $('.request').tsort('.timeago',{order:'asc', data:'timestamp'})
+      $(this).addClass('active')
+      $('.sort-by-popularity').removeClass('active')

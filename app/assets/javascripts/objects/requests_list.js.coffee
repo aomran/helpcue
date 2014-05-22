@@ -15,6 +15,7 @@
       complete: ->
         HelpCue.timeago()
         HelpCue.editable()
+        HelpCue.tinysort()
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')

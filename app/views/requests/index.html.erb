@@ -13,6 +13,7 @@
         <p class="placeholder">There's no one in the help queue right now.</p>
       </div>
     </div>
+    <%= link_to 'Sort by time', set_sort_classroom_path(@classroom, sort_type: 'time'), class: "sort-link sort-by-time #{'active' if current_user.sort_by_time?(@classroom)}", remote: true, method: :patch %> | <%= link_to 'Sort by popularity', set_sort_classroom_path(@classroom, sort_type: 'popularity'), class: "sort-link sort-by-popularity #{'active' if current_user.sort_by_popularity?(@classroom)}", remote: true, method: :patch %>
     <%= render partial: 'requests' %>
   </div>
 </div>

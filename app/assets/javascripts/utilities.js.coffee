@@ -46,3 +46,7 @@
     onblur: 'ignore'
     emptytext: 'Click to enter text'
   )
+
+@HelpCue.tinysort = ->
+  if $('.sort-by-popularity.active').length
+    $('.request').tsort('.me-too-count',{order:'desc', data:'count'})

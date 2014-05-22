@@ -102,4 +102,16 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "change sort of queue to by-popularity" do
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: 'time'
+
+    assert users(:teacher1).sort_by_time?(classrooms(:one))
+  end
+
+  test "change sort of queue back to by-time" do
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: 'popularity'
+
+    assert users(:teacher1).sort_by_popularity?(classrooms(:one))
+  end
+
 end

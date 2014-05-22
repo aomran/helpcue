@@ -8,6 +8,7 @@ Helpcue::Application.routes.draw do
   resources :classrooms, except: [:show, :new, :edit] do
     post 'join', on: :collection
     get 'people', on: :member
+    patch 'set_sort', on: :member
     resources :requests, only: [:index, :create, :update, :destroy, :show] do
       patch 'remove', on: :member
       patch 'toggle_help', on: :member

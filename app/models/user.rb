@@ -24,6 +24,22 @@ class User < ActiveRecord::Base
     self.classroom_users.where(classroom: classroom, role: 'Admin').any?
   end
 
+  def set_sort(sort_type, classroom)
+    classroom_user = classroom_users.where(classroom: classroom).first
+    classroom_user.sort_type = sort_type
+    classroom_user.save
+  end
+
+  def sort_by_time?(classroom)
+    classroom_user = classroom_users.where(classroom: classroom).first
+    classroom_user.sort_type == 'time'
+  end
+
+  def sort_by_popularity?(classroom)
+    classroom_user = classroom_users.where(classroom: classroom).first
+    classroom_user.sort_type == 'popularity'
+  end
+
   def promote_or_demote(classroom, promote)
     classroom_user = self.classroom_users.where(classroom: classroom).first
     if promote
