@@ -27,4 +27,9 @@
 <% end %>
 <div class="grid-unit-footer">
   <p class="register"><%= link_to 'Already have an account? Login here', new_session_path(resource_name) %></p>
+  <%- if devise_mapping.omniauthable? %>
+    <p class="register">
+    <%= link_to "Sign in with Google", omniauth_authorize_path(resource_name, :google_oauth2), class: 'googleplus-login' %>
+    </p>
+  <% end -%>
 </div>

@@ -258,4 +258,8 @@ td .btn-small {
   position: relative;
   top: 10px;
   right: 10px;
+
+  &:hover {
+    background-position: -60px -90px;
+  }
 }
