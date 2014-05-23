@@ -1,9 +1,10 @@
 <div class="grid-unit narrow classroom" id="classroom<%= classroom.id %>">
+  <% if policy(classroom).edit? %>
+    <span class="pr">
+      <a href="#edit-classroom<%= classroom.id %>" rel="modal:open" class="open-modal classroom-settings"></a>
+    </span>
+  <% end %>
   <div class="padding-border">
-    <% if policy(classroom).edit? %>
-      <a href="#edit-classroom<%= classroom.id %>" rel="modal:open" class="open-modal">Edit</a>
-    <% end %>
-
     <%= link_to classroom_requests_path(classroom), class: 'content classroom-unit' do %>
       <h4 class="unit-header truncate"><%= classroom.name %></h4>
       <p class="classroom-desc"><%= classroom.description %></p>
