@@ -114,7 +114,8 @@ a.selected, a.selected:hover {
 .nav-classrooms,
 .nav-queue,
 .nav-queue-completed,
-.nav-settings,
+.nav-people,
+.nav-support,
 .nav-account,
 .nav-size {
   padding: 15px;
@@ -133,8 +134,12 @@ a.selected, a.selected:hover {
   background-position: 0 -60px;
 }
 
-.nav-settings {
+.nav-people {
   background-position: 0 -90px;
+}
+
+.nav-support {
+  background-position: 0 -210px;
 }
 
 .nav-account {
@@ -166,10 +171,14 @@ a:hover {
     background-position: -30px -60px;
   }
 
-  & .nav-settings {
+  & .nav-people {
     background-position: -30px -90px;
   }
 
+  & .nav-support {
+    background-position: -30px -210px;
+  }
+ 
   & .nav-account {
     background-position: -30px -120px;
   }
@@ -192,7 +201,7 @@ a.selected {
     background-position: -60px -60px;
   }
 
-  & .nav-settings, .nav-settings:hover {
+  & .nav-people, .nav-people:hover {
     background-position: -60px -90px;
   }
 

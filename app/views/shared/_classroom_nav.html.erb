@@ -22,7 +22,7 @@
   <% if policy(@classroom).edit? %>
     <li>
      <%= link_to_selected people_classroom_path(@classroom), class: "nav-links" do %>
-       <span class="nav-icon nav-settings">
+       <span class="nav-icon nav-people">
          <% if @classroom.classroom_users.students.empty? %>
            <span class="req-num requests-badge">!</span>
          <% end %>
