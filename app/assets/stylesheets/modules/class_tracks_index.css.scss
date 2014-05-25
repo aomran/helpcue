@@ -5,6 +5,7 @@
   margin: 15px 0;
   font-size: 0.9rem;
   line-height: 1.4;
+  min-height: 38px;
 }
 
 // .student-count,
@@ -40,22 +41,35 @@
   margin: 15px 0 20px;
 }
 
+.classroom-settings,
+.class-icons,
+.tracks-icons {
+  background-image: image-url('helpcue-icons.svg');
+  display: inline-block;
+}
+
+.classroom-settings {
+  background-position: -90px -150px;
+  padding: 12px;
+  position: relative;
+  top: 18px;
+  right: 15px;
+  &:hover {
+    background-position: -90px -174px;
+  }
+}
+
 .class-icons, 
 .tracks-icons {
   position: absolute;
   top: -5px;
   padding: 12px;
   margin: 6px 15px 0 0;
-  display: inline-block;
-  background-image: image-url('curri-icons.svg');
+  // background-image: image-url('curri-icons.svg');
 }
 
 .student-icon {
-  background-position: 0 -180px;
-}
-
-.track-icon {
-  background-position: -24px -180px;
+  background-position: -114px -150px;
 }
 
 .number {
