@@ -24,6 +24,7 @@ gem 'kaminari'
 gem 'pg_search'
 gem 'chronic_duration'
 gem 'draper', '~> 1.3'
+gem "skylight"
 
 group :development do
   gem 'style-guide'
