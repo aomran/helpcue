@@ -25,7 +25,7 @@ $ ->
     HelpCue.tinysort()
 
     $('.sort-by-popularity').on "ajax:success", (e, data) ->
-      $('.request').tsort('.me-too-count',{order:'desc', data:'count'})
+      $('.request').tsort('.me-too-count',{order:'desc', data:'count'}, '.timeago', {order:'asc', data:'timestamp'})
       $(this).addClass('active')
       $('.sort-by-time').removeClass('active')
 

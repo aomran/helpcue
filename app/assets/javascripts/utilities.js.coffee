@@ -49,4 +49,4 @@
 
 @HelpCue.tinysort = ->
   if $('.sort-by-popularity.active').length
-    $('.request').tsort('.me-too-count',{order:'desc', data:'count'})
+    $('.request').tsort('.me-too-count',{order:'desc', data:'count'}, '.timeago', {order:'asc', data:'timestamp'})
