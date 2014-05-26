@@ -73,11 +73,14 @@ class ClassroomsController < ApplicationController
   end
 
   def set_sort
-    current_user.set_sort(params[:sort_type], @classroom)
+    authorize @classroom
+
+    @classroom.sort_type = params[:sort_type]
+    @classroom.save
 
     respond_to do |format|
       format.json {
-        render json: { sort_type: params[:sort_type] }
+        render json: { sort_type: @classroom.sort_type }
       }
     end
   end

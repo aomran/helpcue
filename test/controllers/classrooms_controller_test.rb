@@ -103,15 +103,25 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "change sort of queue to by-popularity" do
-    xhr :patch, :set_sort, id: classrooms(:one), sort_type: 'time'
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: 'popularity'
 
-    assert users(:teacher1).sort_by_time?(classrooms(:one))
+    assert_equal true, classrooms(:one).reload.sort_by_popularity?
   end
 
   test "change sort of queue back to by-time" do
     xhr :patch, :set_sort, id: classrooms(:one), sort_type: 'popularity'
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: 'time'
 
-    assert users(:teacher1).sort_by_popularity?(classrooms(:one))
+    assert_equal true, classrooms(:one).reload.sort_by_time?
+  end
+
+  test "non-admin can't change sort type" do
+    sign_out users(:teacher1)
+    sign_in users(:student1)
+
+    xhr :patch, :set_sort, id: classrooms(:two), sort_type: 'popularity'
+
+    assert "You are not authorized to perform this action.", flash[:error]
   end
 
 end

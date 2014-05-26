@@ -14,6 +14,10 @@ class ClassroomPolicy
     user.admin?(classroom)
   end
 
+  def set_sort?
+    user.admin?(classroom)
+  end
+
   def people?
     user.admin?(classroom)
   end

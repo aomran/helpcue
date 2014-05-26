@@ -1,6 +1,19 @@
-  <div class="grid-unit whole">
+  <div class="grid-unit wide">
     <h2>Active Questions</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
+  </div>
+
+  <div class="grid-unit narrow">
+    <p>
+      Sort:
+
+      <% if policy(@classroom).set_sort? %>
+        <%= link_to 'Time', set_sort_classroom_path(@classroom, sort_type: 'time'), class: "sort-link sort-by-time #{'active' if @classroom.sort_by_time?}", remote: true, method: :patch %> |
+        <%= link_to 'Popularity', set_sort_classroom_path(@classroom, sort_type: 'popularity'), class: "sort-link sort-by-popularity #{'active' if @classroom.sort_by_popularity?}", remote: true, method: :patch %>
+      <% else %>
+        <strong><%= @classroom.sort_type.capitalize %></strong>
+      <% end %>
+    </p>
   </div>
 </div>
 <div class="wrapper">
@@ -13,7 +26,7 @@
         <p class="placeholder">There's no one in the help queue right now.</p>
       </div>
     </div>
-    <%= link_to 'Sort by time', set_sort_classroom_path(@classroom, sort_type: 'time'), class: "sort-link sort-by-time #{'active' if current_user.sort_by_time?(@classroom)}", remote: true, method: :patch %> | <%= link_to 'Sort by popularity', set_sort_classroom_path(@classroom, sort_type: 'popularity'), class: "sort-link sort-by-popularity #{'active' if current_user.sort_by_popularity?(@classroom)}", remote: true, method: :patch %>
+
     <%= render partial: 'requests' %>
   </div>
 </div>

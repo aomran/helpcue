@@ -18,6 +18,14 @@ class Classroom < ActiveRecord::Base
     users.merge(classroom_users.teachers)
   end
 
+  def sort_by_time?
+    sort_type == 'time'
+  end
+
+  def sort_by_popularity?
+    sort_type == 'popularity'
+  end
+
   private
   def generate_token
     begin

@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20140521224045) do
     t.integer  "classroom_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sort_type",    default: "time"
   end
 
   create_table "classrooms", force: true do |t|
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140521224045) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sort_type",   default: "time"
   end
 
   create_table "requests", force: true do |t|
