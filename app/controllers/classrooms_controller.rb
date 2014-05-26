@@ -9,8 +9,7 @@ class ClassroomsController < ApplicationController
 
   def people
     authorize @classroom
-    @teachers = @classroom.teachers
-    @students = @classroom.students
+    @users = @classroom.users.order('classroom_users.role, first_name')
   end
 
   def create

@@ -97,8 +97,7 @@ class ClassroomsControllerTest < ActionController::TestCase
   test "should get list of teachers and students in the classroom" do
     get :people, id: classrooms(:one)
 
-    assert assigns(:teachers)
-    assert assigns(:students)
+    assert assigns(:users)
     assert :success
   end
 
