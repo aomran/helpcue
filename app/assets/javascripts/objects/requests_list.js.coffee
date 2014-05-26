@@ -54,16 +54,9 @@
       $request_modal.find(".answer").html(data.answer)
 
   updateSort: (data) ->
-    $sort = $('#sort-type')
-
-    if $sort.find('a').length # admin
-      $('a').removeClass('active')
-      $(".sort-by-#{data.sortType}").addClass('active')
-    else
-      $('#sort-type').html("<p>Sort: <strong>#{data.sortType}</strong>")
-
-    $('#sort-type').data('sorttype', data.sortType)
-    HelpCue.tinysort()
+    $sort_el = $('#sort-type')
+    $sort_el.html("<p>Sort: <strong>#{data.sortType}</strong>") unless $sort_el.find('a').length
+    HelpCue.tinysort({sortType: data.sortType})
 
   realtimeRequests: (data) ->
     HelpCue.RequestsList[data.requestAction](data)

@@ -47,8 +47,15 @@
     emptytext: 'Click to enter text'
   )
 
-@HelpCue.tinysort = ->
-  if $('#sort-type').data('sorttype') == 'Popularity'
+@HelpCue.tinysort = (data) ->
+  $sort_el = $('#sort-type')
+  $sort_el.data('sorttype', data.sortType) if data
+
+  sort_type = $sort_el.data('sorttype')
+  $('#sort-type a').removeClass('active')
+  $(".sort-by-#{sort_type}").addClass('active')
+
+  if sort_type == 'Popularity'
     $('.request').tsort('.me-too-count',{order:'desc', data:'count'}, '.timeago', {order:'asc', data:'timestamp'})
-  else if $('#sort-type').data('sorttype') == 'Time'
+  else if sort_type == 'Time'
     $('.request').tsort('.timeago',{order:'asc', data:'timestamp'})

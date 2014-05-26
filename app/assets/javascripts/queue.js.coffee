@@ -24,12 +24,5 @@ $ ->
     HelpCue.timeago()
     HelpCue.tinysort()
 
-    $('.sort-by-popularity').on "ajax:success", (e, data) ->
-      $('.request').tsort('.me-too-count',{order:'desc', data:'count'}, '.timeago', {order:'asc', data:'timestamp'})
-      $(this).addClass('active')
-      $('.sort-by-time').removeClass('active')
-
-    $('.sort-by-time').on "ajax:success", (e, data) ->
-      $('.request').tsort('.timeago',{order:'asc', data:'timestamp'})
-      $(this).addClass('active')
-      $('.sort-by-popularity').removeClass('active')
+    $('.sort-link').on "ajax:success", (e, data) ->
+      HelpCue.tinysort({sortType: data.sort_type})
