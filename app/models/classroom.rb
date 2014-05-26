@@ -9,6 +9,7 @@ class Classroom < ActiveRecord::Base
   validates_length_of :description, :maximum => 90, :allow_blank => true
 
   before_create :generate_token
+  SORT_TYPE = ['Time', 'Popularity']
 
   def students
     users.merge(classroom_users.students)
@@ -19,11 +20,11 @@ class Classroom < ActiveRecord::Base
   end
 
   def sort_by_time?
-    sort_type == 'time'
+    sort_type == SORT_TYPE[0]
   end
 
   def sort_by_popularity?
-    sort_type == 'popularity'
+    sort_type == SORT_TYPE[1]
   end
 
   private

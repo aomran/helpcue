@@ -1,0 +1,10 @@
+<p id="sort-type" data-sorttype="<%= @classroom.sort_type %>">
+  Sort:
+
+  <% if policy(@classroom).set_sort? %>
+    <%= link_to Classroom::SORT_TYPE[0], set_sort_classroom_path(@classroom, sort_type: Classroom::SORT_TYPE[0]), class: "sort-link sort-by-time #{'active' if @classroom.sort_by_time?}", remote: true, method: :patch %> |
+    <%= link_to Classroom::SORT_TYPE[1], set_sort_classroom_path(@classroom, sort_type: Classroom::SORT_TYPE[1]), class: "sort-link sort-by-popularity #{'active' if @classroom.sort_by_popularity?}", remote: true, method: :patch %>
+  <% else %>
+    <strong><%= @classroom.sort_type %></strong>
+  <% end %>
+</p>

@@ -48,5 +48,7 @@
   )
 
 @HelpCue.tinysort = ->
-  if $('.sort-by-popularity.active').length
+  if $('#sort-type').data('sorttype') == 'Popularity'
     $('.request').tsort('.me-too-count',{order:'desc', data:'count'}, '.timeago', {order:'asc', data:'timestamp'})
+  else if $('#sort-type').data('sorttype') == 'Time'
+    $('.request').tsort('.timeago',{order:'asc', data:'timestamp'})

@@ -4,16 +4,7 @@
   </div>
 
   <div class="grid-unit narrow">
-    <p>
-      Sort:
-
-      <% if policy(@classroom).set_sort? %>
-        <%= link_to 'Time', set_sort_classroom_path(@classroom, sort_type: 'time'), class: "sort-link sort-by-time #{'active' if @classroom.sort_by_time?}", remote: true, method: :patch %> |
-        <%= link_to 'Popularity', set_sort_classroom_path(@classroom, sort_type: 'popularity'), class: "sort-link sort-by-popularity #{'active' if @classroom.sort_by_popularity?}", remote: true, method: :patch %>
-      <% else %>
-        <strong><%= @classroom.sort_type.capitalize %></strong>
-      <% end %>
-    </p>
+    <%= render partial: 'sort' %>
   </div>
 </div>
 <div class="wrapper">
