@@ -1,0 +1,38 @@
+  <div class="grid-unit whole">
+    <h2>People</h2>
+    <h6 class="subtitle"><%= @classroom.name %></h6>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <% if policy(@classroom).remove_student? %>
+    <div class="grid-unit narrow sidebar pull-right">
+      <h4>Invite People</h4>
+      <p>To invite people to this classroom, please share this access code: <span class='token'><%= @classroom.user_token %></span> or use the form below.</p>
+
+      <%= form_tag classroom_invitations_path(@classroom) do %>
+        <div class="form-group">
+          <%= text_area_tag :invitation_emails, '', placeholder: "Separate multiple email addresses with commas or line breaks.", class: "form-input", rows: 4 %>
+        </div>
+        <div>
+          <%= submit_tag 'Send Invitation', class: 'btn btn-primary', id: 'invite-button' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="grid-unit wide">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th colspan="2">User</th>
+          <% if policy(@classroom).promote? %><th>Admin?</th><% end %>
+          <% if policy(@classroom).remove_student? %><th>Options</th><% end %>
+        </tr>
+      </thead>
+
+    <%= render @users %>
+    </table>
+  </div>
+</div>

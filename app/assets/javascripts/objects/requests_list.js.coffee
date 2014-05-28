@@ -15,6 +15,7 @@
       complete: ->
         HelpCue.timeago()
         HelpCue.editable()
+        HelpCue.tinysort()
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')
@@ -52,6 +53,10 @@
     else
       $request_modal.find(".answer").html(data.answer)
 
+  updateSort: (data) ->
+    $sort_el = $('#sort-type')
+    $sort_el.html("<p>Sort: <strong>#{data.sortType}</strong>") unless $sort_el.find('a').length
+    HelpCue.tinysort({sortType: data.sortType})
 
   realtimeRequests: (data) ->
     HelpCue.RequestsList[data.requestAction](data)

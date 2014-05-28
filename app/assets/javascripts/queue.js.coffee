@@ -22,3 +22,7 @@ $ ->
           $('#new_request').css('top', '90px')
 
     HelpCue.timeago()
+    HelpCue.tinysort()
+
+    $('.sort-link').on "ajax:success", (e, data) ->
+      HelpCue.tinysort({sortType: data.sort_type})

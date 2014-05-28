@@ -14,11 +14,23 @@ class ClassroomPolicy
     user.admin?(classroom)
   end
 
+  def set_sort?
+    user.admin?(classroom)
+  end
+
+  def people?
+    user.admin?(classroom)
+  end
+
   def remove_admin?
     classroom.owner == user
   end
 
   def remove_student?
     user.admin?(classroom)
+  end
+
+  def promote?
+    classroom.owner == user
   end
 end

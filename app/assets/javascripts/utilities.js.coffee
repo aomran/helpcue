@@ -15,7 +15,8 @@
 @HelpCue.form_validations = (resource, errors) ->
   $('.error-message').remove()
   for field, error of errors
-    $input = $("##{resource}_#{field}")
+    $modal = $('.modal.current')
+    $input = $modal.find("##{resource}_#{field}")
     $error = $('<span>').addClass('error-message h6').text(error)
     $input.addClass('error').before($error)
 
@@ -45,3 +46,16 @@
     onblur: 'ignore'
     emptytext: 'Click to enter text'
   )
+
+@HelpCue.tinysort = (data) ->
+  $sort_el = $('#sort-type')
+  $sort_el.data('sorttype', data.sortType) if data
+
+  sort_type = $sort_el.data('sorttype')
+  $('#sort-type a').removeClass('active')
+  $(".sort-by-#{sort_type}").addClass('active')
+
+  if sort_type == 'Popularity'
+    $('.request').tsort('.me-too-count',{order:'desc', data:'count'}, '.timeago', {order:'asc', data:'timestamp'})
+  else if sort_type == 'Time'
+    $('.request').tsort('.timeago',{order:'asc', data:'timestamp'})

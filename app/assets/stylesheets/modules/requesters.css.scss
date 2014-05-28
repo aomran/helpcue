@@ -21,6 +21,25 @@
   @include border-radius(5px);
 }
 
+.gravatar-table-image {
+  margin-right: 5px;
+  vertical-align: middle;
+  float: left;
+  @include border-radius(5px);
+}
+
+.name-email {
+  float: left;
+}
+
+td.name-gravatar {
+  text-align: left;
+}
+
+td.admin input {
+  margin: 0 auto;
+}
+
 @include media-query(medium) {
   .gravatar-image {
     height: 60px;
@@ -225,4 +244,9 @@ td .btn-small {
 
 .editable-input {
   width: 100%;
+}
+
+.sort-link.active {
+  font-weight: bold;
+  border-bottom: 1px dashed $color-text;
 }

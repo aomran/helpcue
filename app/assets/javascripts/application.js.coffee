@@ -17,6 +17,7 @@
 #= require jquery-editable-poshytip
 #= require jquery.modal
 #= require jquery.timeago
+#= require jquery.tinysort
 #= require utilities
 #= require_tree ./objects
 #= require_tree .

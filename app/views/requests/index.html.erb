@@ -1,6 +1,10 @@
-  <div class="grid-unit whole">
+  <div class="grid-unit wide">
     <h2>Active Questions</h2>
     <h6 class="subtitle"><%= @classroom.name %></h6>
+  </div>
+
+  <div class="grid-unit narrow">
+    <%= render partial: 'sort' %>
   </div>
 </div>
 <div class="wrapper">
@@ -13,6 +17,7 @@
         <p class="placeholder">There's no one in the help queue right now.</p>
       </div>
     </div>
+
     <%= render partial: 'requests' %>
   </div>
 </div>

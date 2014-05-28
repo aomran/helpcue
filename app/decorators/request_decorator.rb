@@ -6,7 +6,7 @@ class RequestDecorator < Draper::Decorator
   end
 
   def time
-    h.content_tag :span, created_at.strftime("%l:%M%P, %e %b %y"), class: "timeago small", title: created_at.getutc.iso8601
+    h.content_tag :span, created_at.strftime("%l:%M%P, %e %b %y"), class: "timeago small", title: created_at.getutc.iso8601, data: { timestamp: created_at }
   end
 
   def owner_name
@@ -14,7 +14,7 @@ class RequestDecorator < Draper::Decorator
   end
 
   def metoo_count
-    h.content_tag :span, "+#{users.count}", class: "me-too-count req-num #{'dont-show' if users.empty?}", title: "More students have this question"
+    h.content_tag :span, "+#{users.count}", class: "me-too-count req-num #{'dont-show' if users.empty?}", title: "More students have this question", data: { count: users.count }
   end
 
   def star_icon

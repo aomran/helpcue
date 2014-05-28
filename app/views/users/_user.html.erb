@@ -1,0 +1,42 @@
+<tr id="user_<%= user.id %>">
+
+  <td colspan="2" class="name-gravatar">
+    <%= image_tag "#{user.avatar}?s=56", class: 'gravatar-table-image' %>
+    <div class="name-email">
+      <%= content_tag :strong, user.full_name %> <br />
+      <%= link_to user.email, "mailto:#{user.email}" %>
+    </div>
+  </td>
+
+  <% if policy(@classroom).promote? %>
+    <td class="admin">
+    <% if user == @classroom.owner %>
+      Owner
+    <% else %>
+      <%= form_tag classroom_user_path(@classroom, user), id: "form#{user.id}", class: 'user-promote-form', remote: true, method: :patch do %>
+        <%= check_box_tag :promote, user.admin?(@classroom), user.admin?(@classroom), onchange: "$('#form#{user.id}').submit();" %>
+      <% end %>
+    <% end %>
+    </td>
+  <% end %>
+
+  <% if policy(@classroom).remove_student? %>
+    <td>
+    <% if user.admin?(@classroom) %>
+      <% if policy(@classroom).remove_admin? && (user != current_user ) %>
+        <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
+          <%= content_tag(:span, '', class: "action-icon trash") %>
+          <%= content_tag(:span, 'Remove', class: "action-label") %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% if policy(@classroom).remove_student? %>
+        <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
+          <%= content_tag(:span, '', class: "action-icon trash") %>
+          <%= content_tag(:span, 'Remove', class: "action-label") %>
+        <% end %>
+      <% end %>
+    <% end %>
+    </td>
+  <% end %>
+</tr>

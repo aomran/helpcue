@@ -28,52 +28,43 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert response["name"]
   end
 
-  test "get edit classroom form" do
-    get :edit, id: classrooms(:one)
-    assert_equal classrooms(:one), assigns(:classroom)
-
-    assert :success
-  end
 
   test "should update classroom with valid data" do
-    patch :update, id: classrooms(:one), classroom: {name: "Changed name" }
+    xhr :patch, :update, id: classrooms(:one), classroom: {name: "Changed name" }
 
     classroom = Classroom.find(classrooms(:one).id)
-    assert_equal "Changed name", classroom.name
-    assert_redirected_to edit_classroom_path(assigns(:classroom))
+    assert_equal "Changed name", classroom.name, 'Name did not change'
+
+    response = JSON.parse(@response.body)
+    assert response["partial"], 'Partial was not sent in response body'
   end
 
   test "should not update classroom with invalid data" do
-    patch :update, id: classrooms(:one), classroom: {name: nil }
+    xhr :patch, :update, id: classrooms(:one), classroom: {name: nil }
 
-    assert_template :edit
+    response = JSON.parse(@response.body)
+    assert response["name"]
   end
 
   test "should remove user from classroom without deleting classroom" do
     assert_difference 'users(:teacher1).classrooms.count', -1 do
-      delete :destroy, id: classrooms(:one)
+      xhr :delete, :destroy, id: classrooms(:one)
     end
 
     assert classrooms(:one).reload
-    assert_redirected_to classrooms_path
+    response = JSON.parse(@response.body)
+    assert response["id"]
   end
 
   test "should remove classroom with no users" do
-    delete :destroy, id: classrooms(:one)
+    xhr :delete, :destroy, id: classrooms(:one)
 
     sign_out users(:teacher1)
     sign_in users(:teacher2)
 
     assert_difference 'Classroom.count', -1 do
-      delete :destroy, id: classrooms(:one)
+      xhr :delete, :destroy, id: classrooms(:one)
     end
-  end
-
-  test "should add user with admin role to classroom with admin-token" do
-    classroom = Classroom.create(name: 'new class')
-    xhr :post, :join, format: :json, join_token: classroom.admin_token
-
-    assert_equal 'Admin', users(:teacher1).classroom_users.last.role
   end
 
   test "should give error with wrong token" do
@@ -97,10 +88,39 @@ class ClassroomsControllerTest < ActionController::TestCase
   test "should not add user to a classroom they are already in" do
 
     assert_no_difference 'users(:teacher1).classrooms.count' do
-      xhr :post, :join, format: :json, join_token: classrooms(:one).admin_token
+      xhr :post, :join, format: :json, join_token: classrooms(:one).user_token
     end
 
     assert_equal 'You are already in this classroom', @response.body
+  end
+
+  test "should get list of teachers and students in the classroom" do
+    get :people, id: classrooms(:one)
+
+    assert assigns(:users)
+    assert :success
+  end
+
+  test "change sort of queue to by-popularity" do
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: Classroom::SORT_TYPE[1]
+
+    assert_equal true, classrooms(:one).reload.sort_by_popularity?
+  end
+
+  test "change sort of queue back to by-time" do
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: Classroom::SORT_TYPE[1]
+    xhr :patch, :set_sort, id: classrooms(:one), sort_type: Classroom::SORT_TYPE[0]
+
+    assert_equal true, classrooms(:one).reload.sort_by_time?
+  end
+
+  test "non-admin can't change sort type" do
+    sign_out users(:teacher1)
+    sign_in users(:student1)
+
+    xhr :patch, :set_sort, id: classrooms(:two), sort_type: Classroom::SORT_TYPE[1]
+
+    assert "You are not authorized to perform this action.", flash[:error]
   end
 
 end

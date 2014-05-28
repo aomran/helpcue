@@ -112,11 +112,11 @@ body.nav-open .main {
   color: $color-main;
   border-bottom: 1px solid $grey-lt;
   margin: -15px -25px 0;
-  padding: 15px;
+  padding: 15px 25px;
   background: #F0F2F5;
   background-image: linear-gradient(to top, $bluegrey-lt, $bluegrey-v-lt);
   text-shadow: 1px 1px #fff;
-  text-align: center;
+  // text-align: center;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
   .padding-border:hover & {
@@ -260,7 +260,7 @@ body.nav-open .main {
 }
 
 .classroom-unit {
-  min-height: 185px;
+  min-height: 200px;
 }
 
 .gravatar-image {

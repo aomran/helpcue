@@ -1,10 +1,15 @@
 class ClassroomsController < ApplicationController
 
-  after_action :verify_authorized, only: [:edit, :update]
-  before_action :get_classroom, only: [:edit, :update, :destroy]
+  after_action :verify_authorized, only: [:edit, :update, :people]
+  before_action :get_classroom, only: [:edit, :update, :destroy, :people, :set_sort]
 
   def index
     @classrooms = current_user.classrooms
+  end
+
+  def people
+    authorize @classroom
+    @users = @classroom.users.order('classroom_users.role, first_name')
   end
 
   def create
@@ -20,17 +25,19 @@ class ClassroomsController < ApplicationController
     end
   end
 
-  def edit
-    authorize @classroom
-  end
-
   def update
     authorize @classroom
 
-    if @classroom.update(classroom_params)
-      redirect_to edit_classroom_path(@classroom), notice: "Classroom has been updated."
-    else
-      render :edit
+    respond_to do |format|
+      if @classroom.update(classroom_params)
+        format.json {
+          render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: @classroom }), id: @classroom.id }, status: :created, location: @classroom
+        }
+      else
+        format.json {
+          render json: @classroom.errors, status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -39,20 +46,20 @@ class ClassroomsController < ApplicationController
     if @classroom.users.empty?
       @classroom.destroy
     end
-    redirect_to classrooms_path, notice: "You have left the classroom."
+    respond_to do |format|
+      format.json {
+        render json: { id: params[:id] }
+      }
+    end
   end
 
   def join
-    if classroom = Classroom.find_by(user_token: params[:join_token].strip)
-      role = 'User'
-    elsif classroom = Classroom.find_by(admin_token: params[:join_token].strip)
-      role = 'Admin'
-    end
+    classroom = Classroom.find_by(user_token: params[:join_token].strip)
 
     respond_to do |format|
       if classroom && current_user.classrooms.exclude?(classroom)
-        classroom.classroom_users.create(user: current_user, role: role)
-        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id, role: role }, status: :created, location: classroom }
+        classroom.classroom_users.create(user: current_user, role: 'User')
+        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom }
       else
         if current_user.classrooms.include?(classroom)
           message = 'You are already in this classroom'
@@ -64,8 +71,26 @@ class ClassroomsController < ApplicationController
     end
   end
 
+  def set_sort
+    authorize @classroom
+
+    @classroom.sort_type = params[:sort_type]
+    @classroom.save
+
+    push_to_channel('updateSort')
+    respond_to do |format|
+      format.json {
+        render json: { sort_type: @classroom.sort_type }
+      }
+    end
+  end
+
   private
   def classroom_params
     params.require(:classroom).permit(:name, :description)
+  end
+
+  def push_to_channel(requestAction)
+    Pusher.trigger("classroom#{@classroom.id}-requests", 'request', requestAction: requestAction, sortType: @classroom.sort_type, user_id: current_user.id)
   end
 end

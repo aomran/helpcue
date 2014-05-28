@@ -3,20 +3,17 @@
 one:
   name: First Classroom
   description: MyString
-  admin_token: ADMINTOKEN
   user_token: USERTOKEN
   owner: teacher1
 
 two:
   name: Second Classroom
   description: MyString
-  admin_token: ADMINTOKEN2
   user_token: USERTOKEN2
   owner: teacher2
 
 three:
   name: New Classroom with token
   description: MyString
-  admin_token: ADMINTOKEN3
   user_token: USERTOKEN3
   owner_id: 1
