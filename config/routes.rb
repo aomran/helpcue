@@ -7,7 +7,7 @@ Helpcue::Application.routes.draw do
     path_names: {
       sign_in: 'login',
       sign_out: 'logout',
-      registration: 'signup'
+      sign_up: 'register'
     },
     controllers: {
       registrations:      "registrations",
