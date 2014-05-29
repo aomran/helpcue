@@ -1,15 +1,10 @@
 class ClassroomsController < ApplicationController
 
-  after_action :verify_authorized, only: [:edit, :update, :people]
-  before_action :get_classroom, only: [:edit, :update, :destroy, :people, :set_sort]
+  after_action :verify_authorized, only: [:update, :set_sort]
+  before_action :get_classroom, only: [:update, :destroy, :set_sort]
 
   def index
     @classrooms = current_user.classrooms
-  end
-
-  def people
-    authorize @classroom
-    @users = @classroom.users.order('classroom_users.role, first_name')
   end
 
   def create

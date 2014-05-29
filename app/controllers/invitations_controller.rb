@@ -9,9 +9,9 @@ class InvitationsController < ApplicationController
 
     if @emails.any? && valid_emails?
       InvitationMailer.invite(@emails, @classroom.id).deliver
-      redirect_to people_classroom_path(@classroom), notice: "Invitations sent."
+      redirect_to classroom_users_path(@classroom), notice: "Invitations sent."
     else
-      redirect_to people_classroom_path(@classroom), alert: "Invalid email format"
+      redirect_to classroom_users_path(@classroom), alert: "Invalid email format"
     end
   end
 
