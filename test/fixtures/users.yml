@@ -2,32 +2,38 @@
 
 teacher1:
   email: aomra@gmail.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   first_name: Ahmed
   last_name: Omran
   encrypted_password: <%= BCrypt::Password.create("password123")%>
 
 teacher2:
   email: franzini@paula.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   first_name: Paula
   last_name: Franzini
   encrypted_password: <%= BCrypt::Password.create("password123")%>
 
 student1:
   email: student@school.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   first_name: jane
   last_name: doe
   encrypted_password: <%= BCrypt::Password.create("password123")%>
 
 student2:
   email: student2@school.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   first_name: john
   last_name: smith
   encrypted_password: <%= BCrypt::Password.create("password123")%>
 
 nameless_student:
   email: student00@school.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   encrypted_password: <%= BCrypt::Password.create("password123")%>
 
 new_student:
   email: student3@school.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   encrypted_password: <%= BCrypt::Password.create("password123")%>
