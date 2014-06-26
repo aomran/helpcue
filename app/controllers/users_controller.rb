@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
 
   before_action :get_classroom
-  before_action :get_user
+  before_action :get_user, except: [:index]
   after_action :verify_authorized
+
+  def index
+    authorize @classroom, :people?
+    @users = @classroom.users.order('classroom_users.role, first_name')
+  end
 
   def update
     authorize @classroom, :promote?

@@ -1,26 +1,36 @@
 Helpcue::Application.routes.draw do
-  resources :requests
-
   root 'classrooms#index'
-  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  # Devise User
+  devise_for :users,
+    path: '',
+    path_names: {
+      sign_in: 'login',
+      sign_out: 'logout',
+      sign_up: 'register'
+    },
+    controllers: {
+      registrations:      "registrations",
+      omniauth_callbacks: "users/omniauth_callbacks"
+    }
 
   # Resources
   resources :classrooms, except: [:show, :new, :edit] do
-    post 'join', on: :collection
-    get 'people', on: :member
+    post  'join',     on: :collection
     patch 'set_sort', on: :member
-    resources :requests, only: [:index, :create, :update, :destroy, :show] do
-      patch 'remove', on: :member
+
+    resources :requests, except: [:new, :edit] do
+      patch 'remove',      on: :member
       patch 'toggle_help', on: :member
-      patch 'me_too', on: :member
-      get 'completed', on: :collection
-      get 'search', on: :collection
+      patch 'me_too',      on: :member
+      get   'completed',   on: :collection
+      get   'search',      on: :collection
     end
 
-    resources :users, only: [:destroy, :update]
-    get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
-    get "hashtags",   to: "hashtags#show",      as: :hashtag_search
+    resources :users, only: [:destroy, :update, :index]
     resources :invitations, only: [:create]
+    get "hashtags/:hashtag",   to: "hashtags#show", as: :hashtag
+    get "hashtags",            to: "hashtags#show", as: :hashtag_search
   end
 
   # Development Environment

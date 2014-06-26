@@ -8,10 +8,6 @@ module RequestsHelper
     "#{numb} #{'question'.pluralize(numb)}"
   end
 
-  def display_duration(seconds)
-    ChronicDuration.output(seconds, :keep_zero => true)
-  end
-
   def editable(object, attribute, data)
     if policy(object).update?
       content_tag :span, object.send(attribute), class: "editable #{attribute}", data: data.merge(name: attribute, resource: object.class.name.downcase, inputclass: 'form-input')

@@ -94,13 +94,6 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert_equal 'You are already in this classroom', @response.body
   end
 
-  test "should get list of teachers and students in the classroom" do
-    get :people, id: classrooms(:one)
-
-    assert assigns(:users)
-    assert :success
-  end
-
   test "change sort of queue to by-popularity" do
     xhr :patch, :set_sort, id: classrooms(:one), sort_type: Classroom::SORT_TYPE[1]
 

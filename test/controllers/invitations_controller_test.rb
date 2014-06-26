@@ -13,20 +13,20 @@ class InvitationsControllerTest < ActionController::TestCase
     invite_email = ActionMailer::Base.deliveries.last
 
     assert_equal ["student@email.com", "student2@gmail.com"], invite_email.to
-    assert_redirected_to people_classroom_path(classrooms(:one))
+    assert_redirected_to classroom_users_path(classrooms(:one))
   end
 
   test "should give error with invalid email formats" do
     post :create, classroom_id: classrooms(:one), invitation_emails: "student@email.com student2@gmail.com"
 
     assert_equal "Invalid email format", flash[:alert]
-    assert_redirected_to people_classroom_path(classrooms(:one))
+    assert_redirected_to classroom_users_path(classrooms(:one))
   end
 
   test "should give error with no emails" do
     post :create, classroom_id: classrooms(:one), invitation_emails: ""
 
     assert_equal "Invalid email format", flash[:alert]
-    assert_redirected_to people_classroom_path(classrooms(:one))
+    assert_redirected_to classroom_users_path(classrooms(:one))
   end
 end
