@@ -1,4 +1,16 @@
-class RegistrationsController < Devise::RegistrationsController
+class API::V1::Devise::RegistrationsController < Devise::RegistrationsController
+
+  def create
+    user = User.new(params[:user])
+    if user.save
+      render :json=> user.as_json(:auth_token=>user.authentication_token, :email=>user.email), :status=>201
+      return
+    else
+      warden.custom_failure!
+      render :json=> user.errors, :status=>422
+    end
+  end
+
   def update
     @user = User.find(current_user.id)
 
@@ -12,12 +24,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     if successfully_updated
-      set_flash_message :notice, :updated
-      # Sign in the user bypassing validation in case his password changed
-      sign_in @user, :bypass => true
-      redirect_to after_update_path_for(@user)
+      render :json=> user.as_json(:auth_token=>user.authentication_token, :email=>user.email), :status=>201
     else
-      render "edit"
+      render :json=> user.errors, :status=>422
     end
   end
 end

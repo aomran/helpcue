@@ -1,4 +1,4 @@
-class HashtagsController < ApplicationController
+class API::V1::HashtagsController < ApplicationController
   before_action :get_classroom
 
   def show

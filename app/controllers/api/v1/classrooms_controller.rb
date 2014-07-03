@@ -1,4 +1,4 @@
-class ClassroomsController < ApplicationController
+class API::V1::ClassroomsController < ApplicationController
 
   after_action :verify_authorized, only: [:update, :set_sort]
   before_action :get_classroom, only: [:update, :destroy, :set_sort]

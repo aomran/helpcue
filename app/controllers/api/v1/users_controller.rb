@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class API::V1::UsersController < ApplicationController
 
   before_action :get_classroom
   before_action :get_user, except: [:index]

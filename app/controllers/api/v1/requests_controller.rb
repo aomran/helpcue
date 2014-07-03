@@ -1,4 +1,4 @@
-class RequestsController < ApplicationController
+class API::V1::RequestsController < ApplicationController
   before_action :get_classroom
   before_action :get_request, only: [:update, :toggle_help, :remove, :destroy, :me_too, :show]
   after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy, :me_too]

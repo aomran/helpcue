@@ -1,4 +1,4 @@
-class InvitationsController < ApplicationController
+class API::V1::InvitationsController < ApplicationController
 
   before_action :get_classroom
   after_action :verify_authorized
