@@ -23,11 +23,11 @@ class RequestDecorator < Draper::Decorator
   end
 
   def question_or_placeholder
-    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : h.html_escape(question)
+    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : question
   end
 
   def answer_or_placeholder
-    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : h.html_escape(answer)
+    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : answer
   end
 
   def question_with_hashtags
