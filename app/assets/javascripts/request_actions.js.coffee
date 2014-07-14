@@ -39,4 +39,3 @@ $ ->
     $.fn.editableform.buttons = '<button type="submit" class="editable-submit btn btn-small btn-success">Save</button>'+
     'or <a href="#" class="editable-cancel">cancel</a>'
     HelpCue.editable()
-    HelpCue.hashTag()
