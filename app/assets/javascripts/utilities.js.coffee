@@ -47,6 +47,12 @@
    with_hash = $0
    "<a href='/classrooms/#{data.classroom_id}/hashtags/#{$0.replace(/#/, '')}'>" + with_hash + "</a>"
 
+@HelpCue.hashTag = ->
+  $('.request-item').each ->
+    $this = $(this)
+    question = $this.find("div.question")
+    question.html(HelpCue.linkHashtags({question: question.html(), classroom_id: $('#queue_link').data('classroomid')}))
+
 @HelpCue.editable = ->
   $('.editable').editable(
     success: (response, newValue) -> HelpCue.RequestsList.realtimeRequests(response)

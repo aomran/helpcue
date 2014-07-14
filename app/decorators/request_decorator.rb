@@ -30,9 +30,9 @@ class RequestDecorator < Draper::Decorator
     answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : h.html_escape(answer)
   end
 
-  def question_with_hashtags
-    h.linkify_hashtags(question_or_placeholder)
-  end
+  # def question_with_hashtags
+  #   h.linkify_hashtags(question_or_placeholder)
+  # end
 
   def metoo_button
     if h.policy(object).me_too?

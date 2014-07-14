@@ -1,6 +1,7 @@
 module HashtagsHelper
   def linkify_hashtags(hashtaggable_content)
     regex = SimpleHashtag::Hashtag::HASHTAG_REGEX
+    hashtaggable_content = html_escape(hashtaggable_content)
     hashtagged_content = hashtaggable_content.to_s.gsub(regex) do
       link_to($&, classroom_hashtag_path(@classroom, $2), {class: :hashtag})
     end

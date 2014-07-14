@@ -16,6 +16,7 @@
         HelpCue.timeago()
         HelpCue.editable()
         HelpCue.tinysort()
+        HelpCue.hashTag()
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')
@@ -24,6 +25,7 @@
       $('#requests-list').append(data.partial).append(data.expand_partial)
       HelpCue.timeago()
       HelpCue.editable()
+      HelpCue.hashTag()
 
   removeRequest: (data) ->
     $("#request#{data.request_id}").fadeOut 'slow', ->
