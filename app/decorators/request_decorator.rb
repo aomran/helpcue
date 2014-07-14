@@ -23,15 +23,15 @@ class RequestDecorator < Draper::Decorator
   end
 
   def question_or_placeholder
-    question.blank? ? "<p class='lightgrey-text'> Blank question </p>" : h.html_escape(question)
+    question.blank? ? "<p class='lightgrey-text'> Blank question </p>".html_safe : question
   end
 
   def answer_or_placeholder
-    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>" : h.html_escape(answer)
+    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>".html_safe : answer
   end
 
   def question_with_hashtags
-    h.linkify_hashtags(question_or_placeholder)
+    question_or_placeholder
   end
 
   def metoo_button

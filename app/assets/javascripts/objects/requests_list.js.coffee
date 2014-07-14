@@ -16,6 +16,7 @@
         HelpCue.timeago()
         HelpCue.editable()
         HelpCue.tinysort()
+        HelpCue.hashTag()
 
   addRequest: (data) ->
     $placeholder = $('#placeholder')
@@ -24,6 +25,7 @@
       $('#requests-list').append(data.partial).append(data.expand_partial)
       HelpCue.timeago()
       HelpCue.editable()
+      HelpCue.hashTag()
 
   removeRequest: (data) ->
     $("#request#{data.request_id}").fadeOut 'slow', ->
@@ -32,8 +34,12 @@
         $('#placeholder').removeClass('dont-show')
 
   updateQuestion: (data) ->
-    data.question = "<p class='lightgrey-text'> Blank question </p>" unless data.question
-    $("#request#{data.request_id}").find("div.question").html(HelpCue.linkHashtags(data))
+    if data.question
+      $("#request#{data.request_id}").find("div.question").html(HelpCue.linkHashtags(data))
+    else
+      data.question = "<p class='lightgrey-text'> Blank question </p>"
+      $("#request#{data.request_id}").find("div.question").html(data.question)
+
     $request_modal = $("#request-expand-#{data.request_id}")
     if $request_modal.find(".editable.question").length
       $request_modal.find(".editable.question").editable('setValue', data.question)
