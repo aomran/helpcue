@@ -10,6 +10,7 @@ class Request < ActiveRecord::Base
   scope :completed, -> { where(status: STATUS_OPTIONS[2]).order("updated_at DESC") }
 
   STATUS_OPTIONS = ['Waiting', 'Being Helped', 'Done']
+  validates :question, length: { maximum: 255 }
 
   include PgSearch
   pg_search_scope :search, against: [:question, :answer],

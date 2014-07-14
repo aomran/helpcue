@@ -20,6 +20,13 @@
     $error = $('<span>').addClass('error-message h6').text(error)
     $input.addClass('error').before($error)
 
+@HelpCue.inline_form_validations = (resource, errors) ->
+  $('.error-message').remove()
+  for field, error of errors
+    $input = $("##{resource}_#{field}")
+    $error = $('<span>').addClass('error-message h6').text(error)
+    $input.addClass('error').before($error)
+
 @HelpCue.clear_modal = ->
   $modal = $('.modal')
   $modal.find('input[type="text"]').each ->
