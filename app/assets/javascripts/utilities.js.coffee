@@ -43,9 +43,17 @@
 
 @HelpCue.linkHashtags = (data) ->
  hashpattern = /(#[A-Za-z0-9-_]+)/g;
+ data.question = data.question.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
  data.question.replace hashpattern, ($0) ->
    with_hash = $0
    "<a href='/classrooms/#{data.classroom_id}/hashtags/#{$0.replace(/#/, '')}'>" + with_hash + "</a>"
+
+@HelpCue.hashTag = ->
+  $('.request-item').each ->
+    $this = $(this)
+    question = $this.find("div.question")
+    unless question.find('.lightgrey-text').length
+      question.html(HelpCue.linkHashtags({question: question.text(), classroom_id: $('#queue_link').data('classroomid')}))
 
 @HelpCue.editable = ->
   $('.editable').editable(

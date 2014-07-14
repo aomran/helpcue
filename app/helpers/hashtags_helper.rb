@@ -1,10 +1,10 @@
 module HashtagsHelper
   def linkify_hashtags(hashtaggable_content)
     regex = SimpleHashtag::Hashtag::HASHTAG_REGEX
-    hashtagged_content = hashtaggable_content.to_s.gsub(regex) do
+    hashtagged_content = hashtaggable_content.gsub(regex) do
       link_to($&, classroom_hashtag_path(@classroom, $2), {class: :hashtag})
     end
-    hashtagged_content.html_safe
+    hashtagged_content
   end
 
   def render_hashtaggable(hashtaggable)

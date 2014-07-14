@@ -27,6 +27,7 @@ $ ->
 
     HelpCue.timeago()
     HelpCue.tinysort()
+    HelpCue.hashTag()
 
     $('.sort-link').on "ajax:success", (e, data) ->
       HelpCue.tinysort({sortType: data.sort_type})
