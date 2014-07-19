@@ -48,6 +48,7 @@ group :test do
 end
 
 group :production do
-  gem 'unicorn'
-  gem 'newrelic_rpm'
+  gem 'rails_12factor', '~> 0.0.2'
+  gem 'unicorn', '~> 4.8.3'
+  gem 'newrelic_rpm', '~> 3.8.1.221'
 end
