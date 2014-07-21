@@ -60,6 +60,6 @@ class User < ActiveRecord::Base
   def set_avatar
     email_address = self.email.downcase
     hash = Digest::MD5.hexdigest(email_address)
-    self.avatar = "http://www.gravatar.com/avatar/#{hash}"
+    self.avatar = "https://secure.gravatar.com/avatar/#{hash}"
   end
 end
