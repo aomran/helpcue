@@ -55,7 +55,7 @@ sample_classroom.classroom_users.create(user: teacher1, role: 'Admin')
 sample_classroom.classroom_users.create(user: teacher2, role: 'Admin')
 
 # Students join
-sample_classroom.classroom_users.create(user: student1, role: 'User')
-sample_classroom.classroom_users.create(user: student2, role: 'User')
-sample_classroom.classroom_users.create(user: student3, role: 'User')
-sample_classroom.classroom_users.create(user: student4, role: 'User')
+sample_classroom.classroom_users.create(user: student1, role: 'Member')
+sample_classroom.classroom_users.create(user: student2, role: 'Member')
+sample_classroom.classroom_users.create(user: student3, role: 'Member')
+sample_classroom.classroom_users.create(user: student4, role: 'Member')

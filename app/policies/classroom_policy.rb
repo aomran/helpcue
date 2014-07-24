@@ -22,15 +22,19 @@ class ClassroomPolicy
     user.admin?(classroom)
   end
 
-  def remove_admin?
-    classroom.owner == user
-  end
-
   def remove_student?
     user.admin?(classroom)
   end
 
   def promote?
+    classroom.owner == user || user.role(classroom) == Classroom::ROLES[0]
+  end
+
+  def remove_admin?
+    classroom.owner == user || user.role(classroom) == Classroom::ROLES[0]
+  end
+
+  def pass_ownership?
     classroom.owner == user
   end
 end
