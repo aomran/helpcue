@@ -4,7 +4,7 @@
     <%= image_tag "#{user.avatar}?s=56", class: 'gravatar-table-image' %>
     <div class="name-email">
       <%= content_tag :strong, user.full_name %>
-      (<%= content_tag :em, user.role(@classroom) %>)<br />
+      (<%= content_tag :em, user.role(@classroom), class: 'user-role' %>)<br />
       <%= link_to user.email, "mailto:#{user.email}" %>
     </div>
   </td>
