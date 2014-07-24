@@ -5,4 +5,12 @@ namespace :helpcue do
       user.save
     end
   end
+
+  desc "Change user role to member"
+  task user_to_member: :environment do
+    ClassroomUser.where(role: 'User').find_each do |cu|
+      cu.role = 'Member'
+      cu.save
+    end
+  end
 end

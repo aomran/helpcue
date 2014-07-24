@@ -8,8 +8,7 @@
       <p class="classroom-desc"><%= classroom.description_or_placeholder %></p>
 
       <div class="student-count">
-        <%= classroom.user_count('student') %>
-        <%= classroom.user_count('teacher') %>
+        <%= classroom.user_count %>
       </div>
     <% end %>
   </div>

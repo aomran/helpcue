@@ -6,12 +6,17 @@ class UsersController < ApplicationController
 
   def index
     authorize @classroom, :people?
-    @users = @classroom.users.order('classroom_users.role, first_name')
+    @admins = @classroom.admins.order('first_name')
+    @mentors = @classroom.mentors.order('first_name')
+    @members = @classroom.members.order('first_name')
   end
 
   def update
     authorize @classroom, :promote?
-    role = @user.promote_or_demote(@classroom, params[:promote]).role
+    classroom_user = @user.classroom_users.where(classroom: @classroom).first
+    classroom_user.role = params[:role]
+    classroom_user.save
+    role = @user.role(@classroom)
 
     respond_to do |format|
       format.json {
@@ -21,7 +26,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.admin?(@classroom)
+    if @user == @classroom.owner
+      raise Pundit::NotAuthorizedError, "Cannot remove owner"
+    elsif @user.admin?(@classroom)
       authorize @classroom, :remove_admin?
     else
       authorize @classroom, :remove_student?

@@ -21,18 +21,15 @@ class User < ActiveRecord::Base
   end
 
   def admin?(classroom)
-    self.classroom_users.where(classroom: classroom, role: 'Admin').any?
+    self.classroom_users.where(classroom: classroom, role: Classroom::ROLES[0]).any? || self.classroom_users.where(classroom: classroom, role: Classroom::ROLES[1]).any?
   end
 
-  def promote_or_demote(classroom, promote)
-    classroom_user = self.classroom_users.where(classroom: classroom).first
-    if promote
-      classroom_user.role = 'Admin'
-    elsif !promote
-      classroom_user.role = 'User'
+  def role(classroom)
+    if self == classroom.owner
+      'Owner'
+    else
+      classroom_users.where(classroom: classroom).first.role
     end
-    classroom_user.save
-    classroom_user
   end
 
   def self.full_names

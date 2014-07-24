@@ -19,6 +19,16 @@
           <%= submit_tag 'Send Invitation', class: 'btn btn-primary', id: 'invite-button' %>
         </div>
       <% end %>
+
+      <div class="permissions">
+        <h4>Permissions</h4>
+        <ul>
+          <li><p>Mentor: Moderate queue + members</p></li>
+          <li><p>Admin: Moderate queue, members + mentors</p></li>
+          <li><p>Owner: All</p></li>
+        </ul>
+      </div>
+
     </div>
   <% end %>
 
@@ -27,12 +37,14 @@
       <thead>
         <tr>
           <th colspan="2">User</th>
-          <% if policy(@classroom).promote? %><th>Admin?</th><% end %>
+          <% if policy(@classroom).promote? %><th>Role</th><% end %>
           <% if policy(@classroom).remove_student? %><th>Options</th><% end %>
         </tr>
       </thead>
 
-    <%= render @users %>
+    <%= render @admins %>
+    <%= render @mentors %>
+    <%= render @members %>
     </table>
   </div>
 </div>

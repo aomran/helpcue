@@ -73,7 +73,7 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert_equal 'Invalid Token', @response.body
   end
 
-  test "should add user with user role to classroom with user-token" do
+  test "should add user with member role to classroom with user-token" do
     assert_equal 1, users(:student1).classrooms.size
 
     sign_out users(:teacher1)
@@ -82,7 +82,7 @@ class ClassroomsControllerTest < ActionController::TestCase
     xhr :post, :join, format: :json, join_token: classrooms(:one).user_token
 
     assert_equal 2, users(:student1).classrooms.size
-    assert_equal 'User', users(:student1).classroom_users.last.role
+    assert_equal Classroom::ROLES[2], users(:student1).classroom_users.last.role
   end
 
   test "should not add user to a classroom they are already in" do

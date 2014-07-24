@@ -13,12 +13,12 @@ class ClassroomDecorator < Draper::Decorator
     description.blank? ? 'No description was added to this classroom.' : description
   end
 
-  def user_count(role)
-    users = classroom.send(role.pluralize.to_sym).count
+  def user_count
+    users = classroom.users.count
     h.content_tag :div do
       h.content_tag(:span, '', class: "class-icons student-icon") +
       h.content_tag(:span, users, class: 'number') +
-      h.content_tag(:span, " #{role.pluralize(users).capitalize} Joined")
+      h.content_tag(:span, " #{'person'.pluralize(users)} in this classroom")
     end
   end
 

@@ -10,13 +10,18 @@ class Classroom < ActiveRecord::Base
 
   before_create :generate_token
   SORT_TYPE = ['Time', 'Popularity']
+  ROLES = ['Admin', 'Mentor', 'Member']
 
-  def students
-    users.merge(classroom_users.students)
+  def members
+    users.merge(classroom_users.members)
   end
 
-  def teachers
-    users.merge(classroom_users.teachers)
+  def admins
+    users.merge(classroom_users.admins)
+  end
+
+  def mentors
+    users.merge(classroom_users.mentors)
   end
 
   def sort_by_time?
