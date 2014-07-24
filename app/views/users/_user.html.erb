@@ -21,6 +21,9 @@
 
   <% if policy(@classroom).remove_student? %>
     <td>
+    <% if user != @classroom.owner && policy(@classroom).pass_ownership? %>
+      <%= link_to 'Promote', pass_ownership_classroom_user_path(@classroom, user), remote: true, method: :patch %>
+    <% end %>
     <% if user.admin?(@classroom) %>
       <% if policy(@classroom).remove_admin? && (user != current_user && user != @classroom.owner ) %>
         <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>

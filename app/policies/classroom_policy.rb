@@ -33,4 +33,8 @@ class ClassroomPolicy
   def remove_admin?
     classroom.owner == user || user.role(classroom) == Classroom::ROLES[0]
   end
+
+  def pass_ownership?
+    classroom.owner == user
+  end
 end

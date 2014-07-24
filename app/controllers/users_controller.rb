@@ -42,6 +42,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def pass_ownership
+    authorize @classroom, :pass_ownership?
+    @classroom.owner = @user
+    @classroom.save
+
+    respond_to do |format|
+      format.json {
+        render json: { id: @classroom.owner.id } , status: :ok
+      }
+    end
+  end
+
   private
   def get_user
     @user = @classroom.users.find(params[:id])

@@ -59,4 +59,13 @@ class UsersControllerTest < ActionController::TestCase
 
     assert classrooms(:two).members.include?(users(:teacher1))
   end
+
+  test "owner can pass ownership to another user" do
+    sign_out users(:teacher1)
+    sign_in users(:teacher2) #owner
+
+    xhr :patch, :pass_ownership, classroom_id: classrooms(:two), id: users(:teacher1).id
+
+    assert_equal users(:teacher1), classrooms(:two).reload.owner
+  end
 end
