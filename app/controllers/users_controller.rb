@@ -12,11 +12,20 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize @classroom, :promote?
     classroom_user = @user.classroom_users.where(classroom: @classroom).first
-    classroom_user.role = params[:role]
-    classroom_user.save
-    role = @user.role(@classroom)
+    if params[:role] == 'Owner'
+      authorize @classroom, :pass_ownership?
+      @classroom.owner = @user
+      @classroom.save
+      classroom_user.role = 'Admin'
+      classroom_user.save
+      role = 'Owner'
+    else
+      authorize @classroom, :promote?
+      classroom_user.role = params[:role]
+      classroom_user.save
+      role = @user.role(@classroom)
+    end
 
     respond_to do |format|
       format.json {
@@ -38,18 +47,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: { id: params[:id] }
-      }
-    end
-  end
-
-  def pass_ownership
-    authorize @classroom, :pass_ownership?
-    @classroom.owner = @user
-    @classroom.save
-
-    respond_to do |format|
-      format.json {
-        render json: { id: @classroom.owner.id } , status: :ok
       }
     end
   end

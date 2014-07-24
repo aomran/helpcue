@@ -27,9 +27,7 @@ Helpcue::Application.routes.draw do
       get   'search',      on: :collection
     end
 
-    resources :users, only: [:destroy, :update, :index] do
-      patch 'pass_ownership',      on: :member
-    end
+    resources :users, only: [:destroy, :update, :index]
     resources :invitations, only: [:create]
     get "hashtags/:hashtag",   to: "hashtags#show", as: :hashtag
     get "hashtags",            to: "hashtags#show", as: :hashtag_search

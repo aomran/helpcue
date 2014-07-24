@@ -64,7 +64,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:teacher1)
     sign_in users(:teacher2) #owner
 
-    xhr :patch, :pass_ownership, classroom_id: classrooms(:two), id: users(:teacher1).id
+    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:teacher1).id, role: 'Owner'
 
     assert_equal users(:teacher1), classrooms(:two).reload.owner
   end
