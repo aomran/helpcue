@@ -18,7 +18,7 @@ class RequestDecorator < Draper::Decorator
   end
 
   def star_icon
-    title = answer? ? "Click 'More' to see answer" : "No answer entered"
+    title = answer? ? "Click 'More' to see note" : "No note added"
     h.content_tag :span, '', class: "request-icon answer-#{answer?}", title: title
   end
 
@@ -27,7 +27,7 @@ class RequestDecorator < Draper::Decorator
   end
 
   def answer_or_placeholder
-    answer.blank? ? "<p class='lightgrey-text'> No answer yet </p>".html_safe : answer
+    answer.blank? ? "<p class='lightgrey-text'> No note yet </p>".html_safe : answer
   end
 
   def question_with_hashtags

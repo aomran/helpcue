@@ -48,10 +48,10 @@
 
   updateAnswer: (data) ->
     if data.answer
-      $("#request#{data.request_id} .answer-false").attr('title', "Click 'More' to see answer").removeClass('answer-false').addClass('answer-true')
+      $("#request#{data.request_id} .answer-false").attr('title', "Click 'More' to see note").removeClass('answer-false').addClass('answer-true')
     else
-      $("#request#{data.request_id} .answer-true").attr('title', 'No answer entered').removeClass('answer-true').addClass('answer-false')
-      data.answer = "<p class='lightgrey-text'> No answer yet </p>"
+      $("#request#{data.request_id} .answer-true").attr('title', 'No note entered').removeClass('answer-true').addClass('answer-false')
+      data.answer = "<p class='lightgrey-text'> No note yet </p>"
 
     $request_modal = $("#request-expand-#{data.request_id}")
     if $request_modal.find(".editable.answer").length
