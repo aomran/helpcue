@@ -21,15 +21,11 @@ class User < ActiveRecord::Base
   end
 
   def admin?(classroom)
-    self.classroom_users.where(classroom: classroom, role: Classroom::ROLES[0]).any? || self.classroom_users.where(classroom: classroom, role: Classroom::ROLES[1]).any?
+    (Classroom::ROLES[0..1]).include?(self.role(classroom))
   end
 
   def role(classroom)
-    if self == classroom.owner
-      'Owner'
-    else
-      classroom_users.where(classroom: classroom).first.role
-    end
+    classroom_users.where(classroom: classroom).first.role
   end
 
   def self.full_names

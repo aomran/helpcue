@@ -6,35 +6,15 @@ class ClassroomPolicy
     @classroom = classroom
   end
 
-  def edit?
-    user.admin?(classroom)
-  end
-
   def update?
-    user.admin?(classroom)
+    user.admin?(classroom) # Admin, Mentor
   end
 
-  def set_sort?
-    user.admin?(classroom)
+  def admin?
+    user.role(classroom) == Classroom::ROLES[0] # Admin
   end
 
-  def people?
-    user.admin?(classroom)
-  end
-
-  def remove_student?
-    user.admin?(classroom)
-  end
-
-  def promote?
-    classroom.owner == user || user.role(classroom) == Classroom::ROLES[0]
-  end
-
-  def remove_admin?
-    classroom.owner == user || user.role(classroom) == Classroom::ROLES[0]
-  end
-
-  def pass_ownership?
-    classroom.owner == user
+  def owner?
+    classroom.owner == user # Owner
   end
 end

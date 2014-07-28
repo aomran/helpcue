@@ -4,7 +4,7 @@ class InvitationsController < ApplicationController
   after_action :verify_authorized
 
   def create
-    authorize @classroom, :edit?
+    authorize @classroom, :update?
     @emails = params[:invitation_emails].split(/,|\n/).map!(&:strip)
 
     if @emails.any? && valid_emails?
