@@ -48,7 +48,7 @@ class RequestsControllerTest < ActionController::TestCase
     classrooms(:two).requests.create(question: 'question about jerky', owner_id: users(:student1).id)
     get :search, classroom_id: classrooms(:two).id, query: 'jerky'
 
-    assert_equal 1, assigns(:requests).count
+    assert_equal 1, assigns(:requests).count(:all)
     assert :success
   end
 

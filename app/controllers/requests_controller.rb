@@ -4,7 +4,7 @@ class RequestsController < ApplicationController
   after_action :verify_authorized, only: [:update, :toggle_help, :remove, :destroy, :me_too]
 
   def index
-    @requests = @classroom.requests.need_help.includes(:owner, :classroom)
+    @requests = @classroom.requests.need_help.includes(:owner)
   end
 
   def completed
@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
   end
 
   def search
-    @requests = @classroom.requests.search(params[:query]).page(params[:page]).includes(:owner, :classroom)
+    @requests = @classroom.requests.search(params[:query]).page(params[:page]).includes(:owner)
 
 
     respond_to do |format|
