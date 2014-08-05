@@ -67,7 +67,7 @@ class ClassroomsController < ApplicationController
   end
 
   def set_sort
-    authorize @classroom
+    authorize @classroom, :update?
 
     @classroom.sort_type = params[:sort_type]
     @classroom.save

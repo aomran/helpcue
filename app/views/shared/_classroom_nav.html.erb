@@ -19,7 +19,7 @@
    <% end %>
   </li>
 
-  <% if policy(@classroom).edit? %>
+  <% if policy(@classroom).update? %>
     <li>
      <%= link_to_selected classroom_users_path(@classroom), class: "nav-links" do %>
        <span class="nav-icon nav-people">

@@ -4,16 +4,16 @@
     <%= image_tag "#{user.avatar}?s=56", class: 'gravatar-table-image' %>
     <div class="name-email">
       <%= content_tag :strong, user.full_name %>
-      (<%= content_tag :em, user.role(@classroom), class: 'user-role' %>)<br />
+      (<%= content_tag :em, user_role(user), class: 'user-role' %>)<br />
       <%= link_to user.email, "mailto:#{user.email}" %>
     </div>
   </td>
 
-  <% if policy(@classroom).promote? %>
+  <% if policy(@classroom).admin? %>
     <td class="role">
     <% unless user == @classroom.owner || user == current_user %>
 
-      <% if policy(@classroom).pass_ownership? %>
+      <% if policy(@classroom).owner? %>
         <% roles = ['Owner'] + Classroom::ROLES %>
       <% else %>
         <% roles = Classroom::ROLES %>
@@ -25,21 +25,19 @@
     </td>
   <% end %>
 
-  <% if policy(@classroom).remove_student? %>
+  <% if policy(@classroom).update? %>
     <td>
     <% if user.admin?(@classroom) %>
-      <% if policy(@classroom).remove_admin? && (user != current_user && user != @classroom.owner ) %>
+      <% if policy(@classroom).admin? && (user != current_user && user != @classroom.owner ) %>
         <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
           <%= content_tag(:span, '', class: "action-icon trash") %>
           <%= content_tag(:span, 'Remove', class: "action-label") %>
         <% end %>
       <% end %>
     <% else %>
-      <% if policy(@classroom).remove_student? %>
-        <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
-          <%= content_tag(:span, '', class: "action-icon trash") %>
-          <%= content_tag(:span, 'Remove', class: "action-label") %>
-        <% end %>
+      <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
+        <%= content_tag(:span, '', class: "action-icon trash") %>
+        <%= content_tag(:span, 'Remove', class: "action-label") %>
       <% end %>
     <% end %>
     </td>

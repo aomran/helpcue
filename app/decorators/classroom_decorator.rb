@@ -2,7 +2,7 @@ class ClassroomDecorator < Draper::Decorator
   delegate_all
 
   def settings_icon
-    if h.policy(object).edit?
+    if h.policy(object).update?
       h.content_tag :span, class: "pr" do
         h.link_to '', "#edit-classroom#{id}", rel: "modal:open", class: "open-modal classroom-settings"
       end
