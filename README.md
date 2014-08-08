@@ -8,7 +8,8 @@ The development environment requires the Ruby 2.1.1 and Postgresql. To get this 
 1. `$ cd helpcue`
 1. `$ bundle install`
 1. `$ rake db:create` ONLY THE FIRST TIME
-1. `rake db:migrate`
+1. `$ rake db:migrate`
+1. `$ cp .env.example .env` -- Fill out the .env file with the appropriate environment variables.
 
 ### Start development environment (at localhost:3000)
 - `$ foreman start`
