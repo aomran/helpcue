@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 ruby "2.1.1"
 gem 'rails', '4.1.4'
 gem 'pg', '~> 0.17.1'
+gem 'unicorn', '~> 4.8.3'
+gem 'foreman', '~> 0.74.0'
 
 # Assets
 gem 'sass-rails', '~> 4.0.3'
@@ -33,7 +35,6 @@ group :development do
   gem 'style-guide', '~> 1.1.1'
   gem 'rack-livereload', '~> 0.3.15'
   gem 'guard-livereload', '~> 2.2.0'
-  gem 'brakeman', '~> 2.6.0', :require => false
 end
 
 group :development, :test do
@@ -44,11 +45,9 @@ group :test do
   gem 'timecop', '~> 0.7.1'
   gem 'capybara', '~> 2.3.0'
   gem 'selenium-webdriver', '~> 2.42.0'
-  gem 'bullet', '~> 4.9.0'
 end
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
-  gem 'unicorn', '~> 4.8.3'
   gem 'newrelic_rpm', '~> 3.8.1.221'
 end
