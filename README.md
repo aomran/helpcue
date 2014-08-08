@@ -11,7 +11,7 @@ The development environment requires the Ruby 2.1.1 and Postgresql. To get this 
 1. `rake db:migrate`
 
 ### Start development environment (at localhost:3000)
-- `$ rails s`
+- `$ foreman start`
 
 ### Run tests
 - `$ rake test` to run all Ruby tests.
