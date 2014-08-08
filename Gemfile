@@ -35,7 +35,6 @@ group :development do
   gem 'style-guide', '~> 1.1.1'
   gem 'rack-livereload', '~> 0.3.15'
   gem 'guard-livereload', '~> 2.2.0'
-  gem 'brakeman', '~> 2.6.0', :require => false
 end
 
 group :development, :test do
@@ -46,7 +45,6 @@ group :test do
   gem 'timecop', '~> 0.7.1'
   gem 'capybara', '~> 2.3.0'
   gem 'selenium-webdriver', '~> 2.42.0'
-  gem 'bullet', '~> 4.9.0'
 end
 
 group :production do
