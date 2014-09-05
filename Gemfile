@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby "2.1.2"
+ruby "2.1.1"
 gem 'rails', '4.1.4'
 gem 'pg', '~> 0.17.1'
 gem 'unicorn', '~> 4.8.3'
@@ -24,7 +24,6 @@ gem 'omniauth-google-oauth2', '~> 0.2.4'
 
 # Third-party gems
 gem 'pusher', '~> 0.14.1'
-gem 'intercom-rails', '~> 0.2.24'
 
 gem 'simple_hashtag', '~> 0.1.9'
 gem 'kaminari', '~> 0.16.1'

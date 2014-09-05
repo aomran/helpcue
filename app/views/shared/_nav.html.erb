@@ -19,12 +19,6 @@
     <%= render 'shared/classroom_nav' %>
 
     <div class="bottom-nav">
-    <li>
-      <%= link_to '', class: 'nav-links', id: 'Intercom' do %>
-        <span class="nav-icon nav-support"></span>
-        <span class="nav-label">Support</span>
-      <% end %>
-    </li>
       <li>
         <%= link_to_selected '', class: 'nav-links subnav-toggle' do %>
           <span class="nav-icon nav-account"><span class="nav-gravatar" style="background: url('<%= current_user.avatar%>?s=68&d=blank'); background-size: contain;" title="<%= current_user.full_name %>"></span></span>

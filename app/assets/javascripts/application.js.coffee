@@ -18,6 +18,7 @@
 #= require jquery.modal
 #= require jquery.timeago
 #= require jquery.tinysort
+#= require uservoice
 #= require utilities
 #= require_tree ./objects
 #= require_tree .
