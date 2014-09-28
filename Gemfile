@@ -42,8 +42,8 @@ end
 
 group :test do
   gem 'timecop', '~> 0.7.1'
-  gem 'capybara', '~> 2.3.0'
-  gem 'selenium-webdriver', '~> 2.42.0'
+  gem 'capybara', '~> 2.4.3'
+  gem 'selenium-webdriver', '~> 2.43.0'
 end
 
 group :production do

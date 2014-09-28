@@ -32,6 +32,7 @@ $ ->
         $(this).remove()
         unless $('.classroom').length
           $('#placeholder').removeClass('dont-show')
+
   # Realtime
   if $('#queue_link').length
     HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
