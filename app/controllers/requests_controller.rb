@@ -5,6 +5,11 @@ class RequestsController < ApplicationController
 
   def index
     @requests = @classroom.requests.need_help.includes(:owner)
+
+    respond_to do |format|
+      format.json { render json: @requests.as_json(include: :owner) }
+      format.html { }
+    end
   end
 
   def completed

@@ -30,3 +30,8 @@ $ ->
 
     $('.sort-link').on "ajax:success", (e, data) ->
       HelpCue.tinysort({sortType: data.sort_type})
+
+    HelpCue.Notifications.setupPermission()
+    $('#ask_permission').on 'click', '.notify-on', (e) ->
+      e.preventDefault()
+      HelpCue.Notifications.askPermission()
