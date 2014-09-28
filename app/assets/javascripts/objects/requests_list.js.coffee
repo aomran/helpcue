@@ -67,4 +67,4 @@
   realtimeRequests: (data) ->
     HelpCue.RequestsList[data.requestAction](data)
     if data.requestAction == 'addRequest'
-      HelpCue.Notifications.notify('A new question was added to HelpCue!')
+      HelpCue.Notifications.notify()

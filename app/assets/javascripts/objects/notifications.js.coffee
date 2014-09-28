@@ -1,7 +1,9 @@
 @HelpCue.Notifications = 
-	notify: (message) ->
-	  if Notification.permission is "granted"
-	    notification = new Notification(message)
+	notify: ->
+    if Notification.permission is "granted"
+      time = new Date()
+      message = "#{time.toLocaleTimeString()}: A new question was added to HelpCue!"
+      notification = new Notification(message, {icon: '/assets/logo.png'})
 
 	askPermission: ->
 	  Notification.requestPermission (permission) ->
