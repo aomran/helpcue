@@ -18,6 +18,12 @@ class RequestsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "should get list of requests in JSON" do
+    xhr :get, :index, format: :json, classroom_id: classrooms(:two).id
+
+    assert_equal classrooms(:two).requests.need_help.to_json(include: :owner), @response.body
+  end
+
   test "should get list of completed requests" do
     get :completed, classroom_id: classrooms(:two).id
 
