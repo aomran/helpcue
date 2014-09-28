@@ -14,4 +14,4 @@
     if Notification.permission is "granted"
       $('#ask_permission').text('Notifications (On)')
     else
-      $('#ask_permission').html('<a href="#">Notifications (Off)</a>')
+      $('#ask_permission').html('<a class="notify-on" href="#">Notifications (Off)</a>')

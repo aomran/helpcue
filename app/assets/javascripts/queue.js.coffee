@@ -32,6 +32,6 @@ $ ->
       HelpCue.tinysort({sortType: data.sort_type})
 
     HelpCue.Notifications.setupPermission()
-    $('#ask_permission').on 'click', 'a', (e) ->
+    $('#ask_permission').on 'click', '.notify-on', (e) ->
       e.preventDefault()
       HelpCue.Notifications.askPermission()
