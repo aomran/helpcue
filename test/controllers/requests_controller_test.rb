@@ -21,7 +21,9 @@ class RequestsControllerTest < ActionController::TestCase
   test "should get list of requests in JSON" do
     xhr :get, :index, format: :json, classroom_id: classrooms(:two).id
 
-    assert_equal classrooms(:two).requests.need_help.to_json(include: :owner), @response.body
+    response_body = JSON.parse(@response.body)
+
+    assert_equal classrooms(:two).requests.need_help.count, response_body.length
   end
 
   test "should get list of completed requests" do

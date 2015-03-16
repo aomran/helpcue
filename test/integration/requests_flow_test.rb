@@ -38,17 +38,14 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "student can add themselves to a request" do
-    page.assert_selector(".me-too-count", :count => 0)
-    find(".request-metoo").click
+    request_id = requests(:two).id
+    find("#request#{request_id} .request-metoo").click
 
-    assert find(".me-too-count").has_content?("+1")
+    assert find("#request#{request_id} .me-too-count").has_content?("+1")
   end
 
   test "student can delete a request" do
-    fill_in :request_question, with: "I has a bad question!"
-    click_button 'Ask Question'
-
-    request_id = Request.all.last.id
+    request_id = requests(:one).id
     find("#request#{request_id}").find(".request-delete").click
     page.driver.browser.switch_to.alert.accept
 

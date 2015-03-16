@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
     @emails = params[:invitation_emails].split(/,|\n/).map!(&:strip)
 
     if @emails.any? && valid_emails?
-      InvitationMailer.invite(@emails, @classroom.id).deliver
+      InvitationMailer.invite(@emails, @classroom.id).deliver_now
       redirect_to classroom_users_path(@classroom), notice: "Invitations sent."
     else
       redirect_to classroom_users_path(@classroom), alert: "Invalid email format"
