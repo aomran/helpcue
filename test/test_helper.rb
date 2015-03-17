@@ -39,4 +39,5 @@ class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
   Capybara.current_driver = Capybara.javascript_driver
+  Capybara.default_wait_time = 5
 end
