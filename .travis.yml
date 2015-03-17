@@ -1,6 +1,10 @@
 language: ruby
 rvm:
   - 2.2.1
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+  - bundle exec rake db:test:prepare
 addons:
   postgresql: '9.3'
 deploy:
