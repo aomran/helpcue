@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140526164836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "classroom_users", force: true do |t|
+  create_table "classroom_users", force: :cascade do |t|
     t.string   "role"
     t.integer  "user_id"
     t.integer  "classroom_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140526164836) do
     t.datetime "updated_at"
   end
 
-  create_table "classrooms", force: true do |t|
+  create_table "classrooms", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "user_token"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140526164836) do
     t.string   "sort_type",   default: "Time"
   end
 
-  create_table "requests", force: true do |t|
+  create_table "requests", force: :cascade do |t|
     t.string   "question"
     t.string   "status",       default: "Waiting"
     t.integer  "owner_id"
@@ -46,12 +46,12 @@ ActiveRecord::Schema.define(version: 20140526164836) do
     t.text     "answer"
   end
 
-  create_table "requests_users", force: true do |t|
+  create_table "requests_users", force: :cascade do |t|
     t.integer "request_id"
     t.integer "user_id"
   end
 
-  create_table "simple_hashtag_hashtaggings", force: true do |t|
+  create_table "simple_hashtag_hashtaggings", force: :cascade do |t|
     t.integer "hashtag_id"
     t.integer "hashtaggable_id"
     t.string  "hashtaggable_type"
@@ -60,13 +60,15 @@ ActiveRecord::Schema.define(version: 20140526164836) do
   add_index "simple_hashtag_hashtaggings", ["hashtag_id"], name: "index_simple_hashtag_hashtaggings_on_hashtag_id", using: :btree
   add_index "simple_hashtag_hashtaggings", ["hashtaggable_id", "hashtaggable_type"], name: "index_hashtaggings_hashtaggable_id_hashtaggable_type", using: :btree
 
-  create_table "simple_hashtag_hashtags", force: true do |t|
+  create_table "simple_hashtag_hashtags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  add_index "simple_hashtag_hashtags", ["name"], name: "index_simple_hashtag_hashtags_on_name", using: :btree
+
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

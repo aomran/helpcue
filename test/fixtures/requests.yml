@@ -8,14 +8,14 @@ one:
   classroom: two
 
 two:
-  question: ruby question
+  question: ruby question 1
   status: Being Helped
   owner: student2
   users:
   classroom: two
 
 three:
-  question: ruby question
+  question: ruby question 2
   status: Being Helped
   owner: student2
   users:
@@ -23,7 +23,7 @@ three:
   helped_at: <%= Time.zone.now + 20.minutes %>
 
 four:
-  question: ruby question
+  question: ruby question 3
   status: Being Helped
   owner: student2
   users:
@@ -31,7 +31,7 @@ four:
   helped_at: <%= Time.zone.now + 30.minutes %>
 
 five:
-  question: ruby question
+  question: ruby question 4
   status: Being Helped
   owner: student2
   users:
@@ -39,7 +39,7 @@ five:
   helped_at: <%= Time.zone.now + 30.minutes %>
 
 six:
-  question: ruby question
+  question: ruby question 5
   status: Being Helped
   owner: student2
   users:
@@ -47,7 +47,7 @@ six:
   helped_at: <%= Time.zone.parse("April 12 2008") %>
 
 seven:
-  question: ruby question
+  question: ruby question 6
   status: Waiting
   owner: student2
   users:
