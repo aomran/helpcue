@@ -1,3 +1,4 @@
+![image](https://codeship.com/projects/69278/status?branch=master)
 # Helpcue App
 
 [HelpCue](http://www.helpcue.com) has been used at HackerYou for at least four cohorts. The software has facilitated the asking of nearly 2600 questions. The web application continues to be used, helping the students ask for help almost 200 times per week.
