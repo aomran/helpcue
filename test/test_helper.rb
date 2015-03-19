@@ -27,7 +27,7 @@ class ActiveSupport::TestCase
   end
 
   def teardown
-    Timecop.return
+    travel_back
   end
 end
 

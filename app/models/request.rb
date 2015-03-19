@@ -50,7 +50,7 @@ class Request < ActiveRecord::Base
 
   def time_waiting
     if helped_at
-      (helped_at - created_at).floor
+      (helped_at - created_at).ceil
     else
       0
     end
@@ -58,7 +58,7 @@ class Request < ActiveRecord::Base
 
   def help_duration
     if helped_at && done_at
-      (done_at - helped_at).floor
+      (done_at - helped_at).ceil
     else
       0
     end

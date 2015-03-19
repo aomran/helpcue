@@ -253,7 +253,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
-    timecop (0.7.3)
     timers (4.0.1)
       hitimes
     tzinfo (1.2.2)
@@ -297,5 +296,4 @@ DEPENDENCIES
   selenium-webdriver (~> 2.45.0)
   simple_hashtag (~> 0.1.9)
   style-guide (~> 1.1.1)
-  timecop (~> 0.7.1)
   uglifier (~> 2.7.1)
