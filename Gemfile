@@ -35,7 +35,6 @@ group :development do
   gem 'rack-livereload', '~> 0.3.15'
   gem 'guard-livereload', '~> 2.4.0'
   gem 'quiet_assets', '~> 1.1.0'
-  gem 'spring', '~> 1.3.3'
 end
 
 group :development, :test do
