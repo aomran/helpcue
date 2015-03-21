@@ -16,9 +16,9 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
 
     within(all(".request-item").last) { click_link 'Being Helped?' }
     assert all(".request-item").last.has_content?("Being Helped")
-    sleep(1)
-
-    within(all(".request-item").last) { click_link 'Done?' }
+    page.document.synchronize do
+      within(all(".request-item").last) { click_link 'Done?' }
+    end
     assert page.has_no_content?("I have a question to add!")
   end
 
