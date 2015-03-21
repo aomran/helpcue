@@ -14,7 +14,7 @@ namespace :helpcue do
     end
   end
 
-  desc "Change user role to member"
+  desc "Migrate request status to state"
   task status_to_state: :environment do
     Request.find_each do |request|
       if request.status == 'Waiting'

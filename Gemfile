@@ -50,4 +50,5 @@ end
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
   gem 'newrelic_rpm', '~> 3.10.0.279'
+  gem 'skylight', '~> 0.6.0'
 end
