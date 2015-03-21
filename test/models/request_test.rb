@@ -5,26 +5,26 @@ class RequestTest < ActiveSupport::TestCase
     @current_time = Time.zone.now
   end
 
-  test "toggle status from waiting to being-helped" do
-    requests(:one).toggle_status.save
+  test "toggle state from waiting to being-helped" do
+    requests(:one).toggle_state.save
 
-    assert_equal Request::STATUS_OPTIONS[1], requests(:one).reload.status
+    assert_equal 'being_helped', requests(:one).reload.state
   end
 
-  test "toggle status from being-helped to waiting" do
-    requests(:two).toggle_status.save
+  test "toggle state from being-helped to waiting" do
+    requests(:two).toggle_state.save
 
-    assert_equal Request::STATUS_OPTIONS[0], requests(:two).reload.status
+    assert_equal 'waiting', requests(:two).reload.state
   end
 
-  test "adds current time when changing status to being-helped" do
+  test "adds current time when changing state to being-helped" do
     travel_to @current_time
-    requests(:one).toggle_status.save
+    requests(:one).toggle_state.save
 
     assert_equal @current_time.to_s, requests(:one).reload.helped_at.to_s
   end
 
-  test "adds current time when changing status to done" do
+  test "adds current time when changing state to done" do
     travel_to @current_time
     requests(:one).remove_from_queue.save
 
@@ -34,14 +34,14 @@ class RequestTest < ActiveSupport::TestCase
   test "time waiting" do
     request = Request.create
     travel(30.minutes) do
-      request.toggle_status.save
+      request.toggle_state.save
       assert_equal 30.minutes, request.time_waiting
     end
   end
 
   test "help duration" do
     request = Request.create
-    request.toggle_status.save
+    request.toggle_state.save
 
     travel(40.minutes) do
       request.remove_from_queue.save

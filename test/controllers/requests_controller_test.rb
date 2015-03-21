@@ -66,36 +66,30 @@ class RequestsControllerTest < ActionController::TestCase
       xhr :post, :create, @params
     end
 
-    assert_equal Request::STATUS_OPTIONS[0], Request.last.status
+    assert_equal 'waiting', Request.last.state
     assert_equal @params[:request][:question], Request.last.question
     assert_equal users(:student1).id, Request.last.owner_id
   end
 
-  test "should update request status" do
+  test "should update request question and answer" do
     xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {question: 'new question', answer: 'with an answer'}
 
     assert_equal 'new question', requests(:one).reload.question
     assert_equal 'with an answer', requests(:one).reload.answer
   end
 
-  test "should update request question" do
-    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id , request: {question: 'new question'}
-
-    assert_equal 'new question', requests(:one).reload.question
-  end
-
-  test "should toggle request status from waiting to being helped" do
+  test "should toggle request state from waiting to being helped" do
     xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:one).id
 
-    assert_equal Request::STATUS_OPTIONS[1], requests(:one).reload.status
+    assert_equal 'being_helped', requests(:one).reload.state
   end
 
-  test "should toggle request status from being helped to waiting" do
+  test "should toggle request state from being helped to waiting" do
     sign_out users(:student1)
     sign_in users(:student2)
     xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:two).id
 
-    assert_equal Request::STATUS_OPTIONS[0], requests(:two).reload.status
+    assert_equal 'waiting', requests(:two).reload.state
   end
 
   test "should remove request when it's done" do
@@ -103,7 +97,7 @@ class RequestsControllerTest < ActionController::TestCase
     sign_in users(:teacher1)
     xhr :patch, :remove, classroom_id: classrooms(:two), id: requests(:two).id
 
-    assert_equal Request::STATUS_OPTIONS[2], requests(:two).reload.status
+    assert_equal 'done', requests(:two).reload.state
   end
 
   test "should delete request" do

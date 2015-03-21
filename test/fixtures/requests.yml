@@ -3,6 +3,7 @@
 one:
   question: css question
   status: Waiting
+  state: 0
   owner: student1
   users:
   classroom: two
@@ -10,6 +11,7 @@ one:
 two:
   question: ruby question 1
   status: Being Helped
+  state: 1
   owner: student2
   users:
   classroom: two
@@ -17,6 +19,7 @@ two:
 three:
   question: ruby question 2
   status: Being Helped
+  state: 1
   owner: student2
   users:
   classroom: three
@@ -25,6 +28,7 @@ three:
 four:
   question: ruby question 3
   status: Being Helped
+  state: 1
   owner: student2
   users:
   classroom: three
@@ -33,6 +37,7 @@ four:
 five:
   question: ruby question 4
   status: Being Helped
+  state: 1
   owner: student2
   users:
   classroom: three

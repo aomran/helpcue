@@ -6,10 +6,11 @@ class Request < ActiveRecord::Base
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   belongs_to :classroom
 
-  scope :need_help, -> { where.not(status: STATUS_OPTIONS[2]).order("created_at ASC") }
-  scope :completed, -> { where(status: STATUS_OPTIONS[2]).order("updated_at DESC") }
+  scope :need_help, -> { where.not(state: 2).order("created_at ASC") }
+  scope :completed, -> { where(state: 2).order("updated_at DESC") }
 
-  STATUS_OPTIONS = ['Waiting', 'Being Helped', 'Done']
+  enum state: [:waiting, :being_helped, :done]
+
   validates :question, length: { maximum: 255 }
 
   include PgSearch
@@ -20,48 +21,28 @@ class Request < ActiveRecord::Base
       owner: [:first_name, :last_name]
     }
 
-  def waiting?
-    status == STATUS_OPTIONS[0]
-  end
-
-  def being_helped?
-    status == STATUS_OPTIONS[1]
-  end
-
-  def done?
-    status == STATUS_OPTIONS[2]
-  end
-
-  def toggle_status
+  def toggle_state
     if waiting?
-      self.status = STATUS_OPTIONS[1]
+      being_helped!
       self.helped_at = Time.zone.now
     elsif being_helped?
-      self.status = STATUS_OPTIONS[0]
+      waiting!
     end
     self
   end
 
   def remove_from_queue
-    self.status = STATUS_OPTIONS[2]
+    done!
     self.done_at = Time.zone.now
     self
   end
 
   def time_waiting
-    if helped_at
-      (helped_at - created_at).ceil
-    else
-      0
-    end
+    helped_at ? (helped_at - created_at).ceil : 0
   end
 
   def help_duration
-    if helped_at && done_at
-      (done_at - helped_at).ceil
-    else
-      0
-    end
+    (helped_at && done_at) ? (done_at - helped_at).ceil : 0
   end
 
   def self.to_csv(admin)
