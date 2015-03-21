@@ -9,47 +9,34 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
     click_link classrooms(:two).name
   end
 
-  test "a student can add a question" do
-    fill_in :request_question, with: "I has a question!"
+  test "student can request help and advance the queue" do
+    fill_in :request_question, with: "I have a question to add!"
     click_button 'Ask Question'
+    assert page.has_content?("I have a question to add!")
 
-    assert page.find('#requests-list').has_content?("I has a question!")
+    within(all(".request-item").last) { click_link 'Being Helped?' }
+    assert all(".request-item").last.has_content?("Being Helped")
+    sleep(1)
+
+    within(all(".request-item").last) { click_link 'Done?' }
+    assert page.has_no_content?("I have a question to add!")
   end
 
-  test "student can mark question as being-helped" do
-    fill_in :request_question, with: "I has another question!"
+  test "student can delete their new request" do
+    fill_in :request_question, with: "I have a question to delete!"
     click_button 'Ask Question'
+    assert page.has_content?("I have a question to delete!")
 
-    request_id = Request.all.last.id
-    find("#request#{request_id}").find(".request-toggle").click
-
-    assert find("#request#{request_id}").has_content?("Being Helped")
+    within(all(".request-item").last) { click_link 'Delete' }
+    assert page.has_no_content?("I have a question to delete!")
   end
 
-  test "student can remove request by marking it as done" do
-    fill_in :request_question, with: "I has a good question!"
-    click_button 'Ask Question'
+  test "student can add themselves to an existing request" do
+    @request_id = requests(:two).id
+    within("#request#{@request_id}") { click_link 'Me too' }
 
-    request_id = Request.all.last.id
-    find("#request#{request_id}").find(".request-toggle").click
-    find("#request#{request_id}").find(".request-remove").click
-
-    page.assert_selector("#request#{request_id}", :count => 0)
-  end
-
-  test "student can add themselves to a request" do
-    request_id = requests(:two).id
-    find("#request#{request_id} .request-metoo").click
-
-    assert find("#request#{request_id} .me-too-count").has_content?("+1")
-  end
-
-  test "student can delete a request" do
-    request_id = requests(:one).id
-    find("#request#{request_id}").find(".request-delete").click
-    page.driver.browser.switch_to.alert.accept
-
-    page.assert_selector("#request#{request_id}", :count => 0)
+    assert page.find("#request#{@request_id} .me-too-count").has_content?("+1")
+    within("#request#{@request_id}") { click_link 'Me too' }
   end
 
   teardown do

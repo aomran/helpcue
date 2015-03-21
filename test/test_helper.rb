@@ -2,6 +2,8 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
+require 'capybara/poltergeist'
+require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
@@ -26,6 +28,10 @@ class ActiveSupport::TestCase
     click_link 'Log Out'
   end
 
+  def setup
+    Pusher.stubs(:trigger)
+  end
+
   def teardown
     travel_back
   end
@@ -36,8 +42,12 @@ class ActionController::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, {js_errors: false})
+  end
+  Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = Capybara.javascript_driver
-  Capybara.default_wait_time = 5
+  Capybara.default_wait_time = 10
 end

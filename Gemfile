@@ -35,6 +35,7 @@ group :development do
   gem 'rack-livereload', '~> 0.3.15'
   gem 'guard-livereload', '~> 2.4.0'
   gem 'quiet_assets', '~> 1.1.0'
+  gem 'spring', '~> 1.3.3'
 end
 
 group :development, :test do
@@ -43,7 +44,8 @@ end
 
 group :test do
   gem 'capybara', '~> 2.4.3'
-  gem 'selenium-webdriver', '~> 2.45.0'
+  gem 'poltergeist', '~> 1.6.0'
+  gem 'mocha', '~> 1.1.0'
 end
 
 group :production do
