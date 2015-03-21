@@ -4,8 +4,7 @@ source 'https://rubygems.org'
 ruby "2.2.1"
 gem 'rails', '4.2'
 gem 'pg', '~> 0.18.1'
-gem 'puma', '~> 2.11.1'
-gem 'rack-timeout', '~> 0.2.1'
+gem 'passenger', '~> 5.0.4'
 gem 'foreman', '~> 0.78.0'
 
 # Assets
@@ -35,6 +34,7 @@ group :development do
   gem 'style-guide', '~> 1.1.1'
   gem 'rack-livereload', '~> 0.3.15'
   gem 'guard-livereload', '~> 2.4.0'
+  gem 'quiet_assets', '~> 1.1.0'
 end
 
 group :development, :test do
