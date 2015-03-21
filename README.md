@@ -1,4 +1,3 @@
-![image](https://codeship.com/projects/69278/status?branch=master)
 # [HelpCue](http://www.helpcue.com)
 
 ## Getting Started
