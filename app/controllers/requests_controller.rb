@@ -102,12 +102,12 @@ class RequestsController < ApplicationController
 
   def toggle_help
     authorize @request
-    @request.toggle_status
+    @request.toggle_state
 
     respond_to do |format|
       if @request.save
         push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status, waiting_time: @request.time_waiting }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_state: @request.state, waiting_time: @request.time_waiting }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -121,7 +121,7 @@ class RequestsController < ApplicationController
       if @request.save
         push_to_channel('removeRequest')
         update_requesters_number(false)
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_status: @request.status }, status: :created }
+        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_state: @request.state }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end

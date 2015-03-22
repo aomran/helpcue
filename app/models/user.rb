@@ -9,23 +9,16 @@ class User < ActiveRecord::Base
 
   before_save :set_avatar
 
-  has_many :classroom_users
-  has_many :classrooms, through: :classroom_users
+  has_many :enrollments
+  has_many :classrooms, through: :enrollments
   has_many :owned_classrooms, :class_name => "Classroom", :foreign_key => "owner_id"
   has_and_belongs_to_many :requests
   has_many :owned_requests, :class_name => "Request", :foreign_key => "owner_id"
 
+  delegate :role, :admin?, to: :enrollments
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def admin?(classroom)
-    (Classroom::ROLES[0..1]).include?(self.role(classroom))
-  end
-
-  def role(classroom)
-    classroom_users.where(classroom: classroom).first.role
   end
 
   def self.full_names

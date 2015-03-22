@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
+require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
@@ -26,8 +27,12 @@ class ActiveSupport::TestCase
     click_link 'Log Out'
   end
 
+  def setup
+    Pusher.stubs(:trigger)
+  end
+
   def teardown
-    Timecop.return
+    travel_back
   end
 end
 
@@ -36,8 +41,8 @@ class ActionController::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+
   Capybara.current_driver = Capybara.javascript_driver
-  Capybara.default_wait_time = 5
+  Capybara.default_wait_time = 10
 end

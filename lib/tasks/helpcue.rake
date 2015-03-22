@@ -13,4 +13,18 @@ namespace :helpcue do
       cu.save
     end
   end
+
+  desc "Migrate request status to state"
+  task status_to_state: :environment do
+    Request.find_each do |request|
+      if request.status == 'Waiting'
+        request.state = 0
+      elsif request.status == 'Being Helped'
+        request.state = 1
+      elsif request.status == 'Done'
+        request.state = 2
+      end
+      request.save
+    end
+  end
 end

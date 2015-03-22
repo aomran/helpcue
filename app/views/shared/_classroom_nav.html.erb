@@ -23,7 +23,7 @@
     <li>
      <%= link_to_selected classroom_users_path(@classroom), class: "nav-links" do %>
        <span class="nav-icon nav-people">
-         <% if @classroom.classroom_users.members.empty? %>
+         <% if @classroom.enrollments.members.empty? %>
            <span class="req-num requests-badge">!</span>
          <% end %>
        </span>

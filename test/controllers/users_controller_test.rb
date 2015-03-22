@@ -37,7 +37,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:teacher1)
     sign_in users(:teacher2) #owner
 
-    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:student2).id, role: Classroom::ROLES[0]
+    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:student2).id, role: Enrollment::ROLES[0]
 
     assert classrooms(:two).admins.include?(users(:student2))
   end
@@ -46,7 +46,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:teacher1)
     sign_in users(:teacher2) #owner
 
-    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:student2).id, role: Classroom::ROLES[1]
+    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:student2).id, role: Enrollment::ROLES[1]
 
     assert classrooms(:two).mentors.include?(users(:student2))
   end
@@ -55,7 +55,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:teacher1)
     sign_in users(:teacher2) #owner
 
-    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:teacher1).id, role: Classroom::ROLES[2]
+    xhr :patch, :update, classroom_id: classrooms(:two), id: users(:teacher1).id, role: Enrollment::ROLES[2]
 
     assert classrooms(:two).members.include?(users(:teacher1))
   end
