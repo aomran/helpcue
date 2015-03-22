@@ -16,9 +16,8 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
 
     within(all(".request-item").last) { click_link 'Being Helped?' }
     assert all(".request-item").last.has_content?("Being Helped")
-    page.document.synchronize do
-      within(all(".request-item").last) { click_link 'Done?' }
-    end
+    within(page.all(".request-item").last) { click_link 'Done?' }
+
     assert page.has_no_content?("I have a question to add!")
   end
 
@@ -28,6 +27,7 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
     assert page.has_content?("I have a question to delete!")
 
     within(all(".request-item").last) { click_link 'Delete' }
+    page.driver.browser.switch_to.alert.accept
     assert page.has_no_content?("I have a question to delete!")
   end
 

@@ -2,7 +2,6 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
-require 'capybara/poltergeist'
 require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
@@ -44,10 +43,6 @@ end
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
 
-  Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, {js_errors: false})
-  end
-  Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = Capybara.javascript_driver
   Capybara.default_wait_time = 10
 end

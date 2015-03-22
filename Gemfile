@@ -43,7 +43,7 @@ end
 
 group :test do
   gem 'capybara', '~> 2.4.3'
-  gem 'poltergeist', '~> 1.6.0'
+  gem 'selenium-webdriver', '~> 2.45.0'
   gem 'mocha', '~> 1.1.0'
 end
 
