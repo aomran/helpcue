@@ -9,13 +9,15 @@ class ClassroomsController < ApplicationController
 
   def create
     @classroom = Classroom.new(classroom_params)
-    @classroom.owner_id = current_user.id
+    ownership = ClassroomOwnership.new(@classroom, current_user)
+
     respond_to do |format|
-      if @classroom.save
-        @classroom.enrollments.create(user: current_user, role: Enrollment::ROLES[0])
-        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: @classroom }), id: @classroom.id }, status: :created, location: @classroom }
-      else
-        format.json { render json: @classroom.errors, status: :unprocessable_entity }
+      format.json do
+        if ownership.save
+          render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: @classroom }), id: @classroom.id }, status: :created, location: @classroom
+        else
+          render json: @classroom.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -24,44 +26,36 @@ class ClassroomsController < ApplicationController
     authorize @classroom
 
     respond_to do |format|
-      if @classroom.update(classroom_params)
-        format.json {
+      format.json do
+        if @classroom.update(classroom_params)
           render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: @classroom }), id: @classroom.id }, status: :created, location: @classroom
-        }
-      else
-        format.json {
+        else
           render json: @classroom.errors, status: :unprocessable_entity
-        }
+        end
       end
     end
   end
 
   def destroy
     current_user.classrooms.delete(@classroom)
-    if @classroom.users.empty?
-      @classroom.destroy
-    end
+    @classroom.destroy if @classroom.users.empty?
+
     respond_to do |format|
-      format.json {
-        render json: { id: params[:id] }
-      }
+      format.json { render json: { id: params[:id] } }
     end
   end
 
   def join
     classroom = Classroom.find_by(user_token: params[:join_token].strip)
+    enroller = Enroller.new(classroom, current_user)
 
     respond_to do |format|
-      if classroom && current_user.classrooms.exclude?(classroom)
-        classroom.enrollments.create(user: current_user, role: Enrollment::ROLES[2])
-        format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom }
-      else
-        if current_user.classrooms.include?(classroom)
-          message = 'You are already in this classroom'
+      format.json do
+        if enroller.save
+          render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom
         else
-          message = 'Invalid Token'
+          render json: enroller.errors[0], status: :unprocessable_entity
         end
-        format.json { render json: message, status: :unprocessable_entity }
       end
     end
   end

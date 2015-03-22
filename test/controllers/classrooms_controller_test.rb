@@ -3,6 +3,7 @@ require 'test_helper'
 class ClassroomsControllerTest < ActionController::TestCase
 
   def setup
+    Pusher.stubs(:trigger)
     sign_in users(:teacher1)
   end
 
@@ -12,24 +13,30 @@ class ClassroomsControllerTest < ActionController::TestCase
     assert :success
   end
 
-  test "should create classroom with valid data" do
+  test "should create classroom with valid data and return an html partial" do
     assert_difference 'users(:teacher1).classrooms.count' do
       xhr :post, :create, format: :json, classroom: {name: "Test classroom"}
     end
 
     response = JSON.parse(@response.body)
-    assert response["partial"]
+    assert response["partial"], 'Partial was not sent in response body'
+  end
+
+  test "should create classroom and add user as owner" do
+    xhr :post, :create, format: :json, classroom: {name: "Test classroom"}
+
+    assert_equal Enrollment::ROLES[0], users(:teacher1).enrollments.last.role
   end
 
   test "should not create classroom with invalid data" do
     xhr :post, :create, format: :json, classroom: { name: nil }
 
     response = JSON.parse(@response.body)
-    assert response["name"]
+    assert_equal ["You must name the classroom!"], response["name"]
   end
 
 
-  test "should update classroom with valid data" do
+  test "should update classroom with valid data and return html partial" do
     xhr :patch, :update, id: classrooms(:one), classroom: {name: "Changed name" }
 
     classroom = Classroom.find(classrooms(:one).id)
@@ -43,7 +50,7 @@ class ClassroomsControllerTest < ActionController::TestCase
     xhr :patch, :update, id: classrooms(:one), classroom: {name: nil }
 
     response = JSON.parse(@response.body)
-    assert response["name"]
+    assert_equal ["You must name the classroom!"], response["name"]
   end
 
   test "should remove user from classroom without deleting classroom" do
