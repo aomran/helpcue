@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?(classroom)
-    (Classroom::ROLES[0..1]).include?(self.role(classroom))
+    (Enrollment::ROLES[0..1]).include?(self.role(classroom))
   end
 
   def role(classroom)

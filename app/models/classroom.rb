@@ -10,7 +10,6 @@ class Classroom < ActiveRecord::Base
 
   before_create :generate_token
   SORT_TYPE = ['Time', 'Popularity']
-  ROLES = ['Admin', 'Mentor', 'Member']
 
   def members
     users.merge(enrollments.members)

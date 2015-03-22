@@ -14,9 +14,9 @@
     <% unless user == @classroom.owner || user == current_user %>
 
       <% if policy(@classroom).owner? %>
-        <% roles = ['Owner'] + Classroom::ROLES %>
+        <% roles = ['Owner'] + Enrollment::ROLES %>
       <% else %>
-        <% roles = Classroom::ROLES %>
+        <% roles = Enrollment::ROLES %>
       <% end %>
       <%= form_tag classroom_user_path(@classroom, user), id: "form#{user.id}", class: 'user-promote-form', remote: true, method: :patch do %>
         <%= select_tag :role, options_for_select(roles, user.role(@classroom)), onchange: "$('#form#{user.id}').submit();" %>

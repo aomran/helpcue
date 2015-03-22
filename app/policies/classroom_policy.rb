@@ -11,7 +11,7 @@ class ClassroomPolicy
   end
 
   def admin?
-    user.role(classroom) == Classroom::ROLES[0] # Admin
+    user.role(classroom) == Enrollment::ROLES[0] # Admin
   end
 
   def owner?
