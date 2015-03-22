@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    classroom_user = @user.classroom_users.where(classroom: @classroom).first
+    classroom_user = @user.enrollments.where(classroom: @classroom).first
     if params[:role] == 'Owner'
       authorize @classroom, :owner?
       @classroom.owner = @user

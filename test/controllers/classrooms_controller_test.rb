@@ -82,7 +82,7 @@ class ClassroomsControllerTest < ActionController::TestCase
     xhr :post, :join, format: :json, join_token: classrooms(:one).user_token
 
     assert_equal 2, users(:student1).classrooms.size
-    assert_equal Classroom::ROLES[2], users(:student1).classroom_users.last.role
+    assert_equal Classroom::ROLES[2], users(:student1).enrollments.last.role
   end
 
   test "should not add user to a classroom they are already in" do

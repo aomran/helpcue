@@ -1,4 +1,4 @@
-class ClassroomUser < ActiveRecord::Base
+class Enrollment < ActiveRecord::Base
   belongs_to :classroom
   belongs_to :user
 

@@ -1,7 +1,7 @@
 class Classroom < ActiveRecord::Base
   has_many :requests
-  has_many :classroom_users
-  has_many :users, through: :classroom_users
+  has_many :enrollments
+  has_many :users, through: :enrollments
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
 
   validates :name, presence: {message: "You must name the classroom!"}
@@ -13,15 +13,15 @@ class Classroom < ActiveRecord::Base
   ROLES = ['Admin', 'Mentor', 'Member']
 
   def members
-    users.merge(classroom_users.members)
+    users.merge(enrollments.members)
   end
 
   def admins
-    users.merge(classroom_users.admins)
+    users.merge(enrollments.admins)
   end
 
   def mentors
-    users.merge(classroom_users.mentors)
+    users.merge(enrollments.mentors)
   end
 
   def sort_by_time?

@@ -12,7 +12,7 @@ class ClassroomsController < ApplicationController
     @classroom.owner_id = current_user.id
     respond_to do |format|
       if @classroom.save
-        @classroom.classroom_users.create(user: current_user, role: Classroom::ROLES[0])
+        @classroom.enrollments.create(user: current_user, role: Classroom::ROLES[0])
         format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: @classroom }), id: @classroom.id }, status: :created, location: @classroom }
       else
         format.json { render json: @classroom.errors, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class ClassroomsController < ApplicationController
 
     respond_to do |format|
       if classroom && current_user.classrooms.exclude?(classroom)
-        classroom.classroom_users.create(user: current_user, role: Classroom::ROLES[2])
+        classroom.enrollments.create(user: current_user, role: Classroom::ROLES[2])
         format.json { render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom }
       else
         if current_user.classrooms.include?(classroom)
