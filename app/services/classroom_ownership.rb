@@ -17,4 +17,11 @@ class ClassroomOwnership
     end
   end
 
+  def update
+    classroom.save
+    enrollment = owner.enrollments.for(classroom)
+    enrollment.role = Enrollment::ROLES[0]
+    enrollment.save
+  end
+
 end

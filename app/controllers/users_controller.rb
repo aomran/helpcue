@@ -12,36 +12,25 @@ class UsersController < ApplicationController
   end
 
   def update
-    classroom_user = @user.enrollments.where(classroom: @classroom).first
     if params[:role] == 'Owner'
       authorize @classroom, :owner?
-      @classroom.owner = @user
-      @classroom.save
-      classroom_user.role = 'Admin'
-      classroom_user.save
-      role = 'Owner'
+      ClassroomOwnership.new(@classroom, @user).update
     else
       authorize @classroom, :admin?
-      classroom_user.role = params[:role]
-      classroom_user.save
-      role = @user.role(@classroom)
+      enrollment = @user.enrollments.for(@classroom)
+      enrollment.role = params[:role]
+      enrollment.save
     end
 
     respond_to do |format|
       format.json {
-        render json: {role: role, id: @user.id} , status: :ok
+        render json: {role: params[:role], id: @user.id} , status: :ok
       }
     end
   end
 
   def destroy
-    if @user == @classroom.owner
-      raise Pundit::NotAuthorizedError, "Cannot remove owner"
-    elsif @user.admin?(@classroom)
-      authorize @classroom, :admin?
-    else
-      authorize @classroom, :update?
-    end
+    authorize_user_removal
     @classroom.users.delete(@user)
 
     respond_to do |format|
@@ -54,5 +43,15 @@ class UsersController < ApplicationController
   private
   def get_user
     @user = @classroom.users.find(params[:id])
+  end
+
+  def authorize_user_removal
+    if @user == @classroom.owner
+      raise Pundit::NotAuthorizedError, "Cannot remove owner"
+    elsif @user.admin?(@classroom)
+      authorize @classroom, :admin?
+    else
+      authorize @classroom, :update?
+    end
   end
 end
