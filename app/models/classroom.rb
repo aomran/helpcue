@@ -11,17 +11,7 @@ class Classroom < ActiveRecord::Base
   before_create :generate_token
   SORT_TYPE = ['Time', 'Popularity']
 
-  def members
-    users.merge(enrollments.members)
-  end
-
-  def admins
-    users.merge(enrollments.admins)
-  end
-
-  def mentors
-    users.merge(enrollments.mentors)
-  end
+  delegate :members, :admins, :mentors, to: :enrollments
 
   def sort_by_time?
     sort_type == SORT_TYPE[0]

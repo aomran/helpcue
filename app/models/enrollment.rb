@@ -4,7 +4,7 @@ class Enrollment < ActiveRecord::Base
 
   ROLES = ['Admin', 'Mentor', 'Member']
 
-  scope :admins, -> { where(role: ROLES[0]) }
-  scope :mentors, -> { where(role: ROLES[1]) }
-  scope :members, -> { where(role: ROLES[2]) }
+  scope :admins, -> { where(role: ROLES[0]).map(&:user) }
+  scope :mentors, -> { where(role: ROLES[1]).map(&:user) }
+  scope :members, -> { where(role: ROLES[2]).map(&:user) }
 end
