@@ -27,13 +27,6 @@ class ActiveSupport::TestCase
     click_link 'Log Out'
   end
 
-  def setup
-    Pusher.stubs(:trigger)
-  end
-
-  def teardown
-    travel_back
-  end
 end
 
 class ActionController::TestCase

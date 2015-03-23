@@ -15,7 +15,13 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :requests
   has_many :owned_requests, :class_name => "Request", :foreign_key => "owner_id"
 
-  delegate :role, :admin?, to: :enrollments
+  def role(classroom)
+    enrollments.for(classroom).role
+  end
+
+  def admin?(classroom)
+    Enrollment::ROLES[0..1].include? role(classroom)
+  end
 
   def full_name
     "#{first_name} #{last_name}"

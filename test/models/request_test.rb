@@ -48,4 +48,8 @@ class RequestTest < ActiveSupport::TestCase
       assert_equal 40.minutes, request.help_duration
     end
   end
+
+  def teardown
+    travel_back
+  end
 end

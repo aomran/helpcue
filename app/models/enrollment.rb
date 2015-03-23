@@ -8,11 +8,7 @@ class Enrollment < ActiveRecord::Base
   scope :mentors, -> { where(role: ROLES[1]).map(&:user) }
   scope :members, -> { where(role: ROLES[2]).map(&:user) }
 
-  def self.role(classroom)
-    where(classroom: classroom).first.role
-  end
-
-  def self.admin?(classroom)
-    ROLES[0..1].include? role(classroom)
+  def self.for(classroom)
+    where(classroom: classroom).first
   end
 end
