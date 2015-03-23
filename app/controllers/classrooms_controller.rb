@@ -66,7 +66,7 @@ class ClassroomsController < ApplicationController
     @classroom.sort_type = params[:sort_type]
     @classroom.save
 
-    push_to_channel('updateSort')
+    push_to_channel('updateSort', sortType: @classroom.sort_type)
     respond_to do |format|
       format.json {
         render json: { sort_type: @classroom.sort_type }
@@ -77,9 +77,5 @@ class ClassroomsController < ApplicationController
   private
   def classroom_params
     params.require(:classroom).permit(:name, :description)
-  end
-
-  def push_to_channel(requestAction)
-    Pusher.trigger("classroom#{@classroom.id}-requests", 'request', requestAction: requestAction, sortType: @classroom.sort_type, user_id: current_user.id)
   end
 end

@@ -54,7 +54,6 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('addRequest')
-        update_requesters_number(true)
         format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, question_length: @request.question.length }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -120,7 +119,6 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         push_to_channel('removeRequest')
-        update_requesters_number(false)
         format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_state: @request.state }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -134,7 +132,6 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       push_to_channel('removeRequest')
-      update_requesters_number(false)
       format.json {
         render json: { request_id: params[:id] }
       }
@@ -147,14 +144,5 @@ class RequestsController < ApplicationController
   end
   def get_request
     @request = @classroom.requests.find(params[:id])
-  end
-
-  def push_to_channel(requestAction, extra_data={})
-    data = { requestAction: requestAction, request_id: params[:id] || @request.id, user_id: current_user.id, classroom_id: @classroom.id }.merge(extra_data)
-    Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
-  end
-
-  def update_requesters_number(add)
-    Pusher.trigger("classroom#{@classroom.id}-requests", 'requestUpdate', {add: add })
   end
 end

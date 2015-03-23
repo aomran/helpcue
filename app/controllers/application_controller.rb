@@ -33,4 +33,12 @@ class ApplicationController < ActionController::Base
     flash[:error] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
   end
+
+  def push_to_channel(requestAction, data={})
+    data = { requestAction: requestAction, user_id: current_user.id, classroom_id: @classroom.id }.merge(data)
+    if @request
+      data = data.merge({request_id: params[:id] || @request.id})
+    end
+    Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
+  end
 end
