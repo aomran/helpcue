@@ -13,10 +13,11 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
     fill_in :request_question, with: "I have a question to add!"
     click_button 'Ask Question'
     assert page.has_content?("I have a question to add!")
+    request_id = Request.all.last.id
 
-    within(all(".request-item").last) { click_link 'Being Helped?' }
-    assert all(".request-item").last.has_content?("Being Helped")
-    within(page.all(".request-item").last) { click_link 'Done?' }
+    within("#request#{request_id}") { click_link 'Being Helped?' }
+    assert find("#request#{request_id}").has_content?("Being Helped")
+    within("#request#{request_id}") { click_link 'Done?' }
 
     assert page.has_no_content?("I have a question to add!")
   end
@@ -25,18 +26,19 @@ class RequestsFlowTest < ActionDispatch::IntegrationTest
     fill_in :request_question, with: "I have a question to delete!"
     click_button 'Ask Question'
     assert page.has_content?("I have a question to delete!")
+    request_id = Request.all.last.id
 
-    within(all(".request-item").last) { click_link 'Delete' }
+    within("#request#{request_id}") { click_link 'Delete' }
     page.driver.browser.switch_to.alert.accept
     assert page.has_no_content?("I have a question to delete!")
   end
 
   test "student can add themselves to an existing request" do
-    @request_id = requests(:two).id
-    within("#request#{@request_id}") { click_link 'Me too' }
+    request_id = requests(:two).id
+    within("#request#{request_id}") { click_link 'Me too' }
 
-    assert page.find("#request#{@request_id} .me-too-count").has_content?("+1")
-    within("#request#{@request_id}") { click_link 'Me too' }
+    assert page.find("#request#{request_id} .me-too-count").has_content?("+1")
+    within("#request#{request_id}") { click_link 'Me too' }
   end
 
   teardown do
