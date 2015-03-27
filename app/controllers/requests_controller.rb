@@ -83,14 +83,8 @@ class RequestsController < ApplicationController
 
   def me_too
     authorize @request
-
-    if current_user.requests.exclude?(@request)
-      me_too_status = 'joined'
-      current_user.requests << @request
-    else
-      current_user.requests.delete(@request)
-      me_too_status = 'left'
-    end
+    request_updater = RequestUpdater.new(@request).add_or_remove_user(current_user)
+    me_too_status = request_updater.update_action
 
     respond_to do |format|
       push_to_channel('updateRequest')
