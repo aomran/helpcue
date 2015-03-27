@@ -50,14 +50,13 @@ class RequestsController < ApplicationController
   def create
     @request = @classroom.requests.build(question: params[:request][:question])
     @request.owner = current_user
+    @request_action = 'addRequest'
 
-    respond_to do |format|
-      if @request.save
-        push_to_channel('addRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, question_length: @request.question.length }, status: :created }
-      else
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
+    if @request.save
+      push_to_channel(@request_action)
+      render :show, status: :created
+    else
+      render json: @request.errors, status: :unprocessable_entity
     end
   end
 
@@ -69,41 +68,31 @@ class RequestsController < ApplicationController
     else
       request_updater.update_content(request_params)
     end
-    request_action = request_updater.update_action
+    @request_action = request_updater.update_action
 
-    respond_to do |format|
-      if @request.save
-        push_to_channel(request_action, question: @request.question, answer: @request.answer)
-        format.json { render json: { question: @request.question, answer: @request.answer, classroom_id: @classroom.id, request_id: @request.id, requestAction: request_action, request_state: @request.state, waiting_time: @request.time_waiting }, status: :created }
-      else
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
+    if @request.save
+      push_to_channel(@request_action, question: @request.question, answer: @request.answer)
+      render :show, status: :ok
+    else
+      render json: @request.errors, status: :unprocessable_entity
     end
+
   end
 
   def me_too
     authorize @request
     request_updater = RequestUpdater.new(@request).add_or_remove_user(current_user)
-    me_too_status = request_updater.update_action
 
-    respond_to do |format|
-      push_to_channel('updateRequest')
-      format.json {
-        render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count }
-      }
-    end
+    push_to_channel('updateRequest')
+    render :show, status: :ok
   end
 
   def destroy
     authorize @request
     @request.destroy
 
-    respond_to do |format|
-      push_to_channel('removeRequest')
-      format.json {
-        render json: { request_id: params[:id] }
-      }
-    end
+    push_to_channel('removeRequest')
+    render json: { request_id: params[:id] }
   end
 
   private

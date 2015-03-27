@@ -28,11 +28,9 @@ class RequestUpdater
 
   def add_or_remove_user(current_user)
     if current_user.requests.exclude?(request)
-      @update_action = 'joined'
       current_user.requests << request
     else
       current_user.requests.delete(request)
-      @update_action = 'left'
     end
     self
   end
