@@ -63,17 +63,18 @@ class RequestsController < ApplicationController
 
   def update
     authorize @request
+    request_updater = RequestUpdater.new(@request)
+    if params[:state_action]
+      request_updater.update_state(params[:state_action])
+    else
+      request_updater.update_content(request_params)
+    end
+    request_action = request_updater.update_action
+
     respond_to do |format|
-      if @request.update(request_params)
-
-        if params[:request][:question]
-          request_action = 'updateQuestion'
-        elsif params[:request][:answer]
-          request_action = 'updateAnswer'
-        end
-
+      if @request.save
         push_to_channel(request_action, question: @request.question, answer: @request.answer)
-        format.json { render json: { question: @request.question, answer: @request.answer, classroom_id: @classroom.id, request_id: @request.id, requestAction: request_action }, status: :created }
+        format.json { render json: { question: @request.question, answer: @request.answer, classroom_id: @classroom.id, request_id: @request.id, requestAction: request_action, request_state: @request.state, waiting_time: @request.time_waiting }, status: :created }
       else
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
@@ -96,33 +97,6 @@ class RequestsController < ApplicationController
       format.json {
         render json: { classroom_id: @classroom.id, request_id: @request.id, me_too_status: me_too_status, count: @request.users.count }
       }
-    end
-  end
-
-  def toggle_help
-    authorize @request
-    @request.toggle_state
-
-    respond_to do |format|
-      if @request.save
-        push_to_channel('updateRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_state: @request.state, waiting_time: @request.time_waiting }, status: :created }
-      else
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def remove
-    authorize @request
-    @request.remove_from_queue
-    respond_to do |format|
-      if @request.save
-        push_to_channel('removeRequest')
-        format.json { render json: { classroom_id: @classroom.id, request_id: @request.id, request_state: @request.state }, status: :created }
-      else
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
     end
   end
 

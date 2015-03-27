@@ -49,7 +49,7 @@ class RequestDecorator < Draper::Decorator
 
   def toggle_help_button
     if h.policy(object).toggle_help?
-      h.link_to h.toggle_help_classroom_request_path(id: id, classroom_id: classroom.id), method: :patch, remote: true, class: 'request-action request-toggle small' do
+      h.link_to h.classroom_request_path(id: id, classroom_id: classroom.id, state_action: 'toggle_state'), method: :patch, remote: true, class: 'request-action request-toggle small' do
         toggle_button_label
       end
     elsif !done?
@@ -70,7 +70,7 @@ class RequestDecorator < Draper::Decorator
         h.content_tag(:span, '', class: "action-icon done-current") + h.content_tag(:span, 'Done', class: "action-label-current")
       end
     elsif h.policy(object).remove?
-      h.link_to h.remove_classroom_request_path(id: id, classroom_id: classroom.id), method: :patch, remote: true, class: 'request-action request-remove small' do
+      h.link_to h.classroom_request_path(id: id, classroom_id: classroom.id, state_action: 'remove'), method: :patch, remote: true, class: 'request-action request-remove small' do
         h.content_tag(:span, '', class: "action-icon done") + h.content_tag(:span, 'Done?', class: "action-label")
       end
     end

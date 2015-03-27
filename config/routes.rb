@@ -21,8 +21,6 @@ Rails.application.routes.draw do
     patch 'set_sort', on: :member
 
     resources :requests, except: [:new, :edit] do
-      patch 'remove',      on: :member
-      patch 'toggle_help', on: :member
       patch 'me_too',      on: :member
       get   'completed',   on: :collection
       get   'search',      on: :collection
