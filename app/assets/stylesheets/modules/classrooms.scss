@@ -1,0 +1,55 @@
+// Styles for the classroom views.
+@import 'globals/all';
+
+.classroom-desc {
+  margin: 15px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  min-height: 38px;
+}
+
+.content > div,
+.content > div > div {
+  position: relative;
+}
+
+.classroom-settings,
+.class-icons{
+  background-image: image-url('helpcue-icons.svg');
+  display: inline-block;
+}
+
+.classroom-settings {
+  background-position: -90px -150px;
+  padding: 12px;
+  position: relative;
+  top: 18px;
+  right: 15px;
+  &:hover {
+    background-position: -90px -174px;
+  }
+}
+
+.class-icons{
+  position: absolute;
+  top: -5px;
+  padding: 12px;
+  margin: 6px 15px 0 0;
+}
+
+.student-icon {
+  background-position: -114px -150px;
+}
+
+.number {
+  font-weight: 700;
+  margin-left: 43px;
+}
+
+.student-count {
+  margin-bottom: 20px;
+}
+
+.classroom-option {
+  margin-top: 15px;
+}

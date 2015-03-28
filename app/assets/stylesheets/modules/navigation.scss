@@ -178,7 +178,7 @@ a:hover {
   & .nav-support {
     background-position: -30px -210px;
   }
- 
+
   & .nav-account {
     background-position: -30px -120px;
   }
@@ -208,12 +208,6 @@ a.selected {
   & .nav-account, .nav-account:hover {
     background-position: -60px -120px;
   }
-}
-
-.requests-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
 }
 
 // Tooltips
@@ -376,89 +370,6 @@ a:hover .nav-burger {
   background-position: -112px 0;
 }
 
-// secondary nav
-.help-toggle {
-  position: relative;
-  top: 3px;
-}
-
-.help-toggle div {
-  text-align: center;
-}
-
-// teacher
-.nav-help {
-  width: 30px;
-  height: 30px;
-  background-position: -60px -120px;
-  &:hover {
-    background-position: -60px -150px;
-  }
-  &.active {
-    margin-right: 14px;
-    background-position: -60px -180px;
-    &:hover {
-      background-position: -60px -210px;
-    }
-  }
-}
-
-.req-num {
-  // position: absolute;
-  // left: 22px;
-  // top: 6px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1;
-  padding: 1px 6px 3px;
-  border-radius: 100px;
-  background-color: $color-warning;
-  // display: inline-block;
-}
-
-// students
-.view-q {
-  display: inline-block;
-  margin-right: 10px;
-}
-.help-btn {
-  display: inline-block;
-  border: 1px solid rgba(0,0,0,0.1);
-  text-align: center;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 1.7;
-  width: 130px;
-  height: 30px;
-  margin-top: 1px;
-  @include border-radius(100px);
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 3px 1px $color-success;
-  }
-}
-
-.in-queue {
-  color: #fff;
-  background: $color-success;
-  box-shadow: 0 0 8px 2px $color-success;
-  &:hover,
-  &:focus {
-    background: darken($color-success, 10%);
-  }
-}
-
-.ask-help {
-  color: $grey-md;
-  background: $grey-lt;
-  &:hover,
-  &:focus {
-    color: #fff;
-    background: darken($grey-lt, 15%);
-  }
-}
-
 @include media-query(medium) {
   .show-desktop {
     display: block;
@@ -466,42 +377,5 @@ a:hover .nav-burger {
 
   .hide-desktop {
     display: none;
-  }
-}
-
-//student tooltips
-.student-help-tooltip {
-  display: none;
-  position: absolute;
-  top:5px;
-  right: 180px;
-  width: 120px;
-  font-size: 14px;
-  line-height: 1.3;
-  text-align: center;
-  padding: 3px 7px 4px;
-  background: $color-main;
-  color: #fff;
-  @include border-radius(5px);
-  &:before {
-    content: "";
-    position: absolute;
-    top: 25px;
-    right: -6px;
-    width: 0;
-    height: 0;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 7px solid $color-main;
-  }
-}
-
-@include media-query(small) {
-  .student-help-tooltip {
-    width: auto;
-    top: 23px;
-    &:before {
-      top: 5px;
-    }
   }
 }

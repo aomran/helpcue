@@ -1,17 +1,17 @@
 @HelpCue.Navigation =
   init: ->
-    if HelpCue.supports_html5_storage()
-      if HelpCue.largeScreen()
-        # Defaults
-        localStorage["expandNav"] ?= true
-        # Build UI
-        $('body').toggleClass('nav-open', JSON.parse(localStorage["expandNav"]))
-      else
-        localStorage.removeItem("expandNav")
+    if HelpCue.largeScreen()
+      localStorage["expandNav"] ?= true
+      expandNav = JSON.parse(localStorage["expandNav"])
+
+      $('body').toggleClass('nav-open', expandNav)
+    else
+      localStorage.removeItem("expandNav")
+
     @registerEventHandlers()
 
   mainUpdate: ->
-    if HelpCue.supports_html5_storage() && HelpCue.largeScreen()
+    if HelpCue.largeScreen()
       if $('body').hasClass('nav-open')
         localStorage["expandNav"] = true
       else
@@ -28,12 +28,12 @@
     $('.subnav-slide').toggleClass('nav-label-hide')
 
   registerEventHandlers: ->
-    $('.collapse-toggle').on 'click', (e) ->
+    $('.collapse-toggle').on 'click', (e) =>
       e.preventDefault()
       $('body').toggleClass('nav-open')
-      HelpCue.Navigation.mainUpdate()
-      HelpCue.Navigation.subClose()
+      @mainUpdate()
+      @subClose()
 
-    $('.subnav-toggle').on 'click', (e) ->
+    $('.subnav-toggle').on 'click', (e) =>
       e.preventDefault()
-      HelpCue.Navigation.subToggle()
+      @subToggle()

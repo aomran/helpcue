@@ -1,11 +1,5 @@
 @HelpCue ?= {}
 
-@HelpCue.supports_html5_storage = ->
-  try
-    return "localStorage" of window and window["localStorage"] isnt null
-  catch e
-    return false
-
 @HelpCue.largeScreen = ->
   return window.matchMedia("(min-width: 1024px)").matches
 
