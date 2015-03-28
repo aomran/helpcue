@@ -49,6 +49,8 @@ GEM
       timers (~> 4.0.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -64,6 +66,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    docile (1.1.5)
     draper (1.4.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -245,6 +248,11 @@ GEM
     signature (0.1.8)
     simple_hashtag (0.1.9)
       rails (> 3.2.0)
+    simplecov (0.9.2)
+      docile (~> 1.1.0)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.9.0)
+    simplecov-html (0.9.0)
     skylight (0.6.0)
       activesupport (>= 3.0.0)
     slop (3.6.0)
@@ -282,6 +290,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (~> 2.4.3)
+  codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   devise (~> 3.4.1)
   draper (~> 1.4.0)

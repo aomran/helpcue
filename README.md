@@ -1,5 +1,9 @@
 # [HelpCue](http://www.helpcue.com)
 
+[![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue)
+
+[![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
+
 ## Getting Started
 
 The development environment requires the Ruby 2.2.1 and Postgresql. To get this set up please follow the instructions in the [Wiki](https://github.com/aomra015/helpcue/wiki) but make sure you upgrade everything.
