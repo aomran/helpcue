@@ -80,7 +80,7 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should toggle request state from waiting to being helped" do
-    xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:one).id
+    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:one).id, state_action: 'toggle_state'
 
     assert_equal 'being_helped', requests(:one).reload.state
   end
@@ -88,7 +88,7 @@ class RequestsControllerTest < ActionController::TestCase
   test "should toggle request state from being helped to waiting" do
     sign_out users(:student1)
     sign_in users(:student2)
-    xhr :patch, :toggle_help, classroom_id: classrooms(:two), id: requests(:two).id
+    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:two).id, state_action: 'toggle_state'
 
     assert_equal 'waiting', requests(:two).reload.state
   end
@@ -96,7 +96,7 @@ class RequestsControllerTest < ActionController::TestCase
   test "should remove request when it's done" do
     sign_out users(:student1)
     sign_in users(:teacher1)
-    xhr :patch, :remove, classroom_id: classrooms(:two), id: requests(:two).id
+    xhr :patch, :update, classroom_id: classrooms(:two), id: requests(:two).id, state_action: 'remove'
 
     assert_equal 'done', requests(:two).reload.state
   end

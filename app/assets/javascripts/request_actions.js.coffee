@@ -22,10 +22,7 @@ $ ->
 
     $requests.on 'ajax:success', '.request-metoo', (e, data) ->
       HelpCue.RequestsList.updateRequest(data)
-      if data.me_too_status == 'joined'
-        analytics.track "User joins a request", classroom_id: data.classroom_id, request_id: data.request_id, count: data.count
-      else if data.me_too_status == 'left'
-        analytics.track "User leaves a request", classroom_id: data.classroom_id, request_id: data.request_id, count: data.count
+      analytics.track "User joins/leaves a request", classroom_id: data.classroom_id, request_id: data.request_id
 
 
     # x-editable

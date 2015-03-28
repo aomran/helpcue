@@ -1,9 +1,9 @@
 @HelpCue.RequestsNumber =
-  update: (data) ->
+  update: (requestAction) ->
     $queueLink = $('#queue_link')
     reqLimit = $queueLink.data("reqlimit")
     oldReqNum = $queueLink.data("requests")
-    newReqNum = @updateNumber(oldReqNum, data.add)
+    newReqNum = @updateNumber(oldReqNum, requestAction)
 
     # Reset title & text
     document.title = document.title.replace(/\(\d+\+*\)\s/, '')
@@ -17,10 +17,10 @@
     if newReqNum > 0
       newReqNum = '30+' if newReqNum > reqLimit
       document.title = "(#{newReqNum}) #{document.title}"
-      $queueLabel.text(newReqNum).show()
+      $queueLabel.text(newReqNum).removeClass('dont-show').show()
 
-  updateNumber: (oldReqNum, add) ->
-    if add
+  updateNumber: (oldReqNum, requestAction) ->
+    if requestAction == 'addRequest'
       return oldReqNum + 1
-    else
+    else if requestAction == 'removeRequest'
       return oldReqNum - 1

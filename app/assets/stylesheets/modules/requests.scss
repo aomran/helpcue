@@ -203,6 +203,7 @@ td .btn-small {
 
 .trash {
   background-position: -162px -102px;
+  fill: $grey-md;
 }
 
 .request-action:hover .trash {
@@ -253,4 +254,24 @@ td .btn-small {
 
 .notify-info {
   position: absolute;
+}
+
+.requests-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.req-num {
+  // position: absolute;
+  // left: 22px;
+  // top: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1px 6px 3px;
+  border-radius: 100px;
+  background-color: $color-warning;
+  // display: inline-block;
 }
