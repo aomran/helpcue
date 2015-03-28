@@ -49,7 +49,7 @@ class RequestDecorator < Draper::Decorator
 
   def toggle_help_button
     if h.policy(object).toggle_help?
-      h.link_to h.classroom_request_path(id: id, classroom_id: classroom.id, state_action: 'toggle_state'), method: :patch, remote: true, class: 'request-action request-toggle small' do
+      status_update_link 'toggle_state', 'request-toggle' do
         toggle_button_label
       end
     elsif !done?
@@ -59,19 +59,14 @@ class RequestDecorator < Draper::Decorator
     end
   end
 
-  def toggle_button_label
-    status_class = being_helped? ?  '-current' : ''
-    h.content_tag(:span, '', class: "action-icon helped#{status_class}") + h.content_tag(:span, "Being Helped#{'?' unless being_helped?}", class: "action-label#{status_class}")
-  end
-
   def done_button
     if done?
       h.content_tag :span, class: 'request-action-disabled small' do
-        h.content_tag(:span, '', class: "action-icon done-current") + h.content_tag(:span, 'Done', class: "action-label-current")
+        done_button_label(true)
       end
     elsif h.policy(object).remove?
-      h.link_to h.classroom_request_path(id: id, classroom_id: classroom.id, state_action: 'remove'), method: :patch, remote: true, class: 'request-action request-remove small' do
-        h.content_tag(:span, '', class: "action-icon done") + h.content_tag(:span, 'Done?', class: "action-label")
+      status_update_link 'remove', 'request-remove' do
+        done_button_label(false)
       end
     end
   end
@@ -88,6 +83,22 @@ class RequestDecorator < Draper::Decorator
         h.content_tag(:span, '', class: "action-icon trash") + h.content_tag(:span, 'Delete', class: "action-label")
       end
     end
+  end
+
+  protected
+  def toggle_button_label
+    status_class = being_helped? ?  '-current' : ''
+    h.content_tag(:span, '', class: "action-icon helped#{status_class}") + h.content_tag(:span, "Being Helped#{'?' unless being_helped?}", class: "action-label#{status_class}")
+  end
+
+  def done_button_label(current)
+    css_class = current ? '-current': ''
+    inflection = current ? '' : '?'
+    h.content_tag(:span, '', class: "action-icon done#{css_class}") + h.content_tag(:span, "Done#{inflection}", class: "action-label#{css_class}")
+  end
+
+  def status_update_link(action, css_class, &block)
+    h.link_to h.classroom_request_path(id: id, classroom_id: classroom.id, state_action: action), {method: :patch, remote: true, class: "request-action #{css_class} small"}, &block
   end
 
 end

@@ -16,9 +16,7 @@ class RequestsController < ApplicationController
     @requests = @classroom.requests.completed.page(params[:page]).includes(:owner, :classroom)
 
     respond_to do |format|
-      format.json {
-        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
-      }
+      format.json { render json: pagination_partial_json }
       format.html {}
       format.csv { send_data @classroom.requests.completed.to_csv(current_user.admin?(@classroom)) }
     end
@@ -26,16 +24,11 @@ class RequestsController < ApplicationController
 
   def search
     @requests = @classroom.requests.search(params[:query]).page(params[:page]).includes(:owner)
-
+    @total_results_count = @requests.total_count
 
     respond_to do |format|
-      format.json {
-        render json: { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
-      }
-      format.html {
-        @total_results_count = @requests.total_count
-        flash.now[:track] = { event_name: "Search", properties: { classroom_id: @classroom.id, query: params[:query], results_count: @total_results_count } }
-      }
+      format.json { render json: pagination_partial_json }
+      format.html {}
     end
   end
 
@@ -101,5 +94,8 @@ class RequestsController < ApplicationController
   end
   def get_request
     @request = @classroom.requests.find(params[:id])
+  end
+  def pagination_partial_json
+    { partial: render_to_string(partial: 'requests.html'), pagination_partial: render_to_string(partial: 'requests_pagination.html') }
   end
 end
