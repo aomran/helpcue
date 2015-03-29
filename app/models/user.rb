@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -11,16 +11,24 @@ class User < ActiveRecord::Base
 
   has_many :enrollments
   has_many :classrooms, through: :enrollments
-  has_many :owned_classrooms, :class_name => "Classroom", :foreign_key => "owner_id"
+  has_many :owned_classrooms, class_name: "Classroom", foreign_key: "owner_id"
   has_and_belongs_to_many :requests
-  has_many :owned_requests, :class_name => "Request", :foreign_key => "owner_id"
+  has_many :owned_requests, class_name: "Request", foreign_key: "owner_id"
 
   def role(classroom)
     enrollments.for(classroom).role
   end
 
-  def admin?(classroom)
+  def admin_or_mentor?(classroom)
     Enrollment::ROLES[0..1].include? role(classroom)
+  end
+
+  def admin?(classroom)
+    role(classroom) == Enrollment::ROLES[0]
+  end
+
+  def owner?(classroom_or_request)
+    self == classroom_or_request.owner
   end
 
   def full_name

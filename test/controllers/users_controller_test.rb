@@ -41,8 +41,7 @@ class UsersControllerTest < ActionController::TestCase
 
     assert classrooms(:two).admins.include?(users(:student2))
 
-    response = JSON.parse(@response.body)
-    assert_equal Enrollment::ROLES[0], response['role']
+    assert_equal Enrollment::ROLES[0], json['role']
   end
 
   test "owner can change user role to mentor" do

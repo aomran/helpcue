@@ -7,22 +7,22 @@ class RequestPolicy
   end
 
   def update?
-    (request.owner == user) || user.admin?(request.classroom)
+    user.owner?(request) || user.admin_or_mentor?(request.classroom)
   end
 
   def toggle_help?
-    !request.done? && ((request.owner == user) || user.admin?(request.classroom))
+    !request.done? && update?
   end
 
   def remove?
-    request.being_helped? && ((request.owner == user) || user.admin?(request.classroom))
+    request.being_helped? && update?
   end
 
   def destroy?
-    request.waiting? && ((request.owner == user) || user.admin?(request.classroom))
+    request.waiting? && update?
   end
 
   def me_too?
-    !request.done? && ((request.owner != user) && !user.admin?(request.classroom))
+    !request.done? && !update?
   end
 end

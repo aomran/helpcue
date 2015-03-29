@@ -1,12 +1,10 @@
 # [HelpCue](http://www.helpcue.com)
 
-[![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue)
-
-[![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
+[![Build Status](https://semaphoreci.com/api/v1/projects/4e05b0dd-c58e-4fde-ada7-be14092048f7/215316/shields_badge.svg)](https://semaphoreci.com/this_ahmed/helpcue) [![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue) [![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
 
 ## Getting Started
 
-The development environment requires the Ruby 2.2.1 and Postgresql. To get this set up please follow the instructions in the [Wiki](https://github.com/aomra015/helpcue/wiki) but make sure you upgrade everything.
+This app requires Ruby 2.2.1 and Postgresql 9.3 in development and production.
 
 1. `$ git clone git@github.com:aomra015/helpcue.git`
 1. `$ cd helpcue`
@@ -18,3 +16,8 @@ The development environment requires the Ruby 2.2.1 and Postgresql. To get this 
 
 ### Run tests
 - `$ rake` to run all Ruby tests.
+
+### Official Browser Support
+- Internet Explorer (Version 9+), Google Chrome (Latest Version), Mozilla Firefox (Latest Version), Apple Safari (Version 5+).
+- Clients without Javascript are not supported.
+- HelpCue supports mobile browsers.

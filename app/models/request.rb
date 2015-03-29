@@ -3,7 +3,7 @@ class Request < ActiveRecord::Base
   hashtaggable_attribute :question
 
   has_and_belongs_to_many :users
-  belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
+  belongs_to :owner, class_name: "User", foreign_key: "owner_id"
   belongs_to :classroom
 
   scope :need_help, -> { where.not(state: 2).order("created_at ASC") }

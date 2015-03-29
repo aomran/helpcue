@@ -29,3 +29,8 @@ six:
   role: Admin
   user: teacher2
   classroom: two
+
+mentor:
+  role: Mentor
+  user: mentor1
+  classroom: two

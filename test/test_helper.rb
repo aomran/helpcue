@@ -30,6 +30,10 @@ class ActiveSupport::TestCase
     click_link 'Log Out'
   end
 
+  def json
+    JSON.parse(@response.body)
+  end
+
 end
 
 class ActionController::TestCase

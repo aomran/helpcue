@@ -18,8 +18,7 @@ class ClassroomsControllerTest < ActionController::TestCase
       xhr :post, :create, format: :json, classroom: {name: "Test classroom"}
     end
 
-    response = JSON.parse(@response.body)
-    assert response["partial"], 'Partial was not sent in response body'
+    assert json["partial"], 'Partial was not sent in response body'
   end
 
   test "should create classroom and add user as owner" do
@@ -31,8 +30,7 @@ class ClassroomsControllerTest < ActionController::TestCase
   test "should not create classroom with invalid data" do
     xhr :post, :create, format: :json, classroom: { name: nil }
 
-    response = JSON.parse(@response.body)
-    assert_equal ["You must name the classroom!"], response["name"]
+    assert_equal ["You must name the classroom!"], json["name"]
   end
 
 
@@ -42,15 +40,13 @@ class ClassroomsControllerTest < ActionController::TestCase
     classroom = Classroom.find(classrooms(:one).id)
     assert_equal "Changed name", classroom.name, 'Name did not change'
 
-    response = JSON.parse(@response.body)
-    assert response["partial"], 'Partial was not sent in response body'
+    assert json["partial"], 'Partial was not sent in response body'
   end
 
   test "should not update classroom with invalid data" do
     xhr :patch, :update, id: classrooms(:one), classroom: {name: nil }
 
-    response = JSON.parse(@response.body)
-    assert_equal ["You must name the classroom!"], response["name"]
+    assert_equal ["You must name the classroom!"], json["name"]
   end
 
   test "should remove user from classroom without deleting classroom" do
@@ -59,8 +55,7 @@ class ClassroomsControllerTest < ActionController::TestCase
     end
 
     assert classrooms(:one).reload
-    response = JSON.parse(@response.body)
-    assert response["id"]
+    assert json["id"]
   end
 
   test "should remove classroom with no users" do
@@ -90,6 +85,7 @@ class ClassroomsControllerTest < ActionController::TestCase
 
     assert_equal 2, users(:student1).classrooms.size
     assert_equal Enrollment::ROLES[2], users(:student1).enrollments.last.role
+    assert json["partial"], 'Partial was not sent in response body'
   end
 
   test "should not add user to a classroom they are already in" do

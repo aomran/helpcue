@@ -11,28 +11,20 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.new(classroom_params)
     ownership = ClassroomOwnership.new(@classroom, current_user)
 
-    respond_to do |format|
-      format.json do
-        if ownership.save
-          render json: classroom_partial_json, status: :created, location: @classroom
-        else
-          render json: @classroom.errors, status: :unprocessable_entity
-        end
-      end
+    if ownership.save
+      render json: classroom_partial_json, status: :created, location: @classroom
+    else
+      render json: @classroom.errors, status: :unprocessable_entity
     end
   end
 
   def update
     authorize @classroom
 
-    respond_to do |format|
-      format.json do
-        if @classroom.update(classroom_params)
-          render json: classroom_partial_json, status: :created, location: @classroom
-        else
-          render json: @classroom.errors, status: :unprocessable_entity
-        end
-      end
+    if @classroom.update(classroom_params)
+      render json: classroom_partial_json, status: :created, location: @classroom
+    else
+      render json: @classroom.errors, status: :unprocessable_entity
     end
   end
 
@@ -40,23 +32,17 @@ class ClassroomsController < ApplicationController
     current_user.classrooms.delete(@classroom)
     @classroom.destroy if @classroom.users.empty?
 
-    respond_to do |format|
-      format.json { render json: { id: params[:id] } }
-    end
+    render json: { id: params[:id] }
   end
 
   def join
-    classroom = Classroom.find_by(user_token: params[:join_token].strip)
-    enroller = Enroller.new(classroom, current_user)
+    @classroom = Classroom.find_by(user_token: params[:join_token].strip)
+    enroller = Enroller.new(@classroom, current_user)
 
-    respond_to do |format|
-      format.json do
-        if enroller.save
-          render json: { partial: render_to_string(partial: 'classroom.html', locals: { classroom: classroom }), id: classroom.id }, status: :created, location: classroom
-        else
-          render json: enroller.errors[0], status: :unprocessable_entity
-        end
-      end
+    if enroller.save
+      render json: classroom_partial_json, status: :created, location: @classroom
+    else
+      render json: enroller.errors[0], status: :unprocessable_entity
     end
   end
 
@@ -67,11 +53,7 @@ class ClassroomsController < ApplicationController
     @classroom.save
 
     push_to_channel('updateSort', sortType: @classroom.sort_type)
-    respond_to do |format|
-      format.json {
-        render json: { sort_type: @classroom.sort_type }
-      }
-    end
+    render json: { sort_type: @classroom.sort_type }
   end
 
   private
