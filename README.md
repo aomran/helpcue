@@ -1,6 +1,6 @@
 # [HelpCue](http://www.helpcue.com)
 
-[![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue) [![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
+[![Build Status](https://semaphoreci.com/api/v1/projects/4e05b0dd-c58e-4fde-ada7-be14092048f7/215316/shields_badge.svg)](https://semaphoreci.com/this_ahmed/helpcue) [![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue) [![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
 
 ## Getting Started
 
