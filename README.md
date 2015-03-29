@@ -1,8 +1,6 @@
 # [HelpCue](http://www.helpcue.com)
 
-[![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue)
-
-[![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
+[![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue) [![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
 
 ## Getting Started
 
