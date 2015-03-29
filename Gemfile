@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 ruby "2.2.1"
-gem 'rails', '4.2'
+gem 'rails', '4.2.1'
 gem 'pg', '~> 0.18.1'
 gem 'passenger', '~> 5.0.4'
 gem 'foreman', '~> 0.78.0'
@@ -28,7 +28,7 @@ gem 'pusher', '~> 0.14.1'
 gem 'simple_hashtag', '~> 0.1.9'
 gem 'kaminari', '~> 0.16.1'
 gem 'pg_search', '~> 0.7.6'
-gem 'draper', '~> 1.4.0'
+gem 'draper', '~> 2.1.0'
 
 group :development do
   gem 'style-guide', '~> 1.1.1'
@@ -41,6 +41,9 @@ end
 
 group :development, :test do
   gem 'pry-rails', '~> 0.3.2'
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
 end
 
 group :test do
@@ -53,6 +56,6 @@ gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
-  gem 'newrelic_rpm', '~> 3.10.0.279'
+  gem 'newrelic_rpm', '~> 3.11.1.284'
   gem 'skylight', '~> 0.6.0'
 end
