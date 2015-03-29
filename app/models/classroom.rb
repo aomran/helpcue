@@ -2,11 +2,11 @@ class Classroom < ActiveRecord::Base
   has_many :requests
   has_many :enrollments
   has_many :users, through: :enrollments
-  belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
+  belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 
   validates :name, presence: {message: "You must name the classroom!"}
-  validates_length_of :name, :maximum => 90
-  validates_length_of :description, :maximum => 90, :allow_blank => true
+  validates_length_of :name, maximum: 90
+  validates_length_of :description, maximum: 90, allow_blank: true
 
   before_create :generate_token
   SORT_TYPE = ['Time', 'Popularity']

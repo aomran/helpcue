@@ -1,6 +1,6 @@
 module UsersHelper
   def user_role(user)
-    if user == @classroom.owner
+    if user.owner?(@classroom)
       'Owner'
     else
       user.role(@classroom)
