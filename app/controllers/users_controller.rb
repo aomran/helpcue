@@ -22,22 +22,14 @@ class UsersController < ApplicationController
       enrollment.save
     end
 
-    respond_to do |format|
-      format.json {
-        render json: {role: params[:role], id: @user.id} , status: :ok
-      }
-    end
+    render json: {role: params[:role], id: @user.id}, status: :ok
   end
 
   def destroy
     authorize_user_removal
     @classroom.users.delete(@user)
 
-    respond_to do |format|
-      format.json {
-        render json: { id: params[:id] }
-      }
-    end
+    render json: { id: params[:id] }
   end
 
   private

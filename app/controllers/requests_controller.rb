@@ -5,11 +5,6 @@ class RequestsController < ApplicationController
 
   def index
     @requests = @classroom.requests.need_help.includes(:owner)
-
-    respond_to do |format|
-      format.json { render json: @requests.as_json(include: :owner) }
-      format.html { }
-    end
   end
 
   def completed
@@ -33,11 +28,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json {
-        render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request.decorate }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
-      }
-    end
+    render json: { partial: render_to_string(partial: 'request.html', locals: { classroom: @classroom, request: @request.decorate }), expand_partial: render_to_string(partial: 'request_more.html', locals: { classroom: @classroom, request: @request }) }
   end
 
   def create

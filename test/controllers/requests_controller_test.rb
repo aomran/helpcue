@@ -22,9 +22,7 @@ class RequestsControllerTest < ActionController::TestCase
   test "should get list of requests in JSON" do
     xhr :get, :index, format: :json, classroom_id: classrooms(:two).id
 
-    response_body = JSON.parse(@response.body)
-
-    assert_equal classrooms(:two).requests.need_help.count, response_body.length
+    assert_equal classrooms(:two).requests.need_help.count, json['requests'].length
   end
 
   test "should get list of completed requests" do
@@ -61,15 +59,23 @@ class RequestsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "should return an html partial for request" do
+    xhr :get, :show, classroom_id: classrooms(:two).id, id: requests(:one).id
+
+    assert json["partial"], 'Partial was not sent in response body'
+  end
+
   test "should create request with valid data" do
     assert_difference 'Request.count' do
       @params[:format] = :json
       xhr :post, :create, @params
     end
 
-    assert_equal 'waiting', Request.last.state
-    assert_equal @params[:request][:question], Request.last.question
-    assert_equal users(:student1).id, Request.last.owner_id
+    response_body = JSON.parse(response.body)
+
+    assert_equal 'waiting', response_body['state']
+    assert_equal @params[:request][:question], response_body['question']
+    assert_equal users(:student1).id, response_body['owner_id']
   end
 
   test "should update request question and answer" do
