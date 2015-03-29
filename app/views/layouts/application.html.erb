@@ -18,9 +18,5 @@
     </div>
 
     <%= javascript_include_tag "application" %>
-
-    <% if flash[:track] %>
-      <%= track_event(flash[:track][:event_name], flash[:track][:properties]) %>
-    <% end %>
   </body>
 </html>

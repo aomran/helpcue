@@ -22,15 +22,6 @@ module ApplicationHelper
     end
   end
 
-  def track_event(event_name, properties=nil)
-    p = properties.nil? ? "" : ", #{properties.to_json}"
-    javascript_tag %Q{
-      $(document).ready(function(){
-        analytics.track("#{event_name}"#{p});
-      });
-    }
-  end
-
   def full_title(page_title)
     base_title = "HelpCue"
     if page_title.empty?
