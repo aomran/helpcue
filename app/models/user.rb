@@ -19,8 +19,16 @@ class User < ActiveRecord::Base
     enrollments.for(classroom).role
   end
 
-  def admin?(classroom)
+  def admin_or_mentor?(classroom)
     Enrollment::ROLES[0..1].include? role(classroom)
+  end
+
+  def admin?(classroom)
+    role(classroom) == Enrollment::ROLES[0]
+  end
+
+  def owner?(classroom_or_request)
+    self == classroom_or_request.owner
   end
 
   def full_name

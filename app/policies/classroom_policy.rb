@@ -7,14 +7,14 @@ class ClassroomPolicy
   end
 
   def update?
-    user.admin?(classroom) # Admin, Mentor
+    user.admin_or_mentor?(classroom)
   end
 
   def admin?
-    user.role(classroom) == Enrollment::ROLES[0] # Admin
+    user.admin?(classroom)
   end
 
   def owner?
-    classroom.owner == user # Owner
+    user.owner?(classroom)
   end
 end

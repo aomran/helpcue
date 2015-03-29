@@ -10,7 +10,7 @@ class RequestDecorator < Draper::Decorator
   end
 
   def owner_name
-    owner.id == h.current_user.id ? 'Me' : owner.full_name
+    h.current_user.owner?(model) ? 'Me' : owner.full_name
   end
 
   def metoo_count

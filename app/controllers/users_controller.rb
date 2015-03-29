@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def authorize_user_removal
     if @user == @classroom.owner
       raise Pundit::NotAuthorizedError, "Cannot remove owner"
-    elsif @user.admin?(@classroom)
+    elsif @user.admin_or_mentor?(@classroom)
       authorize @classroom, :admin?
     else
       authorize @classroom, :update?

@@ -13,7 +13,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       format.json { render json: pagination_partial_json }
       format.html {}
-      format.csv { send_data @classroom.requests.completed.to_csv(current_user.admin?(@classroom)) }
+      format.csv { send_data @classroom.requests.completed.to_csv(current_user.admin_or_mentor?(@classroom)) }
     end
   end
 

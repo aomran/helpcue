@@ -27,7 +27,7 @@
 
   <% if policy(@classroom).update? %>
     <td>
-    <% if user.admin?(@classroom) %>
+    <% if user.admin_or_mentor?(@classroom) %>
       <% if policy(@classroom).admin? && (user != current_user && user != @classroom.owner ) %>
         <%= link_to [@classroom, user], method: :delete, remote: true, class: 'user-remove request-action small', data: {confirm: 'Are you sure?'} do %>
           <%= content_tag(:span, '', class: "action-icon trash") %>

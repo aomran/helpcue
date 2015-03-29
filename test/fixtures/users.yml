@@ -37,3 +37,8 @@ new_student:
   email: student3@school.com
   avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
   encrypted_password: <%= BCrypt::Password.create("password123")%>
+
+mentor1:
+  email: mentor1@school.com
+  avatar: http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
+  encrypted_password: <%= BCrypt::Password.create("password123")%>
