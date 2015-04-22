@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   before_save :set_avatar
 
-  has_many :enrollments
+  has_many :enrollments, dependent: :destroy
   has_many :classrooms, through: :enrollments
   has_many :owned_classrooms, class_name: "Classroom", foreign_key: "owner_id"
   has_and_belongs_to_many :requests
