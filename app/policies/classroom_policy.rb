@@ -1,20 +1,14 @@
-class ClassroomPolicy
-  attr_reader :user, :classroom
-
-  def initialize(user, classroom)
-    @user = user
-    @classroom = classroom
-  end
+class ClassroomPolicy < ApplicationPolicy
 
   def update?
-    user.admin_or_mentor?(classroom)
+    user.admin_or_mentor?(record)
   end
 
   def admin?
-    user.admin?(classroom)
+    user.admin?(record)
   end
 
   def owner?
-    user.owner?(classroom)
+    user.owner?(record)
   end
 end
