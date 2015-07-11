@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby "2.2.1"
-gem 'rails', '4.2.1'
+ruby "2.2.2"
+gem 'rails', '4.2.3'
 gem 'pg', '~> 0.18.2'
 gem 'passenger', '~> 5.0.7'
 gem 'foreman', '~> 0.78.0'
@@ -15,10 +15,10 @@ gem 'jquery-rails', '~> 4.0.3'
 gem 'jquery-ui-rails', '~> 5.0.5'
 
 # JSON API
-gem 'jbuilder', '~> 2.2.11'
+gem 'jbuilder', '~> 2.3.1'
 
 # Authorization & Authentication
-gem 'devise', '~> 3.4.1'
+gem 'devise', '~> 3.5.1'
 gem 'pundit', '~> 1.0.0'
 gem 'omniauth-google-oauth2', '~> 0.2.4'
 
@@ -48,7 +48,7 @@ end
 
 group :test do
   gem 'capybara', '~> 2.4.3'
-  gem 'selenium-webdriver', '~> 2.45.0'
+  gem 'selenium-webdriver', '~> 2.46.2'
   gem 'mocha', '~> 1.1.0'
 end
 
@@ -56,6 +56,6 @@ gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
-  gem 'newrelic_rpm', '~> 3.12.0.288'
+  gem 'newrelic_rpm', '~> 3.12.1.298'
   gem 'skylight', '~> 0.6.0'
 end

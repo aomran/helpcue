@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-This app requires Ruby 2.2.1 and Postgresql 9.3 in development and production.
+This app requires Ruby 2.2.2 and Postgresql 9.3 in development and production.
 
 1. `$ git clone git@github.com:aomra015/helpcue.git`
 1. `$ cd helpcue`
