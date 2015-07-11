@@ -36,8 +36,6 @@ $ ->
   # Realtime
   if $('#queue_link').length
     MessageBus.start()
-    MessageBus.callbackInterval = 500
-    MessageBus.alwaysLongPoll = true
     MessageBus.subscribe '/request', (data) ->
       if (data.user_id != HelpCue.user.id)
         HelpCue.RequestsList.realtimeRequests(data)

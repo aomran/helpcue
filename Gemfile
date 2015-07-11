@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 ruby "2.2.2"
 gem 'rails', '4.2.3'
 gem 'pg', '~> 0.18.2'
-gem 'passenger', '~> 5.0.7'
+gem 'puma', '~> 2.11.3'
+gem "rack-timeout"
 gem 'foreman', '~> 0.78.0'
 
 # Assets
