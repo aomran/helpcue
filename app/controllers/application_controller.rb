@@ -27,6 +27,8 @@ class ApplicationController < ActionController::Base
   private
   def get_classroom
     @classroom = current_user.classrooms.find(params[:classroom_id] || params[:id])
+    MessageBus.group_ids_lookup { |env| [@classroom.id] }
+    @classroom
   end
 
   def user_not_authorized
@@ -39,6 +41,6 @@ class ApplicationController < ActionController::Base
     if @request
       data = data.merge({request_id: params[:id] || @request.id})
     end
-    Pusher.trigger("classroom#{@classroom.id}-requests", 'request', data)
+    MessageBus.publish "/request", data, group_ids: [@classroom.id]
   end
 end

@@ -3,7 +3,7 @@ require 'test_helper'
 class ClassroomsControllerTest < ActionController::TestCase
 
   def setup
-    Pusher.stubs(:trigger)
+    MessageBus.stubs(:publish)
     sign_in users(:teacher1)
   end
 

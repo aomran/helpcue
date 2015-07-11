@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RequestsControllerTest < ActionController::TestCase
   def setup
-    Pusher.stubs(:trigger)
+    MessageBus.stubs(:publish)
     sign_in users(:student1)
     @params = {
       classroom_id: classrooms(:two),
