@@ -35,9 +35,8 @@ $ ->
 
   # Realtime
   if $('#queue_link').length
-    HelpCue.channel ?= HelpCue.pusher.subscribe("classroom#{$('#queue_link').data('classroomid')}-requests")
-
-    HelpCue.channel.bind 'request', (data) ->
+    MessageBus.start()
+    MessageBus.subscribe '/request', (data) ->
       if (data.user_id != HelpCue.user.id)
         HelpCue.RequestsList.realtimeRequests(data)
       if data.requestAction == 'addRequest' || data.requestAction == 'removeRequest'

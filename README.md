@@ -17,6 +17,11 @@ This app requires Ruby 2.2.2 and Postgresql 9.3 in development and production.
 ### Run tests
 - `$ rake` to run all Ruby tests.
 
+### For realtime pub/sub
+
+- `$ brew install redis`
+
+
 ### Official Browser Support
 - Internet Explorer (Version 9+), Google Chrome (Latest Version), Mozilla Firefox (Latest Version), Apple Safari (Version 5+).
 - Clients without Javascript are not supported.

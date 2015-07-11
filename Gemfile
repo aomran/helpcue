@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 ruby "2.2.2"
 gem 'rails', '4.2.3'
 gem 'pg', '~> 0.18.2'
-gem 'passenger', '~> 5.0.7'
+gem 'puma', '~> 2.11.3'
+gem "rack-timeout"
 gem 'foreman', '~> 0.78.0'
 
 # Assets
@@ -22,8 +23,8 @@ gem 'devise', '~> 3.5.1'
 gem 'pundit', '~> 1.0.0'
 gem 'omniauth-google-oauth2', '~> 0.2.4'
 
-# Third-party gems
-gem 'pusher', '~> 0.14.5'
+# Pub/sub
+gem 'message_bus', '~> 1.0.9'
 
 gem 'simple_hashtag', '~> 0.1.9'
 gem 'kaminari', '~> 0.16.1'
