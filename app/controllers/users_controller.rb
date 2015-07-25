@@ -6,9 +6,7 @@ class UsersController < ApplicationController
 
   def index
     authorize @classroom, :update?
-    @admins = @classroom.admins.sort_by(&:first_name)
-    @mentors = @classroom.mentors.sort_by(&:first_name)
-    @members = @classroom.members.sort_by(&:first_name)
+    @users = ClassroomRole.new(@classroom, current_user).sorted_users
   end
 
   def update

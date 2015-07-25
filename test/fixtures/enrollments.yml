@@ -11,12 +11,12 @@ two:
   classroom: one
 
 three:
-  role: User
+  role: Member
   user: student1
   classroom: two
 
 four:
-  role: User
+  role: Member
   user: student2
   classroom: two
 

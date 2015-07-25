@@ -9,7 +9,6 @@ class UsersControllerTest < ActionController::TestCase
   test "should get list of teachers and students in the classroom" do
     get :index, classroom_id: classrooms(:one)
 
-    assert assigns(:admins)
     assert :success
   end
 
