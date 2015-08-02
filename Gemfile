@@ -6,6 +6,7 @@ gem 'rails', '4.2.3'
 gem 'pg', '~> 0.18.2'
 gem 'puma', '~> 2.12.2'
 gem "rack-timeout"
+gem 'rack-timeout-puma'
 gem 'foreman', '~> 0.78.0'
 
 # Assets
