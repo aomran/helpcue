@@ -44,5 +44,5 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
 
   Capybara.current_driver = Capybara.javascript_driver
-  Capybara.default_wait_time = 10
+  Capybara.default_max_wait_time = 10
 end

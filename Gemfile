@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.3.1'
 
 # Authorization & Authentication
 gem 'devise', '~> 3.5.1'
+gem 'bcrypt', '3.1.9'
 gem 'pundit', '~> 1.0.0'
 gem 'omniauth-google-oauth2', '~> 0.2.4'
 
