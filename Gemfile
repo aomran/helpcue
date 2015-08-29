@@ -2,11 +2,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 ruby "2.2.2"
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 gem 'pg', '~> 0.18.2'
-gem 'puma', '~> 2.12.2'
+gem 'puma', '~> 2.13.4'
 gem "rack-timeout"
-gem 'rack-timeout-puma'
 gem 'foreman', '~> 0.78.0'
 
 # Assets
@@ -38,7 +37,7 @@ group :development do
   gem 'guard-livereload', '~> 2.4.0'
   gem 'quiet_assets', '~> 1.1.0'
   gem 'guard-minitest', '~> 2.4.4'
-  gem 'guard', '~> 2.12.5'
+  gem 'guard', '~> 2.13.0'
 end
 
 group :development, :test do
@@ -49,8 +48,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 2.4.3'
-  gem 'selenium-webdriver', '~> 2.46.2'
+  gem 'capybara', '~> 2.5.0'
+  gem 'selenium-webdriver', '~> 2.47.1'
   gem 'mocha', '~> 1.1.0'
 end
 
@@ -58,6 +57,6 @@ gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
-  gem 'newrelic_rpm', '~> 3.12.1.298'
-  gem 'skylight', '~> 0.6.0'
+  gem 'newrelic_rpm', '~> 3.13.0.299'
+  gem 'skylight', '~> 0.8.0'
 end
