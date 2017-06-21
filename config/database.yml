@@ -14,21 +14,21 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: helpcue_development
   pool: 5
-  username: <%= ENV['USER'] %>
-  password:
+  port: 5432
+  host: localhost
+  username: ahmedomran
+
+development:
+  <<: *default
+  database: helpcue_development
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: helpcue_test
-  pool: 5
-  username: <%= ENV['USER'] %>
-  password:
 
 production:
   url:  <%= ENV["DATABASE_URL"] %>

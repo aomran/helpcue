@@ -15,12 +15,13 @@ This app requires Ruby 2.2.2 and Postgresql 9.3 in development and production.
 - `$ foreman start`
 
 ### Run tests
-- `$ rake` to run all Ruby tests.
+- `$ bin/rails test` to run all Ruby tests.
+- `$ bin/rails test:system` to run system tests.
 
-### For realtime pub/sub
+### Dependencies
 
-- `$ brew install redis`
-
+- `$ brew install redis` (For realtime pub/sub)
+- `$ brew install phantomjs` (For system tests)
 
 ### Official Browser Support
 - Internet Explorer (Version 9+), Google Chrome (Latest Version), Mozilla Firefox (Latest Version), Apple Safari (Version 5+).

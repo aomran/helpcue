@@ -31,9 +31,4 @@ Rails.application.routes.draw do
     get "hashtags/:hashtag",   to: "hashtags#show", as: :hashtag
     get "hashtags",            to: "hashtags#show", as: :hashtag_search
   end
-
-  # Development Environment
-  if Rails.env.development?
-    mount StyleGuide::Engine => "/style-guide"
-  end
 end

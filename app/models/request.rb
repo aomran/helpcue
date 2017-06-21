@@ -1,4 +1,4 @@
-class Request < ActiveRecord::Base
+class Request < ApplicationRecord
   include SimpleHashtag::Hashtaggable
   hashtaggable_attribute :question
 

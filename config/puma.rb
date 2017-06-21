@@ -14,3 +14,6 @@ on_worker_boot do
   # Reconnect to Redis
   MessageBus.after_fork if defined?(MessageBus)
 end
+
+# Allow puma to be restarted by `rails restart` command.
+plugin :tmp_restart

@@ -1,6 +1,6 @@
-require 'test_helper'
+require 'application_system_test_case'
 
-class ClassroomFlowTest < ActionDispatch::IntegrationTest
+class ClassroomFlowTest < ApplicationSystemTestCase
   setup do
     @teacher = users(:teacher1)
     @classroom = classrooms(:one)

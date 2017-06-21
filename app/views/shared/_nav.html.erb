@@ -20,7 +20,7 @@
 
     <div class="bottom-nav">
       <li>
-        <%= link_to_selected '', class: 'nav-links subnav-toggle' do %>
+        <%= link_to_selected '', class: 'nav-links subnav-toggle', id: "account-open" do %>
           <span class="nav-icon nav-account"><span class="nav-gravatar" style="background: url('<%= current_user.avatar%>?s=68&d=blank'); background-size: contain;" title="<%= current_user.full_name %>"></span></span>
           <span class="nav-label subnav-slide">Account</span>
         <% end %>
