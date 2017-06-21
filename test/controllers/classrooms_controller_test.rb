@@ -58,6 +58,7 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "should remove classroom with no users" do
+    classrooms(:one).members.map(&:destroy)
     delete :destroy, xhr: true, params: {id: classrooms(:one)}
 
     sign_out users(:teacher1)
@@ -75,14 +76,14 @@ class ClassroomsControllerTest < ActionController::TestCase
   end
 
   test "should add user with member role to classroom with user-token" do
-    assert_equal 1, users(:student1).classrooms.size
+    assert_equal 2, users(:student1).classrooms.size
 
     sign_out users(:teacher1)
     sign_in users(:student1)
 
-    post :join, xhr: true, format: :json, params: {join_token: classrooms(:one).user_token}
+    post :join, xhr: true, format: :json, params: {join_token: classrooms(:three).user_token}
 
-    assert_equal 2, users(:student1).classrooms.size
+    assert_equal 3, users(:student1).classrooms.size
     assert_equal Enrollment::ROLES[2], users(:student1).enrollments.last.role
     assert json["partial"], 'Partial was not sent in response body'
   end
