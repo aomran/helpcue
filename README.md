@@ -1,12 +1,13 @@
 # [HelpCue](http://www.helpcue.com)
 
-[![Build Status](https://semaphoreci.com/api/v1/projects/4e05b0dd-c58e-4fde-ada7-be14092048f7/215316/shields_badge.svg)](https://semaphoreci.com/this_ahmed/helpcue) [![Code Climate](https://codeclimate.com/github/aomra015/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomra015/helpcue) [![Test Coverage](https://codeclimate.com/github/aomra015/helpcue/badges/coverage.svg)](https://codeclimate.com/github/aomra015/helpcue)
+[![Build Status](https://travis-ci.org/aomran/helpcue.svg?branch=master)](https://travis-ci.org/aomran/helpcue)
+[![Code Climate](https://codeclimate.com/github/aomran/helpcue/badges/gpa.svg)](https://codeclimate.com/github/aomran/helpcue)
 
 ## Getting Started
 
-This app requires Ruby 2.2.2 and Postgresql 9.3 in development and production.
+This app requires Ruby 2.4.1 and Postgresql 9.3+ in development and production.
 
-1. `$ git clone git@github.com:aomra015/helpcue.git`
+1. `$ git clone git@github.com:aomran/helpcue.git`
 1. `$ cd helpcue`
 1. `$ bin/setup`
 1. `$ cp .env.example .env` -- Fill out the .env file with the appropriate environment variables.
