@@ -55,8 +55,6 @@ group :test do
   gem 'mocha', '~> 1.2', '>= 1.2.1'
 end
 
-gem "codeclimate-test-reporter", group: :test, require: nil
-
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'newrelic_rpm', '~> 4.2', '>= 4.2.0.334'
