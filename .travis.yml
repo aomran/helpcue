@@ -1,10 +1,18 @@
 language: ruby
 rvm:
-  - 2.4.1
+- 2.4.1
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp config/database.yml.travis config/database.yml
-  - bin/rails db:setup
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- bin/rails db:setup
 script: bin/rails test
+deploy:
+  provider: heroku
+  api_key:
+    secure: QgD+GzP+adw2mY8gGhL2IFre5bJlU44Z9047VJaqappw40L17cqyqQqfnZ+wENRVDfI6PL3/a4IelpaXKKvB/B3dqZr76v9AqWImYendeET17xrm8/b4d22nYuZjlCf5pOnmLiaKdGG5AWjS6oil4hvlsZN1ui+jrXyISmLKVcY=
+  run: "bin/rails db:migrate"
+  app: helpcue
+  on:
+    repo: aomran/helpcue
