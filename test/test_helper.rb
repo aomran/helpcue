@@ -1,10 +1,6 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'capybara/rails'
 require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
@@ -26,8 +22,7 @@ class ActiveSupport::TestCase
   end
 
   def log_out
-    click_link 'Account'
-    click_link 'Log Out'
+    Capybara.reset_sessions!
   end
 
   def json
@@ -37,12 +32,5 @@ class ActiveSupport::TestCase
 end
 
 class ActionController::TestCase
-  include Devise::TestHelpers
-end
-
-class ActionDispatch::IntegrationTest
-  include Capybara::DSL
-
-  Capybara.current_driver = Capybara.javascript_driver
-  Capybara.default_max_wait_time = 10
+  include Devise::Test::ControllerHelpers
 end

@@ -32,7 +32,8 @@ class RequestTest < ActiveSupport::TestCase
   end
 
   test "time waiting" do
-    request = Request.create
+    request = requests(:one)
+    request.update_attribute(:created_at, @current_time)
     travel(30.minutes) do
       request.toggle_state.save
       assert_equal 30.minutes, request.time_waiting
@@ -40,7 +41,7 @@ class RequestTest < ActiveSupport::TestCase
   end
 
   test "help duration" do
-    request = Request.create
+    request = requests(:one)
     request.toggle_state.save
 
     travel(40.minutes) do

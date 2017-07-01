@@ -10,6 +10,16 @@ two:
   user: teacher2
   classroom: one
 
+student1:
+  role: Member
+  user: student1
+  classroom: one
+
+student2:
+  role: Member
+  user: student2
+  classroom: one
+
 three:
   role: Member
   user: student1

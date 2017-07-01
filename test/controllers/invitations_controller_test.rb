@@ -7,7 +7,7 @@ class InvitationsControllerTest < ActionController::TestCase
 
   test "should send email to all recipients" do
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      post :create, classroom_id: classrooms(:one), invitation_emails: "student@email.com, student2@gmail.com"
+      post :create, params: {classroom_id: classrooms(:one), invitation_emails: "student@email.com, student2@gmail.com"}
     end
 
     invite_email = ActionMailer::Base.deliveries.last
@@ -17,14 +17,14 @@ class InvitationsControllerTest < ActionController::TestCase
   end
 
   test "should give error with invalid email formats" do
-    post :create, classroom_id: classrooms(:one), invitation_emails: "student@email.com student2@gmail.com"
+    post :create, params: {classroom_id: classrooms(:one), invitation_emails: "student@email.com student2@gmail.com"}
 
     assert_equal "Invalid email format", flash[:alert]
     assert_redirected_to classroom_users_path(classrooms(:one))
   end
 
   test "should give error with no emails" do
-    post :create, classroom_id: classrooms(:one), invitation_emails: ""
+    post :create, params: {classroom_id: classrooms(:one), invitation_emails: ""}
 
     assert_equal "Invalid email format", flash[:alert]
     assert_redirected_to classroom_users_path(classrooms(:one))

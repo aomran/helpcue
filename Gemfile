@@ -1,63 +1,61 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby "2.2.2"
-gem 'rails', '4.2.4'
-gem 'pg', '~> 0.18.2'
-gem 'puma', '~> 2.13.4'
-gem "rack-timeout"
-gem 'foreman', '~> 0.78.0'
+ruby "2.4.1"
+
+gem 'rails', '~> 5.1.1'
+gem 'pg', '~> 0.21.0'
+gem 'puma', '~> 3.9', '>= 3.9.1'
+gem 'rack-timeout', '~> 0.4.2'
+gem 'foreman', '~> 0.84.0'
 
 # Assets
-gem 'sass-rails', '~> 5.0.3'
-gem 'uglifier', '~> 2.7.1'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails', '~> 4.0.3'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'jquery-ui-rails', '~> 5.0.5'
 
-# JSON API
-gem 'jbuilder', '~> 2.3.1'
+# Default Rails Gems
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
+# gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
 
 # Authorization & Authentication
-gem 'devise', '~> 3.5.1'
-gem 'bcrypt', '3.1.9'
-gem 'pundit', '~> 1.0.0'
-gem 'omniauth-google-oauth2', '~> 0.2.4'
+gem 'devise', '~> 4.3'
+gem 'bcrypt', '~> 3.1.7'
+gem 'pundit', '~> 1.1'
+gem 'omniauth-google-oauth2', '~> 0.5.0'
 
 # Pub/sub
-gem 'message_bus', '~> 1.0.9'
+gem 'message_bus', '~> 2.0', '>= 2.0.2'
+gem 'redis', '~> 3.3', '>= 3.3.3'
 
+# Misc.
 gem 'simple_hashtag', '~> 0.1.9'
-gem 'kaminari', '~> 0.16.1'
-gem 'pg_search', '~> 1.0.3'
-gem 'draper', '~> 2.1.0'
-
-group :development do
-  gem 'style-guide', '~> 1.1.1'
-  gem 'rack-livereload', '~> 0.3.15'
-  gem 'guard-livereload', '~> 2.4.0'
-  gem 'quiet_assets', '~> 1.1.0'
-  gem 'guard-minitest', '~> 2.4.4'
-  gem 'guard', '~> 2.13.0'
-end
+gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'pg_search', '~> 2.0', '>= 2.0.1'
+gem 'draper', '~> 3.0'
 
 group :development, :test do
-  gem 'pry-rails', '~> 0.3.2'
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
-  gem 'capybara', '~> 2.5.0'
-  gem 'selenium-webdriver', '~> 2.47.1'
-  gem 'mocha', '~> 1.1.0'
+  gem 'mocha', '~> 1.2', '>= 1.2.1'
 end
 
-gem "codeclimate-test-reporter", group: :test, require: nil
-
 group :production do
-  gem 'rails_12factor', '~> 0.0.2'
-  gem 'newrelic_rpm', '~> 3.13.0.299'
-  gem 'skylight', '~> 0.8.0'
+  gem 'rails_12factor', '~> 0.0.3'
+  gem 'newrelic_rpm', '~> 4.2', '>= 4.2.0.334'
 end
